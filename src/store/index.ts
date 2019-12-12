@@ -1,12 +1,17 @@
 import { createStore, applyMiddleware, compose, combineReducers, Reducer } from 'redux';
 import thunk from 'redux-thunk';
-import settingReducer from './reducer/settingReducer'
+import { Product } from './contract/Product';
+import { productReducer } from './reducer/productReducer';
 
-interface RootApp {
-    settingReducer: object
+
+export interface AppState {
+    productReducer: Product
 }
-export const rootReducer: Reducer<RootApp> = combineReducers({
-    settingReducer
+
+
+
+export const rootReducer: Reducer<AppState> = combineReducers({
+    productReducer
 })
 
 declare global {
