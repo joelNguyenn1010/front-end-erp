@@ -2,9 +2,10 @@ import React from 'react';
 import { Input, Popover } from 'antd';
 import ContentData from './ContentData';
 import CreateButton from './CreateButton';
+import { Spin } from 'antd';
 
 export interface Content {
-    key: string,
+    id: number,
     name: string,
 }
 
@@ -14,15 +15,18 @@ interface SearchCreationProps {
     loading?: boolean,
     onSelected?: (selected: Content) => void,
     onClickCreate: (input: string) => void,
-    onChangeInput: (input: string) => void
+    resetInput?: () => void,
+    input: string,
+    setSearch: (input: string) => void,
+    onChange?: (input: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 
 const SearchCreation: React.FC<SearchCreationProps> = props => {
 
-    const [focus, setFocus]: [boolean, (data: boolean) => void] = React.useState<boolean>(false)
+  
 
-    const [input, setInput]: [string, (data: string) => void] = React.useState<string>('')
+    const [focus, setFocus]: [boolean, (data: boolean) => void] = React.useState<boolean>(false)
 
     const onFocusInput = (inc: React.FocusEvent<HTMLInputElement>) => {
         setFocus(true)
@@ -34,12 +38,7 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
         }, 100)
     }
 
-
-
-    const onChangeInput = (ele: React.ChangeEvent<HTMLInputElement>) => {
-        setInput(ele.target.value)
-        props.onChangeInput(ele.target.value)
-    }
+  
 
     return (
         <Input.Group>
@@ -47,11 +46,16 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
             placement="bottom"
                 content={
                     <React.Fragment>
-                        {props.content && <ContentData
-                            input={input}
+                        {!props.loading ? props.content && <ContentData
+                            input={props.input}
                             selectedContent={props.onSelected}
-                            content={props.content} />}
-                        <CreateButton input={input} onClickCreate={props.onClickCreate} />
+                            content={props.content} /> 
+                            : 
+                            <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
+                                <Spin />
+                            </div>
+                            }
+                        <CreateButton input={props.input} setInput={props.setSearch} onClickCreate={props.onClickCreate} />
                     </React.Fragment>
                 }
 
@@ -59,8 +63,8 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
                 <Input placeholder="Search"
                     onFocus={onFocusInput}
                     onBlur={onOutFocusInput}
-                    onChange={onChangeInput}
-                    value={input}
+                    onChange={props.onChange}
+                    value={props.input}
                 />
             </Popover>
         </Input.Group>
