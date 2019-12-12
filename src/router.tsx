@@ -13,7 +13,7 @@ const Routing: React.FC = props => {
             </Route>
 
             <Route path="/model">
-                <h1>Model</h1>
+                
             </Route>
         </Switch>
     )
