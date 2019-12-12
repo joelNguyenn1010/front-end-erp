@@ -13,7 +13,8 @@ interface SearchCreationProps {
     content?: Array<Content>,
     loading?: boolean,
     onSelected?: (selected: Content) => void,
-    onClickCreate: (input: string) => void
+    onClickCreate: (input: string) => void,
+    onChangeInput: (input: string) => void
 }
 
 
@@ -33,8 +34,11 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
         }, 100)
     }
 
+
+
     const onChangeInput = (ele: React.ChangeEvent<HTMLInputElement>) => {
         setInput(ele.target.value)
+        props.onChangeInput(ele.target.value)
     }
 
     return (
