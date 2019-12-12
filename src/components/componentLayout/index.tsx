@@ -1,9 +1,10 @@
 import React from 'react'
 import { Layout } from 'antd';
+import HeaderLink from '../layout/header';
 const { Header, Content, Footer, Sider } = Layout;
 interface ComponentLayoutProps {
-    headersContent?: React.FC
-    footerContent?: React.FC
+    headersContent?: React.ReactNode
+    footerContent?: React.ReactNode
 }
 
 
@@ -11,7 +12,7 @@ const ComponentLayout: React.FC<ComponentLayoutProps> = props => {
     return (
         <Layout>
             <Header>
-                {props.headersContent}
+                    <HeaderLink />
             </Header>
 
             <Content>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { List, Typography, Button, Input } from 'antd';
 import { Content } from '.';
-import { Table } from 'antd';
+
+import { Empty } from 'antd';
 
 interface ContentDataProps {
     content: Array<Content>,
@@ -9,11 +10,7 @@ interface ContentDataProps {
     input: string
 }
 
-const columns = [
-    {
-        dataIndex: 'name'
-    }
-]
+
 const ContentData: React.FC<ContentDataProps> = props => {
 
 
@@ -49,7 +46,7 @@ const ContentData: React.FC<ContentDataProps> = props => {
     
     return (
         <React.Fragment>
-            <List
+           {props.content.length > 0 ? <List
             size="small"
                 style={{ overflow: 'auto', maxHeight: '10rem',  clear: 'both' }}
             >
@@ -63,10 +60,13 @@ const ContentData: React.FC<ContentDataProps> = props => {
                     </List.Item>
                 ))}
 
-            </List>
+                </List> 
+            : 
+            
+            <Empty />
+            }
 
-            {/* <Table onRow={cc} showHeader={false}  columns={columns} dataSource={contentData} /> */}
-     
+      
         </React.Fragment>
     )
 }

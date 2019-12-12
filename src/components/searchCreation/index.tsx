@@ -12,7 +12,8 @@ export interface Content {
 interface SearchCreationProps {
     content?: Array<Content>,
     loading?: boolean,
-    onSelected?: (selected: Content) => void
+    onSelected?: (selected: Content) => void,
+    onClickCreate: (input: string) => void
 }
 
 
@@ -27,7 +28,9 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
     }
 
     const onOutFocusInput = (out: React.FocusEvent<HTMLInputElement>) => {
-        setFocus(false)
+        setTimeout(() => {
+            setFocus(false)
+        }, 100)
     }
 
     const onChangeInput = (ele: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,13 +40,14 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
     return (
         <Input.Group>
             <Popover
+            placement="bottom"
                 content={
                     <React.Fragment>
-                      {props.content && <ContentData
+                        {props.content && <ContentData
                             input={input}
                             selectedContent={props.onSelected}
-                      content={props.content} /> }
-                        <CreateButton input={input} />
+                            content={props.content} />}
+                        <CreateButton input={input} onClickCreate={props.onClickCreate} />
                     </React.Fragment>
                 }
 
