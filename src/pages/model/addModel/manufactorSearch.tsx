@@ -63,7 +63,7 @@ const ManufactorSearch: React.FC = () => {
     return (
         <React.Fragment>
             <SearchCreation
-                placeholder="Manufacture"
+                placeholder="manufacture"
                 loading={loading}
                 content={data ? data.manufactor ? data.manufactor.data : [] : []}
                 onClickCreate={onCreate}
