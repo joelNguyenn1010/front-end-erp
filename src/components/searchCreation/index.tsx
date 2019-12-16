@@ -1,69 +1,70 @@
-import React from 'react';
-import { Input, Popover } from 'antd';
-import ContentData from './ContentData';
-import CreateButton from './CreateButton';
+import React, { useState } from 'react';
+import { Select, Icon, Button, Divider, Spin } from 'antd';
 
 export interface Content {
-    key: string,
+    id: number,
     name: string,
+
 }
 
 
 interface SearchCreationProps {
     content?: Array<Content>,
-    loading?: boolean,
-    onSelected?: (selected: Content) => void,
+    onSelected?: any,
     onClickCreate: (input: string) => void,
-    onChangeInput: (input: string) => void
+    resetInput?: () => void,
+    loading?: boolean
+    onSearch: (input: string) => void,
+    placeholder?: string
 }
 
 
 const SearchCreation: React.FC<SearchCreationProps> = props => {
 
-    const [focus, setFocus]: [boolean, (data: boolean) => void] = React.useState<boolean>(false)
-
-    const [input, setInput]: [string, (data: string) => void] = React.useState<string>('')
-
-    const onFocusInput = (inc: React.FocusEvent<HTMLInputElement>) => {
-        setFocus(true)
-    }
-
-    const onOutFocusInput = (out: React.FocusEvent<HTMLInputElement>) => {
-        setTimeout(() => {
-            setFocus(false)
-        }, 100)
-    }
+    const [currentValue, setValue] = useState<string>('')
 
 
 
-    const onChangeInput = (ele: React.ChangeEvent<HTMLInputElement>) => {
-        setInput(ele.target.value)
-        props.onChangeInput(ele.target.value)
-    }
 
     return (
-        <Input.Group>
-            <Popover
-            placement="bottom"
-                content={
-                    <React.Fragment>
-                        {props.content && <ContentData
-                            input={input}
-                            selectedContent={props.onSelected}
-                            content={props.content} />}
-                        <CreateButton input={input} onClickCreate={props.onClickCreate} />
-                    </React.Fragment>
-                }
+        <React.Fragment>
+            <Select
+            placeholder={props.placeholder}
+                onSelect={props.onSelected}
 
-                visible={focus}>
-                <Input placeholder="Search"
-                    onFocus={onFocusInput}
-                    onBlur={onOutFocusInput}
-                    onChange={onChangeInput}
-                    value={input}
-                />
-            </Popover>
-        </Input.Group>
+                filterOption={false}
+                dropdownRender={menu => (
+                    <div>
+                        {menu}
+                        <Divider style={{ margin: '4px 0' }} />
+                        <div
+                            onMouseDown={e => e.preventDefault()}
+                            style={{ padding: '4px 8px', display: 'flex', justifyContent: 'center' }}
+                        >
+                            <Button onClick={() => props.onClickCreate(currentValue)} ><Icon type="plus" /></Button>
+                        </div>
+                    </div>
+                )}
+                showSearch
+                onSearch={(val: string) => {
+                    props.onSearch(val)
+                    setValue(val)
+                }}
+            >
+
+                {!props.loading ? props.content && props.content.map((val) => (
+                    <Select.Option key={val.id}>{val.name}</Select.Option>
+                )) :
+                    <Select.Option key={1}><div
+                        onMouseDown={e => e.preventDefault()}
+                        style={{ padding: '4px 8px', display: 'flex', justifyContent: 'center' }}
+                    >
+                        <Spin />
+                    </div>
+                    </Select.Option>
+                }
+            </Select>
+        </React.Fragment>
     )
 }
 

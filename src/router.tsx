@@ -8,13 +8,26 @@ import DisplayModel from "./pages/model/displayModel"
 import DisplayItem from './pages/item/displayItem'
 import { TableData } from "./pages/table/TableData";
 import EditItemProvider from "./provider/EditItemProvider";
+import CreateModelProvider from "./context/provider/createModelContext";
+import AddItem from "./pages/item/addItem";
 
 const Routing: React.FC = props => {
     return (
         <Switch>
+
             <Route path="/model/add">
-                <AddModel />
+                <CreateModelProvider>
+                    <AddModel />
+                </CreateModelProvider>
             </Route>
+
+
+            <Route path="/item/add">
+            
+                    <AddItem />
+      
+            </Route>
+
 
             <Route path="/model">
                 <DisplayModel />

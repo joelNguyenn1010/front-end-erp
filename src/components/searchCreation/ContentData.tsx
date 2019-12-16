@@ -13,29 +13,10 @@ interface ContentDataProps {
 
 const ContentData: React.FC<ContentDataProps> = props => {
 
-
-
-    const init = props.content.concat()
-
-    const [contentData, setData]: [Array<Content>, (data: Array<Content>) => void ] = React.useState<Array<Content>>(init) 
-
-    const onFilterContent = () => {
-        if(props.input.length > 0) {
-            const filter = props.content.filter(data => data.name.toLowerCase().startsWith(props.input.toLowerCase()))
-            setData(filter)
-        } else {
-            setData(init)
-        }
-    }
-
-    React.useEffect(() => {
-        onFilterContent()
-    }, [props.input])
-
-    const onSelected = (key: string, name: string) => {
+    const onSelected = (id: number, name: string) => {
         if (props.selectedContent) {
             const selectContent: Content = {
-                key,
+                id,
                 name
             }
             props.selectedContent(selectContent)
@@ -43,17 +24,16 @@ const ContentData: React.FC<ContentDataProps> = props => {
     }
 
 
-    
     return (
         <React.Fragment>
            {props.content.length > 0 ? <List
             size="small"
                 style={{ overflow: 'auto', maxHeight: '10rem',  clear: 'both' }}
             >
-                {contentData.map(data => (
-                    <List.Item
-                        onClick={() => onSelected(data.key, data.name)}
-                        style={{ cursor: 'pointer', padding: '1rem' }} key={data.key}>
+                {props.content.map(data => (
+                    <List.Item        
+                        onClick={() => onSelected(data.id, data.name)}
+                        style={{ cursor: 'pointer', padding: '1rem' }} key={data.id}>
                         <Typography.Paragraph>
                             {data.name}
                         </Typography.Paragraph>

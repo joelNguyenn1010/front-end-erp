@@ -1,0 +1,83 @@
+// enum Types {
+//     SETNAME = 'SETNAME',
+//     SETOTHERNAME = 'SETOTHERNAME',
+//     SETMANUFACTOR = 'SETMANUFACTOR',
+//     SETHASSERIAL = 'SETHASSERIAL',
+//     SETSHORTDESCRIP = 'SETSHORTDESCRIP',
+//     SETLONGDESCRIP = 'SETLONGDESCRIP',
+//     SETNOTE = 'SETNOTE',
+//     SETCATEGORY = 'SETCATEGORY',
+// }
+
+// interface CreateModelDAO {
+//     name: string,
+//     otherNames?: Array<string>,
+//     manufactorId: number,
+//     hasSerial?: boolean,
+//     shortDescription?: string,
+//     longDescription?: string,
+//     note?: string,
+//     categoryId: string
+// }
+
+
+// interface CreateModelAction {
+//     type: Types,
+//     payload: any
+// }
+
+
+// const reducer = (state: CreateModelDAO, action: CreateModelAction) => {
+//     switch (action.type) {
+//         case Types.SETCATEGORY:
+//             return {
+//                 ...state,
+//                 categoryId: action.payload.categoryId
+//             }
+
+//         case Types.SETHASSERIAL:
+//             return {
+//                 ...state,
+//                 hasSerial: action.payload.hasSerial
+//             }
+
+//         case Types.SETLONGDESCRIP:
+//             return {
+//                 ...state,
+//                 longDescription: action.payload.longDescription
+//             }
+
+//         case Types.SETMANUFACTOR:
+//             return {
+//                 ...state,
+//                 manufactorId: action.payload.manufactorId
+//             }
+
+//         case Types.SETNAME:
+//             return {
+//                 ...state,
+//                 name: action.payload.name
+//             }
+
+//         case Types.SETNOTE:
+//             return {
+//                 ...state,
+//                 note: action.payload.note
+//             }
+
+//         case Types.SETOTHERNAME:
+//             return {
+//                 ...state,
+//                 otherNames: action.payload.otherNames
+//             }
+
+//         case Types.SETSHORTDESCRIP:
+//             return {
+//                 ...state,
+//                 shortDescription: action.payload.shortDescription
+//             }
+
+//         default:
+//             return state;
+//     }
+// };

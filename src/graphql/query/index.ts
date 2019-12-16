@@ -47,3 +47,15 @@ query($limit: Int!, $page: Int!, $serialNumber: String!){
   }
 }
 `
+
+export const CATEGORY_QUERY = gql`
+query($name: String!) {
+    category(page: 1, limit: 10, name: $name) {
+      data {
+        id
+        name
+      }
+    }
+  }
+`
+
