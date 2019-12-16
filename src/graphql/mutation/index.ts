@@ -9,3 +9,13 @@ mutation($name: String!) {
   }
 `
 
+
+export const ADD_CATEGORY = gql`
+mutation($name: String!) {
+    createNewCategory(name: $name) {
+      id
+      name
+    }
+  }
+`
+
