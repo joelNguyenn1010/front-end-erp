@@ -12,7 +12,12 @@ interface Validation {
 interface InputSearchModelProps {
     label: string,
     mutation: string,
-    returnResolve?: (value: string | null) => void
+    returnResolve?: (value: string | null) => void,
+    onChangeInput?: (value: string) => void, 
+
+    notFoundModel?: string | 'Not found model'
+
+    foundModel?: string | 'Model found, '
 }
 
 
@@ -23,9 +28,13 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
         validate: ""
     })
 
+
+   
     let timeout: any = null;
 
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+       
 
         setValidation({
             mess: "Validating",
@@ -33,6 +42,8 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
         })
 
         const input = e.target.value
+        if(props.onChangeInput)
+            props.onChangeInput(input)
         if (input && input.length > 0) {
             clearTimeout(timeout);
             timeout = setTimeout(function () {

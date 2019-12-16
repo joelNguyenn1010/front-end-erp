@@ -11,7 +11,7 @@ export interface Content {
 interface SearchCreationProps {
     content?: Array<Content>,
     onSelected?: any,
-    onClickCreate: (input: string) => void,
+    onClickCreate?: (input: string) => void,
     resetInput?: () => void,
     loading?: boolean
     onSearch: (input: string) => void,
@@ -41,7 +41,12 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
                             onMouseDown={e => e.preventDefault()}
                             style={{ padding: '4px 8px', display: 'flex', justifyContent: 'center' }}
                         >
-                            <Button onClick={() => props.onClickCreate(currentValue)} ><Icon type="plus" /></Button>
+                {props.onClickCreate &&  <Button onClick={() =>{
+                    if(props.onClickCreate)
+                        props.onClickCreate(currentValue)
+                }
+                    
+                    } ><Icon type="plus" /></Button> }
                         </div>
                     </div>
                 )}
