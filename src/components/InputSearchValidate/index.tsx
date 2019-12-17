@@ -3,11 +3,13 @@ import { Form, Input } from 'antd';
 import { ApolloQueryResult, gql } from 'apollo-boost';
 import client from '../../graphql';
 declare const ValidateStatuses: ["success", "warning", "error", "validating", ""];
-
 interface Validation {
     mess: string,
     validate: typeof ValidateStatuses[number]
 }
+
+
+let timeout: any = null;
 
 interface InputSearchModelProps {
     label: string,
@@ -23,14 +25,14 @@ interface InputSearchModelProps {
 
 const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
 
+
+
     const [validation, setValidation] = useState<Validation>({
         mess: "",
         validate: ""
     })
 
 
-   
-    let timeout: any = null;
 
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 
@@ -47,6 +49,7 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
         if (input && input.length > 0) {
             clearTimeout(timeout);
             timeout = setTimeout(function () {
+                console.log("mode del")
                 const QUERY = gql`
                  query {
                    ${props.mutation}(name: "${input}") {
