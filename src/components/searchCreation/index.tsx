@@ -28,6 +28,7 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
 
     return (
         <React.Fragment>
+<label>{props.placeholder}</label>
             <Select
             placeholder={props.placeholder}
                 onSelect={props.onSelected}

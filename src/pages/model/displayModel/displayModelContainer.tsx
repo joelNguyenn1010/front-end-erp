@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { Fragment } from "react";
 import { GET_MODEL_QUERY } from "../../../graphql/query";
-import { Table } from "antd";
+import { Table, Input } from "antd";
 
 const DisplayModelContainer: React.FC = () => {
   const [pagi, setPagi] = React.useState<any>({
@@ -21,15 +21,16 @@ const DisplayModelContainer: React.FC = () => {
 
   const columns = [
     {
-      title: "Manufacture",
-      dataIndex: "manufactors.name",
-      key: "manuName"
-    },
-    {
       title: "Name",
       dataIndex: "name",
       key: "name"
     },
+    {
+      title: "Manufacture",
+      dataIndex: "manufactors.name",
+      key: "manuName"
+    },
+
     {
       title: "Short Description",
       dataIndex: "shortDescription",
@@ -112,8 +113,8 @@ const DisplayModelContainer: React.FC = () => {
   return (
     <Table
       title={() => (
-        <input
-          placeholder={"search"}
+        <Input
+          placeholder={"Search"}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPagi({ limit: 10, page: 1, name: e.target.value })
           }
@@ -136,6 +137,7 @@ const DisplayModelContainer: React.FC = () => {
       }}
       dataSource={dataRender}
       columns={columns}
+      scroll={{ y: window.screen.height - 500 }} 
     />
   );
 };
