@@ -4,6 +4,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_ITEM_QUERY } from "../../graphql/query";
 import { TableComponents } from "antd/lib/table";
 import { TableRow } from "./TableRow";
+import styled from 'styled-components'
+
 
 // const EditableContext = React.createContext({});
 
@@ -137,13 +139,16 @@ export const TableData = () => {
   //       name: "hello"
   //     }
   //   ];
+  const onShowSizeChange = (current: number, size: number) => {
+    console.log(current, size);
+  };
 
   var tableStyle = {
-      "width" : "100%"
-  }
+    width: "100%"
+  };
   return (
     // <Table components={components} dataSource={dataRender2} columns={newColumns} />
-    <div>
+   
       <table style={tableStyle}>
         <thead className="ant-table-thead">
           <tr>
@@ -210,12 +215,21 @@ export const TableData = () => {
               </span>
             </th>
           </tr>
-        </thead>
-
-        <tbody className="ant-table-tbody">
+        </thead> 
+    <tr>
+      <td>
+      <div style={{ overflow: "auto", maxHeight: "250px"}}>
+      <table>
+          <tbody className="ant-table-tbody">
           <TableRow />
-        </tbody>
+          </tbody>
+   
+        </table>
+      </div>
+      </td>
+    </tr>
+     
       </table>
-    </div>
+ 
   );
 };

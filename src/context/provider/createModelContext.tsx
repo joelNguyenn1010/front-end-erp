@@ -16,6 +16,7 @@ interface CreateModelDAO {
 
 const CreateModelProvider: React.FC = props => {
 
+    const [checkModel, setCheckModel] = React.useState<string | undefined>(undefined)
 
     let value: CreateModelDAO = {
         name: '',
@@ -31,7 +32,7 @@ const CreateModelProvider: React.FC = props => {
 
 
     return (
-        <CreateModelContext.Provider value={{ value: value, action: { build } }}>
+        <CreateModelContext.Provider value={{ value: value, action: { build }, model: {checkModel, setCheckModel} }}>
             {props.children}
         </CreateModelContext.Provider>
     )

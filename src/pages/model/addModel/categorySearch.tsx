@@ -46,6 +46,7 @@ const CategorySearch: React.FC = () => {
     const onSelected = (val: string) => {
         // cái này được gọi sau khi người dùng chọn, nên bỏ vào redux, nó sẽ trả về id của cái select
         context.value.categoryId = parseInt(val)
+
     }
 
     let timeout: any = null;
@@ -53,8 +54,9 @@ const CategorySearch: React.FC = () => {
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            refetch({name: val})
-        }, 220);
+            console.log('time time')
+            // refetch({name: val})
+        }, 520);
     }
     
 

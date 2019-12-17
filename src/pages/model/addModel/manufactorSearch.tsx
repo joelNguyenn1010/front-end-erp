@@ -16,7 +16,6 @@ const ManufactorSearch: React.FC = () => {
         // bỏ varialbe search vào
         variables: { name: '' },
     })
-
    
 
     if(error) {
