@@ -17,7 +17,7 @@ interface CreateModelDAO {
 const CreateModelProvider: React.FC = props => {
 
 
-    const [dummy, setDummy] = useState('')
+    const [dummy, setDummy] = React.useState('')
     let value: CreateModelDAO = {
         name: '',
     }
@@ -25,6 +25,9 @@ const CreateModelProvider: React.FC = props => {
 
     const build = () => {
        
+    
+
+
         console.log(value)
     }
 

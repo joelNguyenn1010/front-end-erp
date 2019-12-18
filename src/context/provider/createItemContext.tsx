@@ -11,13 +11,13 @@ export interface CreateItemDAO {
   note?: string;
   categoryId?: number;
   supplierId?: number;
-  modelId: number;
+  modelId?: number;
 }
 
 const CreateItemProvider: React.FC = props => {
   const [state, setState] = React.useState<Array<CreateItemDAO>>([]);
 
-  let newItem: CreateItemDAO = {modelId: 1};
+  let newItem: CreateItemDAO = {};
 
   const build = () => {
     console.log(newItem);

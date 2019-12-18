@@ -1,3 +1,4 @@
+import { createItemReducer, CreateItem } from './reducer/createItemReducer';
 import { createStore, applyMiddleware, compose, combineReducers, Reducer } from 'redux';
 import thunk from 'redux-thunk';
 import { Product } from './contract/Product';
@@ -8,6 +9,9 @@ import { ModelCreate } from './contract/Model';
 
 export interface AppState {
     productReducer: Product,
+    createItemReducer: CreateItem,
+
+
     createModelReducer: ModelCreate
     
 }
@@ -16,6 +20,7 @@ export interface AppState {
 
 export const rootReducer: Reducer<AppState> = combineReducers({
     productReducer,
+    createItemReducer,
     createModelReducer
 })
 

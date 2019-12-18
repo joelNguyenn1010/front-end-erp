@@ -25,7 +25,7 @@ const AddModel: React.FC = () => {
       </Form.Item>
       <SubmitModel />
 
-      <Button onClick={() => context.action.clear()}>
+      <Button>
         Clear
       </Button>
     </Form>
