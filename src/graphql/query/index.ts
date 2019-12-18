@@ -18,8 +18,7 @@ export const GET_MODEL_QUERY = gql`
           key: id
           name
           hasSerial
-          shortDescription
-          longDescription
+          note
           manufactors{
             name
           }

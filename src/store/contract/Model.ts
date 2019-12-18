@@ -20,14 +20,12 @@ export interface ModelCreate {
         id: string,
         name: string,
         hasSerial: boolean,
-        category: {
-            id: number,
-            name: string
-        },
-        manufactor: {
-            id: number,
-            name: string
-        }
-    }
- 
+        category: string,
+        manufactor: string,
+        manufactorId: number,
+        categoryId: number
+    }, 
+    value?: Array<string>
+  
+
 }

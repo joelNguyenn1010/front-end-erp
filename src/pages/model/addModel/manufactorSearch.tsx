@@ -5,12 +5,18 @@ import { MANUFACTURE_QUERY } from '../../../graphql/query';
 import { ADD_MANUFACTURE } from '../../../graphql/mutation';
 import { message } from 'antd';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/createModelAction';
+import { AppState } from '../../../store';
 
-
+let timeout: any = null;
 const ManufactorSearch: React.FC = () => {
     const [input, setInput] = useState<string>('')
+
+
+    const name = useSelector((state: AppState) => state.createModelReducer.input.manufactor)
+
+
 
 
     const dispatch: any = useDispatch()
@@ -42,21 +48,17 @@ const ManufactorSearch: React.FC = () => {
 
     // execute khi button create chạy
     const onCreate = (val: string) => {
+    
         addManufacture({ variables: { name: val } })
     }
 
 
     const onSelected = (val: string, option: any) => {
-        // cái này được gọi sau khi người dùng chọn, nên bỏ vào redux, nó sẽ trả về id của cái select
-        //    context.value.manufactorId = parseInt(val)
-        // console.log(option.key)
-        dispatch(changeValueAction('manufactorId', option.key))
-
-        setInput(val)
-
+        dispatch(changeValueAction('manufactor', val))
+        dispatch(changeValueAction('manufactorId', parseInt(option.key)))
     }
 
-    let timeout: any = null;
+
 
     const onSearch = (val: string) => {
         clearTimeout(timeout);
@@ -68,7 +70,7 @@ const ManufactorSearch: React.FC = () => {
 
     return (
         <React.Fragment>
-
+            <label>Manufacture:</label>
             <SearchCreation
                 placeholder="Manufacture"
                 loading={loading}
@@ -76,8 +78,8 @@ const ManufactorSearch: React.FC = () => {
                 onClickCreate={onCreate}
                 onSelected={onSelected}
                 onSearch={onSearch}
-                input={input}
-                setInput={setInput}
+                input={name}
+      
             />
         </React.Fragment>
 

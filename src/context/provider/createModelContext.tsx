@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 export const CreateModelContext = React.createContext({});
 
 
@@ -16,8 +16,8 @@ interface CreateModelDAO {
 
 const CreateModelProvider: React.FC = props => {
 
-    const [checkModel, setCheckModel] = React.useState<string | undefined>(undefined)
 
+    const [dummy, setDummy] = useState('')
     let value: CreateModelDAO = {
         name: '',
     }
@@ -27,12 +27,17 @@ const CreateModelProvider: React.FC = props => {
        
         console.log(value)
     }
+
+    const clear = () => {
+        setDummy('clear')
+        // setDummy('')
+    }
     
 
 
 
     return (
-        <CreateModelContext.Provider value={{ value: value, action: { build }, model: {checkModel, setCheckModel} }}>
+        <CreateModelContext.Provider value={{ value: {dummy}, action: { build, clear } }}>
             {props.children}
         </CreateModelContext.Provider>
     )

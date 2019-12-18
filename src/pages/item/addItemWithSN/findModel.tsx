@@ -35,7 +35,7 @@ const FindModel: React.FC = () => {
     <React.Fragment>
       <SearchCreation
         input={input}
-        setInput={setInput}
+
         loading={loading}
         onSearch={onSearch}
         content={data ? data.model ? data.model.data : [] : []}

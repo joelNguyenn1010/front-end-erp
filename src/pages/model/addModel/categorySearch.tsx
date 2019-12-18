@@ -6,24 +6,26 @@ import { message } from 'antd';
 import { CATEGORY_QUERY } from '../../../graphql/query';
 import { ADD_CATEGORY } from '../../../graphql/mutation';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/createModelAction';
+import { AppState } from '../../../store';
+
+let timeout: any = null;
 const CategorySearch: React.FC = () => {
-    
-    const [input, setInput] = useState<string>('')
+
 
     const dispatch: any = useDispatch()
- 
-    const context: any = useContext(CreateModelContext)
 
-    const {loading, error, data, refetch } = useQuery(CATEGORY_QUERY, {
+    const name = useSelector((state: AppState) => state.createModelReducer.input.category)
+
+
+    const { loading, error, data, refetch } = useQuery(CATEGORY_QUERY, {
         // bỏ varialbe search vào
         variables: { name: '' },
     })
 
-   
 
-    if(error) {
+    if (error) {
         message.error("We can't fetch the category, please try again")
     }
 
@@ -36,7 +38,7 @@ const CategorySearch: React.FC = () => {
         onCompleted: (data: any) => {
             const name = data.createNewCategory.name;
             // fetch lại data mới khi tạo
-            refetch({name: name})
+            refetch({ name: name })
             message.success(`Category ${data.createNewCategory.name} created`)
         }
     })
@@ -44,32 +46,33 @@ const CategorySearch: React.FC = () => {
 
     // execute khi button create chạy
     const onCreate = (val: string) => {
+        console.log(val)
         addManufacture({ variables: { name: val } })
     }
 
 
-    const onSelected = (val: string) => {
+    const onSelected = (val: string, option: any) => {
         // cái này được gọi sau khi người dùng chọn, nên bỏ vào redux, nó sẽ trả về id của cái select
-        context.value.categoryId = parseInt(val)
+        dispatch(changeValueAction('category', val))
+        dispatch(changeValueAction('categoryId', parseInt(option.key)))
 
-        dispatch(changeValueAction('categoryId',val ))
-        setInput(val)
     }
 
-    let timeout: any = null;
+
 
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            console.log('time time')
-            // refetch({name: val})
+
+            refetch({name: val})
         }, 520);
     }
-    
+
 
 
     return (
         <React.Fragment>
+            <label>Category:</label>
             <SearchCreation
                 placeholder="Category"
                 loading={loading}
@@ -77,8 +80,8 @@ const CategorySearch: React.FC = () => {
                 onClickCreate={onCreate}
                 onSelected={onSelected}
                 onSearch={onSearch}
-                input={input}
-                setInput={setInput}
+                input={name}
+       
             />
         </React.Fragment>
 

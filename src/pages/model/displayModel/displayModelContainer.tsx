@@ -10,7 +10,7 @@ const DisplayModelContainer: React.FC = () => {
     name: ""
   });
 
-  const { data, loading, error, fetchMore, refetch } = useQuery(
+  const { data, loading } = useQuery(
     GET_MODEL_QUERY,
     { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
   );
@@ -32,9 +32,9 @@ const DisplayModelContainer: React.FC = () => {
     },
 
     {
-      title: "Short Description",
-      dataIndex: "shortDescription",
-      key: "shortDescription"
+      title: "Note",
+      dataIndex: "note",
+      key: "note"
     },
     {
       title: "AU",

@@ -65,7 +65,7 @@ const FindSupplier: React.FC = () => {
         <React.Fragment>
             <SearchCreation
                 input={input}
-                setInput={setInput}
+
                 placeholder='Supplier'
                 loading={loading}
                 onSearch={onSearch}

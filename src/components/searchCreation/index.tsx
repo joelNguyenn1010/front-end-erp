@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Select, Icon, Button, Divider, Spin } from "antd";
+import { CreateModelContext } from "../../context/provider/createModelContext";
+
+
 
 export interface Content {
     id: number;
@@ -18,12 +21,13 @@ interface SearchCreationProps {
     defaultValue?: string;
 
     input: string;
-    setInput: (str: string) => void;
 }
 
 const SearchCreation: React.FC<SearchCreationProps> = props => {
-    //   const [currentValue, setValue] = useState<string>("");
+ 
+    const [createInput, setCreateInput] = useState('')
 
+     
     return (
         <React.Fragment>
             <Select
@@ -53,7 +57,8 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
                             {props.onClickCreate && (
                                 <Button
                                     onClick={() => {
-                                        if (props.onClickCreate) props.onClickCreate(props.input);
+
+                                        if (props.onClickCreate) props.onClickCreate(createInput);
                                     }}
                                 >
                                     <Icon type="plus" />
@@ -65,7 +70,8 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
                 showSearch
                 onSearch={(val: string) => {
                     props.onSearch(val);
-                    props.setInput(val);
+                    setCreateInput(val)
+                    // props.setInput(val);
                 }}
             >
                 {!props.loading ? (
