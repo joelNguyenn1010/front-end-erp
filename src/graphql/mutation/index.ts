@@ -20,6 +20,8 @@ mutation($name: String!) {
 `
 
 
+
+
 export const ADD_SUPPLIER = gql`
 mutation($name: String!) {
   createNewSupplier(name: $name){
@@ -29,13 +31,19 @@ mutation($name: String!) {
 }
 `
 
+// export const ADD_MODEL_SHORTCUT = gql`
+//     mutation($object: Any!) {
+//       createNewModel()
+//     }
+// `
+
 export const ADD_MODEL = gql`
 mutation($name: String!, 
   $manufactorId: Int!, 
   $categoryId: Int!, 
   $hasSerial: Boolean!, 
-  $shortDescription: String!, 
-  $longDescription: String!)
+  $shortDescription: String, 
+  $longDescription: String)
   {
   createNewModel(name: $name, 
     manufactorId: $manufactorId, 

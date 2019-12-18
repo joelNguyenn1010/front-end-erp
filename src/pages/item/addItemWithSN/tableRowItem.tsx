@@ -63,13 +63,14 @@ export const TableRowItem: React.FC<TableRowItemProps> = props => {
             props.value.model.name.length > 0 ? (
               props.value.model.name
             ) : (
-                <SearchCreation
-                placeholder="Create"
-                loading={loading}
-                content={data ? (data.model ? data.model.data : []) : []}
-                onSelected={onSelected}
-                onSearch={onSearch}
-              />
+              //   <SearchCreation
+              //   placeholder="Create"
+              //   loading={loading}
+              //   content={data ? (data.model ? data.model.data : []) : []}
+              //   onSelected={onSelected}
+              //   onSearch={onSearch}
+              // />
+              ''
               
             )
           ) : (

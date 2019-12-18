@@ -12,7 +12,7 @@ const DisplayItemContainer: React.FC = () => {
     serialNumber: " "
   });
 
-  const { data, loading, error, fetchMore, refetch } = useQuery(
+  const { data, loading } = useQuery(
     GET_ITEM_QUERY,
     {
       variables: {

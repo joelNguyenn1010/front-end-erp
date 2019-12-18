@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { CreateItemContext } from '../../../context/provider/createItemContext';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -6,10 +6,13 @@ import { GET_SUPPLIER_QUERY } from '../../../graphql/query';
 import { message } from 'antd';
 import { ADD_SUPPLIER } from '../../../graphql/mutation';
 
-const  FindSupplier: React.FC = () => {
+const FindSupplier: React.FC = () => {
     const context: any = React.useContext(CreateItemContext);
 
-    const {loading, error, data, refetch } = useQuery(GET_SUPPLIER_QUERY, {
+    const [input, setInput] = useState<string>('')
+
+
+    const { loading, error, data, refetch } = useQuery(GET_SUPPLIER_QUERY, {
         // bỏ varialbe search vào
         variables: { name: '' },
     })
@@ -17,7 +20,7 @@ const  FindSupplier: React.FC = () => {
 
 
     //display error if can not connact to provider
-    if(error){
+    if (error) {
         message.error("We can't fetch data supplier, please try again")
     }
 
@@ -35,16 +38,16 @@ const  FindSupplier: React.FC = () => {
             //create new name in mutation ADD_SUPPLIER
             const name = data.createNewSupplier.name
             //refetch API 
-          
-            refetch({name: name})
+
+            refetch({ name: name })
             //Print message
             message.success(`Supplier ${data.createNewSupplier.name} created`)
 
-        } 
+        }
     })
 
     const onCreate = (e: string) => {
-        addSupplier({variables: {name: e}})
+        addSupplier({ variables: { name: e } })
     }
 
 
@@ -54,13 +57,15 @@ const  FindSupplier: React.FC = () => {
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            refetch({name: val})
+            refetch({ name: val })
         }, 220);
     }
 
     return (
         <React.Fragment>
-            <SearchCreation 
+            <SearchCreation
+                input={input}
+
                 placeholder='Supplier'
                 loading={loading}
                 onSearch={onSearch}

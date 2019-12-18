@@ -15,9 +15,12 @@ interface InputSearchModelProps {
     label: string,
     mutation: string,
     returnResolve?: (value: string | null) => void,
-    onChangeInput?: (value: string) => void, 
+    onChangeInput: (value: string) => void, 
 
     notFoundModel?: string | 'Not found model'
+    input: string,
+    validation: Validation,
+    setValidation: (state: Validation) => void,
 
     foundModel?: string | 'Model found, '
 }
@@ -27,23 +30,24 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
 
 
 
-    const [validation, setValidation] = useState<Validation>({
-        mess: "",
-        validate: ""
-    })
+    // const [validation, setValidation] = useState<Validation>({
+    //     mess: "",
+    //     validate: ""
+    // })
 
 
 
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-       
 
-        setValidation({
+        props.setValidation({
             mess: "Validating",
             validate: "validating"
         })
 
         const input = e.target.value
+        props.onChangeInput(input)
+
         if(props.onChangeInput)
             props.onChangeInput(input)
         if (input && input.length > 0) {
@@ -60,7 +64,7 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
                 client.query({ query: QUERY })
                     .then((res: ApolloQueryResult<any>) => {
                         if (res && res.data && res.data.findModelWithName && res.data.findModelWithName.name) {
-                            setValidation({
+                            props.setValidation({
                                 mess: `The ${input} already exist`,
                                 validate: "error"
                             })
@@ -69,14 +73,14 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
 
                         } else if (input.length > 1) {
 
-                            setValidation({
+                            props.setValidation({
                                 mess: `You can create ${input}`,
                                 validate: "success"
                             })
                             if (props.returnResolve)
                                 props.returnResolve(input)
                         } else {
-                            setValidation({
+                            props.setValidation({
                                 mess: ``,
                                 validate: ""
                             })
@@ -87,7 +91,7 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
                     })
                     .catch((reason: any) => {
 
-                        setValidation({
+                        props.setValidation({
                             mess: `We can't validate the ${props.label}, but you can still create new model`,
                             validate: "warning"
                         })
@@ -100,13 +104,14 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
     return (
         <Form.Item
             label={props.label}
-            validateStatus={validation.validate}
-            help={validation.mess}
+            validateStatus={props.validation.validate}
+            help={props.validation.mess}
             hasFeedback>
 
             <Input
+                value={props.input}
                 onChange={onSearch}
-                placeholder={props.label} id={validation.validate} />
+                placeholder={props.label} id={props.validation.validate} />
 
         </Form.Item>
     )

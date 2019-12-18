@@ -15,11 +15,10 @@ export const GET_MODEL_QUERY = gql`
   query($limit: Int!, $page: Int!, $name: String!) {
     model(limit: $limit, page: $page, name: $name) {
         data{
-          id
+          key: id
           name
           hasSerial
-          shortDescription
-          longDescription
+          note
           manufactors{
             name
           }

@@ -10,7 +10,7 @@ export const TableRow: React.FC<TableRowProps> = props => {
 
     console.log(context)
     return context.value.data.map((value: any) => {
-        return <TableEditRow  value={value} key={value.key} />
+        return <TableEditRow value={value} key={value.key} />
     })
     
 }

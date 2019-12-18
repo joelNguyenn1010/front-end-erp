@@ -11,6 +11,9 @@ const HeaderLink: React.FC = () => {
                         <Link to="/model">Model</Link>
                     </Menu.Item>
                     <Menu.Item>
+                        <Link to="/item">Item</Link>
+                    </Menu.Item>
+                    <Menu.Item>
                         <Link to="/model/add">Add Model</Link>
                     </Menu.Item>
                     <Menu.Item>

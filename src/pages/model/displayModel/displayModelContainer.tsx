@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { Fragment } from "react";
 import { GET_MODEL_QUERY } from "../../../graphql/query";
-import { Table } from "antd";
+import { Table, Input } from "antd";
 
 const DisplayModelContainer: React.FC = () => {
   const [pagi, setPagi] = React.useState<any>({
@@ -10,7 +10,7 @@ const DisplayModelContainer: React.FC = () => {
     name: ""
   });
 
-  const { data, loading, error, fetchMore, refetch } = useQuery(
+  const { data, loading } = useQuery(
     GET_MODEL_QUERY,
     { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
   );
@@ -21,19 +21,20 @@ const DisplayModelContainer: React.FC = () => {
 
   const columns = [
     {
-      title: "Manufacture",
-      dataIndex: "manufactors.name",
-      key: "manuName"
-    },
-    {
       title: "Name",
       dataIndex: "name",
       key: "name"
     },
     {
-      title: "Short Description",
-      dataIndex: "shortDescription",
-      key: "shortDescription"
+      title: "Manufacture",
+      dataIndex: "manufactors.name",
+      key: "manuName"
+    },
+
+    {
+      title: "Note",
+      dataIndex: "note",
+      key: "note"
     },
     {
       title: "AU",
@@ -112,8 +113,8 @@ const DisplayModelContainer: React.FC = () => {
   return (
     <Table
       title={() => (
-        <input
-          placeholder={"search"}
+        <Input
+          placeholder={"Search"}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPagi({ limit: 10, page: 1, name: e.target.value })
           }
@@ -136,6 +137,7 @@ const DisplayModelContainer: React.FC = () => {
       }}
       dataSource={dataRender}
       columns={columns}
+      scroll={{ y: window.screen.height - 500 }} 
     />
   );
 };

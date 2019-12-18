@@ -1,24 +1,33 @@
 import React, { useState, useContext } from 'react';
-import SearchCreation, { Content } from '../../../components/searchCreation';
+import SearchCreation from '../../../components/searchCreation';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { MANUFACTURE_QUERY } from '../../../graphql/query';
 import { ADD_MANUFACTURE } from '../../../graphql/mutation';
 import { message } from 'antd';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeValueAction } from '../../../store/action/createModelAction';
+import { AppState } from '../../../store';
 
-
+let timeout: any = null;
 const ManufactorSearch: React.FC = () => {
+    const [input, setInput] = useState<string>('')
 
 
-    const  context: any = useContext(CreateModelContext)
+    const name = useSelector((state: AppState) => state.createModelReducer.input.manufactor)
 
-    const {loading, error, data, refetch } = useQuery(MANUFACTURE_QUERY, {
+
+
+
+    const dispatch: any = useDispatch()
+
+    const { loading, error, data, refetch } = useQuery(MANUFACTURE_QUERY, {
         // bỏ varialbe search vào
         variables: { name: '' },
     })
-   
 
-    if(error) {
+
+    if (error) {
         message.error("We can't fetch the manufacture, please try again")
     }
 
@@ -31,7 +40,7 @@ const ManufactorSearch: React.FC = () => {
         onCompleted: (data: any) => {
             const name = data.createNewManufacture.name;
             // fetch lại data mới khi tạo
-            refetch({name: name})
+            refetch({ name: name })
             message.success(`Manufacture ${data.createNewManufacture.name} created`)
         }
     })
@@ -39,28 +48,29 @@ const ManufactorSearch: React.FC = () => {
 
     // execute khi button create chạy
     const onCreate = (val: string) => {
+    
         addManufacture({ variables: { name: val } })
     }
 
 
-    const onSelected = (val: string) => {
-        // cái này được gọi sau khi người dùng chọn, nên bỏ vào redux, nó sẽ trả về id của cái select
-       context.value.manufactorId = parseInt(val)
-      
+    const onSelected = (val: string, option: any) => {
+        dispatch(changeValueAction('manufactor', val))
+        dispatch(changeValueAction('manufactorId', parseInt(option.key)))
     }
 
-    let timeout: any = null;
+
 
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            refetch({name: val})
+            refetch({ name: val })
         }, 220);
     }
 
 
     return (
         <React.Fragment>
+            <label>Manufacture:</label>
             <SearchCreation
                 placeholder="Manufacture"
                 loading={loading}
@@ -68,6 +78,8 @@ const ManufactorSearch: React.FC = () => {
                 onClickCreate={onCreate}
                 onSelected={onSelected}
                 onSearch={onSearch}
+                input={name}
+      
             />
         </React.Fragment>
 
