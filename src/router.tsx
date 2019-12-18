@@ -29,7 +29,7 @@ const Routing: React.FC = props => {
         <DisplayModel />
       </Route>
 
-      <Route path="/add/item/nomodel">
+      <Route path="/add/item/nosn">
         <AddItemWithoutSN />
       </Route>
 

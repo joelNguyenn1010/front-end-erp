@@ -19,6 +19,10 @@ const HeaderLink: React.FC = () => {
                     <Menu.Item>
                         <Link to="/item/add">Add Item</Link>
                     </Menu.Item>
+
+                    <Menu.Item>
+                        <Link to="/add/item/nosn">Add Item With No SN</Link>
+                    </Menu.Item>
                 </Menu>
             }
         >
