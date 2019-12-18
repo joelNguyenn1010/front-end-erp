@@ -2,16 +2,21 @@ import { createStore, applyMiddleware, compose, combineReducers, Reducer } from 
 import thunk from 'redux-thunk';
 import { Product } from './contract/Product';
 import { productReducer } from './reducer/productReducer';
+import { createModelReducer } from './reducer/createModelReducer'
+import { ModelCreate } from './contract/Model';
 
 
 export interface AppState {
-    productReducer: Product
+    productReducer: Product,
+    createModelReducer: ModelCreate
+    
 }
 
 
 
 export const rootReducer: Reducer<AppState> = combineReducers({
-    productReducer
+    productReducer,
+    createModelReducer
 })
 
 declare global {

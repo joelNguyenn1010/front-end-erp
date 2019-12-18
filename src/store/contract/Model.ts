@@ -12,4 +12,22 @@ export interface Model {
     shortDescription?: string,
     longDescription?: string,
     note?: string,
-}   
+}
+
+
+export interface ModelCreate {
+    input: {
+        id: string,
+        name: string,
+        hasSerial: boolean,
+        category: {
+            id: number,
+            name: string
+        },
+        manufactor: {
+            id: number,
+            name: string
+        }
+    }
+ 
+}

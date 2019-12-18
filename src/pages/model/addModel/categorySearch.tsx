@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import SearchCreation from '../../../components/searchCreation';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
@@ -6,8 +6,13 @@ import { message } from 'antd';
 import { CATEGORY_QUERY } from '../../../graphql/query';
 import { ADD_CATEGORY } from '../../../graphql/mutation';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
+import { useDispatch } from 'react-redux';
+import { changeValueAction } from '../../../store/action/createModelAction';
 const CategorySearch: React.FC = () => {
     
+    const [input, setInput] = useState<string>('')
+
+    const dispatch: any = useDispatch()
  
     const context: any = useContext(CreateModelContext)
 
@@ -47,6 +52,8 @@ const CategorySearch: React.FC = () => {
         // cái này được gọi sau khi người dùng chọn, nên bỏ vào redux, nó sẽ trả về id của cái select
         context.value.categoryId = parseInt(val)
 
+        dispatch(changeValueAction('categoryId',val ))
+        setInput(val)
     }
 
     let timeout: any = null;
@@ -70,6 +77,8 @@ const CategorySearch: React.FC = () => {
                 onClickCreate={onCreate}
                 onSelected={onSelected}
                 onSearch={onSearch}
+                input={input}
+                setInput={setInput}
             />
         </React.Fragment>
 

@@ -1,7 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Input, Form } from 'antd';
-import client from '../../../graphql';
-import { ApolloQueryResult, gql } from 'apollo-boost';
+import React, { useContext } from 'react';
+
 import { CreateModelContext } from '../../../context/provider/createModelContext';
 import InputSearchValidation from '../../../components/InputSearchValidate';
 
