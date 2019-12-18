@@ -1,25 +1,21 @@
 import React from 'react'
 import { TableRowItem } from './tableRowItem'
-import { CreateItemContext } from '../../../context/provider/createItemContext'
 
-export const TableBodyItem = () => {
+import { useSelector } from 'react-redux'
+import { AppState } from '../../../store'
+import { Item } from '../../../store/reducer/createItemReducer'
 
-    const {reducer} = React.useContext<any>(CreateItemContext)
+export const TableBodyItem: React.FC= () => {
 
+    const items: any = useSelector((state: AppState) => state.createItemReducer.items)
+
+    console.log("item",items)
+    
     return (
         <tbody>
-            {reducer ? reducer.state.map(() => {
-                return <TableRowItem />
+            {items ? items.map((value: Item, index: number) => {
+                return <TableRowItem index={index} key={value.sn} value={value} />
             }) : ''}
-            
-            {/* <TableRowItem />
-            <TableRowItem />
-            <TableRowItem />
-            <TableRowItem />
-            <TableRowItem />
-            <TableRowItem />
-            <TableRowItem />
-            <TableRowItem /> */}
       </tbody>
     )
 }

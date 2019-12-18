@@ -10,14 +10,14 @@ const AddModel: React.FC = () => {
   return (
     <Form>
       <AddName />
-      <Form.Item>
+      <Form.Item label="Manufacture:">
         <ManufactorCreation />
       </Form.Item>
-      <Form.Item>
+      <Form.Item label="Category:">
         <CategorySearch />
       </Form.Item>
 
-      <Form.Item>
+      <Form.Item label="Manage by:">
         <HasSerialModel />
       </Form.Item>
       <SubmitModel />

@@ -1,4 +1,6 @@
 import React from 'react';
+import client from '../../graphql';
+import { useMutation } from '@apollo/react-hooks';
 export const CreateModelContext = React.createContext({});
 
 
@@ -18,6 +20,9 @@ const CreateModelProvider: React.FC = props => {
 
     const [checkModel, setCheckModel] = React.useState<string | undefined>(undefined)
 
+    // const {} = useMutation()
+    
+
     let value: CreateModelDAO = {
         name: '',
     }
@@ -25,6 +30,9 @@ const CreateModelProvider: React.FC = props => {
 
     const build = () => {
        
+    
+
+
         console.log(value)
     }
     

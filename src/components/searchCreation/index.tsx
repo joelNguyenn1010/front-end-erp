@@ -24,6 +24,7 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
   return (
     <React.Fragment>
       <Select
+        style={{width: "100%"}}
         defaultValue={props.defaultValue ? props.defaultValue : undefined}
         onFocus={() => {
           if(props.onFocus) {

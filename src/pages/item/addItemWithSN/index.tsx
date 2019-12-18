@@ -3,16 +3,17 @@ import FindSN from "./findSN";
 import { TableBodyItem } from "./tableBodyItem";
 
 const AddItem: React.FC = () => {
+  
   return (
-    <table>
-      <thead>
+    <table style={{width: "100%"}}>
+      <thead >
         <tr>
-          <th>SN</th>
-          <th>Model</th>
-          <th>Condition</th>
-          <th>Supplier</th>
-          <th>Note</th>
-          <th></th>
+          <th style={{width: 200}}>SN</th>
+          <th style={{width: 200}}>Model</th>
+          <th style={{width: 200}}>Condition</th>
+          <th style={{width: 200}}>Supplier</th>
+          <th style={{width: 200}}>Note</th>
+          <th style={{width: 200}}>Function</th>
         </tr>
         <FindSN />
       </thead>

@@ -1,3 +1,4 @@
+import { createItemReducer, CreateItem } from './reducer/createItemReducer';
 import { createStore, applyMiddleware, compose, combineReducers, Reducer } from 'redux';
 import thunk from 'redux-thunk';
 import { Product } from './contract/Product';
@@ -5,13 +6,17 @@ import { productReducer } from './reducer/productReducer';
 
 
 export interface AppState {
-    productReducer: Product
+    productReducer: Product,
+    createItemReducer: CreateItem,
+
+
 }
 
 
 
 export const rootReducer: Reducer<AppState> = combineReducers({
-    productReducer
+    productReducer,
+    createItemReducer
 })
 
 declare global {

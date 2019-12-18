@@ -12,6 +12,7 @@ const init: Product = {
 }
 
 export const productReducer = (state: Product = init, action: ProductActionTypes) => {
+    
     return state;
 }
 

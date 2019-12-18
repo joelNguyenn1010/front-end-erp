@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import AddModel from "./pages/model/addModel";
 import DisplayModel from "./pages/model/displayModel";
 import DisplayItem from "./pages/item/displayItem";
-import { TableData } from "./pages/table/TableData";
+import { TableData } from "./pages/tableEditable/TableData";
 import EditItemProvider from "./provider/EditItemProvider";
 import CreateModelProvider from "./context/provider/createModelContext";
 import AddItem from "./pages/item/addItemWithSN";

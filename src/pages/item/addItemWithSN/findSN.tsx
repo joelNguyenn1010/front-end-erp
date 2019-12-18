@@ -6,67 +6,30 @@ import client from "../../../graphql";
 import { gql } from "apollo-boost";
 import { CreateItemDAO } from "../../../context/provider/createItemContext";
 import { CreateItemContext } from "../../../context/provider/createItemContext";
+import {
+  fetchSN,
+  checkModelInDB,
+  addItem
+} from "../../../store/action/itemAction/createItemAction";
+import { useDispatch } from "react-redux";
 
 let timeout: any = null;
 
 const FindSN: React.FC = () => {
   const [loading, setLoading] = React.useState<boolean>(false);
 
-  const [input, setInput] = React.useState<string>("");
+  const dispatch = useDispatch()
 
-  const { reducer } = React.useContext<any>(CreateItemContext);
+  const [input, setInput] = React.useState<string>("");
 
   const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    clearTimeout(timeout);
-    // const input = e.target.value.trim();
-    timeout = setTimeout(function() {
+  
+    dispatch(addItem(input))
 
-
-      const oldState: Array<CreateItemDAO> = reducer.state.concat();
-      
-      let newItem: CreateItemDAO = {
-        serialNumber: input.trim(),
-        modelId: 1
-      };
-
-      axios
-        .get(`http://apisn.ipsupply.net:2580/api/check-sn/${input}`)
-        .then(res => {
-          if (res && res.data) {
-            const { ITEM_NAME } = res.data[0];
-
-            const QUERY = gql`
-                    query {
-                        findModelWithName(name: "${ITEM_NAME}") {
-                        name
-                      }
-                    }
-                  `;
-
-            client.query({ query: QUERY }).then(result => {
-              if (result.data && result.data && result.data.findModelWithName) {
-                console.log(result.data )
-                oldState.push(newItem);
-                reducer.setState(oldState);
-
-                setInput("");
-              } else {
-                console.log(input, "Ko co trong db");
-              }
-            });
-          }
-        })
-        .catch(err => {
-          message.warning(
-            "This serial number's model cannot be found on SN check"
-          );
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 550);
+    setInput("")
+  
   };
 
   return (

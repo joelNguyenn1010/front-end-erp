@@ -218,7 +218,7 @@ export const TableData = () => {
         </thead> 
     <tr>
       <td>
-      <div style={{ overflow: "auto", maxHeight: "250px"}}>
+      <div>
       <table>
           <tbody className="ant-table-tbody">
           <TableRow />

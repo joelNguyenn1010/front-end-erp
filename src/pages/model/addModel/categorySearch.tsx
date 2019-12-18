@@ -54,8 +54,7 @@ const CategorySearch: React.FC = () => {
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            console.log('time time')
-            // refetch({name: val})
+            refetch({name: val})
         }, 520);
     }
     

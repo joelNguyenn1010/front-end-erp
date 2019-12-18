@@ -57,12 +57,12 @@ const ManufactorSearch: React.FC = () => {
             refetch({name: val})
         }, 220);
     }
-    
+
 
     return (
         <React.Fragment>
             <SearchCreation
-                placeholder="manufacture"
+                placeholder="Manufacture"
                 loading={loading}
                 content={data ? data.manufactor ? data.manufactor.data : [] : []}
                 onClickCreate={onCreate}
