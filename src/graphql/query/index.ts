@@ -15,7 +15,7 @@ export const GET_MODEL_QUERY = gql`
   query($limit: Int!, $page: Int!, $name: String!) {
     model(limit: $limit, page: $page, name: $name) {
         data{
-          key: id
+          id
           name
           hasSerial
           note
@@ -33,7 +33,7 @@ export const GET_ITEM_QUERY = gql`
 query($limit: Int!, $page: Int!, $serialNumber: String!){
   findItemBySerial(limit: $limit, page: $page, serialNumber: $serialNumber){
     data{
-      key: id
+      id
       conditionId
       warehouse
       supplierId
@@ -61,6 +61,17 @@ query($name: String!) {
 export const GET_SUPPLIER_QUERY = gql`
 query($name: String!){
   supplier(limit: 10, page: 1, name: $name){
+    data{
+      id
+      name
+    }
+  }
+}
+`
+
+export const GET_CONDITION_QUERY = gql`
+query($name: String!){
+  condition(limit: 6, page:1, name: $name){
     data{
       id
       name

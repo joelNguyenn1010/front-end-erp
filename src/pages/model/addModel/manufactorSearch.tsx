@@ -11,7 +11,7 @@ import { AppState } from '../../../store';
 
 let timeout: any = null;
 const ManufactorSearch: React.FC = () => {
-    const [input, setInput] = useState<string>('')
+ 
 
 
     const name = useSelector((state: AppState) => state.createModelReducer.input.manufactor)

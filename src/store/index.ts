@@ -1,18 +1,19 @@
+import { ItemWithoutSn } from './contract/ItemWithoutSn';
 import { createItemReducer, CreateItem } from './reducer/createItemReducer';
 import { createStore, applyMiddleware, compose, combineReducers, Reducer } from 'redux';
 import thunk from 'redux-thunk';
 import { Product } from './contract/Product';
 import { productReducer } from './reducer/productReducer';
-import { createModelReducer } from './reducer/createModelReducer'
+import { createModelReducer } from './reducer/createModelReducer';
+import { CreateItemWithoutSNReducer }  from './reducer/createItemWithoutSNReducer';
 import { ModelCreate } from './contract/Model';
 
 
 export interface AppState {
     productReducer: Product,
     createItemReducer: CreateItem,
-
-
-    createModelReducer: ModelCreate
+    CreateItemWithoutSNReducer: ItemWithoutSn,
+    createModelReducer: ModelCreate,
     
 }
 
@@ -21,7 +22,8 @@ export interface AppState {
 export const rootReducer: Reducer<AppState> = combineReducers({
     productReducer,
     createItemReducer,
-    createModelReducer
+    createModelReducer,
+    CreateItemWithoutSNReducer
 })
 
 declare global {

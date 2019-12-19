@@ -23,9 +23,11 @@ export interface ModelCreate {
         category: string,
         manufactor: string,
         manufactorId: number,
-        categoryId: number
+        categoryId: number,
     }, 
     value?: Array<string>
   
 
 }
+
+

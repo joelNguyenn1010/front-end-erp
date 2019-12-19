@@ -61,3 +61,30 @@ mutation($name: String!,
     }
   }
 `
+
+export const ADD_ITEM = gql`
+  mutation($warehouse: String!, $supplierId: Int!, $modelId: Int!, $serialNumber: String, $price: Float, $note: String, $quantity: Int!, $conditionId: Int!){
+    createNewItem(warehouse: $warehouse, supplierId: $supplierId, modelId: $modelId, serialNumber: $serialNumber, price: $price, note: $note, quantity: $quantity, conditionId: $conditionId){
+      id
+      conditionId
+      warehouse
+      suppliers{
+        id
+        name
+      }
+      models{
+        id
+        name
+      }
+      serialNumber
+      price
+      note
+      quantity
+      conditions{
+        id
+        name
+      }
+
+    }
+  }
+`
