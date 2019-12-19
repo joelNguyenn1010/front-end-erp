@@ -11,7 +11,7 @@ export const TableCell: React.FC<TableCellProps> = props => {
 
   const handleBlur = () => {
 
-     console.log(input)
+     console.log("input", input)
     //  fetch lai data
       setEdit({editing: false})
   }
