@@ -53,7 +53,7 @@ const InputSearchValidation: React.FC<InputSearchModelProps> = props => {
         if (input && input.length > 0) {
             clearTimeout(timeout);
             timeout = setTimeout(function () {
-                console.log("mode del")
+                // console.log("mode del")
                 const QUERY = gql`
                  query {
                    ${props.mutation}(name: "${input}") {

@@ -1,9 +1,59 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { GET_ITEM_QUERY } from "../../../graphql/query";
-import { Table, PageHeader, Input, InputNumber, Popconfirm, Form } from "antd";
+import { Table, PageHeader, Input, InputNumber, Popconfirm, Form, message } from "antd";
 
-const EditableContext = React.createContext({});
+const columns = [
+  {
+    title: "WH Location",
+    dataIndex: "warehouse",
+    key: "whLocation",
+    editable: true,
+  },
+  {
+    title: "Item Location",
+    key: "itemLocation",
+    editable: true,
+  },
+  {
+    title: "Serial Number",
+    dataIndex: "serialNumber",
+    key: "serialNumber",
+    editable: true,
+  },
+  {
+    title: "Condition",
+    dataIndex: "conditionId",
+    key: "condition",
+    editable: true,
+  },
+  {
+    title: "Stock Status",
+    key: "stockStatus",
+    editable: true,
+  },
+  {
+    title: "Supplier",
+    dataIndex: "supplierId",
+    key: "supplier",
+    editable: true,
+  },
+  {
+    title: "Cost",
+    dataIndex: "price",
+    key: "cost",
+    editable: true,
+  },
+  {
+    title: "Note",
+    key: "note",
+    editable: true,
+  },
+  {
+    title: "Function",
+    key: "function",
+  }
+];
 
 const DisplayItemContainer: React.FC = () => {
   const [serialInput, setSerialInput] = React.useState<any>({
@@ -12,7 +62,7 @@ const DisplayItemContainer: React.FC = () => {
     serialNumber: " "
   });
 
-  const { data, loading } = useQuery(
+  const { data, loading, error } = useQuery(
     GET_ITEM_QUERY,
     {
       variables: {
@@ -23,65 +73,14 @@ const DisplayItemContainer: React.FC = () => {
     }
   );
 
+  if(error)
+    message.error("We can fetch data, please try again")
 
   const dataRender = !loading ? data.findItemBySerial.data : [];
   const dataTotal = !loading ? data.findItemBySerial.total : [];
   
 
-  const columns = [
-    {
-      title: "WH Location",
-      dataIndex: "warehouse",
-      key: "whLocation",
-      editable: true,
-    },
-    {
-      title: "Item Location",
-      key: "itemLocation",
-      editable: true,
-    },
-    {
-      title: "Serial Number",
-      dataIndex: "serialNumber",
-      key: "serialNumber",
-      editable: true,
-    },
-    {
-      title: "Condition",
-      dataIndex: "conditionId",
-      key: "condition",
-      editable: true,
-    },
-    {
-      title: "Stock Status",
-      key: "stockStatus",
-      editable: true,
-    },
-    {
-      title: "Supplier",
-      dataIndex: "supplierId",
-      key: "supplier",
-      editable: true,
-    },
-    {
-      title: "Cost",
-      dataIndex: "price",
-      key: "cost",
-      editable: true,
-    },
-    {
-      title: "Note",
-      key: "note",
-      editable: true,
-    },
-    {
-      title: "Function",
-      key: "function",
-    }
-  ];
-
-
-
+  
   const onShowSizeChange = (current: number, size: number) => {
     console.log(current, size);
   };

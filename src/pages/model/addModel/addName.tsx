@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/createModelAction';
 import { AppState } from '../../../store';
 
+
+
 declare const ValidateStatuses: ["success", "warning", "error", "validating", ""];
 
 interface Validation {
@@ -34,6 +36,7 @@ const AddName = () => {
             })
         }
     }, [name])
+
 
     return (
         <InputSearchValidation 

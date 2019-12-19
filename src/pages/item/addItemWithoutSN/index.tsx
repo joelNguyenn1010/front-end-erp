@@ -1,29 +1,32 @@
 import React from "react";
 import { Form, Input } from "antd";
-import FindWarehouse from "../addItemWithSN/findWarehouse";
-import FindSupplier from "../addItemWithSN/findSupplier";
-import FindModel from "../addItemWithSN/findModel";
-import TextArea from "antd/lib/input/TextArea";
-import DisplayQuantityInput from "./displayQuantityInput";
+import SearchSupplier from "./supplierSearch";
+import FindModel from "../addItemWithoutSN/modelSearch";
+import DisplayQuantityInput from "./quantityInput";
 import SubmitItemWithoutSN from "./submitItemWithoutSN"
-
+import InputWhLocation from "./whLocationInput";
+import ConditionInput from "./conditionInput"
+import Note from "./noteInput"
 const AddItemWithoutSN = () => {
   return (
     <Form>
-      <Form.Item label="Model:">
+      <Form.Item>
         <FindModel />
       </Form.Item>
-      <Form.Item label="Location:">
-        <FindWarehouse />
+      <Form.Item>
+        <InputWhLocation />
       </Form.Item>
-      <Form.Item label="Supplier:">
-        <FindSupplier />
+      <Form.Item>
+        <SearchSupplier />
       </Form.Item>
-      <Form.Item label="Quantity">
+      <Form.Item>
           <DisplayQuantityInput />
       </Form.Item>
-      <Form.Item label="Internal note:">
-        <TextArea rows={4} />
+      <Form.Item>
+        <ConditionInput />
+      </Form.Item>
+      <Form.Item>
+        <Note />
       </Form.Item>
       <SubmitItemWithoutSN />
     </Form>

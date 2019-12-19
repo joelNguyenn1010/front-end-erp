@@ -29,7 +29,7 @@ const Routing: React.FC = props => {
         <DisplayModel />
       </Route>
 
-      <Route path="/add/item/nosn">
+      <Route path="/add/item/noserial">
         <AddItemWithoutSN />
       </Route>
 
@@ -37,8 +37,9 @@ const Routing: React.FC = props => {
         <EditItemProvider>
           <TableData />
         </EditItemProvider>
-
-        {/* <DisplayItem /> */}
+      
+      {/* <DisplayItem /> */}
+        
       </Route>
     </Switch>
   );
