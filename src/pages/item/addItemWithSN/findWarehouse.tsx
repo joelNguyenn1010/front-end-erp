@@ -33,7 +33,7 @@ const options = [
   }
 ];
 
-const FindModel = () => {
+const FindWarehouse = () => {
 
     const onChange = (value: any) => {
         console.log(value)
@@ -48,4 +48,4 @@ const FindModel = () => {
   );
 };
 
-export default FindModel;
+export default FindWarehouse;

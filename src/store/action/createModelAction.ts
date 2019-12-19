@@ -13,7 +13,7 @@ export interface ChangeValue {
 }
 
 export const changeValueAction = (key: string, value: any) : ChangeValue => {
-    console.log('value', value)
+
     return {
         type: "CHANGE_VALUE",
         payload: {

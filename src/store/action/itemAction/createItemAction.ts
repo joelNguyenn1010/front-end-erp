@@ -5,6 +5,32 @@ import axios from 'axios';
 import client from '../../../graphql';
 import { Item } from '../../reducer/createItemReducer';
 
+
+export const makeLoadingModel = (index: number, loading: boolean) => {
+    // oldState[action.payload.index].loading = action.payload.loading
+    return {
+        type: "ITEM:LOADING",
+        payload: {
+            index,
+            loading
+        }
+    }
+}
+
+
+// cái này dùng để tạo model
+export const makeCiscoModelCreation = (index: number, noModelInDB: boolean, model: string) => {
+
+    return {
+        type: "ITEM:CREATESN:DB",
+        payload: {
+            model,
+            noModelInDB,
+            index
+        }
+    }
+}
+
 export const fetchSN = (sn: string): Promise<string | null> => {
     const url: string = `http://apisn.ipsupply.net:2580/api/check-sn/${sn}`
     return new Promise((resolve: any) => {
@@ -54,29 +80,26 @@ interface ReturnedModelId {
     id: number
 }
 
-export const getModelSNInDB = (sn: string): Promise<ReturnedModelId | null> => {
+export const getModelSNInDB = (name: string): Promise<ReturnedModelId | null> => {
     return new Promise((resolve: any) => {
 
         const QUERY = gql`
                       query {
-                          findItemBySerial(limit: 1, page: 1, serialNumber: "${sn}") {
-                          data{
-                              models {
+                          findModelWithName(name: "${name}") {
                                   id
                                   name
-                              }
-                          }
                         }
                       }
                     `;
         client.query({ query: QUERY }).then(result => {
-            if (result.data && result.data && result.data.findItemBySerial) {
+            console.log(result)
+            if (result.data && result.data.findModelWithName) {
 
 
                 try {
                     resolve({
-                        model: result.data.findItemBySerial.data[0].models.name,
-                        id: result.data.findItemBySerial.data[0].models.id
+                        model: result.data.findModelWithName.name,
+                        id: result.data.findModelWithName.id
                     })
                 } catch (e) {
                     resolve(null)
@@ -94,67 +117,93 @@ export const getModelSNInDB = (sn: string): Promise<ReturnedModelId | null> => {
 // get model by sn
 export const addModelWithCiscoCheck = (sn: string, index: number) => {
     return async (dispatch: any, getState: () => AppState) => {
-
-
         const oldItemsState: Array<Item> = getState().createItemReducer.items.concat()
         const item: Item = oldItemsState[index]
 
-        try {
-            const ciscoModel = await fetchSN(sn);
-            const dbModel = await getModelSNInDB(sn)
+            fetchSN(sn)
+                .then((ciscoModel) => {
 
 
-            // neu 2 model bang nhau
+                    if (ciscoModel) {
 
-            if (ciscoModel && dbModel && ciscoModel == dbModel.model) {
-                // oldItemsState
-                let newModel = {
-                    id: dbModel.id,
-                    name: dbModel.model
-                }
+                 
+                        
+                        getModelSNInDB(ciscoModel)
+                            .then((dbModel) => {
+                                console.log('dang',dbModel)
+                                if (dbModel) {
 
-                item.model = newModel
+                                    
 
-                oldItemsState[index] = item
+                                    item.model = dbModel.model
+                                    item.modelId = dbModel.id
+                                    oldItemsState[index] = item
 
 
-                dispatch({
-                    type: "ADD_MODEL",
-                    payload: oldItemsState
+                                    dispatch({
+                                        type: "ADD_MODEL",
+                                        payload: oldItemsState
+                                    })
+
+                                } else {
+                                    message.info(`We found the cisco model ${ciscoModel}, considering create it`)
+                                    dispatch(makeCiscoModelCreation(index, true, ciscoModel))
+
+                                }
+
+
+                            })
+                    } else {
+
+                        console.log("Should not be here", ciscoModel)
+                        message.info(`We found the cisco model with sn:${sn} select from db or crete new`)
+                        dispatch(makeCiscoModelCreation(index, true, ''))
+                    }
                 })
-
-
-            } else {
-                throw new Error("Cisco not found")
-
-
-            }
-
-
-        } catch (e) {
-
-            let newModel = {
-                id: 0,
-                name: ''
-            }
-
-            item.model = newModel
-
-
-            oldItemsState[index] = item
-
-
-            dispatch({
-                type: "ADD_MODEL",
-                payload: oldItemsState
-            })
+                .finally(() => dispatch(makeLoadingModel(index, false)))
+            // const ciscoModel = await fetchSN(sn);
+            // const dbModel = await getModelSNInDB(ciscoModel!)
 
 
 
-            message.warning("Appearantly, the cisco model not found or not in the database, you need to create it")
-        }
+            // // neu 2 model bang nhau
+
+            // if (ciscoModel && dbModel && ciscoModel === dbModel.model) {
 
 
+            //     item.model = dbModel.model
+            //     item.modelId = dbModel.id
+            //     oldItemsState[index] = item
+
+
+            //     dispatch({
+            //         type: "ADD_MODEL",
+            //         payload: oldItemsState
+            //     })
+
+            // } else if (dbModel) {
+            //     item.model = dbModel.model
+            //     item.modelId = dbModel.id
+            //     oldItemsState[index] = item
+
+
+            //     dispatch({
+            //         type: "ADD_MODEL",
+            //         payload: oldItemsState
+            //     })
+            // }
+
+            // else if (ciscoModel) {
+            //     message.info(`We found the cisco model ${ciscoModel}, considering create it`)
+            //     dispatch(makeCiscoModelCreation(index, true, ciscoModel))
+            // }
+
+            // else {
+            //     throw new Error("Cisco not found")
+            // }
+  
+
+        
     }
 }
 

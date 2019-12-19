@@ -8,12 +8,12 @@ const AddItem: React.FC = () => {
     <table style={{width: "100%"}}>
       <thead >
         <tr>
-          <th style={{width: 200}}>SN</th>
-          <th style={{width: 200}}>Model</th>
-          <th style={{width: 200}}>Condition</th>
-          <th style={{width: 200}}>Supplier</th>
-          <th style={{width: 200}}>Note</th>
-          <th style={{width: 200}}>Function</th>
+          <th >SN</th>
+          <th style={{width: '30%'}}>Model</th>
+          <th >Condition</th>
+          <th >Supplier</th>
+          <th >Note</th>
+          <th >Action</th>
         </tr>
         <FindSN />
       </thead>

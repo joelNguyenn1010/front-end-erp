@@ -31,6 +31,7 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
     return (
         <React.Fragment>
             <Select
+                style={{width: '100%'}}
                 allowClear={true}
                 value={props.input}
                 defaultValue={props.defaultValue ? props.defaultValue : undefined}
