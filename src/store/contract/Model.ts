@@ -17,7 +17,7 @@ export interface Model {
 
 export interface ModelCreate {
     input: {
-        id: string,
+
         name: string,
         hasSerial: boolean,
         category: string,

@@ -3,7 +3,7 @@ import { CreateModelActionTypes } from '../action/createModelAction'
 
 const init: ModelCreate = {
     input: {
-        id: '',
+
         name: '',
         manufactor: '',
         manufactorId: 0,
@@ -24,11 +24,16 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
                 input: oldInput
             }
 
+        case "ASSIGNINITMODEL":
+            return {
+                ...state,
+                input: action.payload
+            }
         case "CLEAR":
             return {
                 ...state,
                 input: {
-                    id: '',
+
                     name: '',
                     manufactor: '',
                     manufactorId: 0,
