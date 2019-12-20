@@ -13,6 +13,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_MODEL_QUERY } from "../../../graphql/query";
 import AddNewModelModal from './addNewModelModal';
 import { Route } from 'react-router-dom';
+import { changeValueAction } from '../../../store/action/createModelAction';
+import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction';
 
 interface ItemModelCreationProps {
     index: number
@@ -27,7 +29,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     const noModelInDB = useSelector((state: AppState) => state.createItemReducer.items[props.index].noModelInDB)
     const name = useSelector((state: AppState) => state.createItemReducer.items[props.index].model)
 
-    // const dispatch: any = useDispatch();
+    const dispatch: any = useDispatch();
 
 
 

@@ -43,10 +43,14 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
         })
 
 
+        dispatch(addModelWithCiscoCheck(sn, props.index));
+
         return () => {
 
+
+            // dispatch(addModelWithCiscoCheck(sn, props.index));
             if(sn){
-                // dispatch(addModelWithCiscoCheck(sn, props.index));
+                
                 // dispatch(addModelWithDBChecked(props.value.sn, props.index))
                 dispatch({type: "CLEAR"})
                 

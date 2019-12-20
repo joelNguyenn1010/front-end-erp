@@ -32,6 +32,16 @@ export const makeCiscoModelCreation = (index: number, noModelInDB: boolean, mode
     }
 }
 
+export const addModelNotinCiscoCheckandDB = ( model: string) => {
+    return {
+        type: "ADD_MODEL",
+        payload: {
+            model
+        }
+
+    }
+}
+
 export const fetchSN = (sn: string): Promise<string | null> => {
     const url: string = `http://apisn.ipsupply.net:2580/api/check-sn/${sn}`
     return new Promise((resolve: any) => {
@@ -115,6 +125,8 @@ export const getModelSNInDB = (name: string): Promise<ReturnedModelId | null> =>
     })
 }
 
+
+
 // get model by sn
 export const addModelWithCiscoCheck = (sn: string, index: number) => {
     return async (dispatch: any, getState: () => AppState) => {
@@ -127,7 +139,7 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
                     if (ciscoModel) {
 
-                 
+                        console.log("lay cisco model", ciscoModel)
                         
                         getModelSNInDB(ciscoModel)
                             .then((dbModel) => {
@@ -138,12 +150,12 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
                                     item.model = dbModel.model
                                     item.modelId = dbModel.id
-                                    oldItemsState[index] = item
+                                     oldItemsState[index] = item
 
 
                                     dispatch({
                                         type: "ADD_MODEL",
-                                        payload: oldItemsState
+                                        payload: item
                                     })
 
                                 } else {
@@ -157,52 +169,12 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
                     } else {
 
                         console.log("Should not be here", ciscoModel)
-                        message.info(`We found the cisco model with sn:${sn} select from db or crete new`)
+                        message.warning(`We are not found the cisco model and db with sn:${sn}, please crete new`)
                         dispatch(makeCiscoModelCreation(index, true, ''))
                     }
                 })
                 .finally(() => dispatch(makeLoadingModel(index, false)))
-            // const ciscoModel = await fetchSN(sn);
-            // const dbModel = await getModelSNInDB(ciscoModel!)
-
-
-
-            // // neu 2 model bang nhau
-
-            // if (ciscoModel && dbModel && ciscoModel === dbModel.model) {
-
-
-            //     item.model = dbModel.model
-            //     item.modelId = dbModel.id
-            //     oldItemsState[index] = item
-
-
-            //     dispatch({
-            //         type: "ADD_MODEL",
-            //         payload: oldItemsState
-            //     })
-
-            // } else if (dbModel) {
-            //     item.model = dbModel.model
-            //     item.modelId = dbModel.id
-            //     oldItemsState[index] = item
-
-
-            //     dispatch({
-            //         type: "ADD_MODEL",
-            //         payload: oldItemsState
-            //     })
-            // }
-
-            // else if (ciscoModel) {
-            //     message.info(`We found the cisco model ${ciscoModel}, considering create it`)
-            //     dispatch(makeCiscoModelCreation(index, true, ciscoModel))
-            // }
-
-            // else {
-            //     throw new Error("Cisco not found")
-            // }
-  
+            
 
         
     }
