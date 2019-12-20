@@ -18,6 +18,7 @@ export const makeLoadingModel = (index: number, loading: boolean) => {
 }
 
 
+
 // cái này dùng để tạo model
 export const makeCiscoModelCreation = (index: number, noModelInDB: boolean, model: string) => {
 

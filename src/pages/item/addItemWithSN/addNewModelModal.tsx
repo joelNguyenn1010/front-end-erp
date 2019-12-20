@@ -4,7 +4,8 @@ import AddModel from '../../model/addModel'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModelCreate } from '../../../store/contract/Model'
 import { AppState } from '../../../store'
-import { addModelWithCiscoCheck } from '../../../store/action/itemAction/createItemAction'
+import { addModelWithCiscoCheck, makeLoadingModel, makeCiscoModelCreation } from '../../../store/action/itemAction/createItemAction'
+import { changeValueAction } from '../../../store/action/createModelAction'
 
 interface AddNewModelModalProps {
     setOpen: (value: boolean) => void,
@@ -44,11 +45,16 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
 
         return () => {
 
-            if (sn) {
-                dispatch(addModelWithCiscoCheck(sn, props.index));
+            if(sn){
+                // dispatch(addModelWithCiscoCheck(sn, props.index));
                 // dispatch(addModelWithDBChecked(props.value.sn, props.index))
                 dispatch({type: "CLEAR"})
+                
+                //ciscomodel 
+            
+            dispatch(makeCiscoModelCreation(props.index, false, props.ciscoModel))
             }
+                
         }
     }, [])
 

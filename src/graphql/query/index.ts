@@ -36,29 +36,35 @@ query($limit: Int!, $page: Int!, $serialNumber: String!){
       id
       conditionId
       warehouse
-      supplierId
       serialNumber
       price
       note
-      conditionId
+      suppliers{
+        id
+        name
+      }
+      conditions{
+        id
+        name
+      }
     }
     total
   }
 }
 `
 
-export const GET_CUSTOMER_DETAIL = gql`
-query{
-  customer(organization, contactType, pricingLevel, ecommercialId, salutation, firstName, lastName, position, phoneNumber, email, moreEmail
-    optionPaypal, postalCountry, postalPostcode, postalSuburb, postalState, postalAddressNo, postalAddressStreet, noteForShipping, noteForReceiving,
-    currency, ipsPaymentTerm, customerPaymentTerm, bankName, bankBranch, bankBsb, bankAccount, gst/vatNumber, ipsWarrantyPolicies, customerWarrantyPolicies,
-    note, saleOrders, purchasesOrder  ){
-      data{
-        
-      }
-  }
-}
-`
+// export const GET_CUSTOMER_DETAIL = gql`
+// query{
+//   customer(organization, contactType, pricingLevel, ecommercialId, salutation, firstName, lastName, position, phoneNumber, email, moreEmail
+//     optionPaypal, postalCountry, postalPostcode, postalSuburb, postalState, postalAddressNo, postalAddressStreet, noteForShipping, noteForReceiving,
+//     currency, ipsPaymentTerm, customerPaymentTerm, bankName, bankBranch, bankBsb, bankAccount, gst/vatNumber, ipsWarrantyPolicies, customerWarrantyPolicies,
+//     note, saleOrders, purchasesOrder  ){
+//       data{
+
+//       }
+//   }
+// }
+// `
 
 export const CATEGORY_QUERY = gql`
 query($name: String!) {

@@ -34,11 +34,7 @@ const Routing: React.FC = props => {
       </Route>
 
       <Route path="/item">
-        <EditItemProvider>
-          <TableData />
-        </EditItemProvider>
-      
-      {/* <DisplayItem /> */}
+        <DisplayItem />
         
       </Route>
     </Switch>
@@ -46,3 +42,6 @@ const Routing: React.FC = props => {
 };
 
 export default Routing;
+{/* <EditItemProvider>
+          <TableData />
+        </EditItemProvider> */}

@@ -5,7 +5,8 @@ import { Spin, Button, Switch } from 'antd'
 import { useDispatch, useSelector } from "react-redux";
 import {
     fetchSN,
-    addModelWithCiscoCheck
+    addModelWithCiscoCheck,
+    makeLoadingModel
 } from "../../../store/action/itemAction/createItemAction";
 import { AppState } from "../../../store";
 import { useQuery } from "@apollo/react-hooks";
@@ -26,6 +27,8 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     const noModelInDB = useSelector((state: AppState) => state.createItemReducer.items[props.index].noModelInDB)
     const name = useSelector((state: AppState) => state.createItemReducer.items[props.index].model)
 
+    // const dispatch: any = useDispatch();
+
 
 
 
@@ -36,7 +39,6 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
     const onSelected = (val: string, option: any) => {
-
     }
 
     let timeout: any = null;
