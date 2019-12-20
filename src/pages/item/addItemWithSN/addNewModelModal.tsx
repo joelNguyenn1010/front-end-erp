@@ -15,23 +15,12 @@ interface AddNewModelModalProps {
     open: boolean,
     ciscoModel: string,
     index: number,
-    fetchModel: () => void
+    setCiscoModel: any
 }
 const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
 
     // const [open, setOpen] = useState<boolean>(true)
 
-    // const { refetch, data } = useQuery(FIND_MODEL_WITH_NAME, {
-    //     variables: { name: props.ciscoModel },
-    //     onCompleted: (data) => {
-    //         console.log(data)
-    //     },
-    //     onError: (err) => {
-    //         console.log(err)
-    //     }
-    //  }
-
-    // )
 
 
     const dispatch = useDispatch()
@@ -74,7 +63,7 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
         
         dispatch(changeItemValue(props.index, 'model', response.name))
         dispatch(changeItemValue(props.index, 'modelId', response.id))
-
+        props.setCiscoModel('')
         props.setOpen(false)
     }
     return (

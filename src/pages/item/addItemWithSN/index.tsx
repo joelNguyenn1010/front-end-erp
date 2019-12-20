@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FindSN from "./findSN";
 import { TableBodyItem } from "./tableBodyItem";
+import { useDispatch } from "react-redux";
 
 const AddItem: React.FC = () => {
+
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    return () => {
+        // dispatch({type: "CLEAR:ITEMS:SN"})
+    }
+  }, [])
   
   return (
     <table style={{width: "100%"}}>

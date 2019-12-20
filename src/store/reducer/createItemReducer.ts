@@ -83,6 +83,12 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 ...state,
                 items: action.payload
             }
+        case "CLEAR:ITEMS:SN":
+            return {
+                ...state,
+                items: []
+            }
+
         default:
             return state;
     }

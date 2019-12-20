@@ -180,3 +180,10 @@ export const addItem = (sn: string) => {
         payload: sn
     }
 }
+
+
+export const clearItems = () => {
+    return {
+        type: "CLEAR:ITEMS:SN",
+    }
+}

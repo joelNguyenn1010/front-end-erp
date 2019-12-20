@@ -8,8 +8,6 @@ import { Item } from '../../../store/reducer/createItemReducer'
 export const TableBodyItem: React.FC= () => {
 
     const items: any = useSelector((state: AppState) => state.createItemReducer.items)
-
-    console.log("item",items)
     
     return (
         <tbody>
