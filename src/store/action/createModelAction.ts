@@ -1,8 +1,20 @@
-import { Model } from "../contract/Model";
 import { AppState } from "..";
 import client from "../../graphql";
 import { ADD_MODEL } from "../../graphql/mutation";
 import { message } from "antd";
+
+
+export interface AssignResponse {
+    type: string,
+    payload: any
+}
+
+export const assignResponse = (value: any) => {
+    return {
+        type: "ASSIGNRESPONSE",
+        payload: value
+    }
+}
 
 export interface ChangeValue {
     type: string,
@@ -40,6 +52,11 @@ export const submitModelAction = () => {
 
         client.mutate({mutation: ADD_MODEL, variables: {...newModel}})
         .then(res => {
+            if(res) {
+                const id = res.data.createNewModel.id
+                const name = res.data.createNewModel.name
+                dispatch(assignResponse({id, name}))
+            }
             message.success("New Model created")
 
             dispatch({type: "CLEAR"})
@@ -50,4 +67,4 @@ export const submitModelAction = () => {
     }
 }
 // 
-export type CreateModelActionTypes = ChangeValue
+export type CreateModelActionTypes = ChangeValue | AssignResponse

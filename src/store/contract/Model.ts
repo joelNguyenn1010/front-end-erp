@@ -17,17 +17,16 @@ export interface Model {
 
 export interface ModelCreate {
     input: {
-
         name: string,
         hasSerial: boolean,
         category: string,
         manufactor: string,
         manufactorId: number,
         categoryId: number,
-    }, 
-    value?: Array<string>
-  
-
+    }, res : {
+        id: number,
+        name: string,
+    }
 }
 
 

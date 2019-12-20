@@ -99,3 +99,12 @@ query($name: String!){
 }
 `
 
+
+export const FIND_MODEL_WITH_NAME = gql`
+query($name: String!) {
+  findModelWithName(name: $name) {
+    name
+    id
+  }
+}
+`

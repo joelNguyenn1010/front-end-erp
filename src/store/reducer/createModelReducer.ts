@@ -1,9 +1,8 @@
-import { Model, ModelCreate } from "../contract/Model"
+import { ModelCreate } from "../contract/Model"
 import { CreateModelActionTypes } from '../action/createModelAction'
 
 const init: ModelCreate = {
     input: {
-
         name: '',
         manufactor: '',
         manufactorId: 0,
@@ -11,6 +10,12 @@ const init: ModelCreate = {
         categoryId: 0,
         hasSerial: true
     },
+
+    res: {
+        id: 0,
+        name: ''
+    }
+
 
 }
 
@@ -29,6 +34,13 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
                 ...state,
                 input: action.payload
             }
+
+        case "ASSIGNRESPONSE":
+            return {
+                ...state,
+                res: action.payload
+            }
+
         case "CLEAR":
             return {
                 ...state,
