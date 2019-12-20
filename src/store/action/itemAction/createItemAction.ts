@@ -6,6 +6,17 @@ import client from '../../../graphql';
 import { Item } from '../../reducer/createItemReducer';
 
 
+export const changeItemValue = (index: number, key: string, value: any) => {
+    return {
+        type: "ITEM:CHANGE:VALUE",
+        payload: {
+            index,
+            key,
+            value
+        }
+    }
+}
+
 export const makeLoadingModel = (index: number, loading: boolean) => {
     // oldState[action.payload.index].loading = action.payload.loading
     return {
@@ -20,13 +31,12 @@ export const makeLoadingModel = (index: number, loading: boolean) => {
 
 
 // cái này dùng để tạo model
-export const makeCiscoModelCreation = (index: number, noModelInDB: boolean, model: string) => {
+export const makeCiscoModelCreation = (index: number, ciscoModel: string) => {
 
     return {
         type: "ITEM:CREATESN:DB",
         payload: {
-            model,
-            noModelInDB,
+            ciscoModel,
             index
         }
     }
@@ -135,19 +145,14 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
             fetchSN(sn)
                 .then((ciscoModel) => {
-
-
                     if (ciscoModel) {
-
-                        console.log("lay cisco model", ciscoModel)
-                        
                         getModelSNInDB(ciscoModel)
                             .then((dbModel) => {
-                                console.log('dang',dbModel)
+
+                                console.log(ciscoModel, dbModel)
                                 if (dbModel) {
 
-                                    
-
+            
                                     item.model = dbModel.model
                                     item.modelId = dbModel.id
                                      oldItemsState[index] = item
@@ -160,7 +165,7 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
                                 } else {
                                     message.info(`We found the cisco model ${ciscoModel}, considering create it`)
-                                    dispatch(makeCiscoModelCreation(index, true, ciscoModel))
+                                    dispatch(makeCiscoModelCreation(index, ciscoModel))
 
                                 }
 
@@ -168,17 +173,17 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
                             })
                     } else {
 
-                        console.log("Should not be here", ciscoModel)
-                        message.warning(`We are not found the cisco model and db with sn:${sn}, please crete new`)
-                        dispatch(makeCiscoModelCreation(index, true, ''))
+                        message.info(`We can't find the cisco model with sn: ${sn}`)
+                        dispatch(makeCiscoModelCreation(index, ''))
                     }
                 })
                 .finally(() => dispatch(makeLoadingModel(index, false)))
-            
-
         
     }
 }
+
+
+
 
 
 export const addItem = (sn: string) => {

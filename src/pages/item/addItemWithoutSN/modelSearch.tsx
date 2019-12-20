@@ -25,7 +25,7 @@ const ModelSearch: React.FC = () => {
     }
 
     const onSelected = (val: string, option: any) => {
-        console.log(option)
+  
         dispatch(ChangeDataAction('model', val))
         dispatch(ChangeDataAction('modelId', parseInt(option.key)))
     }

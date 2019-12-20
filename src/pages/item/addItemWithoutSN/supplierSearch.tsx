@@ -8,6 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../../store';
 import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction';
 
+
+let timeout: any = null;
+
 const SearchSupplier: React.FC = () => {
 
     const name  = useSelector((state: AppState) => state.CreateItemWithoutSNReducer.input.supplier)
@@ -56,8 +59,7 @@ const SearchSupplier: React.FC = () => {
 
 
     // Search on content of data with timeout
-    let timeout: any = null;
-
+    
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {

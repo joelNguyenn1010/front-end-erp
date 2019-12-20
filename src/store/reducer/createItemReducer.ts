@@ -10,6 +10,7 @@ export interface Item {
     note: string,
     isFetchingModel: boolean,
     noModelInDB: boolean,
+    ciscoModel: string
 
 }
 
@@ -25,10 +26,22 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
     const oldState: Array<Item> = state.items.concat()
     switch (action.type) {
 
+        case 'ITEM:CHANGE:VALUE':
+
+            let oldInput: any = Object.assign({}, oldState[action.payload.index])
+      
+            oldInput[action.payload.key] = action.payload.value
+
+            oldState[action.payload.index] = oldInput
+            return {
+                ...state,
+                items: oldState
+            }
+
 
         case 'ITEM:CREATESN:DB':
             oldState[action.payload.index].noModelInDB = action.payload.noModelInDB
-            oldState[action.payload.index].model = action.payload.model
+            oldState[action.payload.index].ciscoModel = action.payload.ciscoModel
             return {
                 ...state,
                 items: oldState
@@ -55,9 +68,9 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 supplierId: 0,
                 note: '',
                 isFetchingModel: true,
-                noModelInDB: false
+                noModelInDB: false,
+                ciscoModel: ''
             }
-
 
             oldState.push(newItem)
             return {
