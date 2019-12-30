@@ -8,6 +8,7 @@ import InputWhLocation from "./whLocationInput";
 import ConditionInput from "./conditionInput"
 import Note from "./noteInput"
 const AddItemWithoutSN = () => {
+  
   return (
     <Form>
       <Form.Item>

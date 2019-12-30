@@ -1,18 +1,6 @@
+import { Item } from './../contract/Item';
 
-export interface Item {
-    sn: string,
-    model: string,
-    modelId: number,
-    condition: string,
-    conditionId: number,
-    supplier: string,
-    supplierId: number,
-    note: string,
-    isFetchingModel: boolean,
-    noModelInDB: boolean,
-    ciscoModel: string
 
-}
 
 export interface CreateItem {
     items: Array<Item>
@@ -33,6 +21,14 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
             oldInput[action.payload.key] = action.payload.value
 
             oldState[action.payload.index] = oldInput
+            return {
+                ...state,
+                items: oldState
+            }
+
+        case 'ITEM:RELOAD:AFTER:DELETE':
+            let a: any = Object.assign({}, oldState[action.payload.index])
+            oldState[action.payload.index] = a
             return {
                 ...state,
                 items: oldState
@@ -59,17 +55,18 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
         case 'ADD_SN':
 
             const newItem: Item = {
-                sn: action.payload,
+                serialNumber: action.payload,
                 model: '',
-                modelId: 0,
-                condition: '',
-                conditionId: 0,
+                condition: 'USEDB',
+                conditionId: 4,
                 supplier: '',
                 supplierId: 0,
                 note: '',
                 isFetchingModel: true,
                 noModelInDB: false,
-                ciscoModel: ''
+                ciscoModel: '',
+                quantity: 1,
+                warehouse: 'sydney',
             }
 
             oldState.push(newItem)
@@ -83,6 +80,12 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 ...state,
                 items: action.payload
             }
+        case "CLEAR:ITEMS:SN":
+            return {
+                ...state,
+                items: []
+            }
+
         default:
             return state;
     }

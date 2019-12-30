@@ -1,15 +1,30 @@
 export interface Item {
-    input: {
-        location: string,
-        locationId: number,
-        conditionId: number,
-        condition: string,
-        supplier: string,
-        supplierId: number,
-        model: string,
-        modelId: number,
-        serialNumber: string,
-        note: string,
-    },
-    value?: Array<string>
+    serialNumber: string,
+    model: string,
+    modelId?: number,
+    condition: string,
+    conditionId: number,
+    supplier: string,
+    supplierId: number,
+    note: string,
+    isFetchingModel: boolean,
+    noModelInDB: boolean,
+    ciscoModel: string,
+    warehouse: string,
+    quantity: number,
+
 }
+
+// export interface ItemCreate { 
+//     input: {
+//         warehouse: string,
+//         condition: string,
+//         conditionId: number,
+//         model: string, 
+//         modelId: number,
+//         sn: string,
+//         supplier: string,
+//         supplierId: number,
+//         note: string
+//     }
+// }

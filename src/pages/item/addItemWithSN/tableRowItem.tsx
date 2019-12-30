@@ -1,49 +1,64 @@
 import React from "react";
-import { Item } from "../../../store/reducer/createItemReducer";
 
-import DisplayItemCondition from "../displayItem/displayItemCondition";
+import AddItemSupplier from "./addItemSupplier"
 import ItemModelCreation from "./itemModelCreation";
-import { useDispatch } from "react-redux";
-import { addModelWithCiscoCheck } from "../../../store/action/itemAction/createItemAction";
+import AddItemCondition from "./addItemCondition";
+import AddItemNote from "./addItemNote"
+import DeleteItemButton from "./deleteItemButton"
+import { Item } from "../../../store/contract/Item";
+import AddItemWarehouse from "./addItemWarehouse";
+import SubmitItemButton from "./submitItemButton";
+
 interface TableRowItemProps {
   value: Item;
   index: number;
 }
 export const TableRowItem: React.FC<TableRowItemProps> = props => {
 
-  const dispatch = useDispatch()
-
-
-// start to fetching model
-  React.useEffect(() => {
-    // effect
-    if (props.value.sn) {
-      dispatch(addModelWithCiscoCheck(props.value.sn, props.index));
-      // dispatch(addModelWithDBChecked(props.value.sn, props.index))
-    }
-
-
-  }, []);
 
 
   return (
-    
-      <tr>
-        <td>{props.value.sn}</td>
-        <td >
 
-          <ItemModelCreation 
- 
-          index={props.index} />
-         
-        </td>
-        <td><DisplayItemCondition /></td>
-        <td>Supplier</td>
-        <td>Note</td>
-        <td>
-          <button>Delete</button>
-        </td>
-      </tr>
-    
+    <tr>
+      <td>{props.value.serialNumber}</td>
+      <td>
+
+        <ItemModelCreation
+          value={props.value}
+          index={props.index}
+        />
+
+      </td>
+      <td>
+        <AddItemCondition 
+          index = {props.index}
+        />
+      </td>
+      <td>
+        <AddItemSupplier 
+          index = {props.index}
+        />
+      </td>
+      <td>
+        <AddItemWarehouse 
+          index={props.index}
+        />
+      </td>
+      <td>
+        <AddItemNote 
+          index = {props.index}
+        />
+      </td>
+      <td>
+        <DeleteItemButton 
+          index = {props.index}
+        />
+        
+        <SubmitItemButton 
+          index={props.index}
+        />
+      </td>
+    </tr>
+
   );
 };

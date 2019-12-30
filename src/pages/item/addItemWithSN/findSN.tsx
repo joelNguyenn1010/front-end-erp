@@ -34,7 +34,7 @@ const FindSN: React.FC = () => {
 
   return (
     <tr>
-      <td colSpan={6}>
+      <td colSpan={8}>
         <Form onSubmit={onSearch}>
           <Search
             loading={loading}
