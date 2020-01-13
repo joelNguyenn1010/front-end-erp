@@ -59,9 +59,9 @@ const NumericInput =  (props: any) => {
           {...props}
           onChange={onChange}
           onBlur={onBlur}
-          maxLength={3}
-          placeholder="Input a number"
-          minLength={1}
+          maxLength={props.maxLength}
+          placeholder={props.placeholder}
+          minLength={props.minLength}
           min={-1}
         />
       </Tooltip>

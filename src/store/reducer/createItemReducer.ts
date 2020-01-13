@@ -2,6 +2,8 @@ import { Item } from './../contract/Item';
 
 
 
+
+
 export interface CreateItem {
     items: Array<Item>
 }
@@ -63,7 +65,7 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 supplierId: 0,
                 note: '',
                 isFetchingModel: true,
-                noModelInDB: false,
+                noModelInDB: true,
                 ciscoModel: '',
                 quantity: 1,
                 warehouse: 'sydney',

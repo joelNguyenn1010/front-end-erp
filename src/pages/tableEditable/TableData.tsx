@@ -3,7 +3,7 @@ import { TableRow } from "./TableRow";
 import { TableItemHeader } from "./TableItemHeader";
 
 
-export const TableData = () => {
+const TableData = () => {
 
   var tableStyle = {
     width: "100%"
@@ -29,3 +29,5 @@ export const TableData = () => {
 
   );
 };
+
+export default TableData

@@ -6,7 +6,9 @@ import { Product } from './contract/Product';
 import { productReducer } from './reducer/productReducer';
 import { createModelReducer } from './reducer/createModelReducer';
 import { CreateItemWithoutSNReducer }  from './reducer/createItemWithoutSNReducer';
+import {CreateCustomerReducer} from './reducer/createCustomerReducer'
 import { ModelCreate } from './contract/Model';
+import {CreateCustomer} from './contract/Customer';
 
 
 export interface AppState {
@@ -14,6 +16,8 @@ export interface AppState {
     createItemReducer: CreateItem,
     CreateItemWithoutSNReducer: ItemWithoutSn,
     createModelReducer: ModelCreate,
+    CreateCustomerReducer: CreateCustomer,
+
     
 }
 
@@ -23,7 +27,8 @@ export const rootReducer: Reducer<AppState> = combineReducers({
     productReducer,
     createItemReducer,
     createModelReducer,
-    CreateItemWithoutSNReducer
+    CreateItemWithoutSNReducer,
+    CreateCustomerReducer,
 })
 
 declare global {
@@ -48,4 +53,6 @@ const enhancer = composeEnhancers(
 const initialState = { }
 
 
-export const initStore = createStore(rootReducer, initialState, enhancer);
+
+
+export const initStore =  createStore(rootReducer, initialState, enhancer);

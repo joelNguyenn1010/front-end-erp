@@ -22,6 +22,13 @@ export const GET_MODEL_QUERY = gql`
           manufactors{
             name
           }
+          items{
+            conditions{
+              id
+              name
+            }
+            quantity
+          }
         }
         total
     }

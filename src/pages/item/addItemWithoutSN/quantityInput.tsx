@@ -22,7 +22,7 @@ const DisplayQuantityInput = () => {
       <label>
         Quantity: 
       </label>
-      <NumericInput value={name} onChange={onChange} />
+      <NumericInput value={name} onChange={onChange} placeholder='Quantity' maxLength={3} minLength={1} />
     </div>
   );
 };

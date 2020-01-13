@@ -8,7 +8,7 @@ import { CreateItemDAO } from "../../../context/provider/createItemContext";
 import { CreateItemContext } from "../../../context/provider/createItemContext";
 import {
   fetchSN,
-  checkModelInDB,
+  checkSNInDB,
   addItem
 } from "../../../store/action/itemAction/createItemAction";
 import { useDispatch } from "react-redux";
@@ -25,8 +25,9 @@ const FindSN: React.FC = () => {
   const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-  
+    
     dispatch(addItem(input))
+    
 
     setInput("")
   

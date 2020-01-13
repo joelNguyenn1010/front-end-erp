@@ -10,6 +10,8 @@ const DisplayModelContainer: React.FC = () => {
     name: ""
   });
 
+  const [index, setIndex] = React.useState()
+
   const { data, loading } = useQuery(
     GET_MODEL_QUERY,
     { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
@@ -18,6 +20,7 @@ const DisplayModelContainer: React.FC = () => {
 console.log(loading)
   const dataRender = !loading ? data.model.data : [];
   const dataTotal = !loading ? data.model.total : [];
+
 
   const columns = [
     {
@@ -53,6 +56,7 @@ console.log(loading)
         },
         {
           title: "USEDB",
+          dataIndex: "items[0].quantity",
           key: "usedbAU"
         },
         {

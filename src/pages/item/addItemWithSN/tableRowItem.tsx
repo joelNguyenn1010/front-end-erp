@@ -18,7 +18,6 @@ export const TableRowItem: React.FC<TableRowItemProps> = props => {
 
 
   return (
-
     <tr>
       <td>{props.value.serialNumber}</td>
       <td>

@@ -2,7 +2,7 @@
 import { ADD_ITEM } from './../../../graphql/mutation/index';
 import { createItemReducer } from './../../reducer/createItemReducer';
 import { Item } from './../../contract/Item';
-import { message } from 'antd';
+import { message, Result } from 'antd';
 import { gql } from 'apollo-boost';
 import axios from 'axios';
 import client from '../../../graphql';
@@ -135,6 +135,33 @@ export const checkModelInDB = (model: string): Promise<boolean> => {
 }
 
 
+
+export const checkSNInDB = (sn: string): Promise<boolean> => {
+    return new Promise((resolve: any, reject: any) => {
+
+        const QUERY = gql`
+                        query{
+                            findItemBySerial(serialNumber: "${sn}", limit: 10, page: 1) {
+                                data {
+                                    serialNumber
+                                }
+                            }
+                        }
+        `;
+        client.query({query: QUERY}).then(result => {
+            console.log(result)
+            if(result.data.findItemBySerial.data.length > 0){
+                resolve(true)
+            } else{
+                reject('This model not in db')
+            }
+            
+        })
+
+    })
+}
+
+
 interface ReturnedModelId {
     model: string,
     id: number
@@ -173,6 +200,9 @@ export const getModelSNInDB = (name: string): Promise<ReturnedModelId | null> =>
         });
     })
 }
+
+// 
+
 
 
 
@@ -226,10 +256,12 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
 
 export const addItem = (sn: string) => {
-    return {
-        type: "ADD_SN",
-        payload: sn
-    }
+        return {
+            type: "ADD_SN",
+            payload: sn
+        }
+    
+    
 }
 
 

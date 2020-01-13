@@ -57,10 +57,6 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
     }, [])
 
     const onClose = () => {
-      
-        
-        
-        
         dispatch(changeItemValue(props.index, 'model', response.name))
         dispatch(changeItemValue(props.index, 'modelId', response.id))
         props.setCiscoModel('')

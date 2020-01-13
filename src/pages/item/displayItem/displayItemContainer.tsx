@@ -2,6 +2,8 @@ import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { GET_ITEM_QUERY } from "../../../graphql/query";
 import { Table, PageHeader, Input, InputNumber, Popconfirm, Form, message } from "antd";
+import EditTableRow from "../../tableEditable/editTableRow";
+import EditTableCell from "../../tableEditable/editTableCell";
 
 
 
@@ -23,6 +25,8 @@ const DisplayItemContainer: React.FC = () => {
     }
   );
 
+  console.log(data)
+
  const dataRender = !loading ? data.findItemBySerial.data : [];
  const dataTotal = !loading ? data.findItemBySerial.total : []
   
@@ -41,42 +45,74 @@ const DisplayItemContainer: React.FC = () => {
     {
       title: "Serial Number",
       dataIndex: "serialNumber",
-      key: "serialNumber",
       editable: true,
     },
     {
       title: "Condition",
       dataIndex: "conditions.name",
-      key: "condition",
       editable: true,
     },
     {
       title: "Stock Status",
-      key: "stockStatus",
       editable: true,
     },
     {
       title: "Supplier",
       dataIndex: "suppliers.name",
-      key: "supplier",
       editable: true,
     },
     {
       title: "Cost",
       dataIndex: "price",
-      key: "cost",
       editable: true,
     },
     {
       title: "Note",
-      key: "note",
+      dataIndex: "note",
       editable: true,
     },
     {
       title: "Function",
-      key: "function",
+      render: (text: any, record: any) =>
+        dataRender.length > 0 ? (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.id)}
+          >
+            <a>Delete</a>
+          </Popconfirm>
+        ) : null
     }
   ];
+
+  const newColumns = columns.map((col: any) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record: any) => ({
+        record,
+        editable: col.editable,
+        dataIndex: col.dataIndex,
+        title: col.title,
+        handleSave: handleSave
+      })
+    };
+  });
+
+  const handleSave = () => {
+
+  }
+
+  const handleDelete = (key: any) => {
+    console.log(key)
+      // const dataSource = [...dataRender]
+      // dataSource.filter((item: any) => item.rowKey !== item)
+      // console.log(dataSource)
+      
+
+  }
   
   const onShowSizeChange = (current: number, size: number) => {
     console.log(current, size);
@@ -90,6 +126,13 @@ const DisplayItemContainer: React.FC = () => {
     }
     return originalElement;
   };
+
+  const components = {
+    body: {
+      row: EditTableRow,
+      cell: EditTableCell
+    }
+  }
 
   return (
     <div>
@@ -106,7 +149,9 @@ const DisplayItemContainer: React.FC = () => {
           }
         />
       )}
+      components={components}
       bordered
+      rowKey='id'
       pagination={{
         itemRender: itemRender,
         pageSizeOptions: ["10", "20", "100", "500", "1000"],
@@ -125,7 +170,7 @@ const DisplayItemContainer: React.FC = () => {
           });
         }
       }}
-      columns={columns}
+      columns={newColumns}
       dataSource={dataRender}
     />
     </div>

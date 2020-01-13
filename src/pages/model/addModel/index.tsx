@@ -5,11 +5,10 @@ import CategorySearch from "./categorySearch";
 import AddName from "./addName";
 import SubmitModel from "./submitModel";
 import HasSerialModel from "./hasSerialModel";
-import { CreateModelContext } from "../../../context/provider/createModelContext";
 
 const AddModel: React.FC = () => {
 
-  const context : any= React.useContext(CreateModelContext)
+  
   return (
     <Form>
       <AddName />

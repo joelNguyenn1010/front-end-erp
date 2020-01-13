@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import { Select, Icon, Button, Divider, Spin } from "antd";
 import { CreateModelContext } from "../../context/provider/createModelContext";
 
@@ -19,8 +19,7 @@ interface SearchCreationProps {
     placeholder?: string;
     onFocus?: () => void;
     defaultValue?: string;
-
-    input: string;
+    input: any ;
 }
 
 const SearchCreation: React.FC<SearchCreationProps> = props => {
