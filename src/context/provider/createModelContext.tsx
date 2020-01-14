@@ -28,7 +28,6 @@ const CreateModelProvider: React.FC = props => {
     
 
 
-        console.log(value)
     }
 
     const clear = () => {

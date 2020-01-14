@@ -25,7 +25,6 @@ const DisplayItemContainer: React.FC = () => {
     }
   );
 
-  console.log(data)
 
  const dataRender = !loading ? data.findItemBySerial.data : [];
  const dataTotal = !loading ? data.findItemBySerial.total : []
@@ -106,7 +105,6 @@ const DisplayItemContainer: React.FC = () => {
   }
 
   const handleDelete = (key: any) => {
-    console.log(key)
       // const dataSource = [...dataRender]
       // dataSource.filter((item: any) => item.rowKey !== item)
       // console.log(dataSource)
@@ -115,7 +113,6 @@ const DisplayItemContainer: React.FC = () => {
   }
   
   const onShowSizeChange = (current: number, size: number) => {
-    console.log(current, size);
   };
 
   const itemRender = (current: any, type: any, originalElement: any) => {

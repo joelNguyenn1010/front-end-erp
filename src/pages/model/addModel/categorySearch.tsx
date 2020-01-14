@@ -46,7 +46,6 @@ const CategorySearch: React.FC = () => {
 
     // execute khi button create chạy
     const onCreate = (val: string) => {
-        console.log(val)
         addManufacture({ variables: { name: val } })
     }
 

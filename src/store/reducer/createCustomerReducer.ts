@@ -77,7 +77,6 @@ export const CreateCustomerReducer = (state: CreateCustomer = init, action: any)
             let oldEcommerce: Array<any> = oldState.input.ecommercial.concat()
 
             let objEcommerce = Object.assign({}, oldEcommerce[action.payload.index])
-            console.log(action.payload.key)
             objEcommerce[action.payload.key] = action.payload.value
 
             oldEcommerce[action.payload.index] = objEcommerce
@@ -102,7 +101,6 @@ export const CreateCustomerReducer = (state: CreateCustomer = init, action: any)
 
         case 'CUSTOMER:DELETE_EMAIL':
             let a: any = Object.assign({}, state.input.emails)
-            console.log(a)
             return {
                 ...state,
                 ...oldState

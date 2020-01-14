@@ -70,7 +70,6 @@ const AddEcommercialId = (props: any) => {
   const handleDelete = (key: any) => {
     const dataSource = [...data.dataSource];
     setData({ dataSource: dataSource.filter((item: any) => item.key !== key) });
-    console.log(key)
   };
 
   const handleAdd = () => {
@@ -79,7 +78,6 @@ const AddEcommercialId = (props: any) => {
       name: "name",
       id: "id"
     };
-    // console.log(newData.name);
     setData({
       dataSource: [...data.dataSource, newData]
     });
@@ -93,15 +91,12 @@ const AddEcommercialId = (props: any) => {
     const newData = [...data.dataSource];
     const index = newData.findIndex(item => row.key === item.key);
     const item = newData[index];
-    console.log(row.name)
-    // console.log('name', item.name)
     newData.splice(index, 1, {
       ...item,
       ...row,
       
     });
     setData({ dataSource: newData });
-    console.log(row.key)
     dispatch(changeValue(row.key, 'id' , row.id))
     dispatch(changeValue(row.key, 'name' , row.name))
     

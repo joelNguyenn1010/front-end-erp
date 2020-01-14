@@ -36,7 +36,6 @@ const options = [
 const FindWarehouse = () => {
 
     const onChange = (value: any) => {
-        console.log(value)
     }
 
   return (

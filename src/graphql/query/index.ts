@@ -15,6 +15,15 @@ export const GET_MODEL_QUERY = gql`
   query($limit: Int!, $page: Int!, $name: String!) {
     model(limit: $limit, page: $page, name: $name) {
         data{
+          au_condition {
+            name
+            QTY
+          }
+          
+          us_condition {
+            name
+            QTY
+          }
           id
           name
           hasSerial

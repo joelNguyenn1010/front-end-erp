@@ -8,7 +8,6 @@ export const TableRow: React.FC<TableRowProps> = props => {
 
     const context: any = React.useContext(EditItemContext)
 
-    console.log(context)
     return context.data.map((value: any) => {
         return <TableEditRow value={value} key={value.key} />
     })

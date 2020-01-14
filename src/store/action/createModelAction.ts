@@ -41,7 +41,6 @@ export const submitModelAction = () => {
 
         const input = getState().createModelReducer.input
 
-        console.log(input)
 
         const newModel = {
             name: input.name,

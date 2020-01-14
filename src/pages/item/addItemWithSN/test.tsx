@@ -13,7 +13,6 @@ const Test = () => {
             `http://apisn.ipsupply.net:2580/api/check-sn/${query}`,
           );
           setData(result.data);
-          console.log(result.data)
         };
         fetchData();
       }, [query]);

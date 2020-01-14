@@ -149,7 +149,6 @@ export const checkSNInDB = (sn: string): Promise<boolean> => {
                         }
         `;
         client.query({query: QUERY}).then(result => {
-            console.log(result)
             if(result.data.findItemBySerial.data.length > 0){
                 resolve(true)
             } else{
@@ -179,7 +178,6 @@ export const getModelSNInDB = (name: string): Promise<ReturnedModelId | null> =>
                       }
                     `;
         client.query({ query: QUERY }).then(result => {
-            console.log(result)
             if (result.data && result.data.findModelWithName) {
 
 
@@ -218,7 +216,6 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
                         getModelSNInDB(ciscoModel)
                             .then((dbModel) => {
 
-                                console.log(ciscoModel, dbModel)
                                 if (dbModel) {
 
             

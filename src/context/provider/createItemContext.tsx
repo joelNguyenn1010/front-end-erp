@@ -20,7 +20,6 @@ const CreateItemProvider: React.FC = props => {
   let newItem: CreateItemDAO = {};
 
   const build = () => {
-    console.log(newItem);
   };
 
   return (

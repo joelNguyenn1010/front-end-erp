@@ -6,15 +6,16 @@ import { CreateItemWithoutSNActionTypes } from './../action/createItemWithoutSNA
 const init: ItemWithoutSn = {
     input: {
         model: '',
-        modelId: 0,
+        // bỏ cái này là -1 vì nếu để 0, backend vẫn nhận đây là valid id của model
+        modelId: -1,
         supplier: '',
-        supplierId: 0,
+        supplierId: -1,
         quantity: 1,
         whlocation: 'sydney',
         whlocationId: 0,
         note: '',
-        conditionId: 4,
-        condition: 'USED B'
+        conditionId: -1,
+        condition: ''
     },
 }
 
@@ -31,17 +32,18 @@ export const CreateItemWithoutSNReducer = (state: ItemWithoutSn = init, action: 
             return {
                 ...state,
                 input: {
-                    modelId: '',
                     model: '',
+                    // bỏ cái này là -1 vì nếu để 0, backend vẫn nhận đây là valid id của model
+                    modelId: -1,
                     supplier: '',
-                    supplierId: 0,
+                    supplierId: -1,
+                    quantity: 1,
                     whlocation: 'sydney',
                     whlocationId: 0,
                     note: '',
-                    condition: 'USED B',
-                    conditionId: 4,
-                    quantity:1
-                }
+                    conditionId: -1,
+                    condition: ''
+                },
             }
         default:
             return state
