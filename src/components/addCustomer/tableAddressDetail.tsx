@@ -6,7 +6,6 @@ import InputStateComponent from './addAddress/inputStateComponent'
 import InputStreetnameComponent from './addAddress/inputStreetnameComponent'
 import InputStreetnumberComponent from './addAddress/inputStreetnumberComponent'
 import InputCourrierNameComponent from './addShippingAccount/inputCourrierNameComponent'
-import InputAccountShippingComponent from './addShippingAccount/inputAccountShippingComponent'
 import AddNoteForShippingComponent from './addNote/addNoteForShippingComponent'
 import AddNoteForReceivingComponent from './addNote/addNoteForReceivingComponent'
 
@@ -49,7 +48,6 @@ const TableAddressDetail = () => {
             <tr style={{display:' inline-block' , marginTop:'10px'}}>
                 <td>Customer Shipping Account: </td>
                 <td><InputCourrierNameComponent/></td>
-                <td><InputAccountShippingComponent /></td>
             </tr> 
 
             <tr style={{display: 'inline-block', marginTop:'10px'}}>

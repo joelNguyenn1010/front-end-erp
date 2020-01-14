@@ -7,8 +7,6 @@ import { addEcommercial } from "../../store/action/customerAction/createCustomer
 const EditTableCell = (props: any) => {
   const [edit, setEdit] = React.useState({ editing: false });
   const [input, setInput] = React.useState();
-
-  const dispatch = useDispatch();
   
   const toggleEdit = () => {
 

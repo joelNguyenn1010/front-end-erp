@@ -1,18 +1,17 @@
 
 
-
+//Change value 
 export const changeCustomerValue = ( key: string, value: any) => {
     return {
         type: 'CUSTOMER:CHANGE_VALUE',
         payload:{
-            
             key,
             value
         }
     }
 }
 
-export const changeValue = (index: number, key: string, value: any) => {
+export const changeValueEcommercial = (index: number, key: string, value: any) => {
     return {
         type: 'CUSTOMER:CHANGE_VALUE_ECOMMERCIAL',
         payload:{
@@ -23,14 +22,21 @@ export const changeValue = (index: number, key: string, value: any) => {
     }
 }
 
-export const submitCustomerAction = () => {
-    return {
-        
+export const changeValueShipping = (index: number, key: string, value: any) => {
+    return{
+        type: 'CUSTOMER:CHANGE_VALUE_SHIPPING',
+        payload: {
+            index,
+            key,
+            value
+        }
     }
 }
 
 
 
+
+//add data to redux
 export const addEmail = (email: string) => {
     return{
         type:'CUSTOMER:ADD_EMAIL',
@@ -38,12 +44,7 @@ export const addEmail = (email: string) => {
     }
 }
 
-export const deleteEmail = (index: number) => {
-    return {
-        type:'CUSTOMER:DELETE_EMAIL',
-        payload: index
-    }
-}
+
 
 export const addEcommercial = ( id: string, name: string) => {
     return {
@@ -54,5 +55,33 @@ export const addEcommercial = ( id: string, name: string) => {
         }
     }
 }
+
+export const addShippingAccount = (courierName: string, accountShipping: string) => {
+    return{
+        type: 'CUSTOMER:ADD_SHIPPINGACCOUNT',
+        payload: {
+            courierName,
+            accountShipping
+        }
+    }
+}
+
+
+//delete data from redux
+export const deleteData = (index: number) => {
+    return {
+        type:'CUSTOMER:DELETE_DATA',
+        payload: index
+    }
+}
+
+//submit data to redux
+export const submitCustomerAction = () => {
+    return {
+        
+    }
+}
+
+
 
 

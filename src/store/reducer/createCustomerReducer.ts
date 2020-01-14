@@ -1,5 +1,6 @@
+
+import { ShippingAccount } from './../contract/ShippingAccount';
 import { Ecommercial } from './../contract/Ecommercial';
-import { Customer } from './../contract/Customer';
 import { Email } from '../contract/Email'
 import { CreateCustomer } from '../contract/Customer'
 
@@ -9,12 +10,9 @@ const init: CreateCustomer = {
     input: {
         organisation: '',
         organisationId: 0,
-        contactType: '',
-        contactTypeId: 0,
+        contactType: 'individual',
         priceLevel: '5',
-        priceLevelId: 0,
-        salutation: '',
-        salutationId: 0,
+        salutation: 'mr',
         firstName: '',
         lastName: '',
         position: '',
@@ -31,8 +29,7 @@ const init: CreateCustomer = {
         streetName: '',
         noteForShipping: '',
         noteForReceiving: '',
-        courierName: '',
-        account: '',
+        shipping:[],
         currency: '',
         currencyId: 0,
         ecommercial: [],
@@ -58,7 +55,6 @@ const init: CreateCustomer = {
 
 export const CreateCustomerReducer = (state: CreateCustomer = init, action: any) => {
     const oldState: CreateCustomer = Object.assign({}, state)
-    // const newState : Array<Customer> = state.input.ecommercial.concat()
     switch (action.type) {
 
         case 'CUSTOMER:CHANGE_VALUE':
@@ -73,17 +69,28 @@ export const CreateCustomerReducer = (state: CreateCustomer = init, action: any)
 
         case 'CUSTOMER:CHANGE_VALUE_ECOMMERCIAL':
            
+            let oldEcommerce: Array<any> = oldState.input.ecommercial ? oldState.input.ecommercial : []
 
-            let oldEcommerce: Array<any> = oldState.input.ecommercial.concat()
+            let newEcommerce = Object.assign({}, oldEcommerce[action.payload.index])
+            newEcommerce[action.payload.key] = action.payload.value
 
-            let objEcommerce = Object.assign({}, oldEcommerce[action.payload.index])
-            console.log(action.payload.key)
-            objEcommerce[action.payload.key] = action.payload.value
-
-            oldEcommerce[action.payload.index] = objEcommerce
+            oldEcommerce[action.payload.index] = newEcommerce
             oldState.input.ecommercial = oldEcommerce
 
             return {
+                ...state,
+                ...oldState
+            }
+
+        case 'CUSTOMER:CHANGE_VALUE_SHIPPING':
+            let oldStateShipping: Array<any> = oldState.input.shipping ? oldState.input.shipping : []
+
+            let newStateShipping = Object.assign({}, oldStateShipping[action.payload.index])
+            newStateShipping[action.payload.key] = action.payload.value
+            oldStateShipping[action.payload.index] = newStateShipping
+            oldState.input.shipping = oldStateShipping
+
+            return{
                 ...state,
                 ...oldState
             }
@@ -100,7 +107,7 @@ export const CreateCustomerReducer = (state: CreateCustomer = init, action: any)
                 ...oldState
             }
 
-        case 'CUSTOMER:DELETE_EMAIL':
+        case 'CUSTOMER:DELETE_DATA':
             let a: any = Object.assign({}, state.input.emails)
             console.log(a)
             return {
@@ -114,26 +121,34 @@ export const CreateCustomerReducer = (state: CreateCustomer = init, action: any)
                 id: action.payload.id,
                 name: action.payload.name
             }
-            oldState.input.ecommercial.push(newEcommercial)
+            let oldEcomme: Array<any> = oldState.input.ecommercial ? oldState.input.ecommercial : []
+
+            oldEcomme.push(newEcommercial)
             return {
                 ...state,
                 ...oldState
             }
 
-
-
+        case 'CUSTOMER:ADD_SHIPPINGACCOUNT':
+            const newShippingAccount: ShippingAccount = {
+                courierName: action.payload.courierName,
+                accountShipping: action.payload.accountShipping
+            }
+            oldState.input.shipping?.push(newShippingAccount)
+            return{
+                ...state,
+                ...oldState
+            }
+        
         case "CLEAR":
             return {
                 ...state,
                 input: {
                     organisation: '',
                     organisationId: 0,
-                    contactType: '',
-                    contactTypeId: 0,
+                    contactType: 'individual',
                     priceLevel: '5',
-                    priceLevelId: 0,
-                    salutation: '',
-                    salutationId: 0,
+                    salutation: 'mr',
                     firstName: '',
                     lastName: '',
                     position: '',

@@ -1,6 +1,6 @@
 
 
 export interface ShippingAccount {
-    currierName?: string,
-    account?: string,
+    courierName?: string,
+    accountShipping?: string,
 }

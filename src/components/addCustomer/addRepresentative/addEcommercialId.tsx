@@ -5,16 +5,21 @@ import EditTableCell from "../../../pages/tableEditable/editTableCell";
 import { Table, Button, Popconfirm } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../store";
-import { addEcommercial, changeCustomerValue, changeValue } from "../../../store/action/customerAction/createCustomerAction";
+import { addEcommercial,  changeValueEcommercial, deleteData } from "../../../store/action/customerAction/createCustomerAction";
+import { Ecommercial } from "../../../store/contract/Ecommercial";
+
+interface DataSource {
+  dataSource: Array<any>
+}
 
 const AddEcommercialId = (props: any) => {
-  const [data, setData] = React.useState({
-    dataSource: [{ key: 0, name: "Input name", id: "Input Id" }]
+  const [data, setData] = React.useState<DataSource>({
+    dataSource: []
   });
-
+  const name = useSelector((state:AppState) => state.CreateCustomerReducer.input.ecommercial ? state.CreateCustomerReducer.input.ecommercial : [])
   const dispatch = useDispatch();
 
-  const [count, setCount] = React.useState(1);
+  const [count, setCount] = React.useState(0);
 
   const columns = [
     {
@@ -70,7 +75,8 @@ const AddEcommercialId = (props: any) => {
   const handleDelete = (key: any) => {
     const dataSource = [...data.dataSource];
     setData({ dataSource: dataSource.filter((item: any) => item.key !== key) });
-    console.log(key)
+    name.splice(key,1)
+    dispatch(deleteData(key))
   };
 
   const handleAdd = () => {
@@ -79,7 +85,9 @@ const AddEcommercialId = (props: any) => {
       name: "name",
       id: "id"
     };
-    // console.log(newData.name);
+
+    const oldData = data.dataSource.concat()
+    oldData.push(newData)
     setData({
       dataSource: [...data.dataSource, newData]
     });
@@ -93,17 +101,14 @@ const AddEcommercialId = (props: any) => {
     const newData = [...data.dataSource];
     const index = newData.findIndex(item => row.key === item.key);
     const item = newData[index];
-    console.log(row.name)
-    // console.log('name', item.name)
     newData.splice(index, 1, {
       ...item,
       ...row,
       
     });
     setData({ dataSource: newData });
-    console.log(row.key)
-    dispatch(changeValue(row.key, 'id' , row.id))
-    dispatch(changeValue(row.key, 'name' , row.name))
+    dispatch(changeValueEcommercial(index, 'id' , row.id))
+    dispatch(changeValueEcommercial(index, 'name' , row.name))
     
   };
 

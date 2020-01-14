@@ -10,7 +10,7 @@ let timeout : any = null
 
 const OrganizationInput = () => {
 
-    const name = ''
+    const name = useSelector((state: AppState) => state.CreateCustomerReducer.input.organisation)
 
     
 
