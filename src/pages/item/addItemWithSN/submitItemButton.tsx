@@ -4,19 +4,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { submitItemAction, deleteItems } from '../../../store/action/itemAction/createItemAction'
 import { AppState } from '../../../store'
 
-interface SubmitItemProps {
-    index: number
-}
 
-const SubmitItemButton: React.FC<SubmitItemProps> = props => {
+
+const SubmitItemButton: React.FC = () => {
+    
 
     const name = useSelector((state: AppState) => state.createItemReducer.items)
 
     const dispatch = useDispatch()
 
     const onClick = () => {
-
-        dispatch(submitItemAction(props.index))
+        for(let i = 0 ; i < name.length; i ++){
+            dispatch(submitItemAction(i))
+            console.log("submit")
+        }
+        
         
     }
 

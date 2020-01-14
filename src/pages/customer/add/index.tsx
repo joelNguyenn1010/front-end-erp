@@ -1,12 +1,10 @@
 import React from 'react'
 import { Row, Col, Table } from 'antd';
-import TableContactDetail from '../../components/addCustomer/tableRepresentative';
-import TableRepresentative from '../../components/addCustomer/tableContactDetail'
-import TableAddressDetail from '../../components/addCustomer/tableAddressDetail'
-import TablePaymentDetail from '../../components/addCustomer/tablePaymentDetail';
-import TableWarrantyPolicy from '../../components/addCustomer/tableWarrantyPolicy'
-import { useSelector } from 'react-redux';
-import { AppState } from '../../store';
+import TableContactDetail from '../../../components/addCustomer/tableRepresentative';
+import TableRepresentative from '../../../components/addCustomer/tableContactDetail'
+import TableAddressDetail from '../../../components/addCustomer/tableAddressDetail'
+import TablePaymentDetail from '../../../components/addCustomer/tablePaymentDetail';
+import TableWarrantyPolicy from '../../../components/addCustomer/tableWarrantyPolicy'
 
 
 const AddCustomer: React.FC = () => {

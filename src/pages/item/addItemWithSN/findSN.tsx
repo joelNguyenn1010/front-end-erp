@@ -27,8 +27,6 @@ const FindSN: React.FC = () => {
     setLoading(true);
     
     dispatch(addItem(input))
-    
-
     setInput("")
   
   };

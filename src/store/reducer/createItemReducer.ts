@@ -28,13 +28,14 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 items: oldState
             }
 
-        case 'ITEM:RELOAD:AFTER:DELETE':
-            let a: any = Object.assign({}, oldState[action.payload.index])
-            oldState[action.payload.index] = a
+        case 'ITEM:DELETE:ITEM':
+
+            oldState.splice(action.payload.index, 1)
             return {
                 ...state,
                 items: oldState
             }
+       
 
 
         case 'ITEM:CREATESN:DB':

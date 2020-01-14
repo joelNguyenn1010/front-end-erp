@@ -34,7 +34,6 @@ const AddItemWarehouse:React.FC<AddWarehouseProps> = props => {
     return (
         <div>
             <Cascader defaultValue={[name]} options={options} onChange={onChange} />
-            
         </div>
     )
 }

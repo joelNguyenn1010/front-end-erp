@@ -88,3 +88,11 @@ export const ADD_ITEM = gql`
     }
   }
 `
+
+export const DELETE_ITEM = gql`
+  mutation($id: Int!){
+    deleteItemWithId(id: $id){
+      id
+    }
+  }
+`

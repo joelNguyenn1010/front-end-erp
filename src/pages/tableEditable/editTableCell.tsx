@@ -11,7 +11,6 @@ const EditTableCell = (props: any) => {
   const toggleEdit = () => {
 
     setEdit({ editing: true });
-    console.log(edit);
   };
 
   const save = (e: any) => {
