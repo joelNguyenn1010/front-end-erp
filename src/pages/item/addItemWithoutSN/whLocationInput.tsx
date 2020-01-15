@@ -88,7 +88,7 @@ const InputWhLocation = () => {
         input={name}
         placeholder='WH Location'
         onSearch={onSearch}
-        onClickCreate={onCreate}
+        // onClickCreate={onCreate}
         onSelected={onSelect}
       />
 

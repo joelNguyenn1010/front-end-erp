@@ -19,8 +19,8 @@ const DisplayModelContainer: React.FC = () => {
     { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
   );
 
-  const dataRender = !loading ? data.model.data : [];
-  const dataTotal = !loading ? data.model.total : [];
+  const dataRender = data ? data.model.data : [];
+  const dataTotal = data ? data.model.total : [];
 
 
   const columns = [

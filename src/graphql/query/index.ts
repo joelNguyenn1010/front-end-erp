@@ -24,7 +24,7 @@ export const GET_MODEL_QUERY = gql`
             name
             QTY
           }
-          
+
           id
           name
           hasSerial
@@ -52,7 +52,9 @@ query($limit: Int!, $page: Int!, $serialNumber: String!, $stockStatus: Boolean){
     data{
       id
       conditionId
-      warehouse
+      whlocations {
+        name
+      }
       serialNumber
       price
       note
@@ -97,7 +99,7 @@ query($name: String!) {
 
 export const GET_SUPPLIER_QUERY = gql`
 query($name: String!){
-  supplier(limit: 10, page: 1, name: $name){
+  supplier(limit: 5, page: 1, name: $name){
     data{
       id
       name
@@ -137,4 +139,16 @@ query($name: String!) {
    }
   }
 }
+`
+
+export const GET_WHLOCATION_QUERY = gql`
+  query($name: String!){
+    whlocation(name: $name, limit: 5, page: 1){
+      data{
+        id
+      name
+      }
+      
+    }
+  }
 `

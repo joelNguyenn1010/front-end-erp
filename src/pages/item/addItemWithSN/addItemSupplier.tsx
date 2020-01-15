@@ -19,7 +19,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
     const name = useSelector((state:AppState) => state.createItemReducer.items[props.index].supplier)
 
     const {data, loading, refetch, error} = useQuery(GET_SUPPLIER_QUERY, {
-        variables: {name: '', limit: 10, page: 1}
+        variables: {name: '', limit: 5, page: 1}
     })
 
     if(error){
@@ -31,8 +31,8 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
     const onSearch = (val: string) => {
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-            refetch({name: val, limit: 10, page: 1})
-        })
+            refetch({name: val, limit: 5, page: 1})
+        }, 250)
     }
 
     const onSelected = (val: string, option: any) => {
@@ -49,7 +49,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
 
             refetch({name: name, limit: 5, page: 1})
 
-            message.success(`Supplier ${data.createNewSupplier.data} created`)
+            message.success(`Supplier ${name} created`)
         }
     })
 
