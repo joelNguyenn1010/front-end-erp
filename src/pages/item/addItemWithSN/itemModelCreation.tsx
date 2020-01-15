@@ -112,9 +112,12 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
         return () => {
-            source.cancel("Operation cancel");  
+            source.cancel("Operation cancel"); 
+            setCiscoModel('')
+ 
         }
 
+     
     }, [])
 
 
@@ -135,10 +138,18 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
                     {open && <AddNewModelModal
                         setCiscoModel={setCiscoModel}
-                        index={props.index}
                         ciscoModel={ciscoModel}
                         open={open}
                         setOpen={setOpen}
+                        onSuccessCreateOrClose={(response: any) => {
+                            if(response.name && response.name.length > 0) {
+                                dispatch(changeItemValue(props.index, 'model', response.name))
+                                dispatch(changeItemValue(props.index, 'modelId', response.id))
+                                setCiscoModel('')
+                            }
+                           
+                            setOpen(false)
+                        }}
                     />}
 
                 </React.Fragment>
@@ -147,25 +158,6 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     )
 
 
-
-    // const loadingModel = useSelector((state: AppState) => state.createItemReducer.items[props.index].isFetchingModel)
-    // return loadingModel ? <Spin /> :
-    //     (
-    //         <React.Fragment>
-
-
-
-    //             {ciscoModel.length > 0 && (
-    //                 <React.Fragment>
-    //                     
-
-    //                 </React.Fragment>
-    //             )
-    //             }
-
-
-    //         </React.Fragment>
-    //     )
 }
 
 export default ItemModelCreation

@@ -15,8 +15,6 @@ const init: ModelCreate = {
         id: 0,
         name: ''
     }
-
-
 }
 
 export const createModelReducer = (state: ModelCreate = init, action: CreateModelActionTypes) => {
@@ -52,6 +50,14 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
                     categoryId: -1,
                     hasSerial: true
                 },
+            }
+        case "CLEAR:RESPONSE":
+            return {
+                ...state,
+                res: {
+                    id: 0,
+                    name: ''
+                }
             }
         default:
             return state

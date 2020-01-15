@@ -126,3 +126,13 @@ export const EDIT_MODEL_MANUFACTOR = gql`
     }
   }
 `
+
+
+export const CREATE_NEW_WHLOCATION = gql`
+mutation($name: String!) {
+  createNewWHLocation(name: $name) {
+      id
+      name
+  }
+}
+`

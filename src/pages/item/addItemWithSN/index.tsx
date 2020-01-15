@@ -12,7 +12,7 @@ const AddItem: React.FC = () => {
 
   useEffect(() => {
     return () => {
-        // dispatch({type: "CLEAR:ITEMS:SN"})
+        dispatch({type: "CLEAR:ITEMS:SN"})
     }
   }, [])
   

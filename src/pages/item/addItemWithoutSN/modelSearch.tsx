@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_MODEL_QUERY } from '../../../graphql/query'
@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../store'
 import { message } from 'antd'
 import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction'
+import AddNewModelModal from '../addItemWithSN/addNewModelModal'
 
 let timeout: any = null
 
@@ -15,40 +16,79 @@ const ModelSearch: React.FC = () => {
 
     const dispatch: any = useDispatch();
 
-    const {loading, data, refetch, error} = useQuery(GET_MODEL_QUERY, {
-        variables: {name: '', limit: 5, page: 1}
+    const { loading, data, refetch, error } = useQuery(GET_MODEL_QUERY, {
+        variables: { name: '', limit: 5, page: 1 }
     })
 
 
-    if(error){
-        message.error("We can't fetch the manufacture, please try again")
+
+    if (error) {
+        console.log(error)
+        message.error("We can't fetch the model, please try again")
     }
 
     const onSelected = (val: string, option: any) => {
-  
+
         dispatch(ChangeDataAction('model', val))
         dispatch(ChangeDataAction('modelId', parseInt(option.key)))
     }
 
 
     const onSearch = (val: string) => {
+        setCiscoModel(val)
         clearTimeout(timeout)
         timeout = setTimeout(function () {
-            refetch({name: val, limit:5, page:1 })
+            refetch({ name: val, limit: 5, page: 1 })
         }, 250)
     }
+
+
+
+    const [open, setOpen] = useState<boolean>(false)
+    const onCreate = () => {
+        // dispatch
+        setOpen(true)
+        
+    }
+
+    const [ciscoModel, setCiscoModel] = useState<string>(name)
 
     return (
         <React.Fragment>
             <label>Model: </label>
-            <SearchCreation 
+            <SearchCreation
                 placeholder={"Model"}
                 loading={loading}
                 onSearch={onSearch}
                 input={name}
                 content={data ? data.model ? data.model.data : [] : []}
                 onSelected={onSelected}
+                onClickCreate={onCreate}
             />
+
+
+            {open &&  <AddNewModelModal
+                setCiscoModel={''}
+                ciscoModel={ciscoModel}
+                open={open}
+                setOpen={setOpen}
+                onSuccessCreateOrClose={(response) => {
+              
+
+
+
+                    dispatch(ChangeDataAction('model', response.name))
+                    dispatch(ChangeDataAction('modelId', parseInt(response.id)))
+                    // clear the response after model been created
+                    dispatch({type: "CLEAR:RESPONSE"})
+
+
+                    // dispatch(changeItemValue(props.index, 'model', response.name))
+                    // dispatch(changeItemValue(props.index, 'modelId', response.id))
+                    // setCiscoModel('')
+                    setOpen(false)
+                }}
+            />}
         </React.Fragment>
     )
 }

@@ -24,6 +24,7 @@ export const GET_MODEL_QUERY = gql`
             name
             QTY
           }
+          
           id
           name
           hasSerial
@@ -122,6 +123,18 @@ query($name: String!) {
   findModelWithName(name: $name) {
     name
     id
+  }
+}
+`
+
+
+export const QUERY_WHLOCATION = gql`
+query($name: String!) {
+  whlocation(name: $name, limit: 10, page: 1) {
+   data {
+    name
+    id
+   }
   }
 }
 `
