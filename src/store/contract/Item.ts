@@ -10,7 +10,8 @@ export interface Item {
     isFetchingModel: boolean,
     noModelInDB: boolean,
     ciscoModel: string,
-    warehouse: string,
+    whlocation: string,
+    whlocationId: number,
     quantity: number,
 
 }

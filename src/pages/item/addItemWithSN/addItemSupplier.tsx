@@ -32,7 +32,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             refetch({name: val, limit: 5, page: 1})
-        })
+        }, 250)
     }
 
     const onSelected = (val: string, option: any) => {

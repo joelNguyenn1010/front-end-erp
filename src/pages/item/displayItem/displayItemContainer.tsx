@@ -4,8 +4,6 @@ import { GET_ITEM_QUERY } from "../../../graphql/query";
 import { Table, PageHeader, Input, Popconfirm, message } from "antd";
 import EditTableRow from "../../tableEditable/editTableRow";
 import EditTableCell from "../../tableEditable/editTableCell";
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../../../store";
 import client from "../../../graphql";
 import { DELETE_ITEM } from "../../../graphql/mutation";
 import EditCellCondition from "../../tableEditable/item/editCellCondition";
@@ -36,8 +34,8 @@ const DisplayItemContainer: React.FC = () => {
     });
   };
 
-  const dataRender = !loading ? data.findItemBySerial.data : [];
-  const dataTotal = !loading ? data.findItemBySerial.total : [];
+  const dataRender = data ? data.findItemBySerial.data : [];
+  const dataTotal = data ? data.findItemBySerial.total : [];
   // console.log(name)
 
   const columns = [
@@ -134,7 +132,6 @@ const DisplayItemContainer: React.FC = () => {
   };
 
   const onShowSizeChange = (current: number, size: number) => {
-    console.log(current, size);
   };
 
   const itemRender = (current: any, type: any, originalElement: any) => {

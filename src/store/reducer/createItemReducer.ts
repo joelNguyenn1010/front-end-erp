@@ -69,7 +69,8 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 noModelInDB: true,
                 ciscoModel: '',
                 quantity: 1,
-                warehouse: 'sydney',
+                whlocation: '',
+                whlocationId: 1,
             }
 
             oldState.push(newItem)

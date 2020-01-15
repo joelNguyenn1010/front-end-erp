@@ -8,7 +8,7 @@ import InputBankBranchComponent from "./addPaymentDetail/inputBankBranchComponen
 import InputBankBsbComponent from "./addPaymentDetail/inputBankBsbComponent";
 import InputAccountNumberComponent from "./addPaymentDetail/inputAccountNumberComponent";
 import InputAccountNameComponent from "./addPaymentDetail/inputAccountNameComponent";
-import InputOptionPaypalComponent from "/Users/gin/Desktop/Ipsupply/erp-front-end/src/components/addCustomer/addPaymentDetail/inputOptionPaypalComponent"
+import InputOptionPaypalComponent from "./addPaymentDetail/inputOptionPaypalComponent"
 
 const TablePaymentDetail = () => {
   return (

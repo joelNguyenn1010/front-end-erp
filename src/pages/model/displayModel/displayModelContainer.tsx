@@ -1,7 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { Fragment } from "react";
 import { GET_MODEL_QUERY } from "../../../graphql/query";
-import { Table, Input } from "antd";
+import { Table, Input, Button, Icon } from "antd";
+import EditableName from "./editableName";
+import EditableNote from "./editableNote";
+import EditableManufactor from "./editableManufactor";
 
 const DisplayModelContainer: React.FC = () => {
   const [pagi, setPagi] = React.useState<any>({
@@ -10,62 +13,102 @@ const DisplayModelContainer: React.FC = () => {
     name: ""
   });
 
-  const [index, setIndex] = React.useState()
 
-  const { data, loading } = useQuery(
+  const { data, loading, refetch } = useQuery(
     GET_MODEL_QUERY,
     { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
   );
 
-console.log(loading)
-  const dataRender = !loading ? data.model.data : [];
-  const dataTotal = !loading ? data.model.total : [];
+  const dataRender = data ? data.model.data : [];
+  const dataTotal = data ? data.model.total : [];
 
 
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
-      key: "name"
+      key: "name",
+      width: '12%',
+
+      render: (text: any, record: any) => <EditableName text={text} record={record}/>
     },
     {
+      width: '12%',
       title: "Manufacture",
       dataIndex: "manufactors.name",
-      key: "manuName"
+      key: "manuName",
+      render: (text: any, record: any) => <EditableManufactor text={text} record={record}/>
     },
 
     {
+      
       title: "Note",
       dataIndex: "note",
-      key: "note"
+      key: "note",
+      width: '19%',
+
+      // ellipsis: true,
+      render:  (text: any, record: any) => <EditableNote text={text} record={record}/>
     },
     {
       title: "AU",
       children: [
         {
           title: "NIB",
-          key: "nibAU"
+          key: "nibAU",
+          render: (index: any, record: any) => {
+            // mai mốt tìm hiểu thêm về dataIndex, cái này là render từng cái cell, kiểm tra xem có bằng với phần tử NIB, NOB không
+            const data = record.au_condition.find((element: any) => element.name === 'NIB')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "NOB",
-          key: "nobAU"
+          key: "nobAU",
+          render: (index: any, record: any) => {
+            const data = record.au_condition.find((element: any) => element.name === 'NOB')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
+
         },
         {
           title: "USEDA",
-          key: "usedaAU"
+          key: "usedaAU",
+          render: (index: any, record: any) => {
+            const data = record.au_condition.find((element: any) => element.name === 'USEDA')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "USEDB",
-          dataIndex: "items[0].quantity",
-          key: "usedbAU"
+          // dataIndex: "items[0].quantity",
+          key: "usedbAU",
+          render: (index: any, record: any) => {
+            const data = record.au_condition.find((element: any) => element.name === 'USEDB')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "USEDC",
-          key: "usedcAU"
+          key: "usedcAU",
+          render: (index: any, record: any) => {
+            const data = record.au_condition.find((element: any) => element.name === 'USEDC')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "PART",
-          key: "partAU"
+          key: "partAU",
+          render: (index: any, record: any) => {
+            const data = record.au_condition.find((element: any) => element.name === 'PART')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         }
       ]
     },
@@ -74,34 +117,64 @@ console.log(loading)
       children: [
         {
           title: "NIB",
-          key: "nibUS"
+          key: "nibUS",
+          render: (index: any, record: any) => {
+            const data = record.us_condition.find((element: any) => element.name === 'NIB')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
+          
         },
         {
           title: "NOB",
-          key: "nobUS"
+          key: "nobUS",
+          render: (index: any, record: any) => {
+            const data = record.us_condition.find((element: any) => element.name === 'NOB')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "USEDA",
-          key: "usedaUS"
+          key: "usedaUS",
+          render: (index: any, record: any) => {
+            const data = record.us_condition.find((element: any) => element.name === 'USEDA')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "USEDB",
-          key: "usedbUS"
+          key: "usedbUS",
+          render: (index: any, record: any) => {
+            const data = record.us_condition.find((element: any) => element.name === 'USEDB')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "USEDC",
-          key: "usedcUS"
+          key: "usedcUS",
+          render: (index: any, record: any) => {
+            const data = record.us_condition.find((element: any) => element.name === 'USEDC')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         },
         {
           title: "PART",
-          key: "partUS"
+          key: "partUS",
+          render: (index: any, record: any) => {
+            const data = record.us_condition.find((element: any) => element.name === 'PART')
+            const qty = data ? data.QTY : 0
+            return (<p>{qty}</p>)
+          }
         }
       ]
     }
   ];
 
   const onShowSizeChange = (current: number, size: number) => {
-    console.log(current, size);
     setPagi({ limit: size, page: current, name: pagi.name });
   };
 
@@ -115,6 +188,7 @@ console.log(loading)
   };
 
   return (
+    <React.Fragment>
     <Table
       title={() => (
         <Input
@@ -139,10 +213,23 @@ console.log(loading)
           setPagi({ limit: 10, page, name: pagi.name });
         }
       }}
+      rowKey='id'
       dataSource={dataRender}
       columns={columns}
-      scroll={{ y: window.screen.height - 500 }} 
-    />
+      scroll={{ y: window.screen.height - 500 }}
+    >
+       
+    </Table>
+    <Button 
+          type="primary" 
+          shape="circle"
+          size="large"
+          onClick={() => {
+            refetch( { limit: pagi.limit, page: pagi.page, name: pagi.name })
+          }}
+          style={{position: 'absolute', bottom: 35, left:10}}><Icon type="reload" /></Button>
+
+    </React.Fragment>
   );
 };
 

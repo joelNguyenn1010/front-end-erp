@@ -42,7 +42,6 @@ const AddEmail = (props: any) => {
     // can use data-binding to get
     const keys = form.getFieldValue("keys");
     const nextKeys = keys.concat(id++);
-    console.log(nextKeys);
     // can use data-binding to set
     // important! notify form to detect changes
     form.setFieldsValue({
@@ -56,11 +55,7 @@ const AddEmail = (props: any) => {
     props.form.validateFields((err: any, values: any) => {
       if (!err) {
         const { keys, names } = values;
-        console.log("Received values of form: ", values);
-        console.log(
-          "Merged values:",
-          keys.map((key: any) => names[key])
-        );
+ 
         
       }
     });

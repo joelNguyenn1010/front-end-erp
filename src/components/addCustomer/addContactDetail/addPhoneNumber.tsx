@@ -9,7 +9,6 @@ const AddPhoneNumber = () => {
 
     const name = useSelector((state:AppState) => state.CreateCustomerReducer.input.phoneNumber)
 
-    console.log(name)
 
     const dispatch = useDispatch()
 
@@ -17,7 +16,6 @@ const AddPhoneNumber = () => {
         const newVal = val.target.value
         dispatch(changeCustomerValue('phoneNumber', newVal))
 
-        console.log(newVal)
     }
 
     return (

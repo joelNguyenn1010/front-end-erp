@@ -20,7 +20,6 @@ const MultipleAddContainer: React.FC<MultipleAddProps> = (props: any) => {
     oldData.push(props.input);
     setData(oldData);
 
-    console.log(oldData);
     props.setInput("");
     value.preventDefault();
   };

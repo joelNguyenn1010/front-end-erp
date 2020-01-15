@@ -5,9 +5,9 @@ const init: ModelCreate = {
     input: {
         name: '',
         manufactor: '',
-        manufactorId: 0,
+        manufactorId: -1,
         category: '',
-        categoryId: 0,
+        categoryId: -1,
         hasSerial: true
     },
 
@@ -45,14 +45,13 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
             return {
                 ...state,
                 input: {
-
                     name: '',
                     manufactor: '',
-                    manufactorId: 0,
+                    manufactorId: -1,
                     category: '',
-                    categoryId: 0,
+                    categoryId: -1,
                     hasSerial: true
-                }
+                },
             }
         default:
             return state
