@@ -7,6 +7,7 @@ import { gql } from 'apollo-boost';
 import axios from 'axios';
 import client from '../../../graphql';
 import { AppState } from '../..';
+import { resolve } from 'dns';
 
 
 export const changeItemValue = (index: number, key: string, value: any) => {
@@ -34,14 +35,14 @@ export const makeLoadingModel = (index: number, loading: boolean) => {
 
 //cai nay dung de add item
 export const submitItemAction = (props: any) => {
-    return(dispatch: any, getState : () => AppState ) => {
-        
+    return (dispatch: any, getState: () => AppState) => {
+
         const input = getState().createItemReducer.items[props]
 
         const name = getState().createItemReducer.items
 
         const newItemAdd = {
-            
+
             whlocationId: input.whlocationId,
             supplierId: input.supplierId,
             modelId: input.modelId,
@@ -50,20 +51,20 @@ export const submitItemAction = (props: any) => {
             quantity: input.quantity,
             conditionId: input.conditionId,
         }
-        
-        client.mutate({mutation: ADD_ITEM, variables: {...newItemAdd}})
-        
-        .then(res => {
-            
-            message.success("New item created")
-            // if(props.index > -1){
-            //     name.splice(props.index, 1)
-            // }
-            dispatch(deleteItems(props.index))
-        })
-        .catch(err => {
-            message.error("Can't create new item, please try again ")
-        })
+
+        client.mutate({ mutation: ADD_ITEM, variables: { ...newItemAdd } })
+
+            .then(res => {
+
+                message.success("New item created")
+                // if(props.index > -1){
+                //     name.splice(props.index, 1)
+                // }
+                dispatch(deleteItems(props.index))
+            })
+            .catch(err => {
+                message.error("Can't create new item, please try again ")
+            })
     }
 }
 
@@ -81,7 +82,7 @@ export const makeCiscoModelCreation = (index: number, ciscoModel: string) => {
     }
 }
 
-export const addModelNotinCiscoCheckandDB = ( model: string) => {
+export const addModelNotinCiscoCheckandDB = (model: string) => {
     return {
         type: "ADD_MODEL",
         payload: {
@@ -140,24 +141,26 @@ export const checkSNInDB = (sn: string): Promise<boolean> => {
     return new Promise((resolve: any, reject: any) => {
 
         const QUERY = gql`
-                        query{
-                            findItemBySerial(serialNumber: "${sn}", limit: 10, page: 1) {
-                                data {
-                                    serialNumber
-                                }
-                            }
-                        }
-        `;
-        client.query({query: QUERY}).then(result => {
-            if(result.data.findItemBySerial.data.length > 0){
+        query{
+            isSNInDBQuery(serialNumber: "${sn}") 
+        }
+`;
+        client.query({ query: QUERY }).then(result => {
+            // console.log(result.data.isSNInDBQuery)
+            if (result.data.isSNInDBQuery) {
                 resolve(true)
-            } else{
+            } else {
                 reject('This model not in db')
             }
-            
+
         })
 
+
     })
+
+
+
+
 }
 
 
@@ -210,41 +213,41 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
         const oldItemsState: Array<Item> = getState().createItemReducer.items.concat()
         const item: Item = oldItemsState[index]
 
-            fetchSN(sn)
-                .then((ciscoModel) => {
-                    if (ciscoModel) {
-                        getModelSNInDB(ciscoModel)
-                            .then((dbModel) => {
+        fetchSN(sn)
+            .then((ciscoModel) => {
+                if (ciscoModel) {
+                    getModelSNInDB(ciscoModel)
+                        .then((dbModel) => {
 
-                                if (dbModel) {
-
-            
-                                    item.model = dbModel.model
-                                    item.modelId = dbModel.id
-                                     oldItemsState[index] = item
+                            if (dbModel) {
 
 
-                                    dispatch({
-                                        type: "ADD_MODEL",
-                                        payload: item
-                                    })
-
-                                } else {
-                                    message.info(`We found the cisco model ${ciscoModel}, considering create it`)
-                                    dispatch(makeCiscoModelCreation(index, ciscoModel))
-
-                                }
+                                item.model = dbModel.model
+                                item.modelId = dbModel.id
+                                oldItemsState[index] = item
 
 
-                            })
-                    } else {
+                                dispatch({
+                                    type: "ADD_MODEL",
+                                    payload: item
+                                })
 
-                        message.info(`We can't find the cisco model with sn: ${sn}`)
-                        dispatch(makeCiscoModelCreation(index, ''))
-                    }
-                })
-                .finally(() => dispatch(makeLoadingModel(index, false)))
-        
+                            } else {
+                                message.info(`We found the cisco model ${ciscoModel}, considering create it`)
+                                dispatch(makeCiscoModelCreation(index, ciscoModel))
+
+                            }
+
+
+                        })
+                } else {
+
+                    message.info(`We can't find the cisco model with sn: ${sn}`)
+                    dispatch(makeCiscoModelCreation(index, ''))
+                }
+            })
+            .finally(() => dispatch(makeLoadingModel(index, false)))
+
     }
 }
 
@@ -253,12 +256,12 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
 
 export const addItem = (sn: string) => {
-        return {
-            type: "ADD_SN",
-            payload: sn
-        }
-    
-    
+    return {
+        type: "ADD_SN",
+        payload: sn
+    }
+
+
 }
 
 

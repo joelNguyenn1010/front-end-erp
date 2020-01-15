@@ -13,7 +13,7 @@ export const TableBodyItem: React.FC= () => {
     
     return (
         <tbody>
-            <SubmitItemButton />
+            <SubmitItemButton  />
             {items ? items.map((value: Item, index: number) => {
                 
                 return <TableRowItem index={index} key={value.serialNumber} value={value} />

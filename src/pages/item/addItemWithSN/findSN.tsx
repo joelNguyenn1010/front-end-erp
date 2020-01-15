@@ -16,19 +16,23 @@ import { useDispatch } from "react-redux";
 let timeout: any = null;
 
 const FindSN: React.FC = () => {
-  const [loading, setLoading] = React.useState<boolean>(false);
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [input, setInput] = React.useState<string>("");
 
   const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    
-    dispatch(addItem(input))
-    setInput("")
-  
+
+    checkSNInDB(input)
+      .then(value => {
+
+        message.error("This item already added");
+      })
+      .catch(() => {
+        dispatch(addItem(input));
+      });
+
+    setInput("");
   };
 
   return (
@@ -36,7 +40,6 @@ const FindSN: React.FC = () => {
       <td colSpan={8}>
         <Form onSubmit={onSearch}>
           <Search
-            loading={loading}
             value={input}
             onChange={(e: any) => setInput(e.target.value)}
           />
