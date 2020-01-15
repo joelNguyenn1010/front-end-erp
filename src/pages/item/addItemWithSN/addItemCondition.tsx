@@ -17,7 +17,7 @@ interface ItemConditionProps {
 const AddItemCondition:React.FC<ItemConditionProps> = props  => {
 
     const name = useSelector((state:AppState) => state.createItemReducer.items[props.index].condition)
-
+   
     
 
     const {data, loading, error, refetch} = useQuery(GET_CONDITION_QUERY, {
@@ -39,12 +39,15 @@ const AddItemCondition:React.FC<ItemConditionProps> = props  => {
     }
 
     const onSelected = (val: string, option: any) => {
+        console.log(option.key)
         dispatch(changeItemValue(props.index, 'condition', val))
         dispatch(changeItemValue(props.index, 'conditionId', parseInt(option.key)))
+        
     }
 
 
     return (
+        
         <div>
             <SearchCreation 
                 input={name}

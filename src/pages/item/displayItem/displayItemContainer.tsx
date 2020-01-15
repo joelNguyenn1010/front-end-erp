@@ -1,33 +1,19 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { GET_ITEM_QUERY } from "../../../graphql/query";
-import {
-  Table,
-  PageHeader,
-  Input,
-  InputNumber,
-  Popconfirm,
-  Form,
-  message,
-  Select
-} from "antd";
+import { Table, PageHeader, Input, Popconfirm, message } from "antd";
 import EditTableRow from "../../tableEditable/editTableRow";
 import EditTableCell from "../../tableEditable/editTableCell";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../store";
-import {
-  deleteItems,
-  makeLoadingModel
-} from "../../../store/action/itemAction/createItemAction";
 import client from "../../../graphql";
 import { DELETE_ITEM } from "../../../graphql/mutation";
 import EditCellCondition from "../../tableEditable/item/editCellCondition";
+import EditCellStockStatus from "../../tableEditable/item/editCellStockStatus";
+import EditCellSupplier from "../../tableEditable/item/editCellSupplier";
+import EditCellNote from "../../tableEditable/item/editCellNote";
 
 const DisplayItemContainer: React.FC = () => {
-  const name = useSelector((state: AppState) => state.createItemReducer.items);
-
-  const dispatch = useDispatch();
-
   const [serialInput, setSerialInput] = React.useState<any>({
     limit: 10,
     page: 1,
@@ -52,6 +38,7 @@ const DisplayItemContainer: React.FC = () => {
 
   const dataRender = !loading ? data.findItemBySerial.data : [];
   const dataTotal = !loading ? data.findItemBySerial.total : [];
+  // console.log(name)
 
   const columns = [
     {
@@ -72,41 +59,23 @@ const DisplayItemContainer: React.FC = () => {
     {
       title: "Condition",
       dataIndex: "conditions.name",
-      // editable: true
-      render: ( record: any) => {
-        // console.log(index )
-        // const value = record ? record : ""
-        // return(
-        //   <Select defaultValue={value}>
-        //     <Select.Option value="NIB">NIB</Select.Option>
-        //     <Select.Option value="NOB">NOB</Select.Option>
-        //     <Select.Option value="USEDB">USEDB</Select.Option>
-        //     <Select.Option value="USEDA">USEDA</Select.Option>
-        //     <Select.Option value="USEDC">USEDC</Select.Option>
-        //     <Select.Option value="PART">PART</Select.Option>
-        //   </Select>
-        // )
-       return <EditCellCondition  record={record}/>
+      render: (text: any, record: any) => {
+        return <EditCellCondition text={text} record={record} />;
       }
     },
     {
       title: "Stock Status",
-      // editable: true,
       dataIndex: "stockStatus",
-      render: (record: any) => {
-        const value = record ? "true" : "false";
-        return (
-          <Select defaultValue={value}>
-            <Select.Option value="true">In Stock</Select.Option>
-            <Select.Option value="false">Not In Stock</Select.Option>
-          </Select>
-        );
+      render: (text: any, record: any) => {
+        return <EditCellStockStatus record={record} />;
       }
     },
     {
       title: "Supplier",
       dataIndex: "suppliers.name",
-      editable: false
+      render: (text: any, record: any) => {
+        return <EditCellSupplier record={record} text={text} />
+      }
     },
     {
       title: "Cost",
@@ -116,7 +85,9 @@ const DisplayItemContainer: React.FC = () => {
     {
       title: "Note",
       dataIndex: "note",
-      editable: true
+      render: (text: any, record: any) => {
+        return <EditCellNote record={record} text={text} />
+      }
     },
     {
       title: "Function",

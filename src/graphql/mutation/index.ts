@@ -96,3 +96,45 @@ export const DELETE_ITEM = gql`
     }
   }
 `
+
+export const UPDATE_ITEM_CONDITION = gql`
+  mutation($id: Int!, $conditionId: Int, ){
+    updateItem(id: $id, conditionId: $conditionId, ){
+      
+      conditionId
+      conditions{
+        id
+        name
+      }
+
+    }
+  }
+`
+
+export const UPDATE_ITEM_STOCKSTATUS = gql`
+  mutation($id: Int!, $stockStatus: Boolean){
+    updateItem(id: $id, stockStatus: $stockStatus){
+      stockStatus
+    }
+  }
+`
+
+export const UPDATE_ITEM_SUPPLIER = gql`
+  mutation($id: Int!, $supplierId: Int){
+    updateItem(id: $id, supplierId: $supplierId){
+      
+      suppliers{
+        id
+        name
+      }
+    }
+  }
+`
+
+export const UPDATE_ITEM_NOTE = gql`
+  mutation($id: Int!, $note: String){
+    updateItem(id: $id, note: $note){
+      note
+    }
+  }
+`
