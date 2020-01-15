@@ -49,11 +49,11 @@ const AddItemWarehouse: React.FC<AddWarehouseProps> = props => {
         message.error("We can't create supplier, please try again")
     },
     onCompleted: (data: any) => {
-        const name = data.createNewSupplier.name
+        const name = data.createNewWHLocation.name
 
         refetch({name: name, limit: 5, page: 1})
 
-        message.success(`Supplier ${name} created`)
+        message.success(`Wh Location ${name} created`)
     }
 })
 

@@ -130,7 +130,7 @@ query($name: String!) {
 
 export const GET_WHLOCATION_QUERY = gql`
   query($name: String!){
-    whlocation(name: $name, limit: 10, page: 1){
+    whlocation(name: $name, limit: 5, page: 1){
       data{
         id
       name

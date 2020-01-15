@@ -174,6 +174,17 @@ export const UPDATE_ITEM_SUPPLIER = gql`
   }
 `
 
+export const UPDATE_ITEM_WHLOCATION = gql`
+  mutation($id: Int!, $whlocationId: Int){
+    updateItem(id: $id, whlocationId: $whlocationId){
+      whlocations{
+        id
+        name
+      }
+    }
+  }
+`
+
 export const ADD_WHLOCATION = gql`
   mutation($name: String!){
     createNewWHLocation(name: $name){

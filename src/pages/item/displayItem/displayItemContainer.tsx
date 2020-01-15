@@ -10,6 +10,7 @@ import EditCellCondition from "../../tableEditable/item/editCellCondition";
 import EditCellStockStatus from "../../tableEditable/item/editCellStockStatus";
 import EditCellSupplier from "../../tableEditable/item/editCellSupplier";
 import EditCellNote from "../../tableEditable/item/editCellNote";
+import EditCellWhlocation from "../../tableEditable/item/editCellWhlocation";
 
 const DisplayItemContainer: React.FC = () => {
   const [serialInput, setSerialInput] = React.useState<any>({
@@ -41,9 +42,11 @@ const DisplayItemContainer: React.FC = () => {
   const columns = [
     {
       title: "WH Location",
-      dataIndex: "warehouse",
+      dataIndex: "whlocations.name",
       key: "whLocation",
-      editable: true
+      render: (text: any, record: any) => {
+        return <EditCellWhlocation record={record} text={text} />
+      }
     },
     {
       title: "Item Location",
@@ -78,11 +81,11 @@ const DisplayItemContainer: React.FC = () => {
     {
       title: "Cost",
       dataIndex: "price",
-      editable: true
     },
     {
       title: "Note",
       dataIndex: "note",
+      ket: "note",
       render: (text: any, record: any) => {
         return <EditCellNote record={record} text={text} />
       }
