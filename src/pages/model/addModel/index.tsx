@@ -5,10 +5,10 @@ import CategorySearch from "./categorySearch";
 import AddName from "./addName";
 import SubmitModel from "./submitModel";
 import HasSerialModel from "./hasSerialModel";
+import { CreateModelContext } from "../../../context/provider/createModelContext";
 
 const AddModel: React.FC = () => {
 
-  
   return (
     <Form>
       <AddName />
@@ -24,9 +24,9 @@ const AddModel: React.FC = () => {
       </Form.Item>
       <SubmitModel />
 
-      <Button>
+      {/* <Button onClick={() => context.action.clear()}>
         Clear
-      </Button>
+      </Button> */}
     </Form>
   );
 };

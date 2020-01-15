@@ -1,74 +1,122 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { GET_ITEM_QUERY } from "../../../graphql/query";
-import { Table, PageHeader, Input, InputNumber, Popconfirm, Form, message } from "antd";
+import {
+  Table,
+  PageHeader,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Form,
+  message,
+  Select
+} from "antd";
 import EditTableRow from "../../tableEditable/editTableRow";
 import EditTableCell from "../../tableEditable/editTableCell";
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { AppState } from "../../../store";
+import {
+  deleteItems,
+  makeLoadingModel
+} from "../../../store/action/itemAction/createItemAction";
+import client from "../../../graphql";
+import { DELETE_ITEM } from "../../../graphql/mutation";
+import EditCellCondition from "../../tableEditable/item/editCellCondition";
 
 const DisplayItemContainer: React.FC = () => {
+  const name = useSelector((state: AppState) => state.createItemReducer.items);
+
+  const dispatch = useDispatch();
+
   const [serialInput, setSerialInput] = React.useState<any>({
     limit: 10,
     page: 1,
     serialNumber: ""
   });
 
-  const { data, loading } = useQuery(
-    GET_ITEM_QUERY,
-    {
-      variables: {
-        limit: serialInput.limit,
-        page: serialInput.page,
-        serialNumber: serialInput.serialNumber
-      }
+  const { data, loading, refetch } = useQuery(GET_ITEM_QUERY, {
+    variables: {
+      limit: serialInput.limit,
+      page: serialInput.page,
+      serialNumber: serialInput.serialNumber
     }
-  );
+  });
 
+  const refetchTheData = () => {
+    refetch({
+      limit: serialInput.limit,
+      page: serialInput.page,
+      serialNumber: serialInput.serialNumber
+    });
+  };
 
- const dataRender = !loading ? data.findItemBySerial.data : [];
- const dataTotal = !loading ? data.findItemBySerial.total : []
-  
+  const dataRender = !loading ? data.findItemBySerial.data : [];
+  const dataTotal = !loading ? data.findItemBySerial.total : [];
+
   const columns = [
     {
       title: "WH Location",
       dataIndex: "warehouse",
       key: "whLocation",
-      editable: true,
+      editable: true
     },
     {
       title: "Item Location",
       key: "itemLocation",
-      editable: true,
+      editable: true
     },
     {
       title: "Serial Number",
-      dataIndex: "serialNumber",
-      editable: true,
+      dataIndex: "serialNumber"
     },
     {
       title: "Condition",
       dataIndex: "conditions.name",
-      editable: true,
+      // editable: true
+      render: ( record: any) => {
+        // console.log(index )
+        // const value = record ? record : ""
+        // return(
+        //   <Select defaultValue={value}>
+        //     <Select.Option value="NIB">NIB</Select.Option>
+        //     <Select.Option value="NOB">NOB</Select.Option>
+        //     <Select.Option value="USEDB">USEDB</Select.Option>
+        //     <Select.Option value="USEDA">USEDA</Select.Option>
+        //     <Select.Option value="USEDC">USEDC</Select.Option>
+        //     <Select.Option value="PART">PART</Select.Option>
+        //   </Select>
+        // )
+       return <EditCellCondition  record={record}/>
+      }
     },
     {
       title: "Stock Status",
-      editable: true,
+      // editable: true,
+      dataIndex: "stockStatus",
+      render: (record: any) => {
+        const value = record ? "true" : "false";
+        return (
+          <Select defaultValue={value}>
+            <Select.Option value="true">In Stock</Select.Option>
+            <Select.Option value="false">Not In Stock</Select.Option>
+          </Select>
+        );
+      }
     },
     {
       title: "Supplier",
       dataIndex: "suppliers.name",
-      editable: true,
+      editable: false
     },
     {
       title: "Cost",
       dataIndex: "price",
-      editable: true,
+      editable: true
     },
     {
       title: "Note",
       dataIndex: "note",
-      editable: true,
+      editable: true
     },
     {
       title: "Function",
@@ -100,18 +148,20 @@ const DisplayItemContainer: React.FC = () => {
     };
   });
 
-  const handleSave = () => {
-
-  }
+  const handleSave = () => {};
 
   const handleDelete = (key: any) => {
-      // const dataSource = [...dataRender]
-      // dataSource.filter((item: any) => item.rowKey !== item)
-      // console.log(dataSource)
-      
+    client
+      .mutate({ mutation: DELETE_ITEM, variables: { id: parseInt(key) } })
+      .then(res => {
+        message.success("Item was deleted");
+        refetchTheData();
+      })
+      .catch(err => {
+        message.error("Cant delete item, please try again ");
+      });
+  };
 
-  }
-  
   const onShowSizeChange = (current: number, size: number) => {
   };
 
@@ -129,51 +179,52 @@ const DisplayItemContainer: React.FC = () => {
       row: EditTableRow,
       cell: EditTableCell
     }
-  }
+  };
 
   return (
     <div>
       <div className="table-operations">
         <PageHeader title="Serial Number: "></PageHeader>
       </div>
-      
+
       <Table
-      title={() => (
-        <Input
-          placeholder={"Search"}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setSerialInput({ limit: 10, page: 1, serialNumber: e.target.value })
+        title={() => (
+          <Input
+            placeholder={"Search"}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSerialInput({
+                limit: 10,
+                page: 1,
+                serialNumber: e.target.value
+              })
+            }
+          />
+        )}
+        components={components}
+        bordered
+        rowKey="id"
+        pagination={{
+          itemRender: itemRender,
+          pageSizeOptions: ["10", "20", "100", "500", "1000"],
+          onShowSizeChange: (current: number, size: number) => {
+            onShowSizeChange(current, size);
+          },
+          showSizeChanger: true,
+          showQuickJumper: true,
+          current: serialInput.page,
+          total: dataTotal,
+          onChange: (page: number) => {
+            setSerialInput({
+              limit: 10,
+              page,
+              serialNumber: serialInput.serialNumber
+            });
           }
-        />
-      )}
-      components={components}
-      bordered
-      rowKey='id'
-      pagination={{
-        itemRender: itemRender,
-        pageSizeOptions: ["10", "20", "100", "500", "1000"],
-        onShowSizeChange: (current: number, size: number) => {
-          onShowSizeChange(current, size);
-        },
-        showSizeChanger: true,
-        showQuickJumper: true,
-        current: serialInput.page,
-        total: dataTotal,
-        onChange: (page: number) => {
-          setSerialInput({
-            limit: 10,
-            page,
-            serialNumber: serialInput.serialNumber
-          });
-        }
-      }}
-      columns={newColumns}
-      dataSource={dataRender}
-    />
+        }}
+        columns={newColumns}
+        dataSource={dataRender}
+      />
     </div>
-    
-      
-    
   );
 };
 

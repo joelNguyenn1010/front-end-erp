@@ -2,6 +2,9 @@ import { useQuery } from "@apollo/react-hooks";
 import React, { Fragment } from "react";
 import { GET_MODEL_QUERY } from "../../../graphql/query";
 import { Table, Input, Button, Icon } from "antd";
+import EditableName from "./editableName";
+import EditableNote from "./editableNote";
+import EditableManufactor from "./editableManufactor";
 
 const DisplayModelContainer: React.FC = () => {
   const [pagi, setPagi] = React.useState<any>({
@@ -24,18 +27,28 @@ const DisplayModelContainer: React.FC = () => {
     {
       title: "Name",
       dataIndex: "name",
-      key: "name"
+      key: "name",
+      width: '12%',
+
+      render: (text: any, record: any) => <EditableName text={text} record={record}/>
     },
     {
+      width: '12%',
       title: "Manufacture",
       dataIndex: "manufactors.name",
-      key: "manuName"
+      key: "manuName",
+      render: (text: any, record: any) => <EditableManufactor text={text} record={record}/>
     },
 
     {
+      
       title: "Note",
       dataIndex: "note",
-      key: "note"
+      key: "note",
+      width: '19%',
+
+      // ellipsis: true,
+      render:  (text: any, record: any) => <EditableNote text={text} record={record}/>
     },
     {
       title: "AU",
@@ -214,7 +227,7 @@ const DisplayModelContainer: React.FC = () => {
           onClick={() => {
             refetch( { limit: pagi.limit, page: pagi.page, name: pagi.name })
           }}
-          style={{position: 'absolute', bottom: 55, left:10}}><Icon type="reload" /></Button>
+          style={{position: 'absolute', bottom: 35, left:10}}><Icon type="reload" /></Button>
 
     </React.Fragment>
   );

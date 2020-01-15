@@ -48,12 +48,12 @@ const ManufactorSearch: React.FC = () => {
 
     // execute khi button create chạy
     const onCreate = (val: string) => {
-    
         addManufacture({ variables: { name: val } })
     }
 
 
     const onSelected = (val: string, option: any) => {
+        refetch({ name: '' })
         dispatch(changeValueAction('manufactor', val))
         dispatch(changeValueAction('manufactorId', parseInt(option.key)))
     }

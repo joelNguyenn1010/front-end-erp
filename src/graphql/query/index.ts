@@ -46,8 +46,8 @@ export const GET_MODEL_QUERY = gql`
 `
 
 export const GET_ITEM_QUERY = gql`
-query($limit: Int!, $page: Int!, $serialNumber: String!){
-  findItemBySerial(limit: $limit, page: $page, serialNumber: $serialNumber){
+query($limit: Int!, $page: Int!, $serialNumber: String!, $stockStatus: Boolean){
+  findItemBySerial(limit: $limit, page: $page, serialNumber: $serialNumber, stockStatus: $stockStatus){
     data{
       id
       conditionId
@@ -55,6 +55,7 @@ query($limit: Int!, $page: Int!, $serialNumber: String!){
       serialNumber
       price
       note
+      stockStatus
       suppliers{
         id
         name

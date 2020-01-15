@@ -21,11 +21,16 @@ import { Item } from '../../../store/contract/Item';
 
 interface ItemModelCreationProps {
     value: Item,
-    index: number
+    index: number,
+    // cancel: any
 }
+
+
 
 const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
+    const CancelToken = Axios.CancelToken;
+    const source = CancelToken.source();
 
     const [open, setOpen] = useState<boolean>(false)
 
@@ -71,8 +76,9 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
         const url: string = `http://apisn.ipsupply.net:2580/api/check-sn/${props.value.serialNumber}`
 
-        Axios.get(url)
+        Axios.get(url, {cancelToken: source.token})
             .then((res) => {
+
 
                 if (res && res.data && res.data[0]) {
                     const { ITEM_NAME } = res.data[0];
@@ -103,6 +109,11 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
             })
             .finally(() => setLoading(false))
+
+
+        return () => {
+            source.cancel("Operation cancel");  
+        }
 
     }, [])
 

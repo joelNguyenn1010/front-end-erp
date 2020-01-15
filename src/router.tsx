@@ -7,7 +7,7 @@ import CreateModelProvider from "./context/provider/createModelContext";
 import AddItem from "./pages/item/addItemWithSN";
 import CreateItemProvider from "./context/provider/createItemContext";
 import AddItemWithoutSN from './pages/item/addItemWithoutSN'
-import AddCustomer from "./pages/customer";
+import AddCustomer from "./pages/customer/add";
 import TableData from "./pages/tableEditable/TableData"
 
 const Routing: React.FC = props => {

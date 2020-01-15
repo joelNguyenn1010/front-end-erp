@@ -8,6 +8,7 @@ import InputBankBranchComponent from "./addPaymentDetail/inputBankBranchComponen
 import InputBankBsbComponent from "./addPaymentDetail/inputBankBsbComponent";
 import InputAccountNumberComponent from "./addPaymentDetail/inputAccountNumberComponent";
 import InputAccountNameComponent from "./addPaymentDetail/inputAccountNameComponent";
+import InputOptionPaypalComponent from "./addPaymentDetail/inputOptionPaypalComponent"
 
 const TablePaymentDetail = () => {
   return (
@@ -62,6 +63,10 @@ const TablePaymentDetail = () => {
         </td>
 
         
+      </tr>
+      <tr>
+        <td>Option Paypal (optional): </td>
+        <td colSpan={5}><InputOptionPaypalComponent /></td>
       </tr>
     </div>
   );

@@ -54,6 +54,7 @@ const CategorySearch: React.FC = () => {
         // cái này được gọi sau khi người dùng chọn, nên bỏ vào redux, nó sẽ trả về id của cái select
         dispatch(changeValueAction('category', val))
         dispatch(changeValueAction('categoryId', parseInt(option.key)))
+        refetch({ name: '' })
 
     }
 

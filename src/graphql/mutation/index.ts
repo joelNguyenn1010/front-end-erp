@@ -88,3 +88,41 @@ export const ADD_ITEM = gql`
     }
   }
 `
+
+export const DELETE_ITEM = gql`
+  mutation($id: Int!){
+    deleteItemWithId(id: $id){
+      id
+    }
+  }
+`
+
+
+export const EDIT_MODEL_NAME = gql`
+  mutation($name: String!, $id: Int!) {
+      updateModel(id: $id, name: $name) {
+          id
+          name
+      }
+  }
+`
+
+export const EDIT_MODEL_NOTE = gql`
+  mutation($note: String!, $id: Int!) {
+      updateModel(id: $id, note: $note) {
+          id
+          note
+      }
+  }
+`
+
+export const EDIT_MODEL_MANUFACTOR = gql`
+  mutation($manufactorId: Int!, $id: Int!) {
+    updateModel(id: $id, manufactorId: $manufactorId) {
+      manufactors {
+        id
+        name
+      }
+    }
+  }
+`

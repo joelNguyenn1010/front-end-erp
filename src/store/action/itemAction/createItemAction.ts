@@ -56,10 +56,10 @@ export const submitItemAction = (props: any) => {
         .then(res => {
             
             message.success("New item created")
-            if(props > -1){
-                name.splice(props, 1)
-            }
-            dispatch(deleteItems(props))
+            // if(props.index > -1){
+            //     name.splice(props.index, 1)
+            // }
+            dispatch(deleteItems(props.index))
         })
         .catch(err => {
             message.error("Can't create new item, please try again ")
@@ -270,7 +270,13 @@ export const clearItems = () => {
 
 export const deleteItems = (index: number) => {
     return {
-        type: "ITEM:RELOAD:AFTER:DELETE",
-        payload: index
+        type: "ITEM:DELETE:ITEM",
+        payload: {
+            index
+        }
     }
 }
+
+
+
+

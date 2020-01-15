@@ -22,7 +22,6 @@ const AddName = () => {
 
     const name = useSelector((state: AppState) => state.createModelReducer.input.name)
     
-    
     const [validation, setValidation] = React.useState<Validation>({
         mess: '',
         validate: ''

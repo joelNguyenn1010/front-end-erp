@@ -5,7 +5,7 @@ import { AppState } from "../../../store";
 import {
   changeCustomerValue,
   addEmail,
-  deleteEmail
+  deleteData
 } from "../../../store/action/customerAction/createCustomerAction";
 
 let id = 0;
@@ -33,7 +33,7 @@ const AddEmail = (props: any) => {
       
     });
     //call function delete email in redux
-    dispatch(deleteEmail(k))
+    dispatch(deleteData(k))
     
   };
 
@@ -98,7 +98,7 @@ const AddEmail = (props: any) => {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} >
         {formItems}
         <Form.Item>
           <Button type="dashed"  onClick={add} style={{ width: "60%" }}>

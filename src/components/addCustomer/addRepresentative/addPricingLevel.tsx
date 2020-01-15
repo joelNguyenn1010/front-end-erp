@@ -1,5 +1,8 @@
 import React from 'react'
 import { Cascader } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import { AppState } from '../../../store'
+import { changeCustomerValue } from '../../../store/action/customerAction/createCustomerAction'
 
 const options = [
     {
@@ -26,13 +29,16 @@ const options = [
 
 const AddPricingLevel = () => {
 
-    const onChange = () => {
+    const name = useSelector((state: AppState) => state.CreateCustomerReducer.input.priceLevel)
+    const dispatch = useDispatch();
 
+    const onChange = (e: string[]) => {
+        dispatch(changeCustomerValue('priceLevel', e[0]))
     }
 
     return (
         <div>
-            <Cascader onChange={onChange} options={options}/>
+            <Cascader defaultValue={[name]} onChange={onChange} options={options}/>
         </div>
     )
 }

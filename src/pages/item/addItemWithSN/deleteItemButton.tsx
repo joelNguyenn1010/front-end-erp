@@ -5,20 +5,18 @@ import { clearItems, deleteItems } from '../../../store/action/itemAction/create
 import { AppState } from '../../../store'
 
 interface DeleteItemProps {
-    index: number
+    index: number,
+    // cancel: any
 }
 
 const DeleteItemButton:React.FC<DeleteItemProps> = (props) => {
 
-    const name = useSelector((state: AppState) => state.createItemReducer.items)
+    // const name = useSelector((state: AppState) => state.createItemReducer.items)
 
     const dispatch = useDispatch()
 
     const onClick = () => {
-        if(props.index > -1){
-            name.splice(props.index, 1)
-        }
-
+        
         dispatch(deleteItems(props.index))
     }
 

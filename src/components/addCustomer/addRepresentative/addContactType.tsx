@@ -1,5 +1,8 @@
 import React from 'react'
 import { Cascader } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import { AppState } from '../../../store'
+import { changeCustomerValue } from '../../../store/action/customerAction/createCustomerAction'
 
 const options = [
     {
@@ -23,17 +26,19 @@ const options = [
 
 const AddContactType = () => {
 
+    const name = useSelector((state: AppState) => state.CreateCustomerReducer.input.contactType)
     
-    const onChange = () => {
-
+    const dispatch = useDispatch();
+    
+    const onChange = (e: string[], option: any) => {
+        dispatch(changeCustomerValue('contactType',e[0]))
     }
 
 
     return (
         
         <div>
-            
-            <Cascader options={options} onChange={onChange}/>
+            <Cascader defaultValue={[name]} options={options} onChange={onChange}/>
         </div>
     )
 }

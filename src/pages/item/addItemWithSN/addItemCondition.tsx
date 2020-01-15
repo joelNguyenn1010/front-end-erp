@@ -18,6 +18,8 @@ const AddItemCondition:React.FC<ItemConditionProps> = props  => {
 
     const name = useSelector((state:AppState) => state.createItemReducer.items[props.index].condition)
 
+    
+
     const {data, loading, error, refetch} = useQuery(GET_CONDITION_QUERY, {
         variables: {name: '', limit: 6, page: 1}
     })
