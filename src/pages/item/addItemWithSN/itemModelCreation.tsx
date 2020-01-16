@@ -18,11 +18,13 @@ import { gql } from 'apollo-boost';
 import client from '../../../graphql';
 import Axios from 'axios';
 import { Item } from '../../../store/contract/Item';
+import { ModelCreate } from '../../../store/contract/Model';
 
 interface ItemModelCreationProps {
     value: Item,
     index: number,
     // cancel: any
+    // forceUpdate?: any
 }
 
 
@@ -33,6 +35,13 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     const source = CancelToken.source();
 
     const [open, setOpen] = useState<boolean>(false)
+
+    // new version
+    const [ciscoModel, setCiscoModel] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(true)
+    // input 
+    const [input, setInput] = useState<string>('')
+
 
 
     // const ciscoModel = useSelector((state: AppState) => state.createItemReducer.items[props.index].ciscoModel)
@@ -57,6 +66,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
     let timeout: any = null;
     const onSearch = (val: string) => {
+        setInput(val)
         clearTimeout(timeout);
         timeout = setTimeout(function () {
             refetch({ name: val, limit: 5, page: 1 });
@@ -65,23 +75,14 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
 
-    // new version
-
-    const [ciscoModel, setCiscoModel] = useState<string>('')
-    const [loading, setLoading] = useState<boolean>(true)
-
 
     useEffect(() => {
         const url: string = `http://apisn.ipsupply.net:2580/api/check-sn/${props.value.serialNumber}`
 
         Axios.get(url, {cancelToken: source.token})
             .then((res) => {
-
-
                 if (res && res.data && res.data[0]) {
                     const { ITEM_NAME } = res.data[0];
-
-
                     const QUERY = gql`
                     query {
                         findModelWithName(name: "${ITEM_NAME}") {
@@ -116,6 +117,27 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
         }
     }, [])
 
+     //  for model creation
+     const model: ModelCreate = {
+        input: {
+            name: ciscoModel,
+            hasSerial: true,
+            category: '',
+            manufactor: '',
+            manufactorId: 0,
+            categoryId: 0,
+        },
+        res: {
+            id: 0,
+            name: ''
+        }
+    }
+
+    const onCreate = () => {
+        setCiscoModel(input)
+        setOpen(true)
+    }
+
 
 
 
@@ -129,6 +151,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
                 onSelected={onSelected}
                 //if have data will display all data or return null array
                 content={data ? data.model ? data.model.data : [] : []}
+                onClickCreate={onCreate}
             />
 
             {ciscoModel.length > 0 && (
@@ -136,12 +159,14 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
                     <Button onClick={() => setOpen(true)}>Click here to add {ciscoModel}</Button>
 
                     {open && <AddNewModelModal
+                        model={model}
                         setCiscoModel={setCiscoModel}
                         ciscoModel={ciscoModel}
                         open={open}
                         setOpen={setOpen}
                         onSuccessCreateOrClose={(response: any) => {
                             if(response.name && response.name.length > 0) {
+                                // props.forceUpdate()
                                 dispatch(changeItemValue(props.index, 'model', response.name))
                                 dispatch(changeItemValue(props.index, 'modelId', response.id))
                                 setCiscoModel('')

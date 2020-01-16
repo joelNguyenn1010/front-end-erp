@@ -44,22 +44,7 @@ const AddItemWarehouse: React.FC<AddWarehouseProps> = props => {
     }, 250);
   };
 
-  const [addWhLocation] = useMutation(ADD_WHLOCATION, {
-    onError: () => {
-        message.error("We can't create supplier, please try again")
-    },
-    onCompleted: (data: any) => {
-        const name = data.createNewWHLocation.name
-
-        refetch({name: name, limit: 5, page: 1})
-
-        message.success(`Wh Location ${name} created`)
-    }
-})
-
-const onCreate = (val: string) => {
-  addWhLocation({variables: {name: val}})
-}
+  
 
 
   return (
@@ -68,7 +53,6 @@ const onCreate = (val: string) => {
       onSearch={onSearch}
       onSelected={onSelected}
       content={data ? (data.whlocation ? data.whlocation.data : []) : []}
-      onClickCreate={onCreate}
     />
   );
 };

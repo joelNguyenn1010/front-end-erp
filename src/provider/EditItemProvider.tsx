@@ -21,7 +21,7 @@ const EditItemProvider: React.FC = props => {
     },
 
     onCompleted: (data: any) => {
-      setData(data.findItemBySerial.data);
+      // setData(data.findItemBySerial.data);
     }
   });
 

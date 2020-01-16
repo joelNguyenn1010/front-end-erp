@@ -7,6 +7,7 @@ import { gql } from 'apollo-boost';
 import axios from 'axios';
 import client from '../../../graphql';
 import { AppState } from '../..';
+
 import * as _ from 'lodash'
 
 export const changeItemValue = (index: number, key: string, value: any) => {
@@ -140,16 +141,13 @@ export const checkSNInDB = (sn: string): Promise<boolean> => {
     return new Promise((resolve: any, reject: any) => {
 
         const QUERY = gql`
-                        query{
-                            findItemBySerial(serialNumber: "${sn}", limit: 10, page: 1) {
-                                data {
-                                    serialNumber
-                                }
-                            }
-                        }
-        `;
+        query{
+            isSNInDBQuery(serialNumber: "${sn}") 
+        }
+`;
         client.query({ query: QUERY }).then(result => {
-            if (result.data.findItemBySerial.data.length > 0) {
+            // console.log(result.data.isSNInDBQuery)
+            if (result.data.isSNInDBQuery) {
                 resolve(true)
             } else {
                 reject('This model not in db')
@@ -157,7 +155,12 @@ export const checkSNInDB = (sn: string): Promise<boolean> => {
 
         })
 
+
     })
+
+
+
+
 }
 
 
@@ -258,16 +261,36 @@ export const addItem = (sn: string) => {
 
         const oldSns = getState().createItemReducer.items.concat()
 
-        console.log(oldSns)
-        const found = _.find(oldSns, {'serialNumber' : sn})
-        
-        if(!found) {
-            dispatch({
-                type: "ADD_SN",
-                payload: sn
-            })
-        }
-     
+
+        // get the array
+
+//         var myStr = 'this,is,a,test';
+// var newStr = myStr.replace(/,/g, '-');
+
+
+        const replaced_comma_sn = sn.replace(/,/g, " ")
+
+        const arr_sn = replaced_comma_sn.split(' ');
+        // const arr_sn_comma =  sn.split(',');
+
+        const removed_duplicated_sn = _.uniq(arr_sn)
+        removed_duplicated_sn.map((item: string) => {
+            if (item.length > 0) {
+                const serialNumber = item.trim();
+
+                const found = _.find(oldSns, { 'serialNumber': serialNumber })
+
+                if (!found) {
+                    dispatch({
+                        type: "ADD_SN",
+                        payload: serialNumber
+                    })
+                }
+            }
+        })
+
+
+
     }
 
 }

@@ -50,9 +50,10 @@ const enhancer = composeEnhancers(
 
 
 // you can load the settings here
-const initialState = { }
+const initialState = {
+}
 
 
 
 
-export const initStore =  createStore(rootReducer, initialState, enhancer);
+export const initStore =  createStore(rootReducer, enhancer);

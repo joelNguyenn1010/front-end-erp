@@ -30,23 +30,7 @@ const EditCellWhlocation:React.FC<EditCellWhlocationProps> = (props: any) => {
         }, 250);
     }
 
-    const [addWhLocation] = useMutation(ADD_WHLOCATION, {
-        onError: (err) => {
-            console.log(err)
-            message.error("We can't create supplier, please try again")
-        },
-        onCompleted: (data: any) => {
-            const name = data.createNewWHLocation.name
     
-            refetch({name: name, limit: 5, page: 1})
-    
-            message.success(`Wh Location ${name} created`)
-        }
-    })
-    
-    const onCreate = (val: string) => {
-      addWhLocation({variables: {name: val}})
-    }
 
     const onSelected = (val: string, option: any) => {
         setValue(val)
@@ -66,7 +50,6 @@ const EditCellWhlocation:React.FC<EditCellWhlocationProps> = (props: any) => {
             onSearch={onSearch}
             onSelected={onSelected}
             content={data ? data.whlocation ? data.whlocation.data : [] : []}
-            onClickCreate={onCreate}
             
         />
     )

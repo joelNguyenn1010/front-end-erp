@@ -142,6 +142,7 @@ mutation($name: String!) {
 export const UPDATE_ITEM_NOTE = gql`
   mutation($id: Int!, $note: String){
     updateItem(id: $id, note: $note){
+      id
       note
     }
   }

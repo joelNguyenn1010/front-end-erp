@@ -15,7 +15,8 @@ interface AddNewModelModalProps {
     open: boolean,
     ciscoModel: string,
     setCiscoModel: any,
-    onSuccessCreateOrClose: (response: any) => void
+    onSuccessCreateOrClose: (response: any) => void,
+    model: ModelCreate
 }
 const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
 
@@ -26,24 +27,24 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
 
 
     useEffect(() => {
-        const model: ModelCreate = {
-            input: {
-                name: props.ciscoModel,
-                hasSerial: true,
-                category: '',
-                manufactor: '',
-                manufactorId: 0,
-                categoryId: 0,
-            },
-            res: {
-                id: 0,
-                name: ''
-            }
-        }
+        // const model: ModelCreate = {
+        //     input: {
+        //         name: props.ciscoModel,
+        //         hasSerial: true,
+        //         category: '',
+        //         manufactor: '',
+        //         manufactorId: 0,
+        //         categoryId: 0,
+        //     },
+        //     res: {
+        //         id: 0,
+        //         name: ''
+        //     }
+        // }
 
         dispatch({
             type: "ASSIGNINITMODEL",
-            payload: model.input
+            payload: props.model.input
         })
 
 
@@ -53,7 +54,7 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
         props.onSuccessCreateOrClose(response)  
     }
     return (
-        <Drawer visible={props.open} onClose={onClose} >
+        <Drawer visible={true} onClose={onClose} >
             <AddModel />
         </Drawer>
     )

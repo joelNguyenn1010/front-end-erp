@@ -7,6 +7,7 @@ import { AppState } from '../../../store'
 import { message } from 'antd'
 import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction'
 import AddNewModelModal from '../addItemWithSN/addNewModelModal'
+import { ModelCreate } from '../../../store/contract/Model'
 
 let timeout: any = null
 
@@ -53,6 +54,23 @@ const ModelSearch: React.FC = () => {
 
     const [ciscoModel, setCiscoModel] = useState<string>(name)
 
+
+    //  for model creation
+    const model: ModelCreate = {
+        input: {
+            name: ciscoModel,
+            hasSerial: false,
+            category: '',
+            manufactor: '',
+            manufactorId: 0,
+            categoryId: 0,
+        },
+        res: {
+            id: 0,
+            name: ''
+        }
+    }
+
     return (
         <React.Fragment>
             <label>Model: </label>
@@ -68,6 +86,7 @@ const ModelSearch: React.FC = () => {
 
 
             {open &&  <AddNewModelModal
+            model={model}
                 setCiscoModel={''}
                 ciscoModel={ciscoModel}
                 open={open}
