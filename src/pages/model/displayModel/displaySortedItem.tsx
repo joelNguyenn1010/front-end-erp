@@ -24,7 +24,7 @@ const DisplaySortedItem: React.FC<DisplaySortedItemProps> = props => {
 
     }, [])
 
-  return <Statistic value={value}/>;
+  return <p>{value}</p>;
 };
 
 export default DisplaySortedItem;

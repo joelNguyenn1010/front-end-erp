@@ -13,6 +13,7 @@ const LayoutBox: React.FC = props => {
                     <Menu.Item key="1">
                         <Icon type="swap-right" />
                         <span>Product</span>
+                        {/* <span>Customer</span> */}
                     </Menu.Item>
                 </Menu>
             </Sider>

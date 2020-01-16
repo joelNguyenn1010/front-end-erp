@@ -40,7 +40,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
     }
 
     const onSelected = (val: string, option: any) => {
-        for(let i = 0; i <= items.length; i ++){
+        for(let i = 0; i < items.length; i ++){
             dispatch(changeItemValue(i, 'supplier', val))
             dispatch(changeItemValue(i, 'supplierId', parseInt(option.key)))
         }
