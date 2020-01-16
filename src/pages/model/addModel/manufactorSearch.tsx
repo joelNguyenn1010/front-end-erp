@@ -8,6 +8,8 @@ import { CreateModelContext } from '../../../context/provider/createModelContext
 import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/createModelAction';
 import { AppState } from '../../../store';
+import client from '../../../graphql';
+import { gql } from 'apollo-boost';
 
 let timeout: any = null;
 const ManufactorSearch: React.FC = () => {
@@ -16,10 +18,35 @@ const ManufactorSearch: React.FC = () => {
 
     const name = useSelector((state: AppState) => state.createModelReducer.input.manufactor)
 
-
-
-
     const dispatch: any = useDispatch()
+
+// inital State to make a default state as cisco
+    React.useEffect(() => {
+        
+        client.query({
+            query: gql`
+        query{
+            manufactor(limit:1, page:1, name: "cisco") {
+              data {
+                name
+                id
+              }
+            }
+          }
+          
+        `})
+    
+        .then((res: any) => {
+        
+            if(res && res.data && res.data.manufactor && res.data.manufactor.data.length > 0) {
+                dispatch(changeValueAction('manufactor', res.data.manufactor.data[0].name))
+                dispatch(changeValueAction('manufactorId', parseInt(res.data.manufactor.data[0].id)))
+            }
+            // localStorage.setItem('manufactor', )
+        })
+
+
+    }, [])
 
     const { loading, error, data, refetch } = useQuery(MANUFACTURE_QUERY, {
         // bỏ varialbe search vào

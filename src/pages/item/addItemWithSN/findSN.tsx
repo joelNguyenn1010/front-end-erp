@@ -1,21 +1,16 @@
 import React from "react";
-import axios from "axios";
-import { Form, Input, message } from "antd";
+import { Form, message } from "antd";
 import Search from "antd/lib/input/Search";
-import client from "../../../graphql";
-import { gql } from "apollo-boost";
-import { CreateItemDAO } from "../../../context/provider/createItemContext";
-import { CreateItemContext } from "../../../context/provider/createItemContext";
 import {
-  fetchSN,
   checkSNInDB,
   addItem
 } from "../../../store/action/itemAction/createItemAction";
 import { useDispatch } from "react-redux";
 
-let timeout: any = null;
+
 
 const FindSN: React.FC = () => {
+  
   const dispatch = useDispatch();
 
   const [input, setInput] = React.useState<string>("");
@@ -24,8 +19,7 @@ const FindSN: React.FC = () => {
     e.preventDefault();
 
     checkSNInDB(input)
-      .then(value => {
-
+      .then(() => {
         message.error("This item already added");
       })
       .catch(() => {
@@ -36,7 +30,7 @@ const FindSN: React.FC = () => {
   };
 
   return (
-    <tr>
+    <tr >
       <td colSpan={8}>
         <Form onSubmit={onSearch}>
           <Search
