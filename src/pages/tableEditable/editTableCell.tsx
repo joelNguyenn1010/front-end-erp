@@ -1,8 +1,6 @@
 import React from "react";
 import { Form, Input } from "antd";
 import { EditTableContext } from "./editTableRow";
-import { useDispatch } from "react-redux";
-import { addEcommercial } from "../../store/action/customerAction/createCustomerAction";
 
 const EditTableCell = (props: any) => {
   const [edit, setEdit] = React.useState({ editing: false });

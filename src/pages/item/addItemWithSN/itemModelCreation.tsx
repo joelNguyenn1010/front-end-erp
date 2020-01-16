@@ -151,7 +151,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
     return loading ? <Spin /> : (
-        <Button.Group>
+        <Button.Group style={{width: "100%"}}>
             <SearchCreation
                 onDropdownVisibleChange={() => setReload({ name: "", limit: 5, page: 1 })}
                 input={name}

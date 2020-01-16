@@ -56,6 +56,8 @@ const DisplayItemContainer: React.FC = () => {
       editable: true,
       dataIndex: "location"
     },
+
+    
     {
       title: "WH Location",
       dataIndex: "whlocations.name",
