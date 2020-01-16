@@ -1,15 +1,19 @@
 import { ModelCreate } from "../contract/Model"
 import { CreateModelActionTypes } from '../action/createModelAction'
 
-const init: ModelCreate = {
+// const cisco = localStorage.getItem('manufactor') ? localStorage.getItem('manufactor') : "Cisco"
+const inputInit = {
     input: {
         name: '',
-        manufactor: '',
-        manufactorId: -1,
+        manufactor: "Cisco",
+        manufactorId: 2,
         category: '',
         categoryId: -1,
         hasSerial: true
     },
+}
+const init: ModelCreate = {
+    input: inputInit.input,
 
     res: {
         id: 0,
@@ -42,14 +46,7 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
         case "CLEAR":
             return {
                 ...state,
-                input: {
-                    name: '',
-                    manufactor: 'Cisco',
-                    manufactorId: 2,
-                    category: '',
-                    categoryId: -1,
-                    hasSerial: true
-                },
+                input: inputInit.input,
             }
         case "CLEAR:RESPONSE":
             return {

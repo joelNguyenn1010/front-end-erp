@@ -33,7 +33,6 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
             
                 onDropdownVisibleChange={props.onDropdownVisibleChange}
                 style={{width: '100%'}}
-                allowClear={true}
                 value={props.input}
                 defaultValue={props.defaultValue ? props.defaultValue : undefined}
                 onFocus={() => {

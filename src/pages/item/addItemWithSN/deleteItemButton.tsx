@@ -1,8 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { clearItems, deleteItems } from '../../../store/action/itemAction/createItemAction'
-import { AppState } from '../../../store'
+import { useDispatch } from 'react-redux'
+import { deleteItems } from '../../../store/action/itemAction/createItemAction'
 
 interface DeleteItemProps {
     index: number,

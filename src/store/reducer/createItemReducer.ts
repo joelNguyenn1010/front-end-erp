@@ -29,7 +29,6 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
             }
 
         case 'ITEM:DELETE:ITEM':
-
             oldState.splice(action.payload.index, 1)
             return {
                 ...state,

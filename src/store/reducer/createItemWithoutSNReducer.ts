@@ -3,7 +3,6 @@ import { ItemWithoutSn } from './../contract/ItemWithoutSn';
 import { CreateItemWithoutSNActionTypes } from './../action/createItemWithoutSNAction'
 
 const inputInit = {
-
         model: '',
         // bỏ cái này là -1 vì nếu để 0, backend vẫn nhận đây là valid id của model
         modelId: -1,
