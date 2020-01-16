@@ -15,7 +15,6 @@ const SearchSupplier: React.FC = () => {
 
     const name  = useSelector((state: AppState) => state.CreateItemWithoutSNReducer.input.supplier)
 
-
     const dispatch: any = useDispatch();
     
     const { loading, error, data, refetch } = useQuery(GET_SUPPLIER_QUERY, {

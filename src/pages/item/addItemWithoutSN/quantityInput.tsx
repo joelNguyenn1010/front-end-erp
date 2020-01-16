@@ -3,18 +3,20 @@ import NumericInput from "../../../components/conponentInputNumberOnly/inputNumb
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../store";
 import { ChangeDataAction } from "../../../store/action/createItemWithoutSNAction";
+import { InputNumber } from "antd";
 
 const DisplayQuantityInput = () => {
-  const name = useSelector(
-    (state: AppState) => state.CreateItemWithoutSNReducer.input.quantity
-  );
+
   // const [state, setState] = React.useState({value: ''})
 
   const dispatch: any = useDispatch();
 
-  const onChange = (value: number) => {
+  const onChange = (value: number | undefined) => {
     // setState({ value });
-    dispatch(ChangeDataAction("quantity", value));
+    if(value) {
+      dispatch(ChangeDataAction("quantity", value));
+
+    }
   };
 
   return (
@@ -22,7 +24,8 @@ const DisplayQuantityInput = () => {
       <label>
         Quantity: 
       </label>
-      <NumericInput value={name} onChange={onChange} placeholder='Quantity' maxLength={3} minLength={1} />
+      <InputNumber min={1} max={100} defaultValue={1} onChange={onChange} />
+      {/* <NumericInput value={name} onChange={onChange} placeholder='Quantity' maxLength={3} minLength={1} /> */}
     </div>
   );
 };

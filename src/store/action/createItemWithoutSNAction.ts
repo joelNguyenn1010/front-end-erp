@@ -34,7 +34,7 @@ export const SubmitItemWithoutSNAction = () => {
             model: input.model,
             modelId: input.modelId,
             supplierId: input.supplierId,
-            warehouseId: input.whlocationId,
+            whlocationId: input.whlocationId,
             conditionId: input.conditionId,
             warehouse: input.whlocation,
             quantity: input.quantity,

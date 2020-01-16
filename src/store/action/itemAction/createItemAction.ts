@@ -7,8 +7,8 @@ import { gql } from 'apollo-boost';
 import axios from 'axios';
 import client from '../../../graphql';
 import { AppState } from '../..';
-import { resolve } from 'dns';
 
+import * as _ from 'lodash'
 
 export const changeItemValue = (index: number, key: string, value: any) => {
     return {
@@ -256,11 +256,42 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
 
 export const addItem = (sn: string) => {
-    return {
-        type: "ADD_SN",
-        payload: sn
-    }
 
+    return (dispatch: any, getState: any) => {
+
+        const oldSns = getState().createItemReducer.items.concat()
+
+
+        // get the array
+
+//         var myStr = 'this,is,a,test';
+// var newStr = myStr.replace(/,/g, '-');
+
+
+        const replaced_comma_sn = sn.replace(/,/g, " ")
+
+        const arr_sn = replaced_comma_sn.split(' ');
+        // const arr_sn_comma =  sn.split(',');
+
+        const removed_duplicated_sn = _.uniq(arr_sn)
+        removed_duplicated_sn.map((item: string) => {
+            if (item.length > 0) {
+                const serialNumber = item.trim();
+
+                const found = _.find(oldSns, { 'serialNumber': serialNumber })
+
+                if (!found) {
+                    dispatch({
+                        type: "ADD_SN",
+                        payload: serialNumber
+                    })
+                }
+            }
+        })
+
+
+
+    }
 
 }
 

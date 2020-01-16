@@ -10,13 +10,14 @@ import SubmitItemButton from './submitItemButton'
 export const TableBodyItem: React.FC= () => {
 
     const items: any = useSelector((state: AppState) => state.createItemReducer.items)
+
     
     return (
         <tbody>
             <SubmitItemButton  />
             {items ? items.map((value: Item, index: number) => {
                 
-                return <TableRowItem index={index} key={value.serialNumber} value={value} />
+                return <TableRowItem  index={index} key={value.serialNumber} value={value} />
                 
             }) : ''}
       </tbody>

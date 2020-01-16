@@ -12,6 +12,7 @@ import SubmitItemButton from "./submitItemButton";
 interface TableRowItemProps {
   value: Item;
   index: number;
+  // forceUpdate?: any;
 }
 
 export const TableRowItem: React.FC<TableRowItemProps> = props => {
@@ -22,7 +23,7 @@ export const TableRowItem: React.FC<TableRowItemProps> = props => {
         
         <td>{props.value.serialNumber}</td>
         <td>
-          <ItemModelCreation value={props.value} index={props.index} />
+          <ItemModelCreation  value={props.value} index={props.index} />
         </td>
         <td>
           <AddItemCondition index={props.index} />

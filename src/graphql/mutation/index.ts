@@ -130,6 +130,15 @@ export const EDIT_MODEL_MANUFACTOR = gql`
   }
 `
 
+
+export const CREATE_NEW_WHLOCATION = gql`
+mutation($name: String!) {
+  createNewWHLocation(name: $name) {
+      id
+      name
+  }
+}
+`
 export const UPDATE_ITEM_NOTE = gql`
   mutation($id: Int!, $note: String){
     updateItem(id: $id, note: $note){

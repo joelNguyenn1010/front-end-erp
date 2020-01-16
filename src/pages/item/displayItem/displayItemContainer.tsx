@@ -35,8 +35,8 @@ const DisplayItemContainer: React.FC = () => {
     });
   };
 
-  const dataRender = data ? data.findItemBySerial.data : [];
-  const dataTotal = data ? data.findItemBySerial.total : [];
+  const dataRender = data ? data.findItemBySerial ? data.findItemBySerial.data : [] : [];
+  const dataTotal = data ? data.findItemBySerial? data.findItemBySerial.total: [] : [];
   // console.log(name)
 
   const columns = [

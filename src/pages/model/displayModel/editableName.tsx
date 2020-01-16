@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import EditableDisplayText from '../../../components/sharedStyled/EditableDisplayText'
-import { Input, Form, Popover, message } from 'antd'
+import { Input, Form, Popover, message, Tooltip } from 'antd'
 import client from '../../../graphql'
 import { EDIT_MODEL_NAME } from '../../../graphql/mutation'
 
@@ -40,10 +40,16 @@ const EditableName: React.FC<EditableNameProps> = props => {
 
     }
 
+
+
+    const title = "Press Enter to submit"
+
     const contentEdit = (
+        <Tooltip title={title} placement="top" >
         <Form onSubmit={onSubmit}>
             <Input placeholder={value} value={value} onChange={onChange} />
         </Form>
+        </Tooltip>
     )
 
     return <Popover trigger="click" placement="right" content={contentEdit}>
