@@ -7,7 +7,8 @@ import {
     fetchSN,
     addModelWithCiscoCheck,
     makeLoadingModel,
-    changeItemValue
+    changeItemValue,
+    checkModelInDB
 } from "../../../store/action/itemAction/createItemAction";
 import { AppState } from "../../../store";
 import { useQuery } from "@apollo/react-hooks";
@@ -35,6 +36,9 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     const source = CancelToken.source();
 
     const [open, setOpen] = useState<boolean>(false)
+    const [reload, setReload] = useState<any>({
+        name: "", limit: 5, page: 1 
+    })
 
     // new version
     const [ciscoModel, setCiscoModel] = useState<string>('')
@@ -47,21 +51,24 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     // const ciscoModel = useSelector((state: AppState) => state.createItemReducer.items[props.index].ciscoModel)
     const name = useSelector((state: AppState) => state.createItemReducer.items[props.index].model)
 
+
+
     const dispatch: any = useDispatch();
 
 
 
 
     const { data, refetch } = useQuery(GET_MODEL_QUERY, {
-        variables: { name: "", limit: 5, page: 1 }
+        variables: { name :reload.name, limit: reload.limit, page: reload.page }
     });
 
 
     // changeItemValue
     const onSelected = (val: string, option: any) => {
+        
+            dispatch(changeItemValue(props.index, 'model', val))
+            dispatch(changeItemValue(props.index, 'modelId', parseInt(option.key)))
 
-        dispatch(changeItemValue(props.index, 'model', val))
-        dispatch(changeItemValue(props.index, 'modelId', parseInt(option.key)))
     }
 
     let timeout: any = null;
@@ -69,7 +76,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
         setInput(val)
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            refetch({ name: val, limit: 5, page: 1 });
+            setReload({ name: val, limit: 5, page: 1 });
         }, 220);
     };
 
@@ -77,10 +84,12 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
     useEffect(() => {
+
         const url: string = `http://apisn.ipsupply.net:2580/api/check-sn/${props.value.serialNumber}`
 
-        Axios.get(url, {cancelToken: source.token})
+        Axios.get(url, { cancelToken: source.token })
             .then((res) => {
+                console.log(res)
                 if (res && res.data && res.data[0]) {
                     const { ITEM_NAME } = res.data[0];
                     const QUERY = gql`
@@ -111,14 +120,14 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
         return () => {
-            source.cancel("Operation cancel"); 
+            source.cancel("Operation cancel");
             setCiscoModel('')
- 
+
         }
     }, [])
 
-     //  for model creation
-     const model: ModelCreate = {
+    //  for model creation
+    const model: ModelCreate = {
         input: {
             name: ciscoModel,
             hasSerial: true,
@@ -144,7 +153,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     return loading ? <Spin /> : (
         <React.Fragment>
             <SearchCreation
-                onDropdownVisibleChange={() => refetch({ name: "", limit: 5, page: 1 })}
+                onDropdownVisibleChange={() => setReload({ name: "", limit: 5, page: 1 })}
                 input={name}
                 loading={loading}
                 onSearch={onSearch}
@@ -155,6 +164,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
             />
 
             {ciscoModel.length > 0 && (
+
                 <React.Fragment>
                     <Button onClick={() => setOpen(true)}>Click here to add {ciscoModel}</Button>
 
@@ -165,13 +175,16 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
                         open={open}
                         setOpen={setOpen}
                         onSuccessCreateOrClose={(response: any) => {
-                            if(response.name && response.name.length > 0) {
+                            if (response.name && response.name.length > 0) {
+                                console.log('co vao day nua ko')
                                 // props.forceUpdate()
                                 dispatch(changeItemValue(props.index, 'model', response.name))
                                 dispatch(changeItemValue(props.index, 'modelId', response.id))
+                                // refetch({ name: reload.name, limit: reload.limit, page: reload.page})
                                 setCiscoModel('')
                             }
-                           
+                            // refetch({ name: reload.name, limit: reload.limit, page: reload.page})   
+
                             setOpen(false)
                         }}
                     />}
