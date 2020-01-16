@@ -44,8 +44,8 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
                 ...state,
                 input: {
                     name: '',
-                    manufactor: '',
-                    manufactorId: -1,
+                    manufactor: 'Cisco',
+                    manufactorId: 2,
                     category: '',
                     categoryId: -1,
                     hasSerial: true
