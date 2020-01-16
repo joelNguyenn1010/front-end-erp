@@ -149,7 +149,8 @@ const DisplayModelContainer: React.FC = () => {
 
   return (
     <React.Fragment>
-    <Table
+    <Table 
+      size="small"
       loading={loading}
       title={() => (
         <Input

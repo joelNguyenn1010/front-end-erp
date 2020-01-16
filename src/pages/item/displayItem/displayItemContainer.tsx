@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { GET_ITEM_QUERY } from "../../../graphql/query";
-import { Table, PageHeader, Input, Popconfirm, message } from "antd";
+import { Table, PageHeader, Input, Popconfirm, message, Button, Icon } from "antd";
 import EditTableRow from "../../tableEditable/editTableRow";
 import EditTableCell from "../../tableEditable/editTableCell";
 import client from "../../../graphql";
@@ -40,14 +40,15 @@ const DisplayItemContainer: React.FC = () => {
   // console.log(name)
 
   const columns = [
-    {
-      title: "Serial Number",
-      dataIndex: "serialNumber"
-    },
+    
     {
       title: "Model",
       key: "model",
       dataIndex: "models.name"
+    },
+    {
+      title: "Serial Number",
+      dataIndex: "serialNumber"
     },
     {
       title: "Item Location",
@@ -146,6 +147,7 @@ const DisplayItemContainer: React.FC = () => {
   };
 
   const onShowSizeChange = (current: number, size: number) => {
+    setSerialInput({limit: size, page: current, serialNumber: serialInput.serialNumber})
   };
 
   const itemRender = (current: any, type: any, originalElement: any) => {
@@ -171,6 +173,7 @@ const DisplayItemContainer: React.FC = () => {
       </div>
 
       <Table
+      size="small"
         loading={loading}
         title={() => (
           <Input
@@ -207,7 +210,14 @@ const DisplayItemContainer: React.FC = () => {
         }}
         columns={newColumns}
         dataSource={dataRender}
+        scroll={{ y: window.screen.height - 500 }}
       />
+      <Button 
+          type="primary" 
+          shape="circle"
+          size="large"
+          onClick={() => refetchTheData()}
+          style={{position: 'absolute', bottom: 35, left:10}}><Icon type="reload" /></Button>
     </div>
   );
 };
