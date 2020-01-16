@@ -16,7 +16,9 @@ let timeout: any = null
 
 const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
 
-    const name = useSelector((state:AppState) => state.createItemReducer.items[props.index].supplier)
+    
+    const name = useSelector((state:AppState) => state.createItemReducer.items)
+
 
     const {data, loading, refetch, error} = useQuery(GET_SUPPLIER_QUERY, {
         variables: {name: '', limit: 5, page: 1}
@@ -36,8 +38,11 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
     }
 
     const onSelected = (val: string, option: any) => {
-        dispatch(changeItemValue(props.index, 'supplier', val))
-        dispatch(changeItemValue(props.index, 'supplierId', parseInt(option.key)))
+        for(let i = 0; i < name.length; i ++){
+            dispatch(changeItemValue(i, 'supplier', val))
+            dispatch(changeItemValue(i, 'supplierId', parseInt(option.key)))
+        }
+        
     }
 
     const [addSupplier] = useMutation(ADD_SUPPLIER, {
@@ -59,12 +64,14 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
 
 
     return (
+        
         <div>
+            
             <SearchCreation 
                 onSearch={onSearch}
                 onSelected={onSelected}
                 placeholder="Supplier"
-                input={name}
+                input={name[props.index].supplier}
                 loading={loading}
                 content={data ? data.supplier ? data.supplier.data : [] : []}
                 onClickCreate={onCreate}
