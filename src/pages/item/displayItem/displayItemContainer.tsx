@@ -52,8 +52,8 @@ const DisplayItemContainer: React.FC = () => {
     {
       title: "Item Location",
       key: "itemLocation",
-      editable: true,
-      dataIndex: "location"
+      dataIndex: "location",
+      render: (text: string, record: any) => <p>text</p>
     },
 
     
