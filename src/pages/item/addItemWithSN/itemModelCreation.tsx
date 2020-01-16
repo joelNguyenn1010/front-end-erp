@@ -72,8 +72,6 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
     useEffect(() => {
-
-
         const url: string = `http://apisn.ipsupply.net:2580/api/check-sn/${props.value.serialNumber}`
 
         Axios.get(url, {cancelToken: source.token})
@@ -116,14 +114,15 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
             setCiscoModel('')
  
         }
-
-     
     }, [])
+
+
 
 
     return loading ? <Spin /> : (
         <React.Fragment>
             <SearchCreation
+                onDropdownVisibleChange={() => refetch({ name: "", limit: 5, page: 1 })}
                 input={name}
                 loading={loading}
                 onSearch={onSearch}
