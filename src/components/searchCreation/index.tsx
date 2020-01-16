@@ -1,6 +1,5 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { useState } from "react";
 import { Select, Icon, Button, Divider, Spin } from "antd";
-import { CreateModelContext } from "../../context/provider/createModelContext";
 
 
 
@@ -19,7 +18,8 @@ interface SearchCreationProps {
     placeholder?: string;
     onFocus?: () => void;
     defaultValue?: string;
-    input: any ;
+    input: any;
+    onDropdownVisibleChange?: (open: boolean) => void
 }
 
 const SearchCreation: React.FC<SearchCreationProps> = props => {
@@ -30,6 +30,8 @@ const SearchCreation: React.FC<SearchCreationProps> = props => {
     return (
         <React.Fragment>
             <Select
+            
+                onDropdownVisibleChange={props.onDropdownVisibleChange}
                 style={{width: '100%'}}
                 allowClear={true}
                 value={props.input}
