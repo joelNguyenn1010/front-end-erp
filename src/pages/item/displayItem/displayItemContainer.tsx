@@ -41,6 +41,21 @@ const DisplayItemContainer: React.FC = () => {
 
   const columns = [
     {
+      title: "Serial Number",
+      dataIndex: "serialNumber"
+    },
+    {
+      title: "Model",
+      key: "model",
+      dataIndex: "models.name"
+    },
+    {
+      title: "Item Location",
+      key: "itemLocation",
+      editable: true,
+      dataIndex: "location"
+    },
+    {
       title: "WH Location",
       dataIndex: "whlocations.name",
       key: "whLocation",
@@ -48,15 +63,9 @@ const DisplayItemContainer: React.FC = () => {
         return <EditCellWhlocation record={record} text={text} />
       }
     },
-    {
-      title: "Item Location",
-      key: "itemLocation",
-      editable: true
-    },
-    {
-      title: "Serial Number",
-      dataIndex: "serialNumber"
-    },
+
+
+
     {
       title: "Condition",
       dataIndex: "conditions.name",
@@ -160,6 +169,7 @@ const DisplayItemContainer: React.FC = () => {
       </div>
 
       <Table
+        loading={loading}
         title={() => (
           <Input
             placeholder={"Search"}

@@ -5,7 +5,6 @@ import DisplayModelContainer from "./displayModelContainer"
 const DisplayModel: React.FC = () => {
   return (
     <div className="container">
-      <h1>{localStorage.getItem('manufactor')}</h1>
       <DisplayModelContainer />
     </div>
   );

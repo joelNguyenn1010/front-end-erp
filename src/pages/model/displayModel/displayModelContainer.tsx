@@ -5,6 +5,8 @@ import { Table, Input, Button, Icon } from "antd";
 import EditableName from "./editableName";
 import EditableNote from "./editableNote";
 import EditableManufactor from "./editableManufactor";
+import DisplaySortedItem from "./displaySortedItem";
+
 
 const DisplayModelContainer: React.FC = () => {
   const [pagi, setPagi] = React.useState<any>({
@@ -56,59 +58,37 @@ const DisplayModelContainer: React.FC = () => {
         {
           title: "NIB",
           key: "nibAU",
-          render: (index: any, record: any) => {
-            // mai mốt tìm hiểu thêm về dataIndex, cái này là render từng cái cell, kiểm tra xem có bằng với phần tử NIB, NOB không
-            const data = record.au_condition.find((element: any) => element.name === 'NIB')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.au_condition} cond="NIB" />
         },
         {
           title: "NOB",
           key: "nobAU",
-          render: (index: any, record: any) => {
-            const data = record.au_condition.find((element: any) => element.name === 'NOB')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
-
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.au_condition} cond="NOB" />
         },
         {
           title: "USEDA",
           key: "usedaAU",
-          render: (index: any, record: any) => {
-            const data = record.au_condition.find((element: any) => element.name === 'USEDA')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.au_condition} cond="USEDA" />
+
         },
         {
           title: "USEDB",
           // dataIndex: "items[0].quantity",
           key: "usedbAU",
-          render: (index: any, record: any) => {
-            const data = record.au_condition.find((element: any) => element.name === 'USEDB')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.au_condition} cond="USEDB" />
+
         },
         {
           title: "USEDC",
           key: "usedcAU",
-          render: (index: any, record: any) => {
-            const data = record.au_condition.find((element: any) => element.name === 'USEDC')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.au_condition} cond="USEDC" />
+
         },
         {
           title: "PART",
           key: "partAU",
-          render: (index: any, record: any) => {
-            const data = record.au_condition.find((element: any) => element.name === 'PART')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.au_condition} cond="PART" />
+
         }
       ]
     },
@@ -118,57 +98,37 @@ const DisplayModelContainer: React.FC = () => {
         {
           title: "NIB",
           key: "nibUS",
-          render: (index: any, record: any) => {
-            const data = record.us_condition.find((element: any) => element.name === 'NIB')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
-          
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+
         },
         {
           title: "NOB",
           key: "nobUS",
-          render: (index: any, record: any) => {
-            const data = record.us_condition.find((element: any) => element.name === 'NOB')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+
         },
         {
           title: "USEDA",
           key: "usedaUS",
-          render: (index: any, record: any) => {
-            const data = record.us_condition.find((element: any) => element.name === 'USEDA')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+
         },
         {
           title: "USEDB",
           key: "usedbUS",
-          render: (index: any, record: any) => {
-            const data = record.us_condition.find((element: any) => element.name === 'USEDB')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+
         },
         {
           title: "USEDC",
           key: "usedcUS",
-          render: (index: any, record: any) => {
-            const data = record.us_condition.find((element: any) => element.name === 'USEDC')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+
         },
         {
           title: "PART",
           key: "partUS",
-          render: (index: any, record: any) => {
-            const data = record.us_condition.find((element: any) => element.name === 'PART')
-            const qty = data ? data.QTY : 0
-            return (<p>{qty}</p>)
-          }
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
         }
       ]
     }
@@ -190,6 +150,7 @@ const DisplayModelContainer: React.FC = () => {
   return (
     <React.Fragment>
     <Table
+      loading={loading}
       title={() => (
         <Input
           placeholder={"Search"}

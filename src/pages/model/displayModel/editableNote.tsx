@@ -23,6 +23,12 @@ const EditableNote: React.FC<EditableNoteProps> = props => {
 
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+      
+
+        if(value && value.length > 0) {
+
+        
 
         const modelId = record.id;
 
@@ -34,23 +40,21 @@ const EditableNote: React.FC<EditableNoteProps> = props => {
                 message.error("Can't change the note, please try again")
             })
 
-        event.preventDefault();
+        } else {
+            message.warning("The value you enter is empty");
+        }
 
     }
 
     const contentEdit = (
         <Form onSubmit={onSubmit}>
-            <TextArea placeholder={value} value={value} onChange={onChange} />
+            <TextArea minLength={1} placeholder={value} value={value} onChange={onChange} />
             <Button htmlType="submit">Submit</Button>
         </Form>
     )
-    // overflow: hidden;
-    // white-space: nowrap;
-    // text-overflow: ellipsis;
-
 
     return <Popover trigger="click" placement="right" content={contentEdit}>
-        {text ?   <EditableDisplayText style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
+        {text ? <EditableDisplayText style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis"}}>
             {text}
         </EditableDisplayText> :
         

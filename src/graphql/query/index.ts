@@ -55,6 +55,10 @@ query($limit: Int!, $page: Int!, $serialNumber: String!, $stockStatus: Boolean){
       whlocations {
         name
       }
+      models {
+        name
+      }
+      location
       serialNumber
       price
       note
@@ -68,6 +72,7 @@ query($limit: Int!, $page: Int!, $serialNumber: String!, $stockStatus: Boolean){
         name
       }
     }
+ 
     total
   }
 }
