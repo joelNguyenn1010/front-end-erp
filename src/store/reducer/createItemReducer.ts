@@ -61,7 +61,7 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 serialNumber: action.payload,
                 model: '',
                 condition: 'USEDB',
-                conditionId: 4,
+                conditionId: 2,
                 supplier: '',
                 supplierId: 0,
                 note: '',
@@ -69,7 +69,7 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 noModelInDB: true,
                 ciscoModel: '',
                 quantity: 1,
-                whlocation: '',
+                whlocation: 'sydney',
                 whlocationId: 1,
             }
 
