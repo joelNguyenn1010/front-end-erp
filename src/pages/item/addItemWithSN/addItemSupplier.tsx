@@ -17,11 +17,13 @@ let timeout: any = null
 const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
 
     
-    const name = useSelector((state:AppState) => state.createItemReducer.items)
+    const items = useSelector((state:AppState) => state.createItemReducer.items)
 
+    const limit: number = 5
+    const page: number = 1
 
     const {data, loading, refetch, error} = useQuery(GET_SUPPLIER_QUERY, {
-        variables: {name: '', limit: 5, page: 1}
+        variables: {name: '', limit, page}
     })
 
     if(error){
@@ -38,7 +40,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
     }
 
     const onSelected = (val: string, option: any) => {
-        for(let i = 0; i < name.length; i ++){
+        for(let i = 0; i <= items.length; i ++){
             dispatch(changeItemValue(i, 'supplier', val))
             dispatch(changeItemValue(i, 'supplierId', parseInt(option.key)))
         }
@@ -52,7 +54,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
         onCompleted: (data: any) => {
             const name = data.createNewSupplier.name
 
-            refetch({name: name, limit: 5, page: 1})
+            refetch({name: name, limit, page})
 
             message.success(`Supplier ${name} created`)
         }
@@ -71,7 +73,7 @@ const AddItemSupplier:React.FC<ItemSupplierProps> = props => {
                 onSearch={onSearch}
                 onSelected={onSelected}
                 placeholder="Supplier"
-                input={name[props.index].supplier}
+                input={items[props.index].supplier}
                 loading={loading}
                 content={data ? data.supplier ? data.supplier.data : [] : []}
                 onClickCreate={onCreate}

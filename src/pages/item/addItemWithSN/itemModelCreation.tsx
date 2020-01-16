@@ -151,7 +151,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
 
     return loading ? <Spin /> : (
-        <React.Fragment>
+        <Button.Group>
             <SearchCreation
                 onDropdownVisibleChange={() => setReload({ name: "", limit: 5, page: 1 })}
                 input={name}
@@ -191,7 +191,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
 
                 </React.Fragment>
             )}
-        </React.Fragment>
+        </Button.Group>
     )
 
 

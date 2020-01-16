@@ -33,6 +33,7 @@ const AddItemWarehouse: React.FC<AddWarehouseProps> = props => {
   }
 
   const onSelected = (val: string, option: any) => {
+    refetch({name: '', limit, page})
     dispatch(changeItemValue(props.index, "whlocation", val));
     dispatch(
       changeItemValue(props.index, "whlocationId", parseInt(option.key))
