@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom'
 interface CreateNewAddressProps {
     setOpen: (value: boolean) => void,
     open: boolean,
+    onClose?: () => void
 }
 
 const CreateNewAddress:React.FC<CreateNewAddressProps> = (props: any) => {
@@ -25,6 +26,9 @@ const CreateNewAddress:React.FC<CreateNewAddressProps> = (props: any) => {
     const onOk = () => {
         props.setOpen(false)
         dispatch(submitAddressAction(id))
+        if(props.onClose) {
+            props.onClose();
+        }
     }
 
     return (
