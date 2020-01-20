@@ -1,5 +1,14 @@
 import { gql } from 'apollo-boost'
 
+// enum SalutationEnum {
+//   mr,
+//   mrs,
+//   ms,
+//   other
+// }
+
+
+//ADD MUTATION
 export const ADD_MANUFACTURE = gql`
 mutation($name: String!) {
     createNewManufacture(name: $name) {
@@ -92,14 +101,48 @@ export const ADD_ITEM = gql`
   }
 `
 
-export const DELETE_ITEM = gql`
-  mutation($id: Int!){
-    deleteItemWithId(id: $id){
-      id
+export const ADD_WHLOCATION = gql`
+  mutation($name: String!){
+    createNewWHLocation(name: $name){
+      id 
+      name
     }
   }
 `
 
+export const CREATE_NEW_WHLOCATION = gql`
+mutation($name: String!) {
+  createNewWHLocation(name: $name) {
+      id
+      name
+  }
+}
+`
+
+
+
+export const ADD_CUS_REPRESENTATIVE = gql`
+mutation($supplierId: Int!, $salutation: SalutationEnum, $fullName: String!, $position: String, $phoneNumber: Int, $emails: [EmailInput]  ){
+  createRepresentative(supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails){
+    id
+    supplierId
+  }
+}
+`
+
+export const ADD_CUS_REPRESENTATIVE_EMAIL = gql`
+mutation($email: String){
+  createRepresentativeEmail(email: $email){
+    id
+    email
+  }
+}
+`
+
+
+
+
+//EDIT MUTATION
 
 export const EDIT_MODEL_NAME = gql`
   mutation($name: String!, $id: Int!) {
@@ -130,15 +173,8 @@ export const EDIT_MODEL_MANUFACTOR = gql`
   }
 `
 
+//UPDATE MUTATION
 
-export const CREATE_NEW_WHLOCATION = gql`
-mutation($name: String!) {
-  createNewWHLocation(name: $name) {
-      id
-      name
-  }
-}
-`
 export const UPDATE_ITEM_NOTE = gql`
   mutation($id: Int!, $note: String){
     updateItem(id: $id, note: $note){
@@ -194,12 +230,24 @@ export const UPDATE_ITEM_WHLOCATION = gql`
     }
   }
 `
-
-export const ADD_WHLOCATION = gql`
-  mutation($name: String!){
-    createNewWHLocation(name: $name){
-      id 
-      name
+//DELETE MUTATATION
+export const DELETE_ITEM = gql`
+  mutation($id: Int!){
+    deleteItemWithId(id: $id){
+      id
     }
   }
 `
+
+export const DELETE_REPRESENTATIVE = gql`
+  mutation($id: Int!){
+    deleteRepresentative(id: $id){
+      id
+    
+    }
+  }
+`
+
+
+
+

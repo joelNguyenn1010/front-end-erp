@@ -157,3 +157,21 @@ export const GET_WHLOCATION_QUERY = gql`
     }
   }
 `
+
+export const GET_REPRESENTATIVE_QUERY = gql`
+  query($supplierId: Int!, $limit: Int!, $page: Int!){
+    representative(supplierId: $supplierId, limit: $limit, page: $page){
+      data{
+        id
+        salutation
+        fullName
+        position
+        phoneNumber
+        representativeemails{
+          email
+        }
+    }
+    
+    }
+  }
+`
