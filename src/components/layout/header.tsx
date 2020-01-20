@@ -31,6 +31,9 @@ const HeaderLink: React.FC = () => {
           <Menu.Item>
               <Link to="/display/customer"> Display Customer</Link>
           </Menu.Item>
+          <Menu.Item>
+              <Link to="/supplier"> Display Supplier</Link>
+          </Menu.Item>
         </Menu>
       }
     >

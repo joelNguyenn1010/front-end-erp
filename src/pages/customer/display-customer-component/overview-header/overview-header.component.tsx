@@ -1,9 +1,19 @@
 import React from "react";
-import { Table } from "antd";
 import { Descriptions } from "antd";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_REPRESENTATIVE_QUERY } from "../../../../graphql/query";
 
 const OverviewCustomerComponent = () => {
+
+  let { id } = useParams()
+
+  const limit = 1
+  const page = 1
   
+  const { data } = useQuery(GET_REPRESENTATIVE_QUERY, {variables: {supplierId: id, limit, page} })
+
+  console.log(data)
   return (
     <Descriptions title="Customer Info">
       <Descriptions.Item label="Customer name">Zhou Maomao</Descriptions.Item>

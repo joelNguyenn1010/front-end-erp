@@ -9,6 +9,8 @@ import CreateItemProvider from "./context/provider/createItemContext";
 import AddItemWithoutSN from './pages/item/addItemWithoutSN'
 import AddCustomer from "./pages/customer/add";
 import DisplayCustomer from "./pages/customer/display-customer-component";
+import Supplier from "./pages/supplier";
+import Page404 from "./pages/error/404";
 
 const Routing: React.FC = props => {
   return (
@@ -35,16 +37,29 @@ const Routing: React.FC = props => {
 
       <Route path="/item">
         <DisplayItem />
-        
+
       </Route>
 
       <Route path="/customer">
-          <AddCustomer />
+        <AddCustomer />
       </Route>
 
       <Route path="/display/customer">
         <DisplayCustomer />
       </Route>
+
+      <Route path="/supplier/:id">
+        <DisplayCustomer />
+      </Route>
+
+
+      <Route exact path="/supplier">
+        <Supplier />
+      </Route>
+
+
+      <Route component={Page404} />
+
     </Switch>
   );
 };
