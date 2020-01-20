@@ -2,8 +2,10 @@ import ApolloClient from 'apollo-boost';
 
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+const production = 'http://api.product.ipsupply.net/graphql'
+const local = 'http://localhost:5000/graphql'
 const client = new ApolloClient({
-  uri: 'http://api.product.ipsupply.net/graphql',
+  uri: production,
   cache: new InMemoryCache()
 });
 

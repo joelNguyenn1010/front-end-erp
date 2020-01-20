@@ -13,33 +13,27 @@ const AddModel: React.FC = () => {
       <Row>
         <Col span={12}>
           <AddName />
-          </Col>
+        </Col>
 
-          <Col span={12}>
+        <Col span={12}>
           <Form.Item>
             <ManufactorCreation />
           </Form.Item>
-          </Col>
-      
+        </Col>
+
       </Row>
 
 
 
       <Row>
         <Col span={12}>
+            <CategorySearch />
+        </Col>
 
-        <Form.Item>
-        <CategorySearch />
-      </Form.Item>
-          </Col>
+        <Col span={12}>
+            <HasSerialModel />
+        </Col>
 
-          <Col span={12}>
-       
-      <Form.Item>
-        <HasSerialModel />
-      </Form.Item>
-          </Col>
-      
       </Row>
 
 
