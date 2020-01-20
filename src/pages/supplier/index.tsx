@@ -19,6 +19,7 @@ const Supplier: React.FC<SupplierProps> = props => {
         }
     ]
 
+    
     const { data } = useQuery(GET_SUPPLIER_QUERY, {variables: {name: ""}})
 
     return (

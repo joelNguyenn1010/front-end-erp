@@ -32,7 +32,6 @@ export interface Suppliers {
 
 export interface Representative {
     id: number,
-    supplierId: number,
     salutation: Salutation,
     fullName: string,
     position: string,
