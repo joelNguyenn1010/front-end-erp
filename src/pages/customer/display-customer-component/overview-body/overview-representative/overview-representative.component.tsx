@@ -75,7 +75,6 @@ const OverviewRepresentativeComponent = () => {
       key: "email",
       dataIndex: "representativeemails",
       render: (text: any, record: any) => {
-        console.log(text)
         return text.map((data: any) => <p>{data.email}</p>);
       }
     },

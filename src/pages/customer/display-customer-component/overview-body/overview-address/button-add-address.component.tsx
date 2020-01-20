@@ -3,7 +3,11 @@ import { Button } from "antd";
 
 import CreateNewAddress from './create-new-address-modal.component'
 
-const ButtonAddAddressComponent = () => {
+interface ButtonAddAddressComponentProps {
+  onClose?: () => void
+}
+
+const ButtonAddAddressComponent:React.FC<ButtonAddAddressComponentProps> = (props: any) => {
   const [open, setOpen] = useState<boolean>(false);
 
 
@@ -17,7 +21,7 @@ const ButtonAddAddressComponent = () => {
         Add more
       </Button>
 
-      {open && <CreateNewAddress setOpen={setOpen} open={open}/>}
+      {open && <CreateNewAddress onClose={props.onClose} setOpen={setOpen} open={open}/>}
       
     </React.Fragment> 
     

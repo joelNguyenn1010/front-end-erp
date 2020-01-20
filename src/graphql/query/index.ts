@@ -198,6 +198,7 @@ export const GET_ADDRESS_QUERY = gql`
         city
         state
         type
+        street
       }
     }
   }
