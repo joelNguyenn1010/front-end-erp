@@ -1,17 +1,18 @@
 import React from 'react'
 
-import {Form } from 'antd'
+import { Form } from 'antd'
+import RightClickMenu from '../../components/rightClickMenu'
 
 export const EditTableContext = React.createContext({})
 
-const EditTableRow:React.FC = ({ ...props}) => {
-    const [data, setData] = React.useState<Array<string>>([])
+const EditTableRow: React.FC = ({ ...props }) => {
     return (
-        <EditTableContext.Provider value={data}>
-         <tr {...props}  />
-        </EditTableContext.Provider>
+        <RightClickMenu data={{...props}} menus={[<p>hello</p>]}>
+      
+
+        </RightClickMenu>
     )
-    
+
 }
 
 export default Form.create()(EditTableRow)

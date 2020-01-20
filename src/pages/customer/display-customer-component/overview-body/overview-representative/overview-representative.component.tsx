@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
-import { Table, Popconfirm, message, Button, Icon } from "antd";
+import { Table, Popconfirm, message, Button, Icon, Result } from "antd";
 import ButtonAddRepresentative from "./button-add-representative";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_REPRESENTATIVE_QUERY } from "../../../../../graphql/query";
 import { DELETE_REPRESENTATIVE } from "../../../../../graphql/mutation";
 import editTableRow from "../../../../tableEditable/editTableRow";
-import editTableCell from "../../../../tableEditable/editTableCell";
+// import editTableCell from "../../../../tableEditable/editTableCell";
 import client from "../../../../../graphql";
 import { useParams } from "react-router-dom";
+import LoadingSpin from "../../../../../components/loadingSpin";
+import { Representative } from "../../../../../store/contract/Suppliers";
 
 const OverviewRepresentativeComponent = () => {
   let { id } = useParams();
@@ -25,7 +27,7 @@ const OverviewRepresentativeComponent = () => {
     supplierId: id
   }
 
-  const { data, refetch } = useQuery(GET_REPRESENTATIVE_QUERY, {
+  const { data, refetch, loading } = useQuery(GET_REPRESENTATIVE_QUERY, {
     variables,
   });
 
@@ -33,17 +35,6 @@ const OverviewRepresentativeComponent = () => {
     refetch(variables);
   };
 
-  const dataRender = data
-    ? data.representative
-      ? data.representative.data
-      : []
-    : [];
-
-  const dataTotal = data
-    ? data.representative
-      ? data.representative.total
-      : []
-    : [];
 
   const columns = [
     {
@@ -79,35 +70,20 @@ const OverviewRepresentativeComponent = () => {
         return text.map((data: any) => <p>{data.email}</p>);
       }
     },
-    {
-      title: "Operation",
-      render: (text: any, record: any) =>
-        dataRender.length > 0 ? (
-          <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => handleDelete(record.id)}
-          >
-            <a>Delete</a>
-          </Popconfirm>
-        ) : null
-    }
+    // {
+    //   title: "Operation",
+    //   render: (text: any, record: any) =>
+    //     dataRender.length > 0 ? (
+    //       <Popconfirm
+    //         title="Sure to delete?"
+    //         onConfirm={() => handleDelete(record.id)}
+    //       >
+    //         <a>Delete</a>
+    //       </Popconfirm>
+    //     ) : null
+    // }
   ];
 
-  const newColumns = columns.map((col: any) => {
-    if (!col.editable) {
-      return col;
-    }
-    return {
-      ...col,
-      onCell: (record: any) => ({
-        record,
-        editable: col.editable,
-        dataIndex: col.dataIndex,
-        title: col.title,
-        handleSave: handleSave
-      })
-    };
-  });
 
 
 
@@ -115,7 +91,6 @@ const OverviewRepresentativeComponent = () => {
   const components = {
     body: {
       row: editTableRow,
-      cell: editTableCell
     }
   };
 
@@ -133,20 +108,34 @@ const OverviewRepresentativeComponent = () => {
       });
   };
 
-  return (
-    <Fragment>
-      <Table
-        rowKey="id"
-        columns={newColumns}
-        bordered
-        dataSource={dataRender}
-        components={components}
-        pagination={false}
-        scroll={{ y: window.screen.height - 700 }}
-      />
-      <ButtonAddRepresentative onClose={refetchTheData} />
-    </Fragment>
-  );
+  if (loading) {
+    return <LoadingSpin />
+  } else if (!loading && data && data.representative && data.representative.data) {
+    const dataSource: Array<Representative> = data.representative.data
+ 
+    return (
+      <Fragment>
+        <Table
+          rowKey="id"
+          columns={columns}
+          bordered
+          dataSource={dataSource}
+          components={components}
+          pagination={false}
+          scroll={{ y: window.screen.height - 700 }}
+        />
+        <ButtonAddRepresentative onClose={refetchTheData} />
+      </Fragment>
+    );
+  } else {
+    return <Result
+      status="error"
+      subTitle={`Please check the url or make sure the id "${id}" is correct`}
+      title="Can't get the representatives">
+    </Result>
+  }
+
+
 };
 
 export default OverviewRepresentativeComponent;

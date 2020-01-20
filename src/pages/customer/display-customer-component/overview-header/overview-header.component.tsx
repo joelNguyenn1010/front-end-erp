@@ -4,6 +4,7 @@ import { useParams, Redirect } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_REPRESENTATIVE_QUERY, GET_SUPPLIER_QUERY, FIND_SUPPLIER_WITH_ID } from "../../../../graphql/query";
 import { Suppliers } from "../../../../store/contract/Suppliers";
+import LoadingSpin from "../../../../components/loadingSpin";
 
 const OverviewCustomerComponent = () => {
 
@@ -26,7 +27,7 @@ const OverviewCustomerComponent = () => {
       </Descriptions>
     );
   } else if (loading) {
-    return <div style={{ width: "100%", justifyContent: "center", display: "flex" }}><Spin /></div>
+    return <LoadingSpin />
   }
   else {
     return <Result

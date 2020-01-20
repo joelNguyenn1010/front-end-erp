@@ -35,5 +35,10 @@ export interface Representative {
     salutation: Salutation,
     fullName: string,
     position: string,
-    phoneNumber: number
+    phoneNumber: number,
+    representativeemails?: Array<Email>
+}
+
+export interface Email {
+    email: string
 }
