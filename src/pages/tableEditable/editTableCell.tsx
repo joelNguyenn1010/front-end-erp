@@ -58,7 +58,7 @@ const EditTableCell = (props: any) => {
   const { editable, children} = props;
 
   return (
-      <td >
+      <td style={{cursor: "pointer"}}>
         {editable ? (
           <EditTableContext.Consumer>{renderCell}</EditTableContext.Consumer>
         ) : (

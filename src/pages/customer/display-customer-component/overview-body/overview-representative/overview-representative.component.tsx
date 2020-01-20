@@ -10,29 +10,27 @@ import client from "../../../../../graphql";
 import { useParams } from "react-router-dom";
 
 const OverviewRepresentativeComponent = () => {
-  let {id} = useParams();
+  let { id } = useParams();
 
-  const [supplierId, setSupplierId] = React.useState<any>({
-    limit: 10,
-    page: 1,
+  const limit = 1000
+  const page = 1
+  // const [supplierId, setSupplierId] = React.useState<any>({
+  //   limit,
+  //   page,
+  //   supplierId: id
+  // });
+  const variables = {
+    limit,
+    page,
     supplierId: id
-  });
+  }
 
   const { data, refetch } = useQuery(GET_REPRESENTATIVE_QUERY, {
-    variables: {
-      limit: supplierId.limit,
-      page: supplierId.page,
-      supplierId: supplierId.supplierId
-    },
+    variables,
   });
 
- const refetchTheData = () => {
-   console.log("co khong")
-    refetch({
-      limit: supplierId.limit,
-      page: supplierId.page,
-      supplierId: supplierId.supplierId
-    });
+  const refetchTheData = () => {
+    refetch(variables);
   };
 
   const dataRender = data
@@ -76,8 +74,8 @@ const OverviewRepresentativeComponent = () => {
       title: "Email",
       key: "email",
       dataIndex: "representativeemails",
-      editable: true,
       render: (text: any, record: any) => {
+        console.log(text)
         return text.map((data: any) => <p>{data.email}</p>);
       }
     },
@@ -111,18 +109,8 @@ const OverviewRepresentativeComponent = () => {
     };
   });
 
-  const itemRender = (current: any, type: any, originalElement: any) => {
-    if (type === "prev") {
-      return <a>Prev</a>;
-    } else if (type === "next") {
-      return <a>Next</a>;
-    }
-    return originalElement;
-  };
 
-  const onShowSizeChange = (current: number, size: number) => {
-    setSupplierId({limit: size, page: current, supplierId: supplierId.supplierId})
-  };
+
 
   const components = {
     body: {
@@ -131,18 +119,18 @@ const OverviewRepresentativeComponent = () => {
     }
   };
 
-  const handleSave = () => {}
+  const handleSave = () => { }
 
   const handleDelete = (key: any) => {
     client
-    .mutate({ mutation: DELETE_REPRESENTATIVE, variables: { id: parseInt(key) } })
-    .then(res => {
-      message.success("Item was deleted");
-      refetchTheData();
-    })
-    .catch(err => {
-      message.error("Cant delete item, please try again ");
-    });
+      .mutate({ mutation: DELETE_REPRESENTATIVE, variables: { id: parseInt(key) } })
+      .then(res => {
+        message.success("Item was deleted");
+        refetchTheData();
+      })
+      .catch(err => {
+        message.error("Cant delete item, please try again ");
+      });
   };
 
   return (
@@ -153,32 +141,10 @@ const OverviewRepresentativeComponent = () => {
         bordered
         dataSource={dataRender}
         components={components}
-        pagination={{
-          itemRender: itemRender,
-          onShowSizeChange: (current: number, size: number) => {
-            onShowSizeChange(current, size);
-          },
-          showSizeChanger: true,
-          showQuickJumper: true,
-          current: supplierId.page,
-          total: dataTotal,
-          onChange: (page: number) => {
-            setSupplierId({
-              limit: 10,
-              page,
-              supplierId: supplierId.supplierId
-            });
-          }
-        }}
-        scroll={{ y: window.screen.height - 500 }}
+        pagination={false}
+        scroll={{ y: window.screen.height - 700 }}
       />
       <ButtonAddRepresentative onClose={refetchTheData} />
-      <Button 
-          type="primary" 
-          shape="circle"
-          size="large"
-          onClick={() => refetchTheData()}
-          style={{position: 'absolute', bottom: 35, left:10}}><Icon type="reload" /></Button>
     </Fragment>
   );
 };
