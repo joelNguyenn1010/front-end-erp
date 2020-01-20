@@ -7,12 +7,15 @@ import { DELETE_REPRESENTATIVE } from "../../../../../graphql/mutation";
 import editTableRow from "../../../../tableEditable/editTableRow";
 import editTableCell from "../../../../tableEditable/editTableCell";
 import client from "../../../../../graphql";
+import { useParams } from "react-router-dom";
 
 const OverviewRepresentativeComponent = () => {
+  let {id} = useParams();
+
   const [supplierId, setSupplierId] = React.useState<any>({
     limit: 10,
     page: 1,
-    supplierId: 1
+    supplierId: id
   });
 
   const { data, refetch } = useQuery(GET_REPRESENTATIVE_QUERY, {

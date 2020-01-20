@@ -66,9 +66,6 @@ const DisplayItemContainer: React.FC = () => {
         return <EditCellWhlocation record={record} text={text} />
       }
     },
-
-
-
     {
       title: "Condition",
       dataIndex: "conditions.name",

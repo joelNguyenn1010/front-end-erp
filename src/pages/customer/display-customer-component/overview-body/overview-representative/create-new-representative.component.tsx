@@ -3,6 +3,7 @@ import { Modal } from 'antd'
 import TableRepresentative from '../../../add/addCustomer/tableRepresentative'
 import { useDispatch } from 'react-redux'
 import { submitRepresentativeAction } from '../../../../../store/action/customerAction/createCustomerAction'
+import { useParams } from 'react-router-dom'
 
 interface CreateNewRepresentativeProps {
     setOpen: (value: boolean) => void,
@@ -11,6 +12,8 @@ interface CreateNewRepresentativeProps {
 }
 
 const CreateNewRepresentative:React.FC<CreateNewRepresentativeProps> = (props: any) => {
+
+    let {id} = useParams();
 
     const dispatch = useDispatch();
 
@@ -22,7 +25,7 @@ const CreateNewRepresentative:React.FC<CreateNewRepresentativeProps> = (props: a
     const onOk = () => {
         props.setOpen(false)
         
-        dispatch(submitRepresentativeAction())
+        dispatch(submitRepresentativeAction(id))
         if(props.onClose) {
             props.onClose();
         }

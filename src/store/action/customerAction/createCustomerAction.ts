@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { ADD_CUS_REPRESENTATIVE, ADD_CUS_REPRESENTATIVE_EMAIL } from './../../../graphql/mutation/index';
+import { ADD_CUS_REPRESENTATIVE, ADD_CUS_REPRESENTATIVE_EMAIL, ADD_SUPPLIER_ADDRESS } from './../../../graphql/mutation/index';
 import { AppState } from "../../../store"
 import client from "../../../graphql"
 
@@ -80,7 +80,7 @@ export const deleteData = (index: number) => {
 }
 
 //submit data to redux
-export const submitRepresentativeAction = () => {
+export const submitRepresentativeAction = (props: any) => {
     return (dispatch: any, getState: () => AppState) => {
         const input = getState().CustomerReducer.input
         // console.log(input)
@@ -90,7 +90,7 @@ export const submitRepresentativeAction = () => {
             position: input.position,
             fullName: input.fullName,
             phoneNumber: input.phoneNumber,
-            supplierId: input.supplierId,
+            supplierId: props,
             emails: input.emails,
             
         }
@@ -101,6 +101,29 @@ export const submitRepresentativeAction = () => {
         })
         .catch(err=>{
             message.error("Cant create new representative, please try again")
+        })
+    }
+}
+
+export const submitAddressAction = (props: any) => {
+    return (dispatch: any, getState : () => AppState) => {
+        
+        const input = getState().CustomerReducer.input
+        const newAddress = {
+            supplierId: props,
+            country: input.country,
+            postcode: input.postcode,
+            city: input.city,
+            state: input.state,
+            street: input.streetName,
+            type: input.type
+        }
+        client.mutate({mutation: ADD_SUPPLIER_ADDRESS, variables: {...newAddress}})
+        .then(res => {
+            message.success("New address created")
+        })
+        .catch(err => {
+            message.error("Cant create new address, please try again")
         })
     }
 }

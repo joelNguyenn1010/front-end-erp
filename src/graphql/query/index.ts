@@ -186,3 +186,19 @@ export const GET_REPRESENTATIVE_QUERY = gql`
     }
   }
 `
+
+export const GET_ADDRESS_QUERY = gql`
+  query($supplierId: Int!, $limit: Int!, $page: Int!){
+    supplierAddresses(supplierId: $supplierId, limit: $limit, page: $page){
+      data{
+        id
+        supplierId
+        country
+        postcode
+        city
+        state
+        type
+      }
+    }
+  }
+`

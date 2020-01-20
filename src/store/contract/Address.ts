@@ -5,6 +5,5 @@ export interface CreateAddress {
     postcodeId?: number,
     city?: string,
     state?: string,
-    addressNumber?: string,
     addressName?: string,
 } 
