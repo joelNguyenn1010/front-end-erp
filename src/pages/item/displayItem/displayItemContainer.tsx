@@ -97,7 +97,7 @@ const DisplayItemContainer: React.FC = () => {
     {
       title: "Note",
       dataIndex: "note",
-      ket: "note",
+      key: "note",
       render: (text: any, record: any) => {
         return <EditCellNote record={record} text={text} />
       }

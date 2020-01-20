@@ -262,12 +262,6 @@ export const addItem = (sn: string) => {
         const oldSns = getState().createItemReducer.items.concat()
 
 
-        // get the array
-
-//         var myStr = 'this,is,a,test';
-// var newStr = myStr.replace(/,/g, '-');
-
-
         const replaced_comma_sn = sn.replace(/,/g, " ")
 
         const arr_sn = replaced_comma_sn.split(' ');

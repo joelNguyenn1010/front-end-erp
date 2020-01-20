@@ -176,7 +176,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
                         setOpen={setOpen}
                         onSuccessCreateOrClose={(response: any) => {
                             if (response.name && response.name.length > 0) {
-                                console.log('co vao day nua ko')
+                                // console.log('co vao day nua ko')
                                 // props.forceUpdate()
                                 dispatch(changeItemValue(props.index, 'model', response.name))
                                 dispatch(changeItemValue(props.index, 'modelId', response.id))

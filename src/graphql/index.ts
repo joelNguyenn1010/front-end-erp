@@ -1,3 +1,4 @@
+import { SALUTATION_ENUM } from './enum/index';
 import ApolloClient from 'apollo-boost';
 
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -5,8 +6,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 const production = 'http://api.product.ipsupply.net/graphql'
 const local = 'http://localhost:5000/graphql'
 const client = new ApolloClient({
-  uri: production,
-  cache: new InMemoryCache()
+  uri: 'http://api.product.ipsupply.net/graphql',
+  cache: new InMemoryCache(),
+  typeDefs: SALUTATION_ENUM
 });
 
 export default client

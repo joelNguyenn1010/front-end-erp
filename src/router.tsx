@@ -8,8 +8,7 @@ import AddItem from "./pages/item/addItemWithSN";
 import CreateItemProvider from "./context/provider/createItemContext";
 import AddItemWithoutSN from './pages/item/addItemWithoutSN'
 import AddCustomer from "./pages/customer/add";
-import TableData from "./pages/tableEditable/TableData"
-import OverviewCustomerComponent from "./components/display-customer-component/overview-customer.component";
+import DisplayCustomer from "./pages/customer/display-customer-component";
 
 const Routing: React.FC = props => {
   return (
@@ -44,7 +43,7 @@ const Routing: React.FC = props => {
       </Route>
 
       <Route path="/display/customer">
-        <OverviewCustomerComponent />
+        <DisplayCustomer />
       </Route>
     </Switch>
   );

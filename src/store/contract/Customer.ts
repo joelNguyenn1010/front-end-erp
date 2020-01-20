@@ -5,13 +5,12 @@ import {Ecommercial} from './Ecommercial'
 
 export interface Customer {
     id: string,
-    organisation: string,
+    supplier: string,
     contactType: string,
     priceLevel: string,
     ecommercialId?: [Ecommercial],
     salutation?: string,
     firstName: string,
-    lastName: string,
     position: string,
     phoneNumber: string,
     optionPaypal?: string,
@@ -36,13 +35,12 @@ export interface Customer {
 
 export interface CreateCustomer {
     input: {
-        organisation?: string,
-        organisationId: number,
+        supplier?: string,
+        supplierId: number,
         contactType: string,
         priceLevel: string,
         salutation?: string,
-        firstName: string,
-        lastName?: string,
+        fullName?: string,
         position?: string,
         phoneNumber?: string,
         optionPaypal?: string,
@@ -52,9 +50,9 @@ export interface CreateCustomer {
         postcodeId: number,
         city?: string,
         state?: string,
-        emails: Array<Email>,
         streetNumber?: string,
         streetName?: string,
+        emails: Array<Email>,
         noteForShipping?: string,
         noteForReceiving?: string,
         shipping?: Array<ShippingAccount>,

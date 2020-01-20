@@ -1,10 +1,11 @@
 import React from 'react'
 import { Row, Col, Table } from 'antd';
-import TableContactDetail from '../../../components/addCustomer/tableRepresentative';
-import TableRepresentative from '../../../components/addCustomer/tableContactDetail'
-import TableAddressDetail from '../../../components/addCustomer/tableAddressDetail'
-import TablePaymentDetail from '../../../components/addCustomer/tablePaymentDetail';
-import TableWarrantyPolicy from '../../../components/addCustomer/tableWarrantyPolicy'
+import TableContactDetail from './addCustomer/tableContactDetail';
+import TableRepresentative from './addCustomer/tableRepresentative'
+import TableAddressDetail from './addCustomer/tableAddressDetail'
+import TablePaymentDetail from './addCustomer/tablePaymentDetail';
+import TableWarrantyPolicy from './addCustomer/tableWarrantyPolicy'
+import SubmitButtonComponent from './addCustomer/submitButton/submit-button.component';
 
 
 const AddCustomer: React.FC = () => {
@@ -25,19 +26,9 @@ const AddCustomer: React.FC = () => {
                     </table>
 
                 </Col>
-                <Col span={12}>
-                    <table style={{width:'100%'}}>
-                        <thead>
-                            Representative:
-                        </thead>
-                        <tbody>
-                            <TableRepresentative />
-                        </tbody>
-                    </table>
-                </Col>
             </Row>
 
-            <Row>
+            {/* <Row>
                 <Col span={12}>
                     <table style={{width:'100%'}}>
                         <thead>
@@ -60,6 +51,9 @@ const AddCustomer: React.FC = () => {
                     </table>
                 </Col>
             </Row>
+            <Row>
+                <SubmitButtonComponent />
+            </Row> */}
         </div>
         
     )

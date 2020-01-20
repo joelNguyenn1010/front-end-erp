@@ -1,3 +1,7 @@
+import { message } from 'antd';
+import { ADD_CUS_REPRESENTATIVE, ADD_CUS_REPRESENTATIVE_EMAIL } from './../../../graphql/mutation/index';
+import { AppState } from "../../../store"
+import client from "../../../graphql"
 
 
 //Change value 
@@ -76,9 +80,45 @@ export const deleteData = (index: number) => {
 }
 
 //submit data to redux
-export const submitCustomerAction = () => {
-    return {
-        
+export const submitRepresentativeAction = () => {
+    return (dispatch: any, getState: () => AppState) => {
+        const input = getState().CustomerReducer.input
+        // console.log(input)
+
+        const newRepresentative = {
+            salutation: input.salutation,
+            position: input.position,
+            fullName: input.fullName,
+            phoneNumber: input.phoneNumber,
+            supplierId: input.supplierId,
+            emails: input.emails,
+            
+        }
+
+        client.mutate({mutation: ADD_CUS_REPRESENTATIVE, variables: {...newRepresentative}})
+        .then(res=> {
+            message.success("New Representative created")
+        })
+        .catch(err=>{
+            message.error("Cant create new representative, please try again")
+        })
+    }
+}
+
+export const submitRepresentativeEmail = () => {
+    return (dispatch: any, getState: () => AppState) => {
+        const input = getState().CustomerReducer.input
+
+        const newRepresentativeEmail = {
+            email: input.emails,
+        }
+        client.mutate({mutation: ADD_CUS_REPRESENTATIVE_EMAIL, variables: {...newRepresentativeEmail}})
+        .then(res => {
+            message.success("New email created!")
+        })
+        .catch(err => {
+            message.error("Cant create email, please try again")
+        })
     }
 }
 
