@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import {Modal} from 'antd'
 import TableAddressDetail from '../../../add/addCustomer/tableAddressDetail'
 import { CreateAddress } from '../../../../../store/contract/Address'
+import { useDispatch } from 'react-redux'
+import { submitAddressAction } from '../../../../../store/action/customerAction/createCustomerAction'
+import { useParams } from 'react-router-dom'
 
 interface CreateNewAddressProps {
     setOpen: (value: boolean) => void,
@@ -10,6 +13,9 @@ interface CreateNewAddressProps {
 
 const CreateNewAddress:React.FC<CreateNewAddressProps> = (props: any) => {
 
+    let {id} = useParams();
+    console.log(id)
+    const dispatch = useDispatch()
 
     const onCancel = (e: any) => {
         props.setOpen(false)
@@ -18,6 +24,7 @@ const CreateNewAddress:React.FC<CreateNewAddressProps> = (props: any) => {
 
     const onOk = () => {
         props.setOpen(false)
+        dispatch(submitAddressAction(id))
     }
 
     return (

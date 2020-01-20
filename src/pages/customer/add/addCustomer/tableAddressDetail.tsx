@@ -4,10 +4,6 @@ import InputPostcodeComponent from "./addAddress/inputPostcodeComponent";
 import InputCityComponent from "./addAddress/inputCityComponent";
 import InputStateComponent from "./addAddress/inputStateComponent";
 import InputStreetnameComponent from "./addAddress/inputStreetnameComponent";
-import InputStreetnumberComponent from "./addAddress/inputStreetnumberComponent";
-import InputCourrierNameComponent from "./addShippingAccount/inputCourrierNameComponent";
-import AddNoteForShippingComponent from "./addNote/addNoteForShippingComponent";
-import AddNoteForReceivingComponent from "./addNote/addNoteForReceivingComponent";
 
 const TableAddressDetail = () => {
   return (
@@ -42,14 +38,7 @@ const TableAddressDetail = () => {
         </tr>
 
         <tr>
-          <td>Street Number:</td>
-          <td>
-            <InputStreetnumberComponent />
-          </td>
-        </tr>
-
-        <tr>
-          <td>Street Name:</td>
+          <td>Address:</td>
           <td>
             <InputStreetnameComponent />
           </td>

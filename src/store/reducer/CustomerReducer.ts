@@ -2,17 +2,17 @@
 import { ShippingAccount } from '../contract/ShippingAccount';
 import { Ecommercial } from '../contract/Ecommercial';
 import { Email } from '../contract/Email'
-import { CreateCustomer } from '../contract/Customer'
+import { CreateCustomer, ContactType, PricingLevel, Salutation, SupplierAddressTypeEnum } from '../contract/Customer'
 
 
 
 const init: CreateCustomer = {
     input: {
         supplier: '',
-        supplierId: 1,
-        contactType: 'individual',
-        priceLevel: '5',
-        salutation: 'mr',
+        supplierId: 2,
+        contactType: ContactType.Individual,
+        priceLevel: PricingLevel.Level5,
+        salutation: Salutation.Mr,
         fullName: '',
         position: '',
         phoneNumber: '',
@@ -21,10 +21,10 @@ const init: CreateCustomer = {
         countryId: 0,
         postcode: '',
         postcodeId: 0,
+        type: SupplierAddressTypeEnum.postal,
         city: '',
         state: '',
         emails: [],
-        streetNumber: '',
         streetName: '',
         noteForShipping: '',
         noteForReceiving: '',

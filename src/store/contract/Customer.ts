@@ -3,13 +3,40 @@ import { CreateAddress } from './Address'
 import {Email} from './Email'
 import {Ecommercial} from './Ecommercial'
 
+export enum ContactType {
+    Gov = "Gov",
+    Corp = "Corp",
+    Broker = "Broker",
+    Individual = "Individual"
+}
+
+export enum PricingLevel {
+    Level1= "1",
+    Level2 = "2",
+    Level3= "3",
+    Level4 = "4",
+    Level5 = "5"
+}
+
+export enum Salutation {
+    Mr='Mr',
+    Ms='Ms',
+    Mrs='Mrs',
+    Other='Other'
+}
+
+export enum SupplierAddressTypeEnum {
+    postal='postal',
+    shipping='shipping'
+}
+
 export interface Customer {
     id: string,
     supplier: string,
-    contactType: string,
-    priceLevel: string,
+    contactType: ContactType,
+    priceLevel: PricingLevel,
     ecommercialId?: [Ecommercial],
-    salutation?: string,
+    salutation?: Salutation,
     firstName: string,
     position: string,
     phoneNumber: string,
@@ -37,9 +64,9 @@ export interface CreateCustomer {
     input: {
         supplier?: string,
         supplierId: number,
-        contactType: string,
-        priceLevel: string,
-        salutation?: string,
+        contactType: ContactType,
+        priceLevel: PricingLevel,
+        salutation?: Salutation,
         fullName?: string,
         position?: string,
         phoneNumber?: string,
@@ -48,9 +75,9 @@ export interface CreateCustomer {
         countryId: number,
         postcode: string,
         postcodeId: number,
+        type: SupplierAddressTypeEnum,
         city?: string,
         state?: string,
-        streetNumber?: string,
         streetName?: string,
         emails: Array<Email>,
         noteForShipping?: string,
