@@ -8,6 +8,7 @@ import OverviewEcommercialIdComponent from "./overview-ecommercialId/overview-ec
 import { OverviewWarrantyComponent } from "./overview-warrantyPolicy/overview-warranty.component";
 import OverviewNoteComponent from "./overview-note/overview-note.component";
 import OverviewEmailComponent from "./overview-email/overview-email.component"
+import OverviewShippingComponent from "./overview-shipping/overview-shipping.component"
 
 const { TabPane } = Tabs;
 
@@ -35,11 +36,14 @@ const OverviewBodyComponent = () => {
       <TabPane tab={<span><Icon type="read" /> Warranty policy</span>} key="5">
         <OverviewWarrantyComponent />
       </TabPane>
-      <TabPane tab={<span><Icon type="form" /> Note</span>} key="6">
-        <OverviewNoteComponent />
-      </TabPane>
-      <TabPane tab={<span><Icon type="mail" /> Email</span>} key="7">
+      <TabPane tab={<span><Icon type="mail" /> Email</span>} key="6">
         <OverviewEmailComponent />
+      </TabPane>
+      <TabPane tab={<span><Icon type="item" /> Shipping</span>} key="7">
+        <OverviewShippingComponent />
+      </TabPane>
+      <TabPane tab={<span><Icon type="form" /> Note</span>} key="8">
+        <OverviewNoteComponent />
       </TabPane>
     </Tabs>
   );

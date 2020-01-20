@@ -16,6 +16,10 @@ const options = [
         value: 'Mrs',
         label: 'Mrs'
     },
+    {
+        value: 'Other',
+        label: 'Other'
+    },
 ]
 
 export const AddSalutation = () => {

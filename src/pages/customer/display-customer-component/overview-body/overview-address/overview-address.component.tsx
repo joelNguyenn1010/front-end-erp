@@ -29,13 +29,10 @@ const OverviewAddressComponent = () => {
       key: "country"
     },
     {
-      title: "Courier",
-      key: "courier"
+      title: "Type",
+      key: "type"
     },
-    {
-      title: "Shipping Account",
-      key: "shippingAccount"
-    },
+    
     {
       title:"Operation",
 

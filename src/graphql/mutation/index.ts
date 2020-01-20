@@ -139,6 +139,14 @@ mutation($email: String){
 }
 `
 
+export const ADD_SUPPLIER_ADDRESS = gql`
+mutation($supplierId: Int!, $country: String, $postcode: String, $city: String, $state: String, $street: String, $type: SupplierAddressTypeEnum){
+  createSupplierAddress(supplierId: $supplierId, country: $country, postcode: $postcode, city: $city, state: $state, street: $street, type: $type){
+    id
+  }
+}
+`
+
 
 
 
