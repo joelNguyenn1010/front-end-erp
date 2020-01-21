@@ -5,8 +5,10 @@ import InputCityComponent from "./addAddress/inputCityComponent";
 import InputStateComponent from "./addAddress/inputStateComponent";
 import InputStreetnameComponent from "./addAddress/inputStreetnameComponent";
 
-const TableAddressDetail = () => {
+const  TableAddressDetail: React.FC = props => {
+
   return (
+
     <div style={{ textAlign: "center" }}>
       <table style={{ marginLeft: "auto", marginRight: "auto" }}>
         <tr>
@@ -48,4 +50,4 @@ const TableAddressDetail = () => {
   );
 };
 
-export default TableAddressDetail;
+export default (TableAddressDetail);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {Modal} from 'antd'
+import { Modal, Form } from 'antd'
 import TableAddressDetail from '../../../add/addCustomer/tableAddressDetail'
 import { CreateAddress } from '../../../../../store/contract/Address'
 import { useDispatch } from 'react-redux'
@@ -9,31 +9,32 @@ import { useParams } from 'react-router-dom'
 interface CreateNewAddressProps {
     setOpen: (value: boolean) => void,
     open: boolean,
-    onClose?: () => void
+    onClose?: () => void,
 }
 
-const CreateNewAddress:React.FC<CreateNewAddressProps> = (props: any) => {
+const CreateNewAddress: React.FC<CreateNewAddressProps> = (props: any) => {
 
-    let {id} = useParams();
+    let { id } = useParams();
     console.log(id)
     const dispatch = useDispatch()
 
     const onCancel = (e: any) => {
         props.setOpen(false)
-        
+
     }
 
     const onOk = () => {
         props.setOpen(false)
         dispatch(submitAddressAction(id))
-        if(props.onClose) {
+        if (props.onClose) {
             props.onClose();
         }
     }
 
+
     return (
         <Modal visible={props.open} onCancel={onCancel} onOk={onOk} >
-            <TableAddressDetail />
+                <TableAddressDetail />
         </Modal>
     )
 }

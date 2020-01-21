@@ -122,7 +122,7 @@ mutation($name: String!) {
 
 
 export const ADD_CUS_REPRESENTATIVE = gql`
-mutation($supplierId: Int!, $salutation: SalutationEnum, $fullName: String!, $position: String, $phoneNumber: Int, $emails: [EmailInput]  ){
+mutation($supplierId: Int!, $salutation: SalutationEnum, $fullName: String!, $position: String, $phoneNumber: String, $emails: [EmailInput]){
   createRepresentative(supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails){
     id
     supplierId
@@ -259,4 +259,16 @@ export const DELETE_REPRESENTATIVE = gql`
 
 
 
+
+export const UPDATE_REPRESENTATIVE = gql`
+  mutation($id: Int!, $salutation: SalutationEnum, $fullName: String, $position: String, $phoneNumber: String) {
+    updateRepresentative(id: $id, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber) {
+      id
+      fullName
+      position
+      salutation
+      phoneNumber
+    }
+  }
+`
 

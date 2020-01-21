@@ -3,24 +3,21 @@ import { Table, Popconfirm, message, Button, Icon, Result } from "antd";
 import ButtonAddRepresentative from "./button-add-representative";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_REPRESENTATIVE_QUERY } from "../../../../../graphql/query";
-import { DELETE_REPRESENTATIVE } from "../../../../../graphql/mutation";
+import { DELETE_REPRESENTATIVE, UPDATE_REPRESENTATIVE } from "../../../../../graphql/mutation";
 import editTableRow from "../../../../tableEditable/editTableRow";
-// import editTableCell from "../../../../tableEditable/editTableCell";
+import editTableCell from "../../../../tableEditable/editTableCell";
 import client from "../../../../../graphql";
 import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import { Representative } from "../../../../../store/contract/Suppliers";
+import SalutationEditable from "./salutation-editable";
 
 const OverviewRepresentativeComponent = () => {
   let { id } = useParams();
 
   const limit = 1000
   const page = 1
-  // const [supplierId, setSupplierId] = React.useState<any>({
-  //   limit,
-  //   page,
-  //   supplierId: id
-  // });
+
   const variables = {
     limit,
     page,
@@ -41,7 +38,7 @@ const OverviewRepresentativeComponent = () => {
       title: "Salutation",
       key: "salutation",
       dataIndex: "salutation",
-      editable: true,
+      render: (text: any, record: any) => <SalutationEditable handleSave={handleSave} text={text} record={record} />
     },
     {
       title: "Full Name",
@@ -59,30 +56,37 @@ const OverviewRepresentativeComponent = () => {
       title: "Phone Number",
       key: "phoneNumber",
       dataIndex: "phoneNumber",
-      editable: true,
+      editable: true
+      // render: (text: any, record: any) => <PhoneNumberEditable handleSave={handleSave} text={text} record={record} />
+
     },
+
     {
       title: "Email",
       key: "email",
       dataIndex: "representativeemails",
       render: (text: any, record: any) => {
-        return text.map((data: any) => <p>{data.email}</p>);
+        return text.map((data: any, index: number) => <p key={index}>{data.email}</p>);
       }
     },
-    // {
-    //   title: "Operation",
-    //   render: (text: any, record: any) =>
-    //     dataRender.length > 0 ? (
-    //       <Popconfirm
-    //         title="Sure to delete?"
-    //         onConfirm={() => handleDelete(record.id)}
-    //       >
-    //         <a>Delete</a>
-    //       </Popconfirm>
-    //     ) : null
-    // }
+
   ];
 
+  const newColumns = columns.map((col: any) => {
+    if (!col.editable) {
+      return col;
+    }
+    return {
+      ...col,
+      onCell: (record: any) => ({
+        record,
+        editable: col.editable,
+        dataIndex: col.dataIndex,
+        title: col.title,
+        handleSave: handleSave
+      })
+    };
+  });
 
 
 
@@ -90,10 +94,21 @@ const OverviewRepresentativeComponent = () => {
   const components = {
     body: {
       row: editTableRow,
+      cell: editTableCell
     }
   };
 
-  const handleSave = () => { }
+
+
+  const [updateRepresentative] = useMutation(UPDATE_REPRESENTATIVE, {
+    onCompleted: () => message.success("Data saved"),
+    onError: () => message.error("Error when try to save data")
+  });
+
+  const handleSave = (data: Representative) => {
+
+    updateRepresentative({ variables: data })
+  }
 
   const handleDelete = (key: any) => {
     client
@@ -107,23 +122,27 @@ const OverviewRepresentativeComponent = () => {
       });
   };
 
+
   if (loading) {
     return <LoadingSpin />
   } else if (!loading && data && data.representative && data.representative.data) {
     const dataSource: Array<Representative> = data.representative.data
- 
+
+
+
+
     return (
       <Fragment>
         <Table
           rowKey="id"
-          columns={columns}
+          columns={newColumns}
           bordered
           dataSource={dataSource}
           components={components}
           pagination={false}
-          scroll={{ y: window.screen.height - 700 }}
+          scroll={{ y: window.screen.height - 490 }}
         />
-        <ButtonAddRepresentative onClose={refetchTheData} />
+        <ButtonAddRepresentative refetchData={refetchTheData} />
       </Fragment>
     );
   } else {

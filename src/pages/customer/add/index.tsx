@@ -1,12 +1,6 @@
 import React from 'react'
 import { Row, Col, Table } from 'antd';
 import TableContactDetail from './addCustomer/tableContactDetail';
-import TableRepresentative from './addCustomer/tableRepresentative'
-import TableAddressDetail from './addCustomer/tableAddressDetail'
-import TablePaymentDetail from './addCustomer/tablePaymentDetail';
-import TableWarrantyPolicy from './addCustomer/tableWarrantyPolicy'
-import SubmitButtonComponent from './addCustomer/submitButton/submit-button.component';
-
 
 const AddCustomer: React.FC = () => {
 

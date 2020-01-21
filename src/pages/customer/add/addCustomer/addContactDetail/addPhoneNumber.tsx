@@ -1,27 +1,19 @@
 import React from 'react'
-import { Input } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import {  Form } from 'antd'
+import { useFormContext } from 'react-hook-form'
 
 
 const AddPhoneNumber = () => {
-
-    const name = useSelector((state:AppState) => state.CustomerReducer.input.phoneNumber)
-
-
-    const dispatch = useDispatch()
-
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-        dispatch(changeCustomerValue('phoneNumber', newVal))
-
-    }
-
+    const { register, errors } = useFormContext()
     return (
-        <div>
-            <Input value={name} placeholder='Phone number' allowClear  onChange={onChange} />
-        </div>
+        <Form.Item
+            help={errors.phoneNumber && "Phone number is required"}
+            label={"Phone Number"}
+            validateStatus={errors.phoneNumber ? "error" : ""}
+        >
+            <input name="phoneNumber" className="ant-input" ref={register} placeholder='Phone number' type="number" />
+
+        </Form.Item>
     )
 }
 
