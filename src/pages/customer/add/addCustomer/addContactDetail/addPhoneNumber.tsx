@@ -1,8 +1,9 @@
 import React from 'react'
-import { Input } from 'antd'
+import { Input, InputNumber } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../../../store'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import NumericInput from '../../../../../components/conponentInputNumberOnly/inputNumberOnly'
 
 
 const AddPhoneNumber = () => {
@@ -12,15 +13,14 @@ const AddPhoneNumber = () => {
 
     const dispatch = useDispatch()
 
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-        dispatch(changeCustomerValue('phoneNumber', newVal))
+    const onChange = (val: number | undefined) => {
+        dispatch(changeCustomerValue('phoneNumber', val))
 
     }
 
     return (
         <div>
-            <Input value={name} placeholder='Phone number' allowClear  onChange={onChange} />
+            <InputNumber maxLength={12} placeholder="Phone number" onChange={onChange} />
         </div>
     )
 }

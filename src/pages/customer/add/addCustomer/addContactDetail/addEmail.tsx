@@ -65,6 +65,7 @@ const AddEmail = (props: any) => {
   const { getFieldDecorator, getFieldValue } = props.form;
 
   getFieldDecorator("keys", { initialValue: [''] });
+  
   const keys = getFieldValue("keys");
   const formItems = keys.map((k: any) => (
     

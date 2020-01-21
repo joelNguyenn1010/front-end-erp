@@ -39,11 +39,6 @@ const OverviewRepresentativeComponent = () => {
       : []
     : [];
 
-  const dataTotal = data
-    ? data.representative
-      ? data.representative.total
-      : []
-    : [];
 
   const columns = [
     {

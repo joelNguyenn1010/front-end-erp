@@ -9,24 +9,12 @@ const OverviewPaymentDetailComponent = () => {
       key: "currency"
     },
     {
-      title: "Ips Payment term",
-      key: "ipsPaymentTerm"
-    },
-    {
-      title: "Customer's Payment term",
-      key: "cusPaymentTerm"
-    },
-    {
       title: "Bank Name",
       key: "bankName"
     },
     {
       title: "Bank Branch",
       key: "bankBranch"
-    },
-    {
-      title: "GST/VAT number",
-      key: "gst"
     },
     {
       title: "Account Name",

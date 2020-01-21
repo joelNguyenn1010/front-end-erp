@@ -4,25 +4,24 @@ import InputPostcodeComponent from "./addAddress/inputPostcodeComponent";
 import InputCityComponent from "./addAddress/inputCityComponent";
 import InputStateComponent from "./addAddress/inputStateComponent";
 import InputStreetnameComponent from "./addAddress/inputStreetnameComponent";
+import InputTypeComponent from "./addAddress/inputTypeComponent";
 
 const TableAddressDetail = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <table style={{ marginLeft: "auto", marginRight: "auto" }}>
         <tr>
-          <td>Country:</td>
+          <td>Type:</td>
           <td>
-            <InputCountryComponent />
+            <InputTypeComponent />
           </td>
         </tr>
-
         <tr>
-          <td>Postcode:</td>
+          <td>Address:</td>
           <td>
-            <InputPostcodeComponent />
+            <InputStreetnameComponent />
           </td>
         </tr>
-
         <tr>
           <td>City:</td>
           <td>
@@ -38,9 +37,16 @@ const TableAddressDetail = () => {
         </tr>
 
         <tr>
-          <td>Address:</td>
+          <td>Postcode:</td>
           <td>
-            <InputStreetnameComponent />
+            <InputPostcodeComponent />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Country:</td>
+          <td>
+            <InputCountryComponent />
           </td>
         </tr>
       </table>

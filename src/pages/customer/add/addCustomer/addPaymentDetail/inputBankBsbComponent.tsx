@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../../../store'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
 import NumericInput from '../../../../../components/conponentInputNumberOnly/inputNumberOnly'
+import { InputNumber } from 'antd'
 
 const InputBankBsbComponent = () => {
 
@@ -10,13 +11,13 @@ const InputBankBsbComponent = () => {
 
     const dispatch = useDispatch()
 
-    const onChange = (val: number) => {
+    const onChange = (val: number | undefined) => {
         dispatch(changeCustomerValue('bankBsb', val))
     }
 
     return (
         <div>
-            <NumericInput minLength={1} maxLength={6} value={name} onChange={onChange} allowClear placeholder='BSB'/>
+            <InputNumber minLength={1} maxLength={6} onChange={onChange}  placeholder='BSB'/>
         </div>
     )
 }

@@ -20,20 +20,7 @@ const TablePaymentDetail = () => {
           <InputCurrencyComponent />
         </td>
       </tr>
-      <tr>
-        <td>Ips Payment term:</td>
-
-        <td>
-          <InputIpsPaymentTermComponent />
-        </td>
-      </tr>
-      <tr>
-        <td>Customer's Payment term:</td>
-
-        <td>
-          <InputCusPaymentTermComponent />
-        </td>
-      </tr>
+      
 
       <tr>
         <td>Bank Name:</td>
@@ -49,13 +36,7 @@ const TablePaymentDetail = () => {
           <InputBankBranchComponent />
         </td>
       </tr>
-      <tr>
-        <td>GST/VAT number:</td>
 
-        <td>
-          <InputGstNumberComponent />
-        </td>
-      </tr>
 
       <tr>
         <td>Account Name:</td>

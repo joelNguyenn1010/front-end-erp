@@ -15,7 +15,6 @@ interface CreateNewAddressProps {
 const CreateNewAddress:React.FC<CreateNewAddressProps> = (props: any) => {
 
     let {id} = useParams();
-    console.log(id)
     const dispatch = useDispatch()
 
     const onCancel = (e: any) => {

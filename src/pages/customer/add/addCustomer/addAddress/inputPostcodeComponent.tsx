@@ -1,45 +1,31 @@
-import React from 'react'
-import SearchCreation from '../../../../../components/searchCreation'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
-import { message } from 'antd'
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { AppState } from "../../../../../store";
+import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
+import { InputNumber } from "antd";
 
-
-let timeout: any = null
+let timeout: any = null;
 const InputPostcodeComponent = () => {
+  const name = useSelector(
+    (state: AppState) => state.CustomerReducer.input.postcode
+  );
 
-    const name = useSelector((state:AppState) => state.CustomerReducer.input.postcode)
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
+  const onChange = (val: number | undefined) => {
+    dispatch(changeCustomerValue("postcode", val));
+  };
 
-    // if(error){
-    //     message.error('We cant fetch data from database, please try again')
-    // }
+  return (
+    <div>
+      <InputNumber
+        style={{width: 200}}
+        maxLength={6}
+        onChange={onChange}
+        placeholder="Postcode"
+      />
+    </div>
+  );
+};
 
-    const onSelected = (val: string, option: any) => {
-        dispatch(changeCustomerValue('postcode', val))
-        dispatch(changeCustomerValue('postcodeId', parseInt(option.key)))
-    }
-
-    const onSearch = (val: string) => {
-        clearTimeout(timeout)
-        timeout= setTimeout(function() {
-            // refetch({name: val, limit:10, page:1})
-        },250)
-    }
-
-
-    return (
-        <div>
-            <SearchCreation 
-                onSelected={onSelected}
-                onSearch={onSearch}
-                input={name}
-                
-            />
-        </div>
-    )
-}
-
-export default InputPostcodeComponent
+export default InputPostcodeComponent;
