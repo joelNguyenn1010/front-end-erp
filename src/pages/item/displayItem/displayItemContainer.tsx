@@ -6,11 +6,11 @@ import EditTableRow from "../../tableEditable/editTableRow";
 import EditTableCell from "../../tableEditable/editTableCell";
 import client from "../../../graphql";
 import { DELETE_ITEM } from "../../../graphql/mutation";
-import EditCellCondition from "../../tableEditable/item/editCellCondition";
-import EditCellStockStatus from "../../tableEditable/item/editCellStockStatus";
-import EditCellSupplier from "../../tableEditable/item/editCellSupplier";
-import EditCellNote from "../../tableEditable/item/editCellNote";
-import EditCellWhlocation from "../../tableEditable/item/editCellWhlocation";
+import EditCellCondition from "../editItem/editCellCondition";
+import EditCellStockStatus from "../editItem/editCellStockStatus";
+import EditCellSupplier from "../editItem/editCellSupplier";
+import EditCellNote from "../editItem/editCellNote";
+import EditCellWhlocation from "../editItem/editCellWhlocation";
 
 const DisplayItemContainer: React.FC = () => {
   const [serialInput, setSerialInput] = React.useState<any>({

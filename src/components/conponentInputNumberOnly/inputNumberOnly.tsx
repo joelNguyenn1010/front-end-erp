@@ -58,7 +58,6 @@ const NumericInput =  (props: any) => {
         <Input
           {...props}
           onChange={onChange}
-          onBlur={onBlur}
           maxLength={props.maxLength}
           placeholder={props.placeholder}
           minLength={props.minLength}

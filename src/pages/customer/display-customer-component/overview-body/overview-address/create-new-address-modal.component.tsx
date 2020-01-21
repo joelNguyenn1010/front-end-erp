@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Modal, Form } from 'antd'
 import TableAddressDetail from '../../../add/addCustomer/tableAddressDetail'
-import { CreateAddress } from '../../../../../store/contract/Address'
 import { useDispatch } from 'react-redux'
 import { submitAddressAction } from '../../../../../store/action/customerAction/createCustomerAction'
 import { useParams } from 'react-router-dom'

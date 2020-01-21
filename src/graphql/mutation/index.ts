@@ -122,10 +122,14 @@ mutation($name: String!) {
 
 
 export const ADD_CUS_REPRESENTATIVE = gql`
-mutation($supplierId: Int!, $salutation: SalutationEnum, $fullName: String!, $position: String, $phoneNumber: String, $emails: [EmailInput]){
+mutation($supplierId: Int!, $salutation: SalutationEnum, $fullName: String!, $position: String, $phoneNumber: String, $emails: [EmailInput]  ){
   createRepresentative(supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails){
     id
     supplierId
+    salutation
+    fullName
+    position
+    phoneNumber
   }
 }
 `
@@ -144,6 +148,12 @@ mutation($supplierId: Int!, $country: String, $postcode: String, $city: String, 
   createSupplierAddress(supplierId: $supplierId, country: $country, postcode: $postcode, city: $city, state: $state, street: $street, type: $type){
     id
     supplierId
+    country
+    postcode
+    city
+    state
+    street
+    type
   }
 }
 `
@@ -239,6 +249,33 @@ export const UPDATE_ITEM_WHLOCATION = gql`
     }
   }
 `
+
+export const UPDATE_CUSTOMER_ADDRESS = gql`
+  mutation($id: Int!, $state: String, $street: String, $city: String, $postcode: String ){
+    updateAddress(id: $id, state: $state, street: $street, city: $city, postcode: $postcode){
+      id
+      supplierId
+      street
+      city
+      state
+      postcode
+    }
+  }
+`
+
+export const UPDATE_ADDRESS_COUNTRY = gql`
+  mutation($id: Int!, $country: String){
+    updateAddress(id: $id, country: $country){
+      id
+      supplierId
+      country
+    }
+  }
+`
+
+
+
+
 //DELETE MUTATATION
 export const DELETE_ITEM = gql`
   mutation($id: Int!){

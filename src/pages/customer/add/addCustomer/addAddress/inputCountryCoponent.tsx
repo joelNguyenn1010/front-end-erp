@@ -1,44 +1,27 @@
 import React from "react";
-import { Form } from "antd";
-import SearchCreation from "../../../../../components/searchCreation";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../../../store";
 import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
+import { Cascader } from "antd";
+import ListCountry from "../../../list country/listCountry";
 
-
-let timeout: any = null
+let timeout: any = null;
 
 const InputCountryComponent = (props: any) => {
+  const name = useSelector(
+    (state: AppState) => state.CustomerReducer.input.country
+  );
 
 
-    const name = useSelector((state:AppState) => state.CustomerReducer.input.country)
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    // if(error){
-    //     message.error('We cant fetch data from database, please try again')
-    // }
-
-    const onSearch = (val: string) => {
-        clearTimeout(timeout)
-        timeout = setTimeout(function(){
-            // refetch({name: val, limit: 10, page: 1})
-        }, 250)
-    }
-
-    const onSelected = (val: string, option: any) => {
-        dispatch(changeCustomerValue('country', val))
-        dispatch(changeCustomerValue('countryId', parseInt(option.key)))
-    }
+  const onChange = (val: string) => {
+    dispatch(changeCustomerValue("country", val));
+  };
 
   return (
     <div>
-      
-          <SearchCreation 
-            onSearch={onSearch}
-            onSelected={onSelected}
-            input={name}
-          />
+      <ListCountry style={{width: 200}} value={name} onChange={(val: any) => onChange(val)}/>
     </div>
   );
 };
