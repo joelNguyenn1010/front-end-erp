@@ -1,55 +1,34 @@
 import React from 'react'
-import { Row, Col, Table } from 'antd';
+import { Row, Col } from 'antd';
 import TableContactDetail from './addCustomer/tableContactDetail';
 
-const AddCustomer: React.FC = () => {
+interface AddCustomerProps {
+    onSuccess?: () => void
+}
+const AddCustomer: React.FC<AddCustomerProps> = props => {
 
-    // const emails: any = useSelector((state:AppState) => state.CreateCustomerEmailReducer.emails)
 
+    console.log('from add')
     return (
         <div>
             <Row>
                 <Col span={12}>
-                    <table style={{width:'100%'}}>
-                        <thead>
-                            Contact Detail
-                        </thead>
+                    <table style={{ width: '100%' }}>
                         <tbody>
-                            <TableContactDetail />
+                            <tr>
+                                <td>
+                                        <TableContactDetail onSuccess={props.onSuccess} />
+
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
                 </Col>
             </Row>
 
-            {/* <Row>
-                <Col span={12}>
-                    <table style={{width:'100%'}}>
-                        <thead>
-                            Address:
-                        </thead>
-                        <tbody>
-                            <TableAddressDetail />
-                        </tbody>
-                    </table>
-                </Col>
-                <Col span={12}>
-                    <table>
-                        <thead>
-                            Payment Detail:
-                        </thead>
-                        <tbody>
-                            <TablePaymentDetail />
-                            <TableWarrantyPolicy />
-                        </tbody>
-                    </table>
-                </Col>
-            </Row>
-            <Row>
-                <SubmitButtonComponent />
-            </Row> */}
         </div>
-        
+
     )
 }
 

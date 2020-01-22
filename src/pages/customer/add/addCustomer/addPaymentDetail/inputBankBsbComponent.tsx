@@ -1,24 +1,21 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
-import NumericInput from '../../../../../components/conponentInputNumberOnly/inputNumberOnly'
-import { InputNumber } from 'antd'
+import { Form } from 'antd'
+import { useFormContext } from 'react-hook-form'
 
 const InputBankBsbComponent = () => {
 
-    const name = useSelector((state:AppState) => state.CustomerReducer.input.bankBsb)
-
-    const dispatch = useDispatch()
-
-    const onChange = (val: number | undefined) => {
-        dispatch(changeCustomerValue('bankBsb', val))
-    }
+    const { register, errors } = useFormContext()
 
     return (
-        <div>
-            <InputNumber minLength={1} maxLength={6} onChange={onChange}  placeholder='BSB'/>
-        </div>
+
+        <Form.Item
+            label="BSB"
+            help={errors.BSB ? "BSB is required" : ""}
+            validateStatus={errors.BSB ? "error" : ''}
+        >
+            <input type="number" className="ant-input" name="BSB" ref={register({ required: true })} placeholder='062888' />
+        </Form.Item>
+
     )
 }
 export default InputBankBsbComponent

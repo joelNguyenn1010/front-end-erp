@@ -15,4 +15,20 @@ export const SALUTATION_ENUM = gql`
         postal,
         shipping
     }
+
+    enum ContactTypeSupplier {
+        Gov,
+        Corp,
+        Broker,
+        Individual,
+        Other
+    }
+
+    enum PricingLevel {
+        Level1,
+        Level2,
+        Level3,
+        Level4,
+        Level5
+    }
 `

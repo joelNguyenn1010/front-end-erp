@@ -3,22 +3,23 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../../../store'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
 import NumericInput from '../../../../../components/conponentInputNumberOnly/inputNumberOnly'
-import { InputNumber } from 'antd'
+import { InputNumber, Form } from 'antd'
+import { useFormContext } from 'react-hook-form'
 
 const InputBankAccountComponent = () => {
 
-    const name = useSelector((state:AppState) => state.CustomerReducer.input.bankAccount)
-
-    const dispatch = useDispatch()
-
-    const onChange = (val: number | undefined) => {
-        dispatch(changeCustomerValue('bankAccount', val))
-    }
+   const {register, errors} = useFormContext()
 
     return (
-        <div>
-            <InputNumber   onChange={onChange} maxLength={8} minLength={1}   placeholder='Account number'/>
-        </div>
+
+        <Form.Item
+            label="Account number"
+            help={errors.accountNumber ? "Account number is required" : ""}
+            validateStatus={errors.accountNumber ? "error" : ''}
+        >
+            <input className="ant-input" name="accountNumber" ref={register({ required: true })} placeholder='99999999' />
+        </Form.Item>
+
     )
 }
 export default InputBankAccountComponent

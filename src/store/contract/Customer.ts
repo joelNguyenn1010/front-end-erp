@@ -11,11 +11,11 @@ export enum ContactType {
 }
 
 export enum PricingLevel {
-    Level1= "1",
-    Level2 = "2",
-    Level3= "3",
-    Level4 = "4",
-    Level5 = "5"
+    Level1= "Level1",
+    Level2 = "Level2",
+    Level3= "Level3",
+    Level4 = "Level4",
+    Level5 = "Level5"
 }
 
 export enum Salutation {

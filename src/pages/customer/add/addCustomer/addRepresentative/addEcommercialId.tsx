@@ -6,7 +6,6 @@ import { Table, Button, Popconfirm } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../../../store";
 import { addEcommercial,  changeValueEcommercial, deleteData } from "../../../../../store/action/customerAction/createCustomerAction";
-import { Ecommercial } from "../../../../../store/contract/Ecommercial";
 
 interface DataSource {
   dataSource: Array<any>

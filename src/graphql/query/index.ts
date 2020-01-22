@@ -108,6 +108,8 @@ query($name: String!, $id: Int){
     data{
       id
       name
+      contactType
+      pricingLevel
     }
   }
 }

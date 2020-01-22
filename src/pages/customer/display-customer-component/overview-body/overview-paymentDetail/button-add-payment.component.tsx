@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import CreateNewPaymentModal from "./create-new-payment-modal.component";
 
-const ButtonAddPayment = () => {
+interface ButtonAddPaymentProps {
+  onSuccess?: () => void
+}
+
+const ButtonAddPayment: React.FC<ButtonAddPaymentProps> = props => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <div>
@@ -15,7 +19,7 @@ const ButtonAddPayment = () => {
           Add more
         </Button>
 
-        {open && <CreateNewPaymentModal setOpen={setOpen} open={open} />}
+        <CreateNewPaymentModal onSuccess={props.onSuccess} setOpen={setOpen} open={open} />
       </React.Fragment>
     </div>
   );

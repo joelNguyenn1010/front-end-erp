@@ -1,8 +1,10 @@
 import React from 'react'
-import { Cascader } from 'antd'
+import { Cascader, Form, Select } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../../../store'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import { useFormContext, Controller } from 'react-hook-form'
+import { PricingLevel } from '../../../../../store/contract/Customer'
 
 const options = [
     {
@@ -29,17 +31,29 @@ const options = [
 
 const AddPricingLevel = () => {
 
-    const name = useSelector((state: AppState) => state.CustomerReducer.input.priceLevel)
-    const dispatch = useDispatch();
+    const { control } = useFormContext()
 
-    const onChange = (e: string[]) => {
-        dispatch(changeCustomerValue('priceLevel', e[0]))
-    }
+    const keys = Object.keys(PricingLevel)
+
+    const pricingLevels = (
+        <Select
+        
+        defaultValue={PricingLevel.Level5}>
+            {keys.map((value: string, index: number) => <Select.Option key={index} value={value}>{value}</Select.Option>)}
+        </Select>
+    )
 
     return (
-        <div>
-            <Cascader defaultValue={[name]} onChange={onChange} options={options}/>
-        </div>
+        <Form.Item
+            label="Pricing Level"
+            style={{width: "100%"}}
+        >
+            <Controller
+                        style={{width: "100%"}}
+
+            control={control} name="pricingLevel" as={pricingLevels} defaultValue={PricingLevel.Level5} />
+
+        </Form.Item>
     )
 }
 

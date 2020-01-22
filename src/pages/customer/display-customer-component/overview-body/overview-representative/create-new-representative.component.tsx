@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react'
 import { Modal, Button, message } from 'antd'
-import AddRepresentativeForm from '../../../add/addCustomer/addRepresentative/add-representative-form'
+import AddRepresentativeForm from '../../../add/addCustomer/addContactDetail/add-representative-form'
 import { useParams } from 'react-router-dom'
 import { useForm, FormContext } from 'react-hook-form'
 import { Email } from '../../../../../store/contract/Email'
@@ -31,7 +31,7 @@ const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: 
         {
             onCompleted: () => {
                 message.success("New representative created")
-                methods.reset()
+                methods.reset({emails: [{name: ""}]})
                 if(props.refetchData) {
                     props.refetchData()
                 }
@@ -49,8 +49,8 @@ const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: 
     // BaseSyntheticEvent<object, any, any>
     const onSubmit = (data: any) => { 
         // supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails
-        // createCustomer({ variables: {...data, supplierId: id}})
-        console.log(data)
+        createCustomer({ variables: {...data, supplierId: id}})
+        // console.log(data)
      }
 
      const onCancel = (e: any) => {

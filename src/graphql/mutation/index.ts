@@ -40,6 +40,15 @@ mutation($name: String!) {
 }
 `
 
+
+export const CREATE_NEW_SUPPLIER_WITH_INFO = gql`
+  mutation($name: String!, $contactType: ContactTypeSupplier, $pricingLevel: PricingLevel) {
+    createNewSupplier(name: $name, contactType: $contactType, pricingLevel: $pricingLevel){
+      id
+    }
+  }
+`
+
 // export const ADD_MODEL_SHORTCUT = gql`
 //     mutation($object: Any!) {
 //       createNewModel()
@@ -309,3 +318,12 @@ export const UPDATE_REPRESENTATIVE = gql`
   }
 `
 
+
+
+export const CREATE_SUPPLIER_PAYMENT = gql`
+  mutation($currency: String!, $bankName: String!, $bankBranch: String!, $BSB: String!, $accountName: String!, $accountNumber: String!, $paypal: String) {
+    createSupplierPayment(currency: $currency, bankName: $bankName, bankBranch: $bankBranch, BSB: $BSB, accountName: $accountName, accountNumber: $accountNumber, paypal: $paypal) {
+      id
+    }
+  }
+`

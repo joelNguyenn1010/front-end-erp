@@ -42,16 +42,16 @@ const DisplayModelContainer: React.FC = () => {
       render: (text: any, record: any) => <EditableManufactor text={text} record={record}/>
     },
 
-    {
+    // {
       
-      title: "Note",
-      dataIndex: "note",
-      key: "note",
-      width: '19%',
+    //   title: "Note",
+    //   dataIndex: "note",
+    //   key: "note",
+    //   width: '19%',
 
-      // ellipsis: true,
-      render:  (text: any, record: any) => <EditableNote text={text} record={record}/>
-    },
+    //   // ellipsis: true,
+    //   render:  (text: any, record: any) => <EditableNote text={text} record={record}/>
+    // },
     {
       title: "AU",
       children: [
@@ -91,6 +91,12 @@ const DisplayModelContainer: React.FC = () => {
 
         }
       ]
+    },
+    {
+        title: 'In transfer',
+        key: 'transfer',
+        width: "20%",
+        render: (text: string, record: any) => <p>AU to US: 0       US to AU: 20</p>
     },
     {
       title: "US",

@@ -40,9 +40,7 @@ const Routing: React.FC = props => {
 
       </Route>
 
-      <Route path="/customer">
-        <AddCustomer />
-      </Route>
+    
 
       <Route path="/display/customer">
         <DisplayCustomer />

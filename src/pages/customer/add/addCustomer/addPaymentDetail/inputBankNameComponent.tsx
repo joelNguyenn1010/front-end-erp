@@ -1,24 +1,21 @@
 import React from 'react'
-import { Input } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import { Form } from 'antd'
+import { useFormContext } from 'react-hook-form'
 
 const InputBankNameComponent = () => {
 
-    const name = useSelector((state:AppState) => state.CustomerReducer.input.bankName)
-
-    const dispatch = useDispatch()
-
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-        dispatch(changeCustomerValue('bankName', newVal))
-    }
+  
+    const {register, errors} = useFormContext()
 
     return (
-        <div>
-            <Input value={name} onChange={onChange} allowClear placeholder='Bank name'/>
-        </div>
+        <Form.Item
+            label="Bank Name"
+            help={errors.bankName ? "Bank name is required" : ""}
+            validateStatus={errors.bankName ? "error" : ''}
+
+        >
+            <input className="ant-input" name="bankName" ref={register({required: true})} placeholder='Bank name'  />
+        </Form.Item>
     )
 }
 export default InputBankNameComponent

@@ -1,45 +1,49 @@
 import React from 'react'
-import { Cascader } from 'antd'
+import { Cascader, Select, Form } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../../../store'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import { ContactType } from '../../../../../store/contract/Customer'
+import { Controller, useFormContext } from 'react-hook-form'
 
-const options = [
-    {
-        value: "gov",
-        label: "Gov"
-    },
-    {
-        value: "corp",
-        label: "Corp"
-    },
-    {
-        value: "broker",
-        label: "Broker"
-    },
-    {
-        value: "individual",
-        label: "Individual"
-    }
-]
+// const options = [
+//     {
+//         value: "gov",
+//         label: "Gov"
+//     },
+//     {
+//         value: "corp",
+//         label: "Corp"
+//     },
+//     {
+//         value: "broker",
+//         label: "Broker"
+//     },
+//     {
+//         value: "individual",
+//         label: "Individual"
+//     }
+// ]
 
 
 const AddContactType = () => {
 
-    const name = useSelector((state: AppState) => state.CustomerReducer.input.contactType)
-    
-    const dispatch = useDispatch();
-    
-    const onChange = (e: string[], option: any) => {
-        dispatch(changeCustomerValue('contactType',e[0]))
-    }
+    const keys = Object.keys(ContactType)
 
+    const { control } = useFormContext()
 
+    const contactTypes = (
+        <Select defaultValue={ContactType.Individual}>
+            {keys.map((value: string, index: number) => <Select.Option key={index} value={value}>{value}</Select.Option>)}
+        </Select>
+    )
     return (
-        
-        <div>
-            <Cascader defaultValue={[name]} options={options} onChange={onChange}/>
-        </div>
+        <Form.Item
+            label="Contact Type"
+        >
+            <Controller control={control} name="contactType" as={contactTypes} defaultValue={ContactType.Individual} />
+
+        </Form.Item>
     )
 }
 
