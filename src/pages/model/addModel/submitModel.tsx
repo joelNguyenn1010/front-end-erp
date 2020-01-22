@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Button } from 'antd';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
 import { useDispatch } from 'react-redux';
-import { submitModelAction } from '../../../store/action/createModelAction';
+import { submitModelAction } from '../../../store/action/model/createModelAction';
 
 const SubmitModel: React.FC = () => {
 

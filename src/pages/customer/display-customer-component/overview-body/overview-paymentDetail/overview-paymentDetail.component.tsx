@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Table } from "antd";
 import ButtonAddPayment from "./button-add-payment.component";
+import { useQuery } from "@apollo/react-hooks";
 
 const OverviewPaymentDetailComponent = () => {
   const columns = [
@@ -37,6 +38,7 @@ const OverviewPaymentDetailComponent = () => {
     }
   ];
 
+  // const {}  = useQuery()
   return (
     <Fragment>
       <Table bordered columns={columns} />

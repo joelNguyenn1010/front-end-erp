@@ -1,6 +1,7 @@
-import { AppState } from "..";
-import client from "../../graphql";
-import { ADD_MODEL } from "../../graphql/mutation";
+import { ModelActionTypes } from './../../types/model/model.types';
+import { AppState } from "../..";
+import client from "../../../graphql";
+import { ADD_MODEL } from "../../../graphql/mutation";
 import { message } from "antd";
 
 
@@ -13,7 +14,7 @@ export interface AssignResponse {
 
 export const assignResponse = (value: any) => {
     return {
-        type: "ASSIGNRESPONSE",
+        type: ModelActionTypes.ASSIGNRESPONSE,
         payload: value
     }
 }
@@ -29,7 +30,7 @@ export interface ChangeValue {
 export const changeValueAction = (key: string, value: any) : ChangeValue => {
 
     return {
-        type: "CHANGE_VALUE",
+        type: ModelActionTypes.CHANGE_VALUE,
         payload: {
             key,
             value
@@ -62,7 +63,7 @@ export const submitModelAction = () => {
             }
             message.success("New Model created")
 
-            dispatch({type: "CLEAR"})
+            dispatch({type: ModelActionTypes.CLEAR})
         })
         .catch(err =>{
             message.error("Cant create new model, please try again")

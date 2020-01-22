@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'antd';
 import {CreateItemContext} from '../../../context/provider/createItemContext'
 import { useDispatch } from 'react-redux';
-import  {SubmitItemWithoutSNAction}  from '../../../store/action/createItemWithoutSNAction';
+import  {SubmitItemWithoutSNAction}  from '../../../store/action/itemAction/createItemWithoutSNAction';
  
 
 const SubmitItemWithoutSN = () => {

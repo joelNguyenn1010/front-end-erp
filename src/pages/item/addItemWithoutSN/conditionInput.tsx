@@ -1,7 +1,7 @@
 
 import { AppState } from "../../../store";
 import { useSelector, useDispatch } from "react-redux";
-import { ChangeDataAction } from "../../../store/action/createItemWithoutSNAction";
+import { ChangeDataAction } from "../../../store/action/itemAction/createItemWithoutSNAction";
 import React from "react";
 import { Select, message} from "antd";
 import SearchCreation from "../../../components/searchCreation";

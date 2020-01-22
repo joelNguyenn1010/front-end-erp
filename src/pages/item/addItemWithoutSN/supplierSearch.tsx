@@ -6,7 +6,7 @@ import { message } from 'antd';
 import { ADD_SUPPLIER } from '../../../graphql/mutation';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../../store';
-import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction';
+import { ChangeDataAction } from '../../../store/action/itemAction/createItemWithoutSNAction';
 
 
 let timeout: any = null;

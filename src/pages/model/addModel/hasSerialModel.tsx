@@ -4,7 +4,7 @@ import { CreateModelContext } from '../../../context/provider/createModelContext
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../store';
-import { changeValueAction } from '../../../store/action/createModelAction';
+import { changeValueAction } from '../../../store/action/model/createModelAction';
 
 const HasSerialModel: React.FC = () => {
 

@@ -1,8 +1,7 @@
-
+import { ItemActionTypes } from './../../types/item/item.types';
 import { ADD_ITEM } from './../../../graphql/mutation/index';
-import { createItemReducer } from './../../reducer/createItemReducer';
 import { Item } from './../../contract/Item';
-import { message, Result } from 'antd';
+import { message } from 'antd';
 import { gql } from 'apollo-boost';
 import axios from 'axios';
 import client from '../../../graphql';
@@ -12,7 +11,7 @@ import * as _ from 'lodash'
 
 export const changeItemValue = (index: number, key: string, value: any) => {
     return {
-        type: "ITEM:CHANGE:VALUE",
+        type: ItemActionTypes.CHANGE_VALUE,
         payload: {
             index,
             key,
@@ -24,7 +23,7 @@ export const changeItemValue = (index: number, key: string, value: any) => {
 export const makeLoadingModel = (index: number, loading: boolean) => {
     // oldState[action.payload.index].loading = action.payload.loading
     return {
-        type: "ITEM:LOADING",
+        type: ItemActionTypes.LOADING,
         payload: {
             index,
             loading
@@ -74,7 +73,7 @@ export const submitItemAction = (props: any) => {
 export const makeCiscoModelCreation = (index: number, ciscoModel: string) => {
 
     return {
-        type: "ITEM:CREATESN:DB",
+        type: ItemActionTypes.CREATESN_DB,
         payload: {
             ciscoModel,
             index
@@ -84,7 +83,7 @@ export const makeCiscoModelCreation = (index: number, ciscoModel: string) => {
 
 export const addModelNotinCiscoCheckandDB = (model: string) => {
     return {
-        type: "ADD_MODEL",
+        type: ItemActionTypes.ADD_MODEL,
         payload: {
             model
         }
@@ -228,7 +227,7 @@ export const addModelWithCiscoCheck = (sn: string, index: number) => {
 
 
                                 dispatch({
-                                    type: "ADD_MODEL",
+                                    type: ItemActionTypes.ADD_MODEL,
                                     payload: item
                                 })
 
@@ -276,7 +275,7 @@ export const addItem = (sn: string) => {
 
                 if (!found) {
                     dispatch({
-                        type: "ADD_SN",
+                        type: ItemActionTypes.ADD_SN,
                         payload: serialNumber
                     })
                 }
@@ -292,13 +291,13 @@ export const addItem = (sn: string) => {
 
 export const clearItems = () => {
     return {
-        type: "CLEAR:ITEMS:SN",
+        type: ItemActionTypes.CLEAR_ITEMS_SN,
     }
 }
 
 export const deleteItems = (index: number) => {
     return {
-        type: "ITEM:DELETE:ITEM",
+        type: ItemActionTypes.DELETE_ITEM,
         payload: {
             index
         }

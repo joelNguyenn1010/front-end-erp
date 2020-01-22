@@ -1,4 +1,5 @@
 import { Item } from './../contract/Item';
+import { ItemActionTypes } from '../types/item/item.types';
 
 
 
@@ -16,7 +17,7 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
     const oldState: Array<Item> = state.items.concat()
     switch (action.type) {
 
-        case 'ITEM:CHANGE:VALUE':
+        case ItemActionTypes.CHANGE_VALUE:
 
             let oldInput: any = Object.assign({}, oldState[action.payload.index])
       
@@ -28,7 +29,7 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 items: oldState
             }
 
-        case 'ITEM:DELETE:ITEM':
+        case ItemActionTypes.DELETE_ITEM:
             oldState.splice(action.payload.index, 1)
             return {
                 ...state,
@@ -37,14 +38,14 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
        
 
 
-        case 'ITEM:CREATESN:DB':
+        case ItemActionTypes.CREATESN_DB:
             oldState[action.payload.index].noModelInDB = action.payload.noModelInDB
             oldState[action.payload.index].ciscoModel = action.payload.ciscoModel
             return {
                 ...state,
                 items: oldState
             }
-        case 'ITEM:LOADING':
+        case ItemActionTypes.LOADING:
 
             oldState[action.payload.index].isFetchingModel = action.payload.loading
 
@@ -54,7 +55,7 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
             }
 
         
-        case 'ADD_SN':
+        case ItemActionTypes.ADD_SN:
 
             const newItem: Item = {
                 serialNumber: action.payload,
@@ -78,12 +79,12 @@ export const createItemReducer = (state: CreateItem = init, action: any) => {
                 items: oldState
             }
 
-        case 'ADD_MODEL':
+        case ItemActionTypes.ADD_MODEL:
             return {
                 ...state,
                 items: action.payload
             }
-        case "CLEAR:ITEMS:SN":
+        case ItemActionTypes.CLEAR_ITEMS_SN:
             return {
                 ...state,
                 items: []

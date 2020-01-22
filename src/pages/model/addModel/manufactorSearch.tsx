@@ -6,7 +6,7 @@ import { ADD_MANUFACTURE } from '../../../graphql/mutation';
 import { message } from 'antd';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeValueAction } from '../../../store/action/createModelAction';
+import { changeValueAction } from '../../../store/action/model/createModelAction';
 import { AppState } from '../../../store';
 import client from '../../../graphql';
 import { gql } from 'apollo-boost';

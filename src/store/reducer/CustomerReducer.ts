@@ -3,6 +3,7 @@ import { ShippingAccount } from '../contract/ShippingAccount';
 import { Ecommercial } from '../contract/Ecommercial';
 import { Email } from '../contract/Email'
 import { CreateCustomer, ContactType, PricingLevel, Salutation, SupplierAddressTypeEnum } from '../contract/Customer'
+import { CustomerActionTypes } from '../types/customer/customer.types';
 
 
 
@@ -56,7 +57,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
     const oldState: CreateCustomer = Object.assign({}, state)
     switch (action.type) {
 
-        case 'CUSTOMER:CHANGE_VALUE':
+        case CustomerActionTypes.CHANGE_VALUE:
             let oldInput: any = Object.assign({}, state.input)
 
             oldInput[action.payload.key] = action.payload.value
@@ -66,7 +67,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 input: oldInput
             }
 
-        case 'CUSTOMER:CHANGE_VALUE_ECOMMERCIAL':
+        case CustomerActionTypes.CHANGE_VALUE_ECOMMERCIAL:
            
             let oldEcommerce: Array<any> = oldState.input.ecommercial ? oldState.input.ecommercial : []
 
@@ -81,7 +82,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
 
-        case 'CUSTOMER:CHANGE_VALUE_SHIPPING':
+        case CustomerActionTypes.CHANGE_VALUE_SHIPPING:
             let oldStateShipping: Array<any> = oldState.input.shipping ? oldState.input.shipping : []
 
             let newStateShipping = Object.assign({}, oldStateShipping[action.payload.index])
@@ -94,7 +95,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
 
-        case 'CUSTOMER:ADD_EMAIL':
+        case CustomerActionTypes.ADD_EMAIL:
 
             const newEmailState: Email = {
 
@@ -106,7 +107,8 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
 
-        case 'CUSTOMER:MODIFY:EMAIL':
+        
+        case CustomerActionTypes.CUSTOMER_MODIFY_EMAIL:
 
 
             const key = action.payload.key
@@ -119,7 +121,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
 
-        case 'CUSTOMER:DELETE_DATA':
+            case CustomerActionTypes.DELETE_DATA:
             let a: any = Object.assign({}, state.input.emails)
             return {
                 ...state,
@@ -127,7 +129,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
             }
 
 
-        case 'CUSTOMER:ADD_ECOMMERCIAL':
+        case CustomerActionTypes.ADD_ECOMMERCIAL:
             const newEcommercial: Ecommercial = {
                 id: action.payload.id,
                 name: action.payload.name
@@ -140,7 +142,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
 
-        case 'CUSTOMER:ADD_SHIPPINGACCOUNT':
+        case CustomerActionTypes.ADD_SHIPPINGACCOUNT:
             const newShippingAccount: ShippingAccount = {
                 courierName: action.payload.courierName,
                 accountShipping: action.payload.accountShipping
@@ -151,7 +153,7 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
         
-        case "CLEAR":
+        case CustomerActionTypes.CLEAR:
             return {
                 ...state,
                 input: {

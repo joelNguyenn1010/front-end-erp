@@ -5,9 +5,10 @@ import { GET_MODEL_QUERY } from '../../../graphql/query'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../store'
 import { message } from 'antd'
-import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction'
+import { ChangeDataAction } from '../../../store/action/itemAction/createItemWithoutSNAction'
 import AddNewModelModal from '../addItemWithSN/addNewModelModal'
 import { ModelCreate } from '../../../store/contract/Model'
+import { ModelActionTypes } from '../../../store/types/model/model.types'
 
 let timeout: any = null
 
@@ -99,7 +100,7 @@ const ModelSearch: React.FC = () => {
                     dispatch(ChangeDataAction('model', response.name))
                     dispatch(ChangeDataAction('modelId', parseInt(response.id)))
                     // clear the response after model been created
-                    dispatch({type: "CLEAR:RESPONSE"})
+                    dispatch({type: ModelActionTypes.CLEAR_RESPONSE})
 
 
                     // dispatch(changeItemValue(props.index, 'model', response.name))
