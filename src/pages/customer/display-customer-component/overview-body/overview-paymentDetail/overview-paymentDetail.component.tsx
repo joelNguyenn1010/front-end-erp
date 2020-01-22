@@ -7,22 +7,20 @@ import { UPDATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation";
 
 import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
-import editTableCell from "../../../../tableEditable/editTableCell";
 import editTableRow from "../../../../tableEditable/editTableRow";
 import EditTableCellWithRules from "../../../../tableEditable/editTableCellWithRules";
 
-
 var reg = new RegExp('^[0-9]+$');
 
-const requiredRules =  [{required: true}]
-const requiredNumberRules = [{required: true}, {pattern: reg, message: "Number thoi"}]
+const requiredRules =  [{required: true, message: "Required"}]
+const requiredNumberRules = [{required: true, message: "Required"}, {pattern: reg, message: "Number only"}]
 const OverviewPaymentDetailComponent = () => {
   const { id } = useParams()
   const columns = [
     {
       title: "Currency",
       key: "Currency",
-      dataIndex: "currency"
+      dataIndex: "currency",
     },
     {
       title: "Bank Name",
@@ -44,7 +42,7 @@ const OverviewPaymentDetailComponent = () => {
       key: "Account Name",
       dataIndex: "accountName",
       editable: true,
-      rules: [requiredNumberRules]
+      rules: requiredRules
 
     },
     {

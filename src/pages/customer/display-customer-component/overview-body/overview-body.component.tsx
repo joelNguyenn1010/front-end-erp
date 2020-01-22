@@ -9,6 +9,7 @@ import { OverviewWarrantyComponent } from "./overview-warrantyPolicy/overview-wa
 import OverviewNoteComponent from "./overview-note/overview-note.component";
 import OverviewEmailComponent from "./overview-email/overview-email.component"
 import OverviewShippingComponent from "./overview-shipping/overview-shipping.component"
+import { Link, Redirect } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -20,8 +21,7 @@ const OverviewBodyComponent = () => {
 
   return (
     <Tabs defaultActiveKey="1" onChange={onChange} type='card'>
-      <TabPane tab={<span><Icon type="contacts"  /> Representative</span>} key="1">
-        
+      <TabPane tab={<span><Icon type="contacts"  /> Representative</span>} key="1"> 
         <OverviewRepresentativeComponent />
       </TabPane>
       <TabPane tab={<span><Icon type="home" /> Address</span>}key="2">

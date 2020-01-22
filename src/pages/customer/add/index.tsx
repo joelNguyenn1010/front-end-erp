@@ -8,7 +8,7 @@ interface AddCustomerProps {
 const AddCustomer: React.FC<AddCustomerProps> = props => {
 
 
-    console.log('from add')
+
     return (
         <div>
             <Row>
@@ -17,8 +17,7 @@ const AddCustomer: React.FC<AddCustomerProps> = props => {
                         <tbody>
                             <tr>
                                 <td>
-                                        <TableContactDetail onSuccess={props.onSuccess} />
-
+                                    <TableContactDetail onSuccess={props.onSuccess} />
                                 </td>
                             </tr>
                         </tbody>
