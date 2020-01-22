@@ -4,6 +4,7 @@ import AddPaymentForm from "../../../add/addCustomer/addPaymentDetail/add-paymen
 import { useForm, FormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation";
+import { useParams } from "react-router-dom";
 
 interface CreateNewPaymentProps {
   setOpen: (value: boolean) => void;
@@ -11,13 +12,20 @@ interface CreateNewPaymentProps {
   onSuccess?: () => void
 }
 
+type Form = {
+  currency: "AUD"
+}
 
 const CreateNewPaymentModal: React.FC<CreateNewPaymentProps> = (props: any) => {
+
+  const { id } = useParams()
+  const methods = useForm<Form>();
 
 
   const [createBankAccount] = useMutation(CREATE_SUPPLIER_PAYMENT, {
     onCompleted: () => {
       message.success("New payment created")
+      methods.reset({currency: "AUD"})
       if (props.onSuccess)
         props.onSuccess()
     },
@@ -36,10 +44,13 @@ const CreateNewPaymentModal: React.FC<CreateNewPaymentProps> = (props: any) => {
   };
 
 
-  const methods = useForm();
 
   const onSubmit = (data: any) => {
-    createBankAccount(data)
+    console.log(data)
+
+    // createCustomer({ variables: {...data, supplierId: id}})
+
+    createBankAccount({ variables: {...data, supplierId: id}})
   };
 
 

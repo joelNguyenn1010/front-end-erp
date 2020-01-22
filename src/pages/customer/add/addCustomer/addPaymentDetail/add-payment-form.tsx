@@ -1,8 +1,6 @@
 import React from "react";
 import InputCurrencyComponent from "./inputCurrencyComponent";
-import InputIpsPaymentTermComponent from "./inputIpsPaymentTermComponent";
-import InputCusPaymentTermComponent from "./inputCusPaymentTermComponent";
-import InputGstNumberComponent from "./inputGstNumberComponent";
+
 import InputBankNameComponent from "./inputBankNameComponent";
 import InputBankBranchComponent from "./inputBankBranchComponent";
 import InputBankBsbComponent from "./inputBankBsbComponent";

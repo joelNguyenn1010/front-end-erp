@@ -19,7 +19,7 @@ const ButtonAddPayment: React.FC<ButtonAddPaymentProps> = props => {
           Add more
         </Button>
 
-        <CreateNewPaymentModal onSuccess={props.onSuccess} setOpen={setOpen} open={open} />
+      <CreateNewPaymentModal onSuccess={props.onSuccess} setOpen={setOpen} open={open} />
       </React.Fragment>
     </div>
   );

@@ -10,7 +10,7 @@ const InputOptionPaypalComponent = () => {
         <Form.Item
             label="Paypal"
         >
-            <input className="ant-input" name="paypayl" ref={register} placeholder='nguyenngocanh@paypal.com' />
+            <input className="ant-input" name="paypal" ref={register} placeholder='nguyenngocanh@paypal.com' />
         </Form.Item>
     )
 }
