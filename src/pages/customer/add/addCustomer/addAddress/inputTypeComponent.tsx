@@ -5,27 +5,18 @@ import { changeCustomerValue } from '../../../../../store/action/customerAction/
 
 const InputTypeComponent = () => {
 
-    const options = [
-        {
-            value:'shipping',
-            lable: 'shipping',
-        },
-        {
-            value: 'portal',
-            label: 'portal'
-        }
-    ]
+    
 
     const dispatch = useDispatch();
 
-    const onChange = (val: string[]) => {
-        dispatch(changeCustomerValue('type', val[0]))
+    const onChange = (val: string) => {
+        dispatch(changeCustomerValue('type', val))
     }
 
     return (
 
         <div>
-            <Cascader options={options} onChange={onChange}/>
+            
         </div>
     )
 }

@@ -1,13 +1,15 @@
+import { CustomerActionTypes } from './../../types/customer/customer.types';
 import { message } from 'antd';
 import { ADD_CUS_REPRESENTATIVE, ADD_CUS_REPRESENTATIVE_EMAIL, ADD_SUPPLIER_ADDRESS } from './../../../graphql/mutation/index';
 import { AppState } from "../../../store"
 import client from "../../../graphql"
 
 
+
 //Change value 
 export const changeCustomerValue = ( key: string, value: any) => {
     return {
-        type: 'CUSTOMER:CHANGE_VALUE',
+        type: CustomerActionTypes.CHANGE_VALUE,
         payload:{
             key,
             value
@@ -17,7 +19,7 @@ export const changeCustomerValue = ( key: string, value: any) => {
 
 export const changeValueEcommercial = (index: number, key: string, value: any) => {
     return {
-        type: 'CUSTOMER:CHANGE_VALUE_ECOMMERCIAL',
+        type: CustomerActionTypes.CHANGE_VALUE_ECOMMERCIAL,
         payload:{
             index,
             key,
@@ -28,7 +30,7 @@ export const changeValueEcommercial = (index: number, key: string, value: any) =
 
 export const changeValueShipping = (index: number, key: string, value: any) => {
     return{
-        type: 'CUSTOMER:CHANGE_VALUE_SHIPPING',
+        type: CustomerActionTypes.CHANGE_VALUE_SHIPPING,
         payload: {
             index,
             key,
@@ -43,7 +45,7 @@ export const changeValueShipping = (index: number, key: string, value: any) => {
 //add data to redux
 export const addEmail = (email: string) => {
     return{
-        type:'CUSTOMER:ADD_EMAIL',
+        type:CustomerActionTypes.ADD_EMAIL,
         payload: email
     }
 }
@@ -52,7 +54,7 @@ export const addEmail = (email: string) => {
 
 export const addEcommercial = ( id: string, name: string) => {
     return {
-        type:'CUSTOMER:ADD_ECOMMERCIAL',
+        type: CustomerActionTypes.ADD_ECOMMERCIAL,
         payload: {
             id,
             name
@@ -62,7 +64,7 @@ export const addEcommercial = ( id: string, name: string) => {
 
 export const addShippingAccount = (courierName: string, accountShipping: string) => {
     return{
-        type: 'CUSTOMER:ADD_SHIPPINGACCOUNT',
+        type: CustomerActionTypes.ADD_SHIPPINGACCOUNT,
         payload: {
             courierName,
             accountShipping
@@ -74,7 +76,7 @@ export const addShippingAccount = (courierName: string, accountShipping: string)
 //delete data from redux
 export const deleteData = (index: number) => {
     return {
-        type:'CUSTOMER:DELETE_DATA',
+        type: CustomerActionTypes.DELETE_DATA,
         payload: index
     }
 }

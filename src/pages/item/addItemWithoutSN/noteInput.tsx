@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../store'
-import { ChangeDataAction } from '../../../store/action/createItemWithoutSNAction';
+import { ChangeDataAction } from '../../../store/action/itemAction/createItemWithoutSNAction';
 import TextArea from 'antd/lib/input/TextArea';
 
 

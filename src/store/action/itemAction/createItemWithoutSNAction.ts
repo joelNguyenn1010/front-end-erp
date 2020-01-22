@@ -1,8 +1,8 @@
 import { message } from 'antd';
-import { ADD_ITEM } from './../../graphql/mutation/index';
-
-import { AppState } from "..";
-import client from '../../graphql';
+import { ADD_ITEM } from './../../../graphql/mutation/index';
+import {ItemNoSNActionTypes} from '../../types/item/item.noSn.types'
+import { AppState } from "../..";
+import client from '../../../graphql';
 
 
 export interface ChangeData {
@@ -18,7 +18,7 @@ export const ChangeDataAction = (key: string, value: any): ChangeData => {
     console.log(key, value)
     return {
 
-        type: "CHANGE_DATA",
+        type: ItemNoSNActionTypes.CHANGE_DATA,
         payload: {
             key,
             value
@@ -47,7 +47,7 @@ export const SubmitItemWithoutSNAction = () => {
         .then(res => {
             message.success("New Item created")
 
-            dispatch({type: "CLEAR_DATA"})
+            dispatch({type: ItemNoSNActionTypes.CLEAR_DATA})
         })
         .catch(err =>{
             message.error("Cant create new item, please try again")

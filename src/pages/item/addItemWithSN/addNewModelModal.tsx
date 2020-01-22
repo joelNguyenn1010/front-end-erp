@@ -4,6 +4,7 @@ import AddModel from '../../model/addModel'
 import { useDispatch, useSelector } from 'react-redux'
 import { ModelCreate } from '../../../store/contract/Model'
 import { AppState } from '../../../store'
+import { ModelActionTypes } from '../../../store/types/model/model.types'
 
 interface AddNewModelModalProps {
     setOpen: (value: boolean) => void,
@@ -24,7 +25,7 @@ const AddNewModelModal: React.FC<AddNewModelModalProps> = props => {
     useEffect(() => {
    
         dispatch({
-            type: "ASSIGNINITMODEL",
+            type: ModelActionTypes.ASSIGNINITMODEL,
             payload: props.model.input
         })
 

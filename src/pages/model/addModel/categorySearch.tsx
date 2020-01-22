@@ -7,7 +7,7 @@ import { CATEGORY_QUERY } from '../../../graphql/query';
 import { ADD_CATEGORY } from '../../../graphql/mutation';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeValueAction } from '../../../store/action/createModelAction';
+import { changeValueAction } from '../../../store/action/model/createModelAction';
 import { AppState } from '../../../store';
 
 let timeout: any = null;

@@ -1,5 +1,6 @@
 import { ModelCreate } from "../contract/Model"
-import { CreateModelActionTypes } from '../action/createModelAction'
+import { CreateModelActionTypes } from '../action/model/createModelAction'
+import { ModelActionTypes } from "../types/model/model.types"
 
 // const cisco = localStorage.getItem('manufactor') ? localStorage.getItem('manufactor') : "Cisco"
 const inputInit = {
@@ -23,7 +24,7 @@ const init: ModelCreate = {
 
 export const createModelReducer = (state: ModelCreate = init, action: CreateModelActionTypes) => {
     switch (action.type) {
-        case "CHANGE_VALUE":
+        case ModelActionTypes.CHANGE_VALUE:
             let oldInput: any = Object.assign({}, state.input)
             oldInput[action.payload.key] = action.payload.value
             return {
@@ -31,24 +32,24 @@ export const createModelReducer = (state: ModelCreate = init, action: CreateMode
                 input: oldInput
             }
 
-        case "ASSIGNINITMODEL":
+        case ModelActionTypes.ASSIGNINITMODEL:
             return {
                 ...state,
                 input: action.payload
             }
 
-        case "ASSIGNRESPONSE":
+        case ModelActionTypes.ASSIGNRESPONSE:
             return {
                 ...state,
                 res: action.payload
             }
 
-        case "CLEAR":
+        case ModelActionTypes.CLEAR:
             return {
                 ...state,
                 input: inputInit.input,
             }
-        case "CLEAR:RESPONSE":
+        case ModelActionTypes.CLEAR_RESPONSE:
             return {
                 ...state,
                 res: {

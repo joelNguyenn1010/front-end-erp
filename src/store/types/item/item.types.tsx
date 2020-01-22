@@ -1,0 +1,10 @@
+export const ItemActionTypes = {
+    CHANGE_VALUE: 'CHANGE_VALUE',
+    LOADING: 'LOADING',
+    CREATESN_DB: 'CREATESN_DB',
+    DD_MODEL: 'DD_MODEL',
+    CLEAR_ITEMS_SN: 'CLEAR_ITEMS_SN',
+    DELETE_ITEM: 'DELETE_ITEM',
+    ADD_MODEL: 'ADD_MODEL',
+    ADD_SN: 'ADD_SN',
+}
