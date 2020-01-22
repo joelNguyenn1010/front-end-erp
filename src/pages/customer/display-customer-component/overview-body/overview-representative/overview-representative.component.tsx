@@ -58,7 +58,6 @@ const OverviewRepresentativeComponent = () => {
       title: "Phone Number",
       key: "phoneNumber",
       dataIndex: "phoneNumber",
-      // editable: true
       render: (text: any, record: any) => <PhoneNumberEditable handleSave={handleSave} text={text} record={record} />
 
     },
@@ -72,6 +71,18 @@ const OverviewRepresentativeComponent = () => {
         return text.map((data: any, index: number) => <p key={index}>{data.email}</p>);
       }
     },
+    {
+      title: "Operation",
+      render: (text: any, record: any) =>
+        data.representative.data.length > 0 ? (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.id)}
+          >
+            <a>Delete</a>
+          </Popconfirm>
+        ) : null
+    }
 
   ];
 

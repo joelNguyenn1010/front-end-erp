@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Table, Popconfirm, message } from "antd";
+import { Table, Popconfirm, message, Result } from "antd";
 import ButtonAddAddressComponent from "./button-add-address.component";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_ADDRESS_QUERY } from "../../../../../graphql/query";
@@ -9,9 +9,10 @@ import editTableCell from "../../../../tableEditable/editTableCell";
 import EditCellPostcode from "../../../editCustomer/editCustomerAddress/editCellPostcode";
 import EditCellCountry from "../../../editCustomer/editCustomerAddress/editCellCountry";
 import client from "../../../../../graphql";
-import { UPDATE_CUSTOMER_ADDRESS } from "../../../../../graphql/mutation";
+import { UPDATE_CUSTOMER_ADDRESS, DELETE_ADDRESS } from "../../../../../graphql/mutation";
 import { Address } from "../../../../../store/contract/Suppliers";
 import EditTypeCustomer from "../../../editCustomer/editCustomerAddress/edit-type-customer";
+import LoadingSpin from "../../../../../components/loadingSpin";
 
 const OverviewAddressComponent = () => {
   let { id } = useParams();
@@ -25,7 +26,7 @@ const OverviewAddressComponent = () => {
     page
   };
 
-  const { data, refetch } = useQuery(GET_ADDRESS_QUERY, {
+  const { data, refetch, loading } = useQuery(GET_ADDRESS_QUERY, {
     variables
   });
 
@@ -33,11 +34,6 @@ const OverviewAddressComponent = () => {
     refetch(variables);
   };
 
-  const dataRender = data
-    ? data.supplierAddresses
-      ? data.supplierAddresses.data
-      : []
-    : [];
 
   const columns = [
     {
@@ -84,12 +80,10 @@ const OverviewAddressComponent = () => {
         return <EditCellCountry text={text} record={record} />
       }
     },
-    
-
     {
       title: "Operation",
       render: (text: any, record: any) =>
-        dataRender.length > 0 ? (
+      data.supplierAddresses.data.length > 0 ? (
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record.id)}
@@ -132,7 +126,22 @@ const OverviewAddressComponent = () => {
     updateAddress({variables: data})
   };
 
-  const handleDelete = (key: any) => {};
+  const handleDelete = (key: any) => {
+    client
+    .mutate({ mutation: DELETE_ADDRESS, variables: { id: parseInt(key) } })
+    .then(res => {
+      message.success("Item was deleted");
+      refetchTheData();
+    })
+    .catch(err => {
+      message.error("Cant delete item, please try again ");
+    });
+  };
+
+  if (loading) {
+    return <LoadingSpin />
+  } else if (!loading && data && data.supplierAddresses && data.supplierAddresses.data) {
+    const dataSource: Array<Address> = data.supplierAddresses.data
 
   return (
     <Fragment>
@@ -140,7 +149,7 @@ const OverviewAddressComponent = () => {
         columns={newColumns}
         bordered
         rowKey="id"
-        dataSource={dataRender}
+        dataSource={dataSource}
         components={components}
         pagination={false}
         scroll={{ y: window.screen.height - 700 }}
@@ -148,6 +157,13 @@ const OverviewAddressComponent = () => {
       <ButtonAddAddressComponent refetchData={refetchTheData} />
     </Fragment>
   );
+} else {
+  return <Result
+    status="error"
+    subTitle={`Please check the url or make sure the id "${id}" is correct`}
+    title="Can't get the representatives">
+  </Result>
+}
 };
 
 export default OverviewAddressComponent;

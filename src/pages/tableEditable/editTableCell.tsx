@@ -26,20 +26,16 @@ const EditTableCell = (props: any) => {
 
 
   const renderCell = (form: any) => {
-    const { children, dataIndex, record, title } = props;
+    const { children, dataIndex, record, rules } = props;
+
+    const newRules = rules ? rules : []
   
-    console.log(record[dataIndex], 'ee')
     const { editing } = edit;
     
     return editing ? (
       <Form.Item style={{ margin: 0 }}>
         {props.form.getFieldDecorator(dataIndex, {
-          rules: [
-            {
-              required: true,
-              message: `${title} is required.`
-            }
-          ],
+          rules: newRules,
           initialValue: record[dataIndex]
         })(
           <Input
@@ -53,7 +49,7 @@ const EditTableCell = (props: any) => {
       </Form.Item>
     ) : (
       <div style={{ paddingRight: 24 }} onClick={toggleEdit}>
-        {children}
+        {record[dataIndex] ? children : <Button>Edit</Button>}
       </div>
     );
   };

@@ -14,10 +14,12 @@ interface CreateNewRepresentativeProps {
 
 
 
+
+
 const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: any) => {
 
      // create new form
-     const methods = useForm<FormData>()
+     const methods = useForm()
 
     let { id } = useParams();
 
@@ -44,7 +46,6 @@ const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: 
     const onSubmit = (data: any) => { 
         // supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails
         createCustomer({ variables: {...data, supplierId: id}})
-        // console.log(data)
      }
 
      const onCancel = (e: any) => {

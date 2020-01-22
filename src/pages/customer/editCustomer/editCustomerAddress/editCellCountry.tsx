@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import SearchCreation from '../../../../components/searchCreation'
-import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
-import { Cascader, message, Dropdown } from 'antd';
+import {  message } from 'antd';
 import client from '../../../../graphql';
 import { UPDATE_ADDRESS_COUNTRY } from '../../../../graphql/mutation';
 import ListCountry from '../../list country/listCountry';
@@ -21,7 +19,6 @@ const EditCellCountry:React.FC<EditCellCountryProps> = (props: any) => {
 
     const onChange = (val: any) => {
 
-        console.log(val)
         setCountry(val)
         client.mutate({mutation: UPDATE_ADDRESS_COUNTRY, variables:{id: record.id, country: val}})
         .then(res => {
