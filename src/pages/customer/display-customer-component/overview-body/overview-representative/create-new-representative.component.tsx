@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react'
 import { Modal, Button, message } from 'antd'
-import AddRepresentativeForm from '../../../add/addCustomer/tableRepresentative'
+import AddRepresentativeForm from '../../../add/addCustomer/addRepresentativeDetail/representative-create-form'
 import { useParams } from 'react-router-dom'
 import { useForm, FormContext } from 'react-hook-form'
 import { Email } from '../../../../../store/contract/Email'

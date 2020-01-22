@@ -1,7 +1,7 @@
 import React from "react";
 
-import InputIpsWarrantyPolicyComponent from "./addWarrantyPolicy/inputIpsWarrantyPolicyComponent";
-import InputCusWarrantyPolicyComponent from "./addWarrantyPolicy/inputCusWarrantyPolicyComponent";
+import InputIpsWarrantyPolicyComponent from "./inputIpsWarrantyPolicyComponent";
+import InputCusWarrantyPolicyComponent from "./inputCusWarrantyPolicyComponent";
 
 const TableWarrantyPolicy = () => {
   return (

@@ -6,13 +6,17 @@ import { GET_ADDRESS_QUERY } from "../../../../../graphql/query";
 import { useParams } from "react-router-dom";
 import editTableRow from "../../../../tableEditable/editTableRow";
 import editTableCell from "../../../../tableEditable/editTableCell";
-import EditCellPostcode from "../../../editCustomer/editCustomerAddress/editCellPostcode";
-import EditCellCountry from "../../../editCustomer/editCustomerAddress/editCellCountry";
+import EditCellCountry from "../../../editCustomer/editCustomerAddress/edit-country-customer";
 import client from "../../../../../graphql";
 import { UPDATE_CUSTOMER_ADDRESS, DELETE_ADDRESS } from "../../../../../graphql/mutation";
 import { Address } from "../../../../../store/contract/Suppliers";
 import EditTypeCustomer from "../../../editCustomer/editCustomerAddress/edit-type-customer";
 import LoadingSpin from "../../../../../components/loadingSpin";
+
+
+var reg = new RegExp('^[0-9]+$');
+const requiredRules =  [{required: true}]
+const requiredNumberRules = [{required: true}, {pattern: reg, message: "Number only"}]
 
 const OverviewAddressComponent = () => {
   let { id } = useParams();
@@ -55,22 +59,24 @@ const OverviewAddressComponent = () => {
       title: "City",
       key: "city",
       dataIndex: "city",
-      editable: true
+      editable: true,
+      
     },
     {
       title: "State",
       key: "state",
       dataIndex: "state",
-      editable: true
+      editable: true,
+      rules: requiredRules
     },
     
     {
       title: "Postcode",
       key: "postcode",
       dataIndex: "postcode",
-      render: (text: any, record: any) => {
-        return <EditCellPostcode text={text} record={record} />
-      }
+      editable: true,
+      rules: [...requiredNumberRules, {max: 6}]
+      
     },
     {
       title: "Country",
@@ -94,14 +100,12 @@ const OverviewAddressComponent = () => {
     }
   ];
   const newColumns = columns.map((col: any) => {
-    if (!col.editable) {
-      return col;
-    }
     return {
       ...col,
       onCell: (record: any) => ({
         record,
         editable: col.editable,
+        rules: col.rules,
         dataIndex: col.dataIndex,
         title: col.title,
         handleSave: handleSave

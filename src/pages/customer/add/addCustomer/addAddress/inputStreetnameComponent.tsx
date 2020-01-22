@@ -15,7 +15,7 @@ const InputStreetnameComponent = () => {
       validateStatus={errors.street ? "error" : ""}
     >
       <input
-        ref={register({ required: true })}
+        ref={register({ required: false })}
         name="street"
         className="ant-input"
         placeholder="Street Name"

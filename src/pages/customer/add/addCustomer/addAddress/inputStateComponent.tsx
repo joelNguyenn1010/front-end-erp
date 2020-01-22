@@ -15,7 +15,7 @@ const InputStateComponent = () => {
       validateStatus={errors.state ? "error" : ""}
     >
       <input
-        ref={register({ required: true })}
+        ref={register({ required: false })}
         name="state"
         className="ant-input"
         placeholder="State"

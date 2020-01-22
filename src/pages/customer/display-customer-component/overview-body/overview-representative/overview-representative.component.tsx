@@ -13,6 +13,11 @@ import { Representative } from "../../../../../store/contract/Suppliers";
 import SalutationEditable from "../../../editCustomer/editCustomerRepresentative/salutation-editable";
 import PhoneNumberEditable from "../../../editCustomer/editCustomerRepresentative/phone-number-editable";
 
+var reg = new RegExp('^[0-9]+$');
+
+const requiredRules =  [{required: true}]
+const requiredNumberRules = [{required: true}, {pattern: reg, message: "Number only"}]
+
 const OverviewRepresentativeComponent = () => {
   let { id } = useParams();
 
@@ -47,6 +52,7 @@ const OverviewRepresentativeComponent = () => {
       key: "firstName",
       dataIndex: "fullName",
       editable: true,
+      rules: requiredRules
     },
     {
       title: "Position",
@@ -58,7 +64,8 @@ const OverviewRepresentativeComponent = () => {
       title: "Phone Number",
       key: "phoneNumber",
       dataIndex: "phoneNumber",
-      render: (text: any, record: any) => <PhoneNumberEditable handleSave={handleSave} text={text} record={record} />
+      editable: true,
+      rules: [...requiredNumberRules, {max: 12}]
 
     },
 
@@ -87,15 +94,13 @@ const OverviewRepresentativeComponent = () => {
   ];
 
   const newColumns = columns.map((col: any) => {
-    if (!col.editable) {
-      return col;
-    }
     return {
       ...col,
       onCell: (record: any) => ({
         record,
         editable: col.editable,
         dataIndex: col.dataIndex,
+        rules: col.rules,
         title: col.title,
         handleSave: handleSave
       })

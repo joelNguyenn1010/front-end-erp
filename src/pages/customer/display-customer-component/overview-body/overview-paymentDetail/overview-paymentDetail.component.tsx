@@ -9,13 +9,12 @@ import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import editTableCell from "../../../../tableEditable/editTableCell";
 import editTableRow from "../../../../tableEditable/editTableRow";
-import EditTableCellWithRules from "../../../../tableEditable/editTableCellWithRules";
 
 
 var reg = new RegExp('^[0-9]+$');
 
 const requiredRules =  [{required: true}]
-const requiredNumberRules = [{required: true}, {pattern: reg, message: "Number thoi"}]
+const requiredNumberRules = [{required: true}, {pattern: reg, message: "Number only"}]
 const OverviewPaymentDetailComponent = () => {
   const { id } = useParams()
   const columns = [
@@ -122,7 +121,7 @@ const newColumns = columns.map((col: any) => {
   const components = {
     body: {
       row: editTableRow,
-      cell: EditTableCellWithRules
+      cell: editTableCell
     }
   };
 

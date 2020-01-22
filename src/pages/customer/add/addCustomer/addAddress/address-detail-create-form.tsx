@@ -1,10 +1,10 @@
 import React from "react";
-import InputCountryComponent from "./addAddress/inputCountryCoponent";
-import InputPostcodeComponent from "./addAddress/inputPostcodeComponent";
-import InputCityComponent from "./addAddress/inputCityComponent";
-import InputStateComponent from "./addAddress/inputStateComponent";
-import InputStreetnameComponent from "./addAddress/inputStreetnameComponent";
-import InputTypeComponent from "./addAddress/inputTypeComponent";
+import InputCountryComponent from "./inputCountryCoponent";
+import InputPostcodeComponent from "./inputPostcodeComponent";
+import InputCityComponent from "./inputCityComponent";
+import InputStateComponent from "./inputStateComponent";
+import InputStreetnameComponent from "./inputStreetnameComponent";
+import InputTypeComponent from "./inputTypeComponent";
 import { Button } from "antd";
 
 const TableAddressDetail: React.FC = props => {
