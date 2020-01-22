@@ -1,24 +1,24 @@
 import React from 'react'
-import { Input } from 'antd'
+import { Input, Form } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '../../../../../store'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import { useFormContext } from 'react-hook-form'
+import InputForm from '../../../../../components/InputForm'
 
 export const AddFirstName = () => {
-
-    const name = useSelector((state: AppState) => state.CustomerReducer.input.fullName)
-
-    const dispatch = useDispatch()
-
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-        dispatch(changeCustomerValue('fullName', newVal))
-    }
+    const { register, errors } = useFormContext();
 
     return (
-        <div>
-            <Input value={name}  placeholder='Full name' allowClear onChange={onChange}/>
-        </div>
+            <Form.Item
+                help= {errors.fullName && "Name is required"}
+                label={"Full Name"}
+                validateStatus={errors.fullName ? "error" : ""}
+            >
+                <input ref={register({ required: true })} name="fullName" className="ant-input" placeholder="Full Name" />
+
+            </Form.Item>
+        
     )
 }
 export default AddFirstName

@@ -297,3 +297,15 @@ export const DELETE_REPRESENTATIVE = gql`
 
 
 
+export const UPDATE_REPRESENTATIVE = gql`
+  mutation($id: Int!, $salutation: SalutationEnum, $fullName: String, $position: String, $phoneNumber: String) {
+    updateRepresentative(id: $id, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber) {
+      id
+      fullName
+      position
+      salutation
+      phoneNumber
+    }
+  }
+`
+

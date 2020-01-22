@@ -1,10 +1,15 @@
 import React from "react";
 import { Modal } from "antd";
-import TablePaymentDetail from "../../../add/addCustomer/tablePaymentDetail";
+import AddPaymentForm from "../../../add/addCustomer/addPaymentDetail/add-payment-form";
+import { useForm, FormContext } from "react-hook-form";
 
 interface CreateNewPaymentProps {
   setOpen: (value: boolean) => void;
   open: boolean;
+}
+
+type PaymentForm = {
+  
 }
 
 const CreateNewPaymentModal: React.FC<CreateNewPaymentProps> = (props: any) => {
@@ -16,10 +21,15 @@ const CreateNewPaymentModal: React.FC<CreateNewPaymentProps> = (props: any) => {
     props.setOpen(false);
   };
 
+
+  const methods = useForm()
   return (
     <div>
       <Modal visible={props.open} onCancel={onCancel} onOk={onOk} >
-        <TablePaymentDetail />
+        {/* <TablePaymentDetail /> */}
+        <FormContext {...methods}>
+          <AddPaymentForm />
+        </FormContext>
       </Modal>
     </div>
   );

@@ -1,40 +1,36 @@
 import React from 'react'
-import { Cascader } from 'antd'
-import {  useDispatch } from 'react-redux'
+import { Select, Form } from 'antd'
+import { useDispatch } from 'react-redux'
 import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import { Salutation } from '../../../../../store/contract/Customer'
+import { useFormContext, Controller } from 'react-hook-form'
 
-const options = [
-    {
-        value: 'Mr',
-        label: 'Mr'
-    },
-    {
-        value: 'Ms',
-        label: 'Ms'
-    },
-    {
-        value: 'Mrs',
-        label: 'Mrs'
-    },
-    {
-        value: 'Other',
-        label: 'Other'
-    },
-]
 
 export const AddSalutation = () => {
 
+    const {  setValue, control } = useFormContext()
 
-    const dispatch = useDispatch();
-    const onChange = (e: string[]) => {
-        dispatch(changeCustomerValue('salutation', e[0]))
+
+    const keys = Object.keys(Salutation);
+
+    const onChange = (value: any) => {
+        setValue("salutation", value)
     }
 
-    return (
-        <div>
-            <Cascader onChange={onChange} options={options}/>
-        </div>
+    const SalutationSelection = (
+        <Select defaultValue={"Mr"} style={{ width: '100%' }} onChange={onChange}>
+            {keys.map((salutaiton: string, index: number) => <Select.Option key={index} value={salutaiton}>{salutaiton}</Select.Option>)}
+        </Select>
     )
+
+    return (
+        <Form.Item
+            label={"Salutation"}
+        >
+            <Controller rules={{required: true}} as={SalutationSelection} name="salutation" control={control} defaultValue="Mr"/>
+        </Form.Item>
+    )
+
 }
 
 export default AddSalutation

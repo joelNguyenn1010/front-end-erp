@@ -1,25 +1,20 @@
 import React from 'react'
-import {Input} from 'antd'
-import {useSelector, useDispatch} from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import { Form } from 'antd'
+import { useFormContext } from 'react-hook-form'
 
 const AddPosition = () => {
 
-    const  name = useSelector((state:AppState) => state.CustomerReducer.input.position)
 
-    const dispatch = useDispatch();
-
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-
-        dispatch(changeCustomerValue('position', newVal))
-    }
+    const { register, errors } = useFormContext()
 
     return (
-        <div>
-            <Input placeholder='Position' value={name} onChange={onChange} allowClear   />
-        </div>
+        <Form.Item
+            label={"Position"}
+        >
+            <input className="ant-input" ref={register} name="position" placeholder='Position' />
+
+        </Form.Item>
+
     )
 }
 

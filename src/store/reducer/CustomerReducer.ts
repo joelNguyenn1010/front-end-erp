@@ -107,7 +107,21 @@ export const CustomerReducer = (state: CreateCustomer = init, action: any) => {
                 ...oldState
             }
 
-        case CustomerActionTypes.DELETE_DATA:
+        
+        case CustomerActionTypes.CUSTOMER_MODIFY_EMAIL:
+
+
+            const key = action.payload.key
+            const email = action.payload.email
+
+            oldState.input.emails[key] = email
+
+            return {
+                ...state,
+                ...oldState
+            }
+
+            case CustomerActionTypes.DELETE_DATA:
             let a: any = Object.assign({}, state.input.emails)
             return {
                 ...state,

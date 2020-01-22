@@ -50,6 +50,17 @@ export const addEmail = (email: string) => {
     }
 }
 
+export const modifyEmail = (key: any, email: string) => {
+    return {
+        type: CustomerActionTypes.CUSTOMER_MODIFY_EMAIL,
+        payload: {
+            key,
+            email
+        }
+    }
+}
+
+
 
 
 export const addEcommercial = ( id: string, name: string) => {

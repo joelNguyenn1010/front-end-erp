@@ -10,7 +10,6 @@ const DisplayCustomer = () => {
   return (
     <div>
       <div style={{marginBottom: '3em'}}>
-        <h1>Id: {id}</h1>
         <OverviewHeaderComponent />
       </div>
       <div>
