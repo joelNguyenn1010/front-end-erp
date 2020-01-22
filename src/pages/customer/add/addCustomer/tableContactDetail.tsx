@@ -9,29 +9,31 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_SUPPLIER } from "../../../../graphql/mutation";
 
 interface TableRowContactDetailProps {
-  onSuccess?: () => void,
+    onSuccess?: () => void,
 
 }
 
-const TableRowContactDetail: React.FC<TableRowContactDetailProps> = props => {
+const TableRowContactDetail: React.FC<TableRowContactDetailProps>  = props => {
 
   const methods = useForm()
 
-  const [createNewSupplier] = useMutation(ADD_SUPPLIER, {
-    onCompleted: () => {
+  const [createNewSupplier] = useMutation(ADD_SUPPLIER,{
+    onCompleted: () =>{
       message.success("New organisation created")
       methods.reset({})
-      if (props.onSuccess)
+      if(props.onSuccess) 
         props.onSuccess()
     },
 
     onError: () => {
-      message.error("Can't create organisation, please try again ")
+      message.error("Can't create organisation, please try again")
     }
-
+    
   })
   const onSubmit = (data: any) => {
-    createNewSupplier({ variables: data })
+
+    createNewSupplier({variables: data})
+  
   }
   return (
     <FormContext {...methods}>

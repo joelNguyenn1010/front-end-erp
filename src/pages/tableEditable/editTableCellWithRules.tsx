@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Input, Button } from "antd";
 import { EditTableContext } from "./editTableRow";
 
-const EditTableCell = (props: any) => {
+const EditTableCellWithRules = (props: any) => {
   const [edit, setEdit] = React.useState({ editing: false });
   const [input, setInput] = React.useState();
   
@@ -23,23 +23,18 @@ const EditTableCell = (props: any) => {
   };
 
 
-
-
   const renderCell = (form: any) => {
-    const { children, dataIndex, record, title } = props;
+    const { children, dataIndex, record, rules } = props;
+
+    const newRules = rules ? rules : []
+
   
-    console.log(record[dataIndex], 'ee')
     const { editing } = edit;
     
     return editing ? (
       <Form.Item style={{ margin: 0 }}>
         {props.form.getFieldDecorator(dataIndex, {
-          rules: [
-            {
-              required: true,
-              message: `${title} is required.`
-            }
-          ],
+          rules: newRules,
           initialValue: record[dataIndex]
         })(
           <Input
@@ -53,11 +48,12 @@ const EditTableCell = (props: any) => {
       </Form.Item>
     ) : (
       <div style={{ paddingRight: 24 }} onClick={toggleEdit}>
-        {children}
+        {record[dataIndex] ? children : <Button>Edit</Button>}
       </div>
     );
   };
-  const { editable, children} = props;
+
+  const { editable, children } = props;
 
   return (
       <td >
@@ -70,4 +66,4 @@ const EditTableCell = (props: any) => {
   )
 };
 
-export default Form.create()(EditTableCell);
+export default Form.create()(EditTableCellWithRules);

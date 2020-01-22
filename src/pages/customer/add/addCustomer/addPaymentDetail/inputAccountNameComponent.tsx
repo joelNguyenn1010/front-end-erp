@@ -9,10 +9,10 @@ const InputAccountNameComponent = () => {
     return (
         <Form.Item
             label="Account name"
-            help={errors.bankAccount ? "Account name is required" : ""}
-            validateStatus={errors.bankAccount ? "error" : ''}
+            help={errors.accountName ? "Account name is required" : ""}
+            validateStatus={errors.accountName ? "error" : ''}
         >
-            <input className="ant-input" name="bankAccount" ref={register({ required: true })} placeholder='Joel Nguyen' />
+            <input className="ant-input" name="accountName" ref={register({ required: true })} placeholder='Joel Nguyen' />
         </Form.Item>
     )
 }

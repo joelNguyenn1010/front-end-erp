@@ -322,9 +322,26 @@ export const UPDATE_REPRESENTATIVE = gql`
 
 
 export const CREATE_SUPPLIER_PAYMENT = gql`
-  mutation($currency: String!, $bankName: String!, $bankBranch: String!, $BSB: String!, $accountName: String!, $accountNumber: String!, $paypal: String) {
-    createSupplierPayment(currency: $currency, bankName: $bankName, bankBranch: $bankBranch, BSB: $BSB, accountName: $accountName, accountNumber: $accountNumber, paypal: $paypal) {
+  mutation($supplierId: Int!,$currency: String!, $bankName: String!, $bankBranch: String!, $BSB: String!, $accountName: String!, $accountNumber: String!, $paypal: String) {
+    createSupplierPayment(supplierId: $supplierId, currency: $currency, bankName: $bankName, bankBranch: $bankBranch, BSB: $BSB, accountName: $accountName, accountNumber: $accountNumber, paypal: $paypal) {
       id
+    }
+  }
+`
+
+
+
+export const UPDATE_SUPPLIER_PAYMENT = gql`
+  mutation($id: Int!,$currency: String!, $bankName: String!, $bankBranch: String!, $BSB: String!, $accountName: String!, $accountNumber: String!, $paypal: String) {
+    updateSupplierPayment(id: $id, currency: $currency, bankName: $bankName, bankBranch: $bankBranch, BSB: $BSB, accountName: $accountName, accountNumber: $accountNumber, paypal: $paypal) {
+      id
+      currency
+      bankName
+      bankBranch
+      BSB
+      accountName
+      accountNumber
+      paypal
     }
   }
 `

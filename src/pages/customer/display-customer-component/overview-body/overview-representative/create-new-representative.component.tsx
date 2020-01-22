@@ -17,7 +17,7 @@ interface CreateNewRepresentativeProps {
 const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: any) => {
 
      // create new form
-     const methods = useForm()
+     const methods = useForm<FormData>()
 
     let { id } = useParams();
 

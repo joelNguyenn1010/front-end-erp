@@ -205,3 +205,20 @@ export const GET_ADDRESS_QUERY = gql`
     }
   }
 `
+
+export const QUERY_SUPPLIER_PAYMENT = gql`
+query($limit: Int!, $page: Int!, $supplierId: Int!) {
+  supplierPayments(limit: $limit, page: $page, supplierId: $supplierId) {
+    data{
+      currency
+      bankName
+      bankBranch
+      id
+      BSB
+      accountName
+      accountNumber
+      paypal
+    }
+  }
+}
+`
