@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Table, Popconfirm, message } from "antd";
 import ButtonAddAddressComponent from "./button-add-address.component";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_ADDRESS_QUERY } from "../../../../../graphql/query";
 import { useParams } from "react-router-dom";
 import editTableRow from "../../../../tableEditable/editTableRow";
@@ -10,6 +10,8 @@ import EditCellPostcode from "../../../editCustomer/editCustomerAddress/editCell
 import EditCellCountry from "../../../editCustomer/editCustomerAddress/editCellCountry";
 import client from "../../../../../graphql";
 import { UPDATE_CUSTOMER_ADDRESS } from "../../../../../graphql/mutation";
+import { Address } from "../../../../../store/contract/Suppliers";
+import EditTypeCustomer from "../../../editCustomer/editCustomerAddress/edit-type-customer";
 
 const OverviewAddressComponent = () => {
   let { id } = useParams();
@@ -41,7 +43,10 @@ const OverviewAddressComponent = () => {
     {
       title: "Type",
       key: "type",
-      dataIndex: "type"
+      dataIndex: "type",
+      render: (text: any, record: any) => {
+        return <EditTypeCustomer handleSave={handleSave} record={record} text={text}  />
+      }
     },
     
     {
@@ -117,15 +122,14 @@ const OverviewAddressComponent = () => {
     }
   };
 
-  const handleSave = (row: any) => {  
+  const [updateAddress ] = useMutation( UPDATE_CUSTOMER_ADDRESS, {
+    onCompleted: () => message.success("Data saved"),
+    onError: () => message.error("Error when try to save data")
+  })
+
+  const handleSave = (data: Address) => {  
     
-    client.mutate({mutation: UPDATE_CUSTOMER_ADDRESS, variables: {id: row.id, city: row.city, state: row.state, street: row.street, postcode: row.postcode}})
-      .then(res => {
-        message.success("Updated address")
-      })
-      .catch(err => {
-        message.error("Cant update the address, please try again")
-      })
+    updateAddress({variables: data})
   };
 
   const handleDelete = (key: any) => {};
@@ -141,7 +145,7 @@ const OverviewAddressComponent = () => {
         pagination={false}
         scroll={{ y: window.screen.height - 700 }}
       />
-      <ButtonAddAddressComponent onClose={refetchTheData} />
+      <ButtonAddAddressComponent refetchData={refetchTheData} />
     </Fragment>
   );
 };

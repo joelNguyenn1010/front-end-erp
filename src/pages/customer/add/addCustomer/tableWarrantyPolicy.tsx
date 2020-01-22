@@ -1,23 +1,27 @@
-import React from 'react'
+import React from "react";
 
-import InputIpsWarrantyPolicyComponent from './addWarrantyPolicy/inputIpsWarrantyPolicyComponent'
-import InputCusWarrantyPolicyComponent from './addWarrantyPolicy/inputCusWarrantyPolicyComponent'
+import InputIpsWarrantyPolicyComponent from "./addWarrantyPolicy/inputIpsWarrantyPolicyComponent";
+import InputCusWarrantyPolicyComponent from "./addWarrantyPolicy/inputCusWarrantyPolicyComponent";
 
 const TableWarrantyPolicy = () => {
-    return (
-        <div>
-            <tr>
-                <td>
-                    Ips's warranty policy:
-                    <InputIpsWarrantyPolicyComponent />
-                </td>
-                <td>
-                    Customer warranty policy:
-                    <InputCusWarrantyPolicyComponent />
-                </td>
-            </tr>
-        </div>
-    )
-}
+  return (
+    <div>
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              Ips's warranty policy:
+              <InputIpsWarrantyPolicyComponent />
+            </td>
+            <td>
+              Customer warranty policy:
+              <InputCusWarrantyPolicyComponent />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
-export default TableWarrantyPolicy
+export default TableWarrantyPolicy;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Salutation } from '../../../../../store/contract/Customer'
+import { Salutation } from '../../../../store/contract/Customer'
 import { Select } from 'antd';
 const { Option } = Select;
 

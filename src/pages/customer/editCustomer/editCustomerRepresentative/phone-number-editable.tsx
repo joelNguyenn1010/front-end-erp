@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Tooltip, Form, Input, Popover, InputNumber } from 'antd';
-import EditableDisplayText from '../../../../../components/sharedStyled/EditableDisplayText';
+import EditableDisplayText from '../../../../components/sharedStyled/EditableDisplayText';
 
 
 
@@ -13,12 +13,12 @@ interface PhoneNumberEditableProps {
 
 const PhoneNumberEditable: React.FC<PhoneNumberEditableProps> = props => {
 
-    const [value, setValue] = useState<string>(props.text);
+    const [value, setValue] = useState<any>(props.text);
 
     const {text, record} = props
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
+    const onChange = (e: number | undefined) => {
+        setValue(e);
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,12 +32,12 @@ const PhoneNumberEditable: React.FC<PhoneNumberEditableProps> = props => {
     const contentEdit = (
         <Tooltip title={title} placement="top">
             <Form onSubmit={onSubmit}>
-                <Input
-                    type="number"
+                <InputNumber
                     minLength={1}
+                    maxLength={12}
                     placeholder={`${value}`}
-                    value={value}
-                  onChange={onChange}
+                    value={parseInt(value) }
+                    onChange={onChange}
                 />
             </Form>
         </Tooltip>

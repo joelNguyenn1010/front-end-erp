@@ -13,58 +13,60 @@ import InputOptionPaypalComponent from "./addPaymentDetail/inputOptionPaypalComp
 const TablePaymentDetail = () => {
   return (
     <div>
-      <tr>
-        <td>Currency:</td>
+      <table>
+        <tbody>
+          <tr>
+            <td>Currency:</td>
 
-        <td>
-          <InputCurrencyComponent />
-        </td>
-      </tr>
-      
+            <td>
+              <InputCurrencyComponent />
+            </td>
+          </tr>
 
-      <tr>
-        <td>Bank Name:</td>
+          <tr>
+            <td>Bank Name:</td>
 
-        <td>
-          <InputBankNameComponent />
-        </td>
-      </tr>
-      <tr>
-        <td>Bank Branch:</td>
+            <td>
+              <InputBankNameComponent />
+            </td>
+          </tr>
+          <tr>
+            <td>Bank Branch:</td>
 
-        <td>
-          <InputBankBranchComponent />
-        </td>
-      </tr>
+            <td>
+              <InputBankBranchComponent />
+            </td>
+          </tr>
 
+          <tr>
+            <td>Account Name:</td>
 
-      <tr>
-        <td>Account Name:</td>
+            <td>
+              <InputAccountNameComponent />
+            </td>
+          </tr>
+          <tr>
+            <td>Account Number:</td>
 
-        <td>
-          <InputAccountNameComponent />
-        </td>
-      </tr>
-      <tr>
-        <td>Account Number:</td>
+            <td>
+              <InputAccountNumberComponent />
+            </td>
+          </tr>
+          <tr>
+            <td>Bank BSB:</td>
 
-        <td>
-          <InputAccountNumberComponent />
-        </td>
-      </tr>
-      <tr>
-        <td>Bank BSB:</td>
-
-        <td>
-          <InputBankBsbComponent />
-        </td>
-      </tr>
-      <tr>
-        <td>Option Paypal (optional): </td>
-        <td>
-          <InputOptionPaypalComponent />
-        </td>
-      </tr>
+            <td>
+              <InputBankBsbComponent />
+            </td>
+          </tr>
+          <tr>
+            <td>Option Paypal (optional): </td>
+            <td>
+              <InputOptionPaypalComponent />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };

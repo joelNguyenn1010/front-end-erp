@@ -1,24 +1,26 @@
-import React from 'react'
-import { Input } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import React from "react";
+import { Input, Form } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { AppState } from "../../../../../store";
+import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
+import { useFormContext } from "react-hook-form";
 
 const InputStreetnameComponent = () => {
+  const { register, errors } = useFormContext();
 
-    const name =  useSelector((state:AppState) => state.CustomerReducer.input.streetName)
-
-    const dispatch = useDispatch();
-
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-        dispatch(changeCustomerValue('streetName', newVal))
-    }
-
-    return (
-        <div>
-            <Input  value={name} onChange={onChange} allowClear placeholder='Street name' />
-        </div>
-    )
-}
-export default InputStreetnameComponent
+  return (
+    <Form.Item
+      help={errors.street && "Street name is required"}
+      label={"Street Name"}
+      validateStatus={errors.street ? "error" : ""}
+    >
+      <input
+        ref={register({ required: true })}
+        name="street"
+        className="ant-input"
+        placeholder="Street Name"
+      />
+    </Form.Item>
+  );
+};
+export default InputStreetnameComponent;

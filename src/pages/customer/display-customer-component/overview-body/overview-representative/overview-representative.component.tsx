@@ -10,7 +10,8 @@ import client from "../../../../../graphql";
 import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import { Representative } from "../../../../../store/contract/Suppliers";
-import SalutationEditable from "./salutation-editable";
+import SalutationEditable from "../../../editCustomer/editCustomerRepresentative/salutation-editable";
+import PhoneNumberEditable from "../../../editCustomer/editCustomerRepresentative/phone-number-editable";
 
 const OverviewRepresentativeComponent = () => {
   let { id } = useParams();
@@ -57,8 +58,8 @@ const OverviewRepresentativeComponent = () => {
       title: "Phone Number",
       key: "phoneNumber",
       dataIndex: "phoneNumber",
-      editable: true
-      // render: (text: any, record: any) => <PhoneNumberEditable handleSave={handleSave} text={text} record={record} />
+      // editable: true
+      render: (text: any, record: any) => <PhoneNumberEditable handleSave={handleSave} text={text} record={record} />
 
     },
 
@@ -66,6 +67,7 @@ const OverviewRepresentativeComponent = () => {
       title: "Email",
       key: "email",
       dataIndex: "representativeemails",
+      editable: true,
       render: (text: any, record: any) => {
         return text.map((data: any, index: number) => <p key={index}>{data.email}</p>);
       }

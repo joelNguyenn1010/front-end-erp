@@ -1,8 +1,8 @@
 import React from "react";
-import OrganizationInput from "./addRepresentative/addOrganizationInput";
-import AddContactType from "./addRepresentative/addContactType";
-import AddPricingLevel from "./addRepresentative/addPricingLevel";
-import AddEcommercialId from "./addRepresentative/addEcommercialId";
+import OrganizationInput from "./addContactDetail/addOrganizationInput";
+import AddContactType from "./addContactDetail/addContactType";
+import AddPricingLevel from "./addContactDetail/addPricingLevel";
+import AddEcommercialId from "./addContactDetail/addEcommercialId";
 import { Button, message } from "antd";
 import { useForm, FormContext, useFormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";

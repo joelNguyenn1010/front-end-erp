@@ -1,6 +1,6 @@
 import React, { BaseSyntheticEvent } from 'react'
 import { Modal, Button, message } from 'antd'
-import AddRepresentativeForm from '../../../add/addCustomer/addContactDetail/add-representative-form'
+import AddRepresentativeForm from '../../../add/addCustomer/tableRepresentative'
 import { useParams } from 'react-router-dom'
 import { useForm, FormContext } from 'react-hook-form'
 import { Email } from '../../../../../store/contract/Email'
@@ -13,13 +13,7 @@ interface CreateNewRepresentativeProps {
 }
 
 
-type FormData = {
-    fullName: string,
-    salutation: string,
-    phoneNumber: string,
-    emails: Array<Email>,
-    position: string
-}
+
 const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: any) => {
 
      // create new form

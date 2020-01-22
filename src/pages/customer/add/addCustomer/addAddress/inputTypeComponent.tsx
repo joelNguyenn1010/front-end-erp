@@ -1,24 +1,43 @@
-import React from 'react'
-import {Cascader} from 'antd'
-import { useDispatch } from 'react-redux'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import React from "react";
+import { Select, Form } from "antd";
+import { useFormContext, Controller } from "react-hook-form";
+import { SupplierAddressTypeEnum } from "../../../../../store/contract/Customer";
+const { Option } = Select;
 
 const InputTypeComponent = () => {
+  const { setValue, control } = useFormContext();
 
-    
+  const keys = Object.keys(SupplierAddressTypeEnum);
 
-    const dispatch = useDispatch();
+  const onChange = (val: string) => {
+    setValue("type", val);
+  };
 
-    const onChange = (val: string) => {
-        dispatch(changeCustomerValue('type', val))
-    }
+  const TypeSelection = (
+    <Select
+      defaultValue={"postal"}
+      style={{ width: "100%" }}
+      onChange={onChange}
+    >
+      {keys.map((type: string, index: number) => (
+        <Option key={index} value={type}>
+          {type}
+        </Option>
+      ))}
+    </Select>
+  );
 
-    return (
+  return (
+    <Form.Item label={"Type"}>
+      <Controller
+        rules={{ required: true }}
+        as={TypeSelection}
+        name="type"
+        control={control}
+        defaultValue="postal"
+      />
+    </Form.Item>
+  );
+  };
 
-        <div>
-            
-        </div>
-    )
-}
-
-export default InputTypeComponent
+export default InputTypeComponent;

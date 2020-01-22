@@ -1,9 +1,9 @@
 import React from "react";
-import AddSalutation from "./addSalutation";
-import AddFirstName from "./addFirstName";
-import AddPosition from "./addPosition";
-import AddPhoneNumber from "./addPhoneNumber";
-import AddEmails from "./addEmails";
+import AddSalutation from "./addRepresentativeDetail/addSalutation";
+import AddFirstName from "./addRepresentativeDetail/addFirstName";
+import AddPosition from "./addRepresentativeDetail/addPosition";
+import AddPhoneNumber from "./addRepresentativeDetail/addPhoneNumber";
+import AddEmails from "./addRepresentativeDetail/addEmails";
 import { Button } from "antd";
 
 interface AddRepresentativeFormProps {

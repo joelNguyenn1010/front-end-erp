@@ -260,14 +260,15 @@ export const UPDATE_ITEM_WHLOCATION = gql`
 `
 
 export const UPDATE_CUSTOMER_ADDRESS = gql`
-  mutation($id: Int!, $state: String, $street: String, $city: String, $postcode: String ){
-    updateAddress(id: $id, state: $state, street: $street, city: $city, postcode: $postcode){
+  mutation($id: Int!, $state: String, $street: String, $city: String, $postcode: String, $type: SupplierAddressTypeEnum){
+    updateAddress(id: $id, state: $state, street: $street, city: $city, postcode: $postcode, type: $type){
       id
       supplierId
       street
       city
       state
       postcode
+      type
     }
   }
 `
