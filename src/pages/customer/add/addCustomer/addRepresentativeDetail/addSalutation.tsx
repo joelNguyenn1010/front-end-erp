@@ -1,7 +1,5 @@
 import React from 'react'
 import { Select, Form } from 'antd'
-import { useDispatch } from 'react-redux'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
 import { Salutation } from '../../../../../store/contract/Customer'
 import { useFormContext, Controller } from 'react-hook-form'
 

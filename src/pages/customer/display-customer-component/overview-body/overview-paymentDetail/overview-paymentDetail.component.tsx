@@ -8,7 +8,7 @@ import { UPDATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation";
 import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import editTableRow from "../../../../tableEditable/editTableRow";
-import EditTableCellWithRules from "../../../../tableEditable/editTableCellWithRules";
+import editTableCell from "../../../../tableEditable/editTableCell";
 
 var reg = new RegExp('^[0-9]+$');
 
@@ -120,7 +120,7 @@ const newColumns = columns.map((col: any) => {
   const components = {
     body: {
       row: editTableRow,
-      cell: EditTableCellWithRules
+      cell: editTableCell
     }
   };
 

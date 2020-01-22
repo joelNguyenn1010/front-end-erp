@@ -4,7 +4,7 @@ import { Button } from "antd";
 import CreateNewAddress from './create-new-address-modal.component'
 
 interface ButtonAddAddressComponentProps {
-  onClose?: () => void
+  refetchData?: () => void
 }
 
 const ButtonAddAddressComponent:React.FC<ButtonAddAddressComponentProps> = (props: any) => {
@@ -21,7 +21,7 @@ const ButtonAddAddressComponent:React.FC<ButtonAddAddressComponentProps> = (prop
         Add more
       </Button>
 
-      {open && <CreateNewAddress onClose={props.onClose} setOpen={setOpen} open={open}/>}
+      <CreateNewAddress refetchData={props.refetchData} setOpen={setOpen} open={open}/>
       
     </React.Fragment> 
     

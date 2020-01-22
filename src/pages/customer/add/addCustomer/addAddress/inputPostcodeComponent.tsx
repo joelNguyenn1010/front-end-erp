@@ -1,30 +1,24 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../../../../../store";
-import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
-import { InputNumber } from "antd";
+import { Form } from "antd";
+import { useFormContext } from "react-hook-form";
 
-let timeout: any = null;
 const InputPostcodeComponent = () => {
-  const name = useSelector(
-    (state: AppState) => state.CustomerReducer.input.postcode
-  );
-
-  const dispatch = useDispatch();
-
-  const onChange = (val: number | undefined) => {
-    dispatch(changeCustomerValue("postcode", val));
-  };
+  const { register, errors } = useFormContext();
 
   return (
-    <div>
-      <InputNumber
-        style={{width: 200}}
-        maxLength={6}
-        onChange={onChange}
+    <Form.Item
+      help={errors.postcode && "State is required"}
+      label={"Postcode"}
+      validateStatus={errors.postcode ? "error" : ""}
+    >
+      <input
+        type='number'
+        ref={register({ required: true })}
+        name="postcode"
+        className="ant-input"
         placeholder="Postcode"
       />
-    </div>
+    </Form.Item>
   );
 };
 

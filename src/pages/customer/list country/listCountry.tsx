@@ -5,7 +5,7 @@ const { Option } = Select;
 
 interface ListCountryProps {
   onChange: (value: any) => void;
-  value: any;
+  value?: any;
   style?: any;
 }
 

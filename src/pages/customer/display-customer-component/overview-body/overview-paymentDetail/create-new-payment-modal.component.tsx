@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, message } from "antd";
-import AddPaymentForm from "../../../add/addCustomer/addPaymentDetail/add-payment-form";
+import AddPaymentForm from "../../../add/addCustomer/addPaymentDetail/payment-detail-create-form";
 import { useForm, FormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation";

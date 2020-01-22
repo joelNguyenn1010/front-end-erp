@@ -1,16 +1,16 @@
 import React from "react";
-import OrganizationInput from "./addRepresentative/addOrganizationInput";
-import AddContactType from "./addRepresentative/addContactType";
-import AddPricingLevel from "./addRepresentative/addPricingLevel";
-import AddEcommercialId from "./addRepresentative/addEcommercialId";
+import OrganizationInput from "./addOrganizationInput";
+import AddContactType from "./addContactType";
+import AddPricingLevel from "./addPricingLevel";
+import AddEcommercialId from "./addEcommercialId";
 import { Button, message } from "antd";
 import { useForm, FormContext, useFormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import { ADD_SUPPLIER } from "../../../../graphql/mutation";
-import history from "../../../../history";
 import { Redirect, useHistory } from "react-router-dom";
+import { ADD_SUPPLIER } from "../../../../../graphql/mutation";
 
 interface TableRowContactDetailProps {
+  
     onSuccess?: () => void,
 }
 
@@ -28,7 +28,6 @@ const TableRowContactDetail: React.FC<TableRowContactDetailProps>  = props => {
         props.onSuccess()
       }
       history.push(`/supplier/${id}`)
-
     },
 
     onError: () => {

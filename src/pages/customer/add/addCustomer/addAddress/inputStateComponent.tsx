@@ -1,24 +1,26 @@
-import React from 'react'
-import { Input } from 'antd'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from '../../../../../store'
-import { changeCustomerValue } from '../../../../../store/action/customerAction/createCustomerAction'
+import React from "react";
+import { Input, Form } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import { AppState } from "../../../../../store";
+import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
+import { useFormContext } from "react-hook-form";
 
 const InputStateComponent = () => {
+  const { register, errors } = useFormContext();
 
-    const name =  useSelector((state:AppState) => state.CustomerReducer.input.state)
-
-    const dispatch = useDispatch();
-
-    const onChange = (val: React.ChangeEvent<HTMLInputElement>) => {
-        const newVal = val.target.value
-        dispatch(changeCustomerValue('state', newVal))
-    }
-
-    return (
-        <div>
-            <Input  value={name} onChange={onChange} allowClear placeholder='state' />
-        </div>
-    )
-}
-export default InputStateComponent
+  return (
+    <Form.Item
+      help={errors.state && "State is required"}
+      label={"State"}
+      validateStatus={errors.state ? "error" : ""}
+    >
+      <input
+        ref={register({ required: false })}
+        name="state"
+        className="ant-input"
+        placeholder="State"
+      />
+    </Form.Item>
+  );
+};
+export default InputStateComponent;

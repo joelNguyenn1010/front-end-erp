@@ -10,7 +10,13 @@ import client from "../../../../../graphql";
 import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import { Representative } from "../../../../../store/contract/Suppliers";
-import SalutationEditable from "./salutation-editable";
+import SalutationEditable from "../../../editCustomer/editCustomerRepresentative/salutation-editable";
+import PhoneNumberEditable from "../../../editCustomer/editCustomerRepresentative/phone-number-editable";
+
+var reg = new RegExp('^[0-9]+$');
+
+const requiredRules =  [{required: true}]
+const requiredNumberRules = [{required: true}, {pattern: reg, message: "Number only"}]
 
 const OverviewRepresentativeComponent = () => {
   let { id } = useParams();
@@ -27,6 +33,7 @@ const OverviewRepresentativeComponent = () => {
   const { data, refetch, loading } = useQuery(GET_REPRESENTATIVE_QUERY, {
     variables,
   });
+
 
   const refetchTheData = () => {
     refetch(variables);
@@ -46,6 +53,7 @@ const OverviewRepresentativeComponent = () => {
       key: "firstName",
       dataIndex: "fullName",
       editable: true,
+      rules: requiredRules
     },
     {
       title: "Position",
@@ -57,8 +65,8 @@ const OverviewRepresentativeComponent = () => {
       title: "Phone Number",
       key: "phoneNumber",
       dataIndex: "phoneNumber",
-      editable: true
-      // render: (text: any, record: any) => <PhoneNumberEditable handleSave={handleSave} text={text} record={record} />
+      editable: true,
+      rules: [...requiredNumberRules, {max: 12}]
 
     },
 
@@ -66,23 +74,34 @@ const OverviewRepresentativeComponent = () => {
       title: "Email",
       key: "email",
       dataIndex: "representativeemails",
+      editable: true,
       render: (text: any, record: any) => {
         return text.map((data: any, index: number) => <p key={index}>{data.email}</p>);
       }
     },
+    {
+      title: "Operation",
+      render: (text: any, record: any) =>
+        data.representative.data.length > 0 ? (
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => handleDelete(record.id)}
+          >
+            <a>Delete</a>
+          </Popconfirm>
+        ) : null
+    }
 
   ];
 
   const newColumns = columns.map((col: any) => {
-    if (!col.editable) {
-      return col;
-    }
     return {
       ...col,
       onCell: (record: any) => ({
         record,
         editable: col.editable,
         dataIndex: col.dataIndex,
+        rules: col.rules,
         title: col.title,
         handleSave: handleSave
       })

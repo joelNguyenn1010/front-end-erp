@@ -19,6 +19,12 @@
         Mrs='Mrs',
         Other='Other'
     }
+
+    export enum SupplierAddressTypeEnum {
+        postal='postal',
+        shipping='shipping'
+    }
+
 export interface Suppliers {
     id: number,
     name: string,
@@ -37,6 +43,16 @@ export interface Representative {
     position: string,
     phoneNumber: number,
     representativeemails?: Array<Email>
+}
+
+export interface Address {
+    id: number,
+    country: string,
+    postcode: string,
+    city: string,
+    state: string,
+    street: string,
+    type: SupplierAddressTypeEnum,
 }
 
 export interface Email {

@@ -2,27 +2,38 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../../../store";
 import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
-import { Cascader } from "antd";
+import { Cascader, Form } from "antd";
 import ListCountry from "../../../list country/listCountry";
+import { useFormContext, Controller } from "react-hook-form";
 
 let timeout: any = null;
 
 const InputCountryComponent = (props: any) => {
-  const name = useSelector(
-    (state: AppState) => state.CustomerReducer.input.country
-  );
+  
+  const { setValue, control } = useFormContext();
 
 
-  const dispatch = useDispatch();
 
   const onChange = (val: string) => {
-    dispatch(changeCustomerValue("country", val));
+    setValue("country",val)
   };
 
+  const CountrySelection = (<ListCountry style={{width: '100%'}} value="Australia" onChange={(val: any) => onChange(val)}/>)
+
   return (
-    <div>
-      <ListCountry style={{width: 200}} value={name} onChange={(val: any) => onChange(val)}/>
-    </div>
+    <Form.Item label={"Country"}>
+      
+      <Controller
+        rules={{ required: true }}
+        as={CountrySelection}
+        name="country"
+        control={control}
+        defaultValue="Australia"
+      />
+    </Form.Item>
+
+      
+    
   );
 };
 

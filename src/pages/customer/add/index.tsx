@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'antd';
-import TableContactDetail from './addCustomer/tableContactDetail';
+import TableContactDetail from './addCustomer/addContactDetail/contact-detail-create-form';
 
 interface AddCustomerProps {
     onSuccess?: () => void
