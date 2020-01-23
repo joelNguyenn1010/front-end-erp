@@ -167,6 +167,16 @@ mutation($supplierId: Int!, $country: String, $postcode: String, $city: String, 
 }
 `
 
+export const ADD_ECOMMERCIAL_ID = gql`
+    mutation($supplierId: Int!, $identify: String, $name: String){
+    createEcommercialSupplier(supplierId: $supplierId, identify: $identify, name: $name){
+    id
+    supplierId
+    identify
+    name
+    }
+    }
+`
 
 
 
@@ -360,4 +370,14 @@ export const UPDATE_SUPPLIER_PAYMENT = gql`
       paypal
     }
   }
+`
+
+export const UPDATE_ECOMMERCIAL_ID = gql`
+    mutation($id: Int!, $identify: String, $name: String) {
+        updateEcommercialSupplier(id: $id, identify: $identify, name: $name) {
+            id
+            identify
+            name
+        }
+    }
 `

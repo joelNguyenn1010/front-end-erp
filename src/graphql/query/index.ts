@@ -223,3 +223,16 @@ query($limit: Int!, $page: Int!, $supplierId: Int!) {
   }
 }
 `
+
+export const GET_ECOMMERCIALID_QUERY = gql`
+ query($limit: Int!, $page: Int!, $supplierId: Int!) {
+  ecommercialId(supplierId: $supplierId, limit: $limit, page: $page){
+    data {
+      id
+      supplierId
+      identify
+      name
+    }
+  }
+}
+`

@@ -59,3 +59,8 @@ export interface Email {
     id: number,
     emails: string
 }
+
+export interface EcommercialId {
+    identify: string,
+    name: string
+}
