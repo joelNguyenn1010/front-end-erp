@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Table, Result } from 'antd'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
@@ -6,6 +6,7 @@ import { GET_SUPPLIER_QUERY } from '../../graphql/query'
 import { Link, withRouter } from 'react-router-dom'
 import AddSupplier from './addSupplier'
 import LoadingSpin from '../../components/loadingSpin'
+import { channel } from '../../websocket/pusher'
 
 interface SupplierProps {
     history: any
@@ -33,6 +34,12 @@ const Supplier: React.FC<SupplierProps> = props => {
 
 
     const { data, refetch, loading } = useQuery(GET_SUPPLIER_QUERY, { variables: { name: "" } })
+
+    // useEffect(() => {
+       
+    //     console.log('ddd')
+    // }, [callback])
+
 
     const onSuccesCreate = () => {
         refetch({name: ""})

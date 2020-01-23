@@ -6,9 +6,11 @@ import EditableName from "./editableName";
 import EditableNote from "./editableNote";
 import EditableManufactor from "./editableManufactor";
 import DisplaySortedItem from "./displaySortedItem";
+import { channel } from "../../../websocket/pusher";
 
 
 const DisplayModelContainer: React.FC = () => {
+
   const [pagi, setPagi] = React.useState<any>({
     page: 1,
     limit: 10,
@@ -21,6 +23,13 @@ const DisplayModelContainer: React.FC = () => {
     { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
   );
 
+
+
+
+  channel.bind('new-model', () => {
+    refetch({ limit: pagi.limit, page: pagi.page, name: pagi.name })
+  })
+  
   const dataRender = data ? data.model.data : [];
   const dataTotal = data ? data.model.total : [];
 
@@ -32,26 +41,17 @@ const DisplayModelContainer: React.FC = () => {
       key: "name",
       width: '12%',
 
-      render: (text: any, record: any) => <EditableName text={text} record={record}/>
+      render: (text: any, record: any) => <EditableName text={text} record={record} />
     },
     {
       width: '12%',
       title: "Manufacture",
       dataIndex: "manufactors.name",
       key: "manuName",
-      render: (text: any, record: any) => <EditableManufactor text={text} record={record}/>
+      render: (text: any, record: any) => <EditableManufactor text={text} record={record} />
     },
 
-    // {
-      
-    //   title: "Note",
-    //   dataIndex: "note",
-    //   key: "note",
-    //   width: '19%',
 
-    //   // ellipsis: true,
-    //   render:  (text: any, record: any) => <EditableNote text={text} record={record}/>
-    // },
     {
       title: "AU",
       children: [
@@ -93,10 +93,10 @@ const DisplayModelContainer: React.FC = () => {
       ]
     },
     {
-        title: 'In transfer',
-        key: 'transfer',
-        width: "20%",
-        render: (text: string, record: any) => <p>AU to US: 0       US to AU: 20</p>
+      title: 'In transfer',
+      key: 'transfer',
+      width: "20%",
+      render: (text: string, record: any) => <p>AU to US: 0       US to AU: 20</p>
     },
     {
       title: "US",
@@ -155,47 +155,47 @@ const DisplayModelContainer: React.FC = () => {
 
   return (
     <React.Fragment>
-    <Table 
-      size="small"
-      loading={loading}
-      title={() => (
-        <Input
-          placeholder={"Search"}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPagi({ limit: 10, page: 1, name: e.target.value })
+      <Table
+        size="small"
+        loading={loading}
+        title={() => (
+          <Input
+            placeholder={"Search"}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPagi({ limit: 10, page: 1, name: e.target.value })
+            }
+          />
+        )}
+        bordered
+        pagination={{
+          itemRender: itemRender,
+          pageSizeOptions: ["10", "20", "100", "500", "1000"],
+          onShowSizeChange: (current: number, size: number) => {
+            onShowSizeChange(current, size);
+          },
+          showSizeChanger: true,
+          showQuickJumper: true,
+          current: pagi.page,
+          total: dataTotal,
+          onChange: (page: number) => {
+            setPagi({ limit: 10, page, name: pagi.name });
           }
-        />
-      )}
-      bordered
-      pagination={{
-        itemRender: itemRender,
-        pageSizeOptions: ["10", "20", "100", "500", "1000"],
-        onShowSizeChange: (current: number, size: number) => {
-          onShowSizeChange(current, size);
-        },
-        showSizeChanger: true,
-        showQuickJumper: true,
-        current: pagi.page,
-        total: dataTotal,
-        onChange: (page: number) => {
-          setPagi({ limit: 10, page, name: pagi.name });
-        }
-      }}
-      rowKey='id'
-      dataSource={dataRender}
-      columns={columns}
-      scroll={{ y: window.screen.height - 500 }}
-    >
-       
-    </Table>
-    <Button 
-          type="primary" 
-          shape="circle"
-          size="large"
-          onClick={() => {
-            refetch( { limit: pagi.limit, page: pagi.page, name: pagi.name })
-          }}
-          style={{position: 'absolute', bottom: 35, left:10}}><Icon type="reload" /></Button>
+        }}
+        rowKey='id'
+        dataSource={dataRender}
+        columns={columns}
+        scroll={{ y: window.screen.height - 500 }}
+      >
+
+      </Table>
+      <Button
+        type="primary"
+        shape="circle"
+        size="large"
+        onClick={() => {
+          refetch({ limit: pagi.limit, page: pagi.page, name: pagi.name })
+        }}
+        style={{ position: 'absolute', bottom: 35, left: 10 }}><Icon type="reload" /></Button>
 
     </React.Fragment>
   );
