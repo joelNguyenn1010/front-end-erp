@@ -181,6 +181,7 @@ export const GET_REPRESENTATIVE_QUERY = gql`
         position
         phoneNumber
         representativeemails{
+          id
           email
         }
     }

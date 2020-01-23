@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import { Representative } from "../../../../../store/contract/Suppliers";
 import SalutationEditable from "../../../editCustomer/editCustomerRepresentative/salutation-editable";
-import PhoneNumberEditable from "../../../editCustomer/editCustomerRepresentative/phone-number-editable";
+import EmailEditable from "../../../editCustomer/editCustomerRepresentative/email-editable";
 
 var reg = new RegExp('^[0-9]+$');
 
@@ -74,9 +74,8 @@ const OverviewRepresentativeComponent = () => {
       title: "Email",
       key: "email",
       dataIndex: "representativeemails",
-      editable: true,
       render: (text: any, record: any) => {
-        return text.map((data: any, index: number) => <p key={index}>{data.email}</p>);
+        return <EmailEditable text={text} record={record}  />
       }
     },
     {

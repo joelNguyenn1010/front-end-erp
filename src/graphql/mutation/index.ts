@@ -283,14 +283,12 @@ export const UPDATE_ADDRESS_COUNTRY = gql`
   }
 `
 
-export const UPDATE_ADDRESS_POSTCODE = gql`
-  mutation($id: Int!, $postcode: String){
-    updateAddress(id: $id, postcode: $postcode){
-      id
-      supplierId
-      postcode
+export const UPDATE_REPRESENTATIVE_EMAIL = gql`
+    mutation($representativeId: Int!, $emails: [EmailWithIdInput]){
+      updateRepresentativeEmail(representativeId: $representativeId, emails: $emails){
+        id
+      }
     }
-  }
 `
 
 

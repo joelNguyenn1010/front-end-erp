@@ -31,4 +31,9 @@ export const SALUTATION_ENUM = gql`
         Level4,
         Level5
     }
+
+    input EmailWithIdInput {
+        email: String
+        id: Int
+    }
 `

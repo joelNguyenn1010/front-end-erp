@@ -56,5 +56,6 @@ export interface Address {
 }
 
 export interface Email {
-    email: string
+    id: number,
+    emails: string
 }
