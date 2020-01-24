@@ -2,7 +2,7 @@ import React from "react";
 import OrganizationInput from "./addOrganizationInput";
 import AddContactType from "./addContactType";
 import AddPricingLevel from "./addPricingLevel";
-import AddEcommercialId from "./addEcommercialId";
+import AddEcommercialId from "../addEcommercialId/addEcommercialId";
 import { Button, message } from "antd";
 import { useForm, FormContext, useFormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";

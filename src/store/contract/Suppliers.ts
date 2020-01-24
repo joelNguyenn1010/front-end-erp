@@ -59,5 +59,17 @@ export interface Address {
 }
 
 export interface Email {
-    email: string
+    id: number,
+    emails: string
+}
+
+export interface EcommercialId {
+    identify: string,
+    name: string
+}
+
+export interface EmailSupplier {
+    id: number
+    email: string,
+    typeemail: string
 }

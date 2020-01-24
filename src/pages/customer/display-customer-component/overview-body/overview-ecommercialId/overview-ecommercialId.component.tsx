@@ -1,51 +1,58 @@
 import React, { Fragment } from "react";
-import { Table, Popconfirm, Button } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../../../../../store";
+import {Table, Popconfirm, Result, message} from "antd";
 import editTableRow from "../../../../tableEditable/editTableRow";
 import editTableCell from "../../../../tableEditable/editTableCell";
-import {
-  deleteData,
-  addEcommercial,
-  changeValueEcommercial
-} from "../../../../../store/action/customerAction/createCustomerAction";
+import {useParams} from "react-router-dom";
+import {useMutation, useQuery} from "@apollo/react-hooks";
+import { GET_ECOMMERCIALID_QUERY} from "../../../../../graphql/query";
+import LoadingSpin from "../../../../../components/loadingSpin";
+import { EcommercialId} from "../../../../../store/contract/Suppliers";
+import ButtonAddEcommercial from "./button-add-ecommercialId.component";
+import {DELETE_ECOMMERCIAL_ID, UPDATE_ECOMMERCIAL_ID} from "../../../../../graphql/mutation";
+import client from "../../../../../graphql";
 
-interface DataSource {
-  dataSource: Array<any>;
-}
+const requiredRules =  [{required: true}]
 
 const OverviewEcommercialIdComponent = (props: any) => {
-  const [data, setData] = React.useState<DataSource>({
-    dataSource: []
-  });
-  const name = useSelector((state: AppState) =>
-    state.CustomerReducer.input.ecommercial
-      ? state.CustomerReducer.input.ecommercial
-      : []
-  );
-  const dispatch = useDispatch();
+  let { id } = useParams();
 
-  const [count, setCount] = React.useState(0);
+  const limit = 100;
+  const page = 1;
+
+  const variables = {
+    supplierId: id,
+    limit,
+    page
+  };
+
+  const { data, refetch, loading } = useQuery(GET_ECOMMERCIALID_QUERY, {
+    variables
+  });
+
+  const refetchTheData = () => {
+    refetch(variables);
+  };
 
   const columns = [
     {
-      title: "name",
+      title: "Name",
       dataIndex: "name",
-      width: "30%",
-      editable: true
+      editable: true,
+      rules: requiredRules
     },
     {
-      title: "id",
-      dataIndex: "id",
-      editable: true
+      title: "ID",
+      dataIndex: "identify",
+      editable: true,
+      rules: requiredRules
     },
     {
-      title: "operation",
+      title: "Operation",
       render: (text: any, record: any) =>
-        data.dataSource.length > 0 ? (
+        data.ecommercialId.data.length > 0 ? (
           <Popconfirm
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.key)}
+            onConfirm={() => handleDelete(record.id)}
           >
             <a>Delete</a>
           </Popconfirm>
@@ -61,15 +68,13 @@ const OverviewEcommercialIdComponent = (props: any) => {
   };
 
   const newColumns = columns.map((col: any) => {
-    if (!col.editable) {
-      return col;
-    }
     return {
       ...col,
       onCell: (record: any) => {
         return {
           record,
           editable: col.editable,
+          rules: col.rules,
           dataIndex: col.dataIndex,
           title: col.title,
           handleSave: handleSave
@@ -79,56 +84,52 @@ const OverviewEcommercialIdComponent = (props: any) => {
   });
 
   const handleDelete = (key: any) => {
-    const dataSource = [...data.dataSource];
-    setData({ dataSource: dataSource.filter((item: any) => item.key !== key) });
-    name.splice(key, 1);
-    dispatch(deleteData(key));
+      client.mutate({mutation: DELETE_ECOMMERCIAL_ID, variables:{id: parseInt(key)}})
+          .then(res => {
+            message.success("Item was deleted")
+            refetchTheData()
+          })
+          .catch(err => {
+            message.error("Cant delete item, please try again")
+          })
   };
 
-  const handleAdd = () => {
-    const newData = {
-      key: count,
-      name: "Default",
-      id: "Default"
-    };
+  const [updateEcommercial ] = useMutation( UPDATE_ECOMMERCIAL_ID, {
+    onCompleted: () => message.success("Data saved"),
+    onError: () => message.error("Error when try to save data")
+  })
 
-    const oldData = data.dataSource.concat();
-    oldData.push(newData);
-    setData({
-      dataSource: [...data.dataSource, newData]
-    });
 
-    setCount(count + 1);
-    dispatch(addEcommercial(newData.id, newData.name));
+  const handleSave = (data: EcommercialId) => {
+      updateEcommercial({variables: data})
   };
 
-  const handleSave = (row: any) => {
-    const newData = [...data.dataSource];
-    const index = newData.findIndex(item => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      ...row
-    });
-    setData({ dataSource: newData });
-    dispatch(changeValueEcommercial(index, "id", row.id));
-    dispatch(changeValueEcommercial(index, "name", row.name));
-  };
+  if (loading) {
+    return <LoadingSpin />
+  } else if (!loading && data && data.ecommercialId && data.ecommercialId.data) {
+    const dataSource: Array<EcommercialId> = data.ecommercialId.data
 
-  return (
-    <Fragment>
-      <Table
-        pagination={{ pageSize: 3 }}
-        components={components}
-        bordered
-        columns={newColumns}
-        dataSource={data.dataSource}
-      />
-      <Button onClick={handleAdd} type="primary" style={{ width: "100%" }}>
-        Add New
-      </Button>
-    </Fragment>
-  );
+    return (
+        <Fragment>
+          <Table
+              columns={newColumns}
+              bordered
+              rowKey="id"
+              dataSource={dataSource}
+              components={components}
+              pagination={false}
+              scroll={{ y: window.screen.height - 700 }}
+          />
+          <ButtonAddEcommercial refetchData={refetchTheData} />
+        </Fragment>
+    );
+  } else {
+    return <Result
+        status="error"
+        subTitle={`Please check the url or make sure the id "${id}" is correct`}
+        title="Can't get the representatives">
+    </Result>
+  }
 };
 
 export default OverviewEcommercialIdComponent;

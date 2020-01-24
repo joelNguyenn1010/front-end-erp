@@ -8,7 +8,7 @@ export const SALUTATION_ENUM = gql`
     }
 
     input EmailInput {
-        name: String
+        email: String
     }
 
     enum SupplierAddressTypeEnum {
@@ -30,5 +30,10 @@ export const SALUTATION_ENUM = gql`
         Level3,
         Level4,
         Level5
+    }
+
+    input EmailWithIdInput {
+        email: String
+        id: Int
     }
 `

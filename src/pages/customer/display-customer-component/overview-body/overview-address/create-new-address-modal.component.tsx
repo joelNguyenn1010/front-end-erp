@@ -35,7 +35,8 @@ const CreateNewAddress: React.FC<CreateNewAddressProps> = (props: any) => {
   const onSubmit = (data: any) => {
     // supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails
     createAddress({ variables: { ...data, supplierId: id } });
-    // console.log(data)
+    props.setOpen(false);
+
   };
 
   const onCancel = (e: any) => {

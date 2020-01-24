@@ -186,6 +186,7 @@ export const GET_REPRESENTATIVE_QUERY = gql`
         position
         phoneNumber
         representativeemails{
+          id
           email
         }
     }
@@ -226,4 +227,30 @@ query($limit: Int!, $page: Int!, $supplierId: Int!) {
     }
   }
 }
+`
+
+export const GET_ECOMMERCIALID_QUERY = gql`
+ query($limit: Int!, $page: Int!, $supplierId: Int!) {
+  ecommercialId(supplierId: $supplierId, limit: $limit, page: $page){
+    data {
+      id
+      supplierId
+      identify
+      name
+    }
+  }
+}
+`
+
+export const GET_EMAIL_SUPPLIER = gql`
+    query($limit: Int!, $page: Int!, $supplierId: Int!){
+        supplierEmail(limit: $limit, page: $page, supplierId: $supplierId){
+            data{
+                id
+                supplierId
+                email
+                typeemail
+            }
+        }
+    }
 `

@@ -1,8 +1,5 @@
 import React from "react";
 import { Input, Form } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../../../../../store";
-import { changeCustomerValue } from "../../../../../store/action/customerAction/createCustomerAction";
 import { useFormContext } from "react-hook-form";
 
 const InputStateComponent = () => {

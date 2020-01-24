@@ -49,12 +49,6 @@ export const CREATE_NEW_SUPPLIER_WITH_INFO = gql`
   }
 `
 
-// export const ADD_MODEL_SHORTCUT = gql`
-//     mutation($object: Any!) {
-//       createNewModel()
-//     }
-// `
-
 export const ADD_MODEL = gql`
 mutation($name: String!, 
   $manufactorId: Int!, 
@@ -139,7 +133,7 @@ mutation($supplierId: Int!, $salutation: SalutationEnum, $fullName: String!, $po
     fullName
     position
     phoneNumber
-  }
+ }   
 }
 `
 
@@ -167,6 +161,26 @@ mutation($supplierId: Int!, $country: String, $postcode: String, $city: String, 
 }
 `
 
+export const ADD_ECOMMERCIAL_ID = gql`
+    mutation($supplierId: Int!, $identify: String, $name: String){
+    createEcommercialSupplier(supplierId: $supplierId, identify: $identify, name: $name){
+    id
+    supplierId
+    identify
+    name
+    }
+    }
+`
+
+export const ADD_EMAIL_SUPPLIER = gql`
+    mutation( $email: String!, $supplierId: Int!, $typeemail: String){
+        createSupplierEmail( email: $email, supplierId: $supplierId, typeemail: $typeemail){
+            supplierId
+            email
+            typeemail
+        }
+    }
+`
 
 
 
@@ -283,14 +297,23 @@ export const UPDATE_ADDRESS_COUNTRY = gql`
   }
 `
 
-export const UPDATE_ADDRESS_POSTCODE = gql`
-  mutation($id: Int!, $postcode: String){
-    updateAddress(id: $id, postcode: $postcode){
-      id
-      supplierId
-      postcode
+export const UPDATE_REPRESENTATIVE_EMAIL = gql`
+    mutation($representativeId: Int!, $emails: [EmailWithIdInput]){
+      updateRepresentativeEmail(representativeId: $representativeId, emails: $emails){
+        id
+      }
     }
-  }
+`
+
+export const UPDATE_EMAIL_SUPPLIER = gql`
+    mutation($id: Int!, $email: String!, $typeemail: String){
+    updateSupplierEmail(id: $id, email: $email, typeemail: $typeemail){
+        id
+        supplierId
+        email
+        typeemail
+     }
+     }
 `
 
 
@@ -320,6 +343,29 @@ export const DELETE_ADDRESS = gql`
       id
     }
   }
+`
+
+export const DELETE_ECOMMERCIAL_ID= gql`
+    mutation($id: Int!){
+        deleteEcommercialSupplier(id: $id){
+            id
+            supplierId
+            identify
+            name
+        }
+    }
+`
+
+export const DELETE_EMAIL_SUPPLIER = gql`
+    mutation($id: Int!){
+    deleteSupplierEmail(id: $id){
+        id
+        email
+        supplierId
+        typeemail
+      }
+      
+    }
 `
 
 
@@ -362,4 +408,14 @@ export const UPDATE_SUPPLIER_PAYMENT = gql`
       paypal
     }
   }
+`
+
+export const UPDATE_ECOMMERCIAL_ID = gql`
+    mutation($id: Int!, $identify: String, $name: String) {
+        updateEcommercialSupplier(id: $id, identify: $identify, name: $name) {
+            id
+            identify
+            name
+        }
+    }
 `
