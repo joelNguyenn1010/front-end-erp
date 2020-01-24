@@ -1,5 +1,5 @@
 import React from "react";
-import {  message, Form } from "antd";
+import {  message, Form, Input } from "antd";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_REPRESENTATIVE_EMAIL } from "../../../../graphql/mutation/supplierMutation";
@@ -12,7 +12,7 @@ interface EmailEditableProps {
 const schema = yup.object().shape({
   emails: yup.array().of(
     yup.object().shape({
-      email: yup.string().email().required()
+      email: yup.string().email()
     })
   )
 })
@@ -42,7 +42,8 @@ const EmailEditable: React.FC<EmailEditableProps> = (props: any) => {
   };
 
   return(
-    <Form 
+
+    <Form
     onSubmit={handleSubmit(onChange)} 
     onBlur={handleSubmit(onChange)}>
       
@@ -52,6 +53,7 @@ const EmailEditable: React.FC<EmailEditableProps> = (props: any) => {
             help={errors.emails && "Email is not validated"}
             validateStatus={errors.emails ? "error" : ""}
           >
+
             <input
               className="ant-input"
               name={`emails[${index}].email`}
@@ -67,7 +69,6 @@ const EmailEditable: React.FC<EmailEditableProps> = (props: any) => {
         </li>
         
       ))}
-      
       <input type="submit" style={{ display: "none" }} />
     </Form>
   )

@@ -22,33 +22,25 @@ export const OverviewWarrantyComponent = () => {
         }
         return (
             <Descriptions layout="vertical" title="" bordered>
+                        <Descriptions.Item span={2} label="Ips policy">
+                            <UpdateDescriptionField
+                                name="ipsPolicy"
+                                isTextarea={true}
+                                value={supplier.ipsPolicy}
+                                mutation={UPDATE_SUPPLIER}
+                                id={id}
+                            />
+                        </Descriptions.Item>
 
-                <Row>
-                    <Col>
-                        <Descriptions.Item label="IPS policy" span={6}> <UpdateDescriptionField
-                            name="ipsPolicy"
-                            isTextarea={true}
-                            value={supplier.ipsPolicy}
-                            mutation={UPDATE_SUPPLIER}
-                            id={id}
-
-                        /></Descriptions.Item>
-                    </Col>
-                    <Col>
-                        <Descriptions.Item label="Warranty policy" span={6}> <UpdateDescriptionField
-                            name="warrantyPolicy"
-                            isTextarea={true}
-                            mutation={UPDATE_SUPPLIER}
-
-                            value={supplier.warrantyPolicy}
-                            id={id}
-                            //
-                        /></Descriptions.Item>
-                    </Col>
-                </Row>
-
-
-
+                        <Descriptions.Item span={2} label="Warranty policy">
+                            <UpdateDescriptionField
+                                name="warrantyPolicy"
+                                isTextarea={true}
+                                mutation={UPDATE_SUPPLIER}
+                                value={supplier.warrantyPolicy}
+                                id={id}
+                            />
+                        </Descriptions.Item>
 
             </Descriptions>
         )
