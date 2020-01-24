@@ -1,6 +1,6 @@
 import React from 'react'
 import client from '../../../graphql';
-import { UPDATE_ITEM_STOCKSTATUS } from '../../../graphql/mutation';
+import { UPDATE_ITEM_STOCKSTATUS } from '../../../graphql/mutation/productMutation';
 import { message, Select } from 'antd';
 
 interface EditCellStockStatusProps {

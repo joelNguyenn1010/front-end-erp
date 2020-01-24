@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {  message } from 'antd';
 import client from '../../../../graphql';
-import { UPDATE_ADDRESS_COUNTRY } from '../../../../graphql/mutation';
+import { UPDATE_ADDRESS_COUNTRY } from '../../../../graphql/mutation/supplierMutation';
 import ListCountry from '../../list country/listCountry';
 
 let timeout: any = null

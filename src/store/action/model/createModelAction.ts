@@ -1,7 +1,7 @@
 import { ModelActionTypes } from './../../types/model/model.types';
 import { AppState } from "../..";
 import client from "../../../graphql";
-import { ADD_MODEL } from "../../../graphql/mutation";
+import { ADD_MODEL } from "../../../graphql/mutation/modelMutation";
 import { message } from "antd";
 
 

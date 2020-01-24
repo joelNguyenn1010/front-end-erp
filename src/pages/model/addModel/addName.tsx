@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React  from 'react';
 
-import { CreateModelContext } from '../../../context/provider/createModelContext';
 import InputSearchValidation from '../../../components/InputSearchValidate';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/model/createModelAction';

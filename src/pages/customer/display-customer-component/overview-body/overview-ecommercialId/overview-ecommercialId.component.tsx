@@ -4,11 +4,11 @@ import editTableRow from "../../../../tableEditable/editTableRow";
 import editTableCell from "../../../../tableEditable/editTableCell";
 import {useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/react-hooks";
-import { GET_ECOMMERCIALID_QUERY} from "../../../../../graphql/query";
+import { GET_ECOMMERCIALID_QUERY} from "../../../../../graphql/query/supplierQuery";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import { EcommercialId} from "../../../../../store/contract/Suppliers";
 import ButtonAddEcommercial from "./button-add-ecommercialId.component";
-import {DELETE_ECOMMERCIAL_ID, UPDATE_ECOMMERCIAL_ID} from "../../../../../graphql/mutation";
+import {DELETE_ECOMMERCIAL_ID, UPDATE_ECOMMERCIAL_ID} from "../../../../../graphql/mutation/supplierMutation";
 import client from "../../../../../graphql";
 
 const requiredRules =  [{required: true}]

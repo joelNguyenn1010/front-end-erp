@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { Fragment } from "react";
-import { GET_MODEL_QUERY } from "../../../graphql/query";
+import React from "react";
+import { GET_MODEL_QUERY } from "../../../graphql/query/modelQuery";
 import { Table, Input, Button, Icon } from "antd";
 import EditableName from "./editableName";
-import EditableNote from "./editableNote";
 import EditableManufactor from "./editableManufactor";
 import DisplaySortedItem from "./displaySortedItem";
 import { channel } from "../../../websocket/pusher";

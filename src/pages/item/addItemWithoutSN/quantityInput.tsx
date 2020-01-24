@@ -1,7 +1,5 @@
 import React from "react";
-import NumericInput from "../../../components/conponentInputNumberOnly/inputNumberOnly";
-import { useSelector, useDispatch } from "react-redux";
-import { AppState } from "../../../store";
+import {  useDispatch } from "react-redux";
 import { ChangeDataAction } from "../../../store/action/itemAction/createItemWithoutSNAction";
 import { InputNumber } from "antd";
 

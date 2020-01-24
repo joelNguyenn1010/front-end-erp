@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { GET_ITEM_QUERY } from "../../../graphql/query";
+import { GET_ITEM_QUERY } from "../../../graphql/query/productQuery";
 import { Table, PageHeader, Input, Popconfirm, message, Button, Icon } from "antd";
 import EditTableRow from "../../tableEditable/editTableRow";
 import EditTableCell from "../../tableEditable/editTableCell";
 import client from "../../../graphql";
-import { DELETE_ITEM } from "../../../graphql/mutation";
+import { DELETE_ITEM } from "../../../graphql/mutation/productMutation";
 import EditCellCondition from "../editItem/editCellCondition";
 import EditCellStockStatus from "../editItem/editCellStockStatus";
 import EditCellSupplier from "../editItem/editCellSupplier";

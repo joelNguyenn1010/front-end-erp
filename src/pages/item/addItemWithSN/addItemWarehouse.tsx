@@ -5,7 +5,7 @@ import {  message } from "antd";
 import { changeItemValue } from "../../../store/action/itemAction/createItemAction";
 import SearchCreation from "../../../components/searchCreation";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_WHLOCATION_QUERY } from "../../../graphql/query";
+import { GET_WHLOCATION_QUERY } from "../../../graphql/query/productQuery";
 
 interface AddWarehouseProps {
   index: number;

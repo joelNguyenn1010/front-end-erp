@@ -1,12 +1,12 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../store'
-import { Cascader, message } from 'antd'
+import {  message } from 'antd'
 import { ChangeDataAction } from '../../../store/action/itemAction/createItemWithoutSNAction'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { QUERY_WHLOCATION } from '../../../graphql/query'
-import { CREATE_NEW_WHLOCATION } from '../../../graphql/mutation'
+import { QUERY_WHLOCATION } from '../../../graphql/query/productQuery'
+import { CREATE_NEW_WHLOCATION } from '../../../graphql/mutation/productMutation'
 
 const options = [
   {

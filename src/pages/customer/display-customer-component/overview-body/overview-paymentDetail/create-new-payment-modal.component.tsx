@@ -3,7 +3,7 @@ import { Modal, message } from "antd";
 import AddPaymentForm from "../../../add/addCustomer/addPaymentDetail/payment-detail-create-form";
 import { useForm, FormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import { CREATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation";
+import { CREATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation/supplierMutation";
 import { useParams } from "react-router-dom";
 
 interface CreateNewPaymentProps {

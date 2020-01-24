@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { CreateItemContext } from '../../../context/provider/createItemContext';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_SUPPLIER_QUERY } from '../../../graphql/query';
+import { GET_SUPPLIER_QUERY } from '../../../graphql/query/supplierQuery';
 import { message } from 'antd';
-import { ADD_SUPPLIER } from '../../../graphql/mutation';
+import { ADD_SUPPLIER } from '../../../graphql/mutation/supplierMutation';
 
 const FindSupplier: React.FC = () => {
     const context: any = React.useContext(CreateItemContext);

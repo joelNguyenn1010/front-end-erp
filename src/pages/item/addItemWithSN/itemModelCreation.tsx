@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 
-import { Spin, Button, Switch, message } from 'antd'
+import { Spin, Button } from 'antd'
 import { useDispatch, useSelector } from "react-redux";
 import {
-    fetchSN,
-    addModelWithCiscoCheck,
-    makeLoadingModel,
     changeItemValue,
-    checkModelInDB
 } from "../../../store/action/itemAction/createItemAction";
 import { AppState } from "../../../store";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_MODEL_QUERY } from "../../../graphql/query";
+import { GET_MODEL_QUERY } from "../../../graphql/query/modelQuery";
 import AddNewModelModal from './addNewModelModal';
-import { Route } from 'react-router-dom';
 import { gql } from 'apollo-boost';
 import client from '../../../graphql';
 import Axios from 'axios';
@@ -24,8 +19,6 @@ import { ModelCreate } from '../../../store/contract/Model';
 interface ItemModelCreationProps {
     value: Item,
     index: number,
-    // cancel: any
-    // forceUpdate?: any
 }
 
 

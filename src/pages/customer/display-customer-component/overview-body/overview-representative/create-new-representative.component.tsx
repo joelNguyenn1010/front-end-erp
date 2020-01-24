@@ -1,11 +1,10 @@
-import React, { BaseSyntheticEvent } from 'react'
-import { Modal, Button, message } from 'antd'
+import React from 'react'
+import { Modal, message } from 'antd'
 import AddRepresentativeForm from '../../../add/addCustomer/addRepresentativeDetail/representative-create-form'
 import { useParams } from 'react-router-dom'
 import { useForm, FormContext } from 'react-hook-form'
-import { Email } from '../../../../../store/contract/Email'
 import { useMutation } from '@apollo/react-hooks'
-import { ADD_CUS_REPRESENTATIVE } from '../../../../../graphql/mutation'
+import { ADD_CUS_REPRESENTATIVE } from '../../../../../graphql/mutation/supplierMutation'
 interface CreateNewRepresentativeProps {
     setOpen: (value: boolean) => void,
     open: boolean,

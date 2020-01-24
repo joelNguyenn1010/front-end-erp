@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 import { Table, Result, message } from "antd";
 import ButtonAddPayment from "./button-add-payment.component";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { QUERY_SUPPLIER_PAYMENT } from "../../../../../graphql/query";
-import { UPDATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation";
+import { QUERY_SUPPLIER_PAYMENT } from "../../../../../graphql/query/supplierQuery";
+import { UPDATE_SUPPLIER_PAYMENT } from "../../../../../graphql/mutation/supplierMutation";
 
 import { useParams } from "react-router-dom";
 import LoadingSpin from "../../../../../components/loadingSpin";

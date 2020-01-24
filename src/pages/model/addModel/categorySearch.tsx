@@ -3,8 +3,8 @@ import SearchCreation from '../../../components/searchCreation';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import { message } from 'antd';
-import { CATEGORY_QUERY } from '../../../graphql/query';
-import { ADD_CATEGORY } from '../../../graphql/mutation';
+import { CATEGORY_QUERY } from '../../../graphql/query/modelQuery';
+import { ADD_CATEGORY } from '../../../graphql/mutation/modelMutation';
 import { CreateModelContext } from '../../../context/provider/createModelContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/model/createModelAction';

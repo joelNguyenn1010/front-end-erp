@@ -4,7 +4,7 @@ import React from "react"
 import {useParams} from "react-router-dom";
 import {FormContext, useForm} from "react-hook-form";
 import {useMutation} from "@apollo/react-hooks";
-import {ADD_ECOMMERCIAL_ID, ADD_SUPPLIER_ADDRESS} from "../../../../../graphql/mutation";
+import {ADD_ECOMMERCIAL_ID} from "../../../../../graphql/mutation/supplierMutation";
 import {message, Modal} from "antd";
 import EcommercialForm from "../../../add/addCustomer/addEcommercialId/ecommercial-id-create-form";
 

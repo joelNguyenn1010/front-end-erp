@@ -1,7 +1,6 @@
 import React from 'react'
-import { Menu, Button, Popconfirm, message } from 'antd'
+import { Popconfirm, message } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
 import { DELETE_SUPPLIER } from '../../../graphql/mutation/supplierMutation'
 
 // this have to be menu

@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-import { Select, Radio } from 'antd';
-import { CreateModelContext } from '../../../context/provider/createModelContext';
+import React from 'react'
+import {  Radio } from 'antd';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../../../store';

@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import EditableField from '../../overview-header/editable-field-supplier'
 import { Suppliers } from '../../../../../store/contract/Suppliers'
 import LoadingSpin from '../../../../../components/loadingSpin'
+import UpdateDescriptionField from '../../../../../components/updateDescriptionField'
+import { UPDATE_SUPPLIER } from '../../../../../graphql/mutation/supplierMutation'
 
 export const OverviewWarrantyComponent = () => {
 
@@ -24,25 +26,26 @@ export const OverviewWarrantyComponent = () => {
             <Descriptions layout="vertical" title="" bordered>
 
 
-                <Descriptions.Item  label="IPS policy"> <EditableField
+                <Descriptions.Item label="IPS policy"> <UpdateDescriptionField
                     name="ipsPolicy"
                     isTextarea={true}
                     value={supplier.ipsPolicy}
-                // 
+                    mutation={UPDATE_SUPPLIER}
+                    id={id}
+         
                 /></Descriptions.Item>
 
 
-
-
-                <Descriptions.Item label="Warranty policy"> <EditableField
+                <Descriptions.Item label="Warranty policy"> <UpdateDescriptionField
                     name="warrantyPolicy"
                     isTextarea={true}
+                    mutation={UPDATE_SUPPLIER}
+
                     value={supplier.warrantyPolicy}
+                    id={id}
                 // 
                 /></Descriptions.Item>
             </Descriptions>
-
-
         )
     } else if (loading) {
         return <LoadingSpin />

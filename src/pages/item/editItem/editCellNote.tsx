@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextArea from "antd/lib/input/TextArea";
 import client from "../../../graphql";
-import { UPDATE_ITEM_NOTE } from "../../../graphql/mutation";
+import { UPDATE_ITEM_NOTE } from "../../../graphql/mutation/productMutation";
 import { Form, Button, message, Popover } from "antd";
 import EditableDisplayText from "../../../components/sharedStyled/EditableDisplayText";
 

@@ -1,5 +1,5 @@
 import { ItemActionTypes } from './../../types/item/item.types';
-import { ADD_ITEM } from './../../../graphql/mutation/index';
+import { ADD_ITEM } from './../../../graphql/mutation/productMutation';
 import { Item } from './../../contract/Item';
 import { message } from 'antd';
 import { gql } from 'apollo-boost';

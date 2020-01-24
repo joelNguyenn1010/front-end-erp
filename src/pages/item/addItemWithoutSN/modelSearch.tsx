@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery } from '@apollo/react-hooks'
-import { GET_MODEL_QUERY } from '../../../graphql/query'
+import { GET_MODEL_QUERY } from '../../../graphql/query/modelQuery'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../store'
 import { message } from 'antd'

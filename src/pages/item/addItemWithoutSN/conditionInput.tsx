@@ -6,7 +6,7 @@ import React from "react";
 import { Select, message} from "antd";
 import SearchCreation from "../../../components/searchCreation";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_CONDITION_QUERY } from "../../../graphql/query";
+import { GET_CONDITION_QUERY } from "../../../graphql/query/productQuery";
 
 
 let timeout: any = null

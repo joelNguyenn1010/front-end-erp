@@ -3,10 +3,10 @@ import SearchCreation from '../../../components/searchCreation'
 import { useSelector, useDispatch } from 'react-redux'
 import { AppState } from '../../../store'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { GET_SUPPLIER_QUERY } from '../../../graphql/query'
+import { GET_SUPPLIER_QUERY } from '../../../graphql/query/supplierQuery'
 import { message } from 'antd'
 import { changeItemValue } from '../../../store/action/itemAction/createItemAction'
-import { ADD_SUPPLIER } from '../../../graphql/mutation'
+import { ADD_SUPPLIER } from '../../../graphql/mutation/supplierMutation'
 
 interface ItemSupplierProps {
     index : number

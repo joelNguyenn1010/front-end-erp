@@ -3,7 +3,7 @@ import SearchCreation from "../../../components/searchCreation";
 import { useSelector, useDispatch } from "react-redux";
 import { AppState } from "../../../store";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_CONDITION_QUERY } from "../../../graphql/query";
+import { GET_CONDITION_QUERY } from "../../../graphql/query/productQuery";
 import { message } from "antd";
 import { changeItemValue } from "../../../store/action/itemAction/createItemAction";
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { GET_SUPPLIER_QUERY } from '../../../graphql/query'
+import { GET_SUPPLIER_QUERY } from '../../../graphql/query/supplierQuery'
 import client from '../../../graphql'
-import { UPDATE_ITEM_SUPPLIER, ADD_SUPPLIER } from '../../../graphql/mutation'
+import { UPDATE_ITEM_SUPPLIER } from '../../../graphql/mutation/productMutation'
+import {  ADD_SUPPLIER } from '../../../graphql/mutation/supplierMutation'
 import { message } from 'antd'
 
 interface EditCellSupplierProps {

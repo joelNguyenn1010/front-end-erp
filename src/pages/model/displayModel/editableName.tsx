@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EditableDisplayText from "../../../components/sharedStyled/EditableDisplayText";
 import { Input, Form, Popover, message, Tooltip } from "antd";
 import client from "../../../graphql";
-import { EDIT_MODEL_NAME } from "../../../graphql/mutation";
+import { EDIT_MODEL_NAME } from "../../../graphql/mutation/modelMutation";
 
 interface EditableNameProps {
   record: any;

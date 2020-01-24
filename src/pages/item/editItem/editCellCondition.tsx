@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
-import { GET_CONDITION_QUERY } from '../../../graphql/query'
+import { GET_CONDITION_QUERY } from '../../../graphql/query/productQuery'
 import { useQuery } from '@apollo/react-hooks'
 import client from '../../../graphql'
-import { UPDATE_ITEM_CONDITION } from '../../../graphql/mutation'
+import { UPDATE_ITEM_CONDITION } from '../../../graphql/mutation/productMutation'
 import { message } from 'antd'
 
 let timeout: any = null

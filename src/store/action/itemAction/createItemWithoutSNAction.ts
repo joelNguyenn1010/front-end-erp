@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { ADD_ITEM } from './../../../graphql/mutation/index';
+import { ADD_ITEM } from './../../../graphql/mutation/productMutation';
 import {ItemNoSNActionTypes} from '../../types/item/item.noSn.types'
 import { AppState } from "../..";
 import client from '../../../graphql';

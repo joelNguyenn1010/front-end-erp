@@ -4,9 +4,9 @@ import { Table , Popconfirm, message, Result} from 'antd'
 import {useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import LoadingSpin from "../../../../../components/loadingSpin";
-import {GET_EMAIL_SUPPLIER} from "../../../../../graphql/query";
+import {GET_EMAIL_SUPPLIER} from "../../../../../graphql/query/supplierQuery";
 import client from "../../../../../graphql";
-import {DELETE_EMAIL_SUPPLIER, UPDATE_EMAIL_SUPPLIER} from "../../../../../graphql/mutation";
+import {DELETE_EMAIL_SUPPLIER, UPDATE_EMAIL_SUPPLIER} from "../../../../../graphql/mutation/supplierMutation";
 import editTableRow from "../../../../tableEditable/editTableRow";
 import editTableCell from "../../../../tableEditable/editTableCell";
 import { EmailSupplier} from "../../../../../store/contract/Suppliers";

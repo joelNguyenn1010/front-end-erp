@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Row, Col } from "antd";
+import { Form, Row, Col } from "antd";
 import ManufactorCreation from "./manufactorSearch";
 import CategorySearch from "./categorySearch";
 import AddName from "./addName";

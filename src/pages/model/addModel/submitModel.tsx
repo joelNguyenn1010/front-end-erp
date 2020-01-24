@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Button } from 'antd';
-import { CreateModelContext } from '../../../context/provider/createModelContext';
 import { useDispatch } from 'react-redux';
 import { submitModelAction } from '../../../store/action/model/createModelAction';
 

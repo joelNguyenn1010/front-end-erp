@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 
 import AddItemSupplier from "./addItemSupplier";
 import ItemModelCreation from "./itemModelCreation";
@@ -11,7 +11,6 @@ import AddItemWarehouse from "./addItemWarehouse";
 interface TableRowItemProps {
   value: Item;
   index: number;
-  // forceUpdate?: any;
 }
 
 export const TableRowItem: React.FC<TableRowItemProps> = props => {

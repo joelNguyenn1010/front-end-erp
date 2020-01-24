@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Statistic } from "antd";
 
 export declare const ConditionCheck: ["NIB", "NOB", "USEDA", "USEDB", "USEDC", "PART"];
 

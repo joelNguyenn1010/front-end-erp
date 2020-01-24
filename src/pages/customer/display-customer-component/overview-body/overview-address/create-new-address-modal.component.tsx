@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import { Modal, Form, message } from "antd";
+import React from "react";
+import { Modal, message } from "antd";
 import TableAddressDetail from "../../../add/addCustomer/addAddress/address-detail-create-form";
-import { useDispatch } from "react-redux";
-import { submitAddressAction } from "../../../../../store/action/customerAction/createCustomerAction";
 import { useParams } from "react-router-dom";
 import { useForm, FormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import { ADD_SUPPLIER_ADDRESS } from "../../../../../graphql/mutation";
+import { ADD_SUPPLIER_ADDRESS } from "../../../../../graphql/mutation/supplierMutation";
 
 interface CreateNewAddressProps {
   setOpen: (value: boolean) => void;

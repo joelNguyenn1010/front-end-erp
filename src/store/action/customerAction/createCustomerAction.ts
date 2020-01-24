@@ -1,6 +1,6 @@
 import { CustomerActionTypes } from './../../types/customer/customer.types';
 import { message } from 'antd';
-import { ADD_CUS_REPRESENTATIVE, ADD_CUS_REPRESENTATIVE_EMAIL, ADD_SUPPLIER_ADDRESS } from './../../../graphql/mutation/index';
+import { ADD_CUS_REPRESENTATIVE, ADD_CUS_REPRESENTATIVE_EMAIL, ADD_SUPPLIER_ADDRESS } from './../../../graphql/mutation/supplierMutation';
 import { AppState } from "../../../store"
 import client from "../../../graphql"
 

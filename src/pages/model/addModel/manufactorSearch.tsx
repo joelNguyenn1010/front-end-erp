@@ -1,10 +1,9 @@
 import React, { useState, useContext } from 'react';
 import SearchCreation from '../../../components/searchCreation';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { MANUFACTURE_QUERY } from '../../../graphql/query';
-import { ADD_MANUFACTURE } from '../../../graphql/mutation';
+import { MANUFACTURE_QUERY } from '../../../graphql/query/modelQuery';
+import { ADD_MANUFACTURE } from '../../../graphql/mutation/modelMutation';
 import { message } from 'antd';
-import { CreateModelContext } from '../../../context/provider/createModelContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/model/createModelAction';
 import { AppState } from '../../../store';

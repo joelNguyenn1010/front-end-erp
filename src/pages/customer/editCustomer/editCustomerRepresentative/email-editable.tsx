@@ -2,7 +2,7 @@ import React from "react";
 import {  message, Form } from "antd";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import { UPDATE_REPRESENTATIVE_EMAIL } from "../../../../graphql/mutation";
+import { UPDATE_REPRESENTATIVE_EMAIL } from "../../../../graphql/mutation/supplierMutation";
 import * as yup from 'yup'
 interface EmailEditableProps {
   text: any;

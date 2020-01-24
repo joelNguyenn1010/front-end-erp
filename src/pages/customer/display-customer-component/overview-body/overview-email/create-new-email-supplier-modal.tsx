@@ -1,5 +1,5 @@
 import React from 'react'
-import { ADD_EMAIL_SUPPLIER} from "../../../../../graphql/mutation";
+import { ADD_EMAIL_SUPPLIER} from "../../../../../graphql/mutation/supplierMutation";
 import { useParams } from 'react-router-dom';
 import { useForm, FormContext } from 'react-hook-form';
 import { useMutation } from '@apollo/react-hooks';

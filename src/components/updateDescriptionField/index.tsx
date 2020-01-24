@@ -1,23 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, FormContext } from 'react-hook-form'
-import {  Popover, Tooltip, message, Button } from 'antd'
+import { Form, Popover, Tooltip, message, Button } from 'antd'
 import { useMutation } from '@apollo/react-hooks'
-import { UPDATE_SUPPLIER } from '../../../../graphql/mutation/supplierMutation'
 import { useParams } from 'react-router-dom'
 
 
-interface EditableFieldProps {
+interface EditableDescriptionFieldProps {
     name: any,
     value: any,
     selectEnum?: any,
     isTextarea?: boolean
+    mutation: any,
+    id?: any
 }
 
-const EditableField: React.FC<EditableFieldProps> = props => {
+const UpdateDescriptionField: React.FC<EditableDescriptionFieldProps> = props => {
 
-    const { id } = useParams()
+    
 
-    const [updateSupplier] = useMutation(UPDATE_SUPPLIER, {
+    const [updateSupplier] = useMutation(props.mutation, {
         onCompleted: () => {
             message.success("Update success")
         },
@@ -30,12 +31,14 @@ const EditableField: React.FC<EditableFieldProps> = props => {
     const { register, handleSubmit } = methods
 
     const onSubmit = (data: any) => {
-        const variables = {
-            id,
-            ...data
+        if(props.id) {
+            const variables = {
+                id: props.id,
+                ...data
+            }
+            updateSupplier({ variables })
         }
-        console.log(variables)
-        updateSupplier({ variables })
+
     }
 
 
@@ -74,4 +77,4 @@ const EditableField: React.FC<EditableFieldProps> = props => {
     )
 }
 
-export default EditableField
+export default UpdateDescriptionField

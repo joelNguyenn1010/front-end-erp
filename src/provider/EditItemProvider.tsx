@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_ITEM_QUERY } from "../graphql/query";
+import { GET_ITEM_QUERY } from "../graphql/query/productQuery";
 
 export const EditItemContext = createContext({});
 

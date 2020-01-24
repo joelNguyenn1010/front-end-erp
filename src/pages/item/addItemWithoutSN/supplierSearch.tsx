@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_SUPPLIER_QUERY } from '../../../graphql/query';
+import { GET_SUPPLIER_QUERY } from '../../../graphql/query/supplierQuery';
 import { message } from 'antd';
-import { ADD_SUPPLIER } from '../../../graphql/mutation';
+import { ADD_SUPPLIER } from '../../../graphql/mutation/supplierMutation';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState } from '../../../store';
 import { ChangeDataAction } from '../../../store/action/itemAction/createItemWithoutSNAction';

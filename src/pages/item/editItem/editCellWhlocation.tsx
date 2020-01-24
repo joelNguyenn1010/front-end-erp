@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { GET_WHLOCATION_QUERY } from '../../../graphql/query'
+import { GET_WHLOCATION_QUERY } from '../../../graphql/query/productQuery'
 import client from '../../../graphql'
-import { UPDATE_ITEM_WHLOCATION, ADD_WHLOCATION } from '../../../graphql/mutation'
+import { UPDATE_ITEM_WHLOCATION, ADD_WHLOCATION } from '../../../graphql/mutation/productMutation'
 import { message } from 'antd'
 
 interface EditCellWhlocationProps {

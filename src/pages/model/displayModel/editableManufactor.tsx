@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { MANUFACTURE_QUERY } from '../../../graphql/query'
-import { ADD_MANUFACTURE, EDIT_MODEL_MANUFACTOR } from '../../../graphql/mutation'
+import { MANUFACTURE_QUERY } from '../../../graphql/query/modelQuery'
+import { ADD_MANUFACTURE, EDIT_MODEL_MANUFACTOR } from '../../../graphql/mutation/modelMutation'
 import { message } from 'antd'
 import client from '../../../graphql'
 

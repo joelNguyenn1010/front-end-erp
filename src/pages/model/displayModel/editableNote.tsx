@@ -3,7 +3,7 @@ import { Popover, message, Form, Button } from 'antd'
 import EditableDisplayText from '../../../components/sharedStyled/EditableDisplayText'
 import TextArea from 'antd/lib/input/TextArea'
 import client from '../../../graphql'
-import { EDIT_MODEL_NOTE } from '../../../graphql/mutation'
+import { EDIT_MODEL_NOTE } from '../../../graphql/mutation/modelMutation'
 
 interface EditableNoteProps {
     record: any
