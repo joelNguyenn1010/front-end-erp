@@ -6,7 +6,7 @@ import { Button, message } from "antd";
 import { useForm, FormContext, useFormContext } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import { Redirect, useHistory } from "react-router-dom";
-import { ADD_SUPPLIER } from "../../../../../graphql/mutation/supplierMutation";
+import { CREATE_NEW_SUPPLIER_WITH_INFO } from "../../../../../graphql/mutation/supplierMutation";
 
 interface TableRowContactDetailProps {
   
@@ -15,10 +15,9 @@ interface TableRowContactDetailProps {
 
 const TableRowContactDetail: React.FC<TableRowContactDetailProps>  = props => {
 
-  const history = useHistory()
   const methods = useForm()
 
-  const [createNewSupplier] = useMutation(ADD_SUPPLIER,{
+  const [createNewSupplier] = useMutation(CREATE_NEW_SUPPLIER_WITH_INFO,{
     onCompleted: (data: any) =>{
       const id = data.createNewSupplier.id
       message.success("New organisation created")

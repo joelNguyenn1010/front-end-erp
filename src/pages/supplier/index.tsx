@@ -10,6 +10,12 @@ import { channel } from '../../websocket/pusher'
 import TableCellRightClick from '../../graphql/tableCellRightClick'
 import DeleteSupplier from './deleteSupplier'
 
+import Pusher from 'pusher-js'
+// Enable pusher logging - don't include this in production
+
+
+
+
 interface SupplierProps {
   history: any
 }
@@ -61,11 +67,26 @@ const Supplier: React.FC<SupplierProps> = props => {
 
 
 
-  channel.bind('supplier', () => {
-    if(refetch) {
-      refetch(pagi)
-    } 
-  })
+  useEffect(() => {
+    Pusher.logToConsole = true;
+
+    const app_id = "11a083decab4e140d659"
+    const pusher = new Pusher(app_id, {
+        cluster: 'ap4',
+        forceTLS: true
+    });
+    
+    
+    const channel = pusher.subscribe('my-channel');
+
+    channel.bind('supplier', () => {
+      if(refetch) {
+        refetch(pagi)
+      } 
+    })
+    
+  }, [])
+
 
   const itemRender = (current: any, type: any, originalElement: any) => {
     if (type === "prev") {
