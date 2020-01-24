@@ -52,7 +52,7 @@ const OverviewCustomerComponent = () => {
    
         /></Descriptions.Item>
 
-        <Descriptions.Item  span={2} label="Customer Term"> <EditableField
+        <Descriptions.Item  label="Customer Term"> <EditableField
           name="customerTerm"
           isTextarea={true}
 

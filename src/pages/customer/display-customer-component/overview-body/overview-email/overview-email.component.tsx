@@ -6,11 +6,10 @@ import {useMutation, useQuery} from "@apollo/react-hooks";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import {GET_EMAIL_SUPPLIER} from "../../../../../graphql/query";
 import client from "../../../../../graphql";
-import {DELETE_EMAIL_SUPPLIER, UPDATE_ECOMMERCIAL_ID, UPDATE_EMAIL_SUPPLIER} from "../../../../../graphql/mutation";
+import {DELETE_EMAIL_SUPPLIER, UPDATE_EMAIL_SUPPLIER} from "../../../../../graphql/mutation";
 import editTableRow from "../../../../tableEditable/editTableRow";
 import editTableCell from "../../../../tableEditable/editTableCell";
-import {EcommercialId, EmailSupplier} from "../../../../../store/contract/Suppliers";
-import ButtonAddEcommercial from "../overview-ecommercialId/button-add-ecommercialId.component";
+import { EmailSupplier} from "../../../../../store/contract/Suppliers";
 import ButtonAddEmailSupplier from "./button-add-email-supplier";
 
 
@@ -49,7 +48,7 @@ const OverviewEmailComponent = () => {
         },
         {
             title: 'Type',
-            dataIndex: 'type',
+            dataIndex: 'typeemail',
             key: 'type',
             editable: true,
         },
