@@ -5,7 +5,7 @@ import {  message } from 'antd'
 import { ChangeDataAction } from '../../../store/action/itemAction/createItemWithoutSNAction'
 import SearchCreation from '../../../components/searchCreation'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { QUERY_WHLOCATION } from '../../../graphql/query/productQuery'
+import {  GET_WHLOCATION_QUERY } from '../../../graphql/query/productQuery'
 import { CREATE_NEW_WHLOCATION } from '../../../graphql/mutation/productMutation'
 
 const options = [
@@ -26,7 +26,7 @@ const InputWhLocation = () => {
 
   const dispatch: any = useDispatch()
 
-  const { loading, error, data, refetch } = useQuery(QUERY_WHLOCATION, {
+  const { loading, error, data, refetch } = useQuery(GET_WHLOCATION_QUERY, {
     // bỏ varialbe search vào
     variables: { name: '' },
   })

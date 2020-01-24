@@ -19,7 +19,7 @@ const SearchSupplier: React.FC = () => {
     
     const { loading, error, data, refetch } = useQuery(GET_SUPPLIER_QUERY, {
         // bỏ varialbe search vào
-        variables: { name: '' },
+        variables: { name: '', limit: 5, page: 1 },
     })
 
 
@@ -45,7 +45,7 @@ const SearchSupplier: React.FC = () => {
             const name = data.createNewSupplier.name
             //refetch API 
 
-            refetch({ name: name })
+            refetch({ name: name, limit: 5, page: 1 })
             //Print message
             message.success(`Supplier ${data.createNewSupplier.name} created`)
 
@@ -62,7 +62,7 @@ const SearchSupplier: React.FC = () => {
     const onSearch = (val: string) => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            refetch({ name: val })
+            refetch({ name: val, limit: 5, page: 1  })
         }, 220);
     }
 
