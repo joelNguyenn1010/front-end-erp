@@ -25,9 +25,9 @@ const DisplayModelContainer: React.FC = () => {
 
 
 
-  channel.bind('new-model', () => {
-    refetch({ limit: pagi.limit, page: pagi.page, name: "" })
-  })
+  // channel.bind('new-model', () => {
+  //   refetch({ limit: pagi.limit, page: pagi.page, name: "" })
+  // })
 
   const dataRender = data ? data.model.data : [];
   const dataTotal = data ? data.model.total : [];

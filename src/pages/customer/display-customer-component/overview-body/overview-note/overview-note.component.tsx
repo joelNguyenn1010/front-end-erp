@@ -14,7 +14,7 @@ const OverviewNoteComponent = () => {
     const { id } = useParams()
     const { data, loading, refetch } = useQuery(GET_SUPPLIER_NOTE, { variables: { supplierId: id } });
 
-    channel.bind("supplier-note",() => refetch({supplierId: id}))
+    // channel.bind("supplier-note",() => refetch({supplierId: id}))
 
     if (loading) {
         return <LoadingSpin />
