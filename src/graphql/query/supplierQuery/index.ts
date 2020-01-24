@@ -21,7 +21,16 @@ query($name: String!, $id: Int, $limit: Int!, $page: Int!){
     }
     total
   }
+}
+`
 
+export const GET_NOTE_SUPPLIER = gql`
+query($id: Int) {
+    findSupplier(id: $id) {
+        id
+        noteShipping
+        noteReceiving
+    }
 }
 `
 

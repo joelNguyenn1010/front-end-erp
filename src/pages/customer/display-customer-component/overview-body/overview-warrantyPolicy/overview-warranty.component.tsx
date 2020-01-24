@@ -15,8 +15,6 @@ export const OverviewWarrantyComponent = () => {
     const { data, loading } = useQuery(FIND_WARRENTY_SUPPLIER, { variables: { id } })
 
 
-    console.log(id)
-
     if (!loading && data && data.findSupplier) {
 
         const supplier: Suppliers = {
@@ -32,7 +30,7 @@ export const OverviewWarrantyComponent = () => {
                     value={supplier.ipsPolicy}
                     mutation={UPDATE_SUPPLIER}
                     id={id}
-         
+
                 /></Descriptions.Item>
 
 
