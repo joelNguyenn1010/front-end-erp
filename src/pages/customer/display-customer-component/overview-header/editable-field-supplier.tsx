@@ -34,7 +34,7 @@ const EditableField: React.FC<EditableFieldProps> = props => {
             id,
             ...data
         }
-        console.log(variables)
+
         updateSupplier({ variables })
     }
 

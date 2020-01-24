@@ -1,33 +1,20 @@
 import React from 'react'
-import {Table } from 'antd'
+import { Table, Descriptions, Row, Col } from 'antd'
+import Courier from './courier'
+import SupplierNote from './supplier-note'
 
 const OverviewShippingComponent = () => {
 
-    const columns = [
-        {
-            title: "Courier",
-            key: "courier"
-          },
-          {
-            title: "Shipping Account",
-            key: "shippingAccount"
-          },
-          {
-            title: "Note for shipping",
-            key: "noteShipping"
-            
-        },
-        {
-            title: "Note for receiving",
-            key: "noteReceiving"
-        },
-    ]
-
     return (
-        <Table 
-            columns={columns}
-            bordered
-        />
+        <Row>
+            <Col span={12}>
+                <Courier />
+            </Col>
+            <Col span={12}>
+                <SupplierNote />
+
+            </Col>
+        </Row>
     )
 }
 
