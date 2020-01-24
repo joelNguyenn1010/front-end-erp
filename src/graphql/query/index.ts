@@ -103,15 +103,17 @@ query($name: String!) {
 `
 
 export const GET_SUPPLIER_QUERY = gql`
-query($name: String!, $id: Int){
-  supplier(limit: 5, page: 1, name: $name, id: $id){
+query($name: String!, $id: Int, $limit: Int!, $page: Int!){
+  supplier(name: $name, id: $id, limit: $limit, page: $page){
     data{
       id
       name
       contactType
       pricingLevel
     }
+    total
   }
+
 }
 `
 
@@ -122,6 +124,9 @@ export const FIND_SUPPLIER_WITH_ID = gql`
      contactType
      pricingLevel
      name
+     ipsTerm
+     customerTerm
+     VAT
     }
   }
 `

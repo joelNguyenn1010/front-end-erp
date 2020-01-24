@@ -27,22 +27,17 @@ const AddModel: React.FC = () => {
 
       <Row>
         <Col span={12}>
-            <CategorySearch />
+          <CategorySearch />
         </Col>
 
         <Col span={12}>
-            <HasSerialModel />
+          <HasSerialModel />
         </Col>
 
       </Row>
 
 
-
       <SubmitModel />
-
-      {/* <Button onClick={() => context.action.clear()}>
-        Clear
-      </Button> */}
 
     </Form>
   );

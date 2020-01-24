@@ -24,10 +24,8 @@ const TableRowContactDetail: React.FC<TableRowContactDetailProps>  = props => {
       const id = data.createNewSupplier.id
       message.success("New organisation created")
       methods.reset({})
-      if(props.onSuccess)  {
-        props.onSuccess()
-      }
-      history.push(`/supplier/${id}`)
+
+      // history.push(`/supplier/${id}`)
     },
 
     onError: () => {

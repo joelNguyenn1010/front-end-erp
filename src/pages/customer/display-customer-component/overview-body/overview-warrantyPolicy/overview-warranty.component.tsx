@@ -1,16 +1,58 @@
 import React from 'react'
-import { Table, Input, Row, Col } from 'antd'
+import { Table, Input, Row, Col, Descriptions, Result } from 'antd'
+import { FIND_WARRENTY_SUPPLIER } from '../../../../../graphql/query/supplierQuery'
+import { useQuery } from '@apollo/react-hooks'
+import { useParams } from 'react-router-dom'
+import EditableField from '../../overview-header/editable-field-supplier'
+import { Suppliers } from '../../../../../store/contract/Suppliers'
+import LoadingSpin from '../../../../../components/loadingSpin'
 
 export const OverviewWarrantyComponent = () => {
 
+    const { id } = useParams()
+    const { data, loading } = useQuery(FIND_WARRENTY_SUPPLIER, { variables: { id } })
 
-    return (
-        <div>
-            <Row>
-                <Col title="Ips Warranty Policy" />
-                <Col title="Cus Warranty Policy" />
-            </Row>
-        </div>
-        
-    )
+
+
+
+    if (!loading && data && data.findSupplier) {
+
+        const supplier: Suppliers = {
+            ...data.findSupplier
+        }
+        return (
+            <Descriptions layout="vertical" title="" bordered>
+
+
+                <Descriptions.Item label="IPS policy"> <EditableField
+                    name="ipsPolicy"
+                    isTextarea={true}
+                    value={supplier.ipsPolicy}
+                // 
+                /></Descriptions.Item>
+
+
+
+
+                <Descriptions.Item label="Warranty policy"> <EditableField
+                    name="warrantyPolicy"
+                    isTextarea={true}
+                    value={supplier.warrantyPolicy}
+                // 
+                /></Descriptions.Item>
+            </Descriptions>
+
+
+        )
+    } else if (loading) {
+        return <LoadingSpin />
+    }
+    else {
+        return <Result
+            status="error"
+            subTitle={`Please check the url or make sure the id "${id}" is correct`}
+            title="Can't get the company information">
+        </Result>
+    }
+
 }

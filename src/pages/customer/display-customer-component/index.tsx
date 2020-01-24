@@ -9,7 +9,7 @@ const DisplayCustomer = () => {
 
   return (
     <div>
-      <div style={{marginBottom: '3em'}}>
+      <div style={{marginBottom: '1em', marginTop: '2em'}}>
         <OverviewHeaderComponent />
       </div>
       <div>

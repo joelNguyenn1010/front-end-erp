@@ -33,6 +33,9 @@ export interface Suppliers {
     ipsPolicy?: string,
     warrantyPolicy?: string,
 
+    ipsTerm?:string,
+    customerTerm?: string,
+    VAT?: string,
     representatives?: Array<Representative>
 }
 

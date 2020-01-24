@@ -1,10 +1,13 @@
 import React from "react";
-import { Descriptions, Spin, Result } from "antd";
+import { Descriptions, Spin, Result, Button } from "antd";
 import { useParams, Redirect } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_REPRESENTATIVE_QUERY, GET_SUPPLIER_QUERY, FIND_SUPPLIER_WITH_ID } from "../../../../graphql/query";
 import { Suppliers } from "../../../../store/contract/Suppliers";
 import LoadingSpin from "../../../../components/loadingSpin";
+import EditableField from "./editable-field-supplier";
+import AddContactType from "../../add/addCustomer/addContactDetail/addContactType";
+import AddPricingLevel from "../../add/addCustomer/addContactDetail/addPricingLevel";
 
 const OverviewCustomerComponent = () => {
 
@@ -21,9 +24,54 @@ const OverviewCustomerComponent = () => {
 
     return (
       <Descriptions title="Customer Info">
-        <Descriptions.Item label="Customer name">{supplier.name}</Descriptions.Item>
-        <Descriptions.Item label="Department">{supplier.contactType}</Descriptions.Item>
-        <Descriptions.Item label="Pricing level">{supplier.pricingLevel}</Descriptions.Item>
+
+        <Descriptions.Item label="Customer name"> <EditableField
+          name="name"
+          value={supplier.name}
+        /></Descriptions.Item>
+
+        <Descriptions.Item label="Department"> <EditableField
+          name="contactType"
+          value={supplier.contactType}
+          selectEnum={<React.Fragment><AddContactType /><Button htmlType="submit">Submit</Button></React.Fragment>}
+        /></Descriptions.Item>
+
+
+        <Descriptions.Item label="Pricing level"> <EditableField
+          name="pricingLevel"
+          value={supplier.pricingLevel}
+          selectEnum={<React.Fragment><AddPricingLevel /><Button htmlType="submit">Submit</Button></React.Fragment>}
+        /></Descriptions.Item>
+
+
+
+        <Descriptions.Item label="IPS Term"> <EditableField
+          name="ipsTerm"
+          isTextarea={true}
+          value={supplier.ipsTerm}
+   
+        /></Descriptions.Item>
+
+        <Descriptions.Item  span={2} label="Customer Term"> <EditableField
+          name="customerTerm"
+          isTextarea={true}
+
+          value={supplier.customerTerm}
+        /></Descriptions.Item>
+
+        <Descriptions.Item
+         
+          label="VAT"> <EditableField
+            name="VAT"
+            isTextarea={true}
+
+
+            value={supplier.VAT}
+          /></Descriptions.Item>
+
+
+        {/* <Descriptions.Item label="Department">{supplier.contactType}</Descriptions.Item> */}
+        {/* <Descriptions.Item label="Pricing level">{supplier.pricingLevel}</Descriptions.Item> */}
       </Descriptions>
     );
   } else if (loading) {
