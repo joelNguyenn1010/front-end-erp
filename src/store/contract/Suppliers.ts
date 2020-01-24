@@ -32,6 +32,8 @@ export interface Suppliers {
     pricingLevel: PricingLevel,
     ipsPolicy?: string,
     warrantyPolicy?: string,
+    noteShipping?: string,
+    noteReceiving?: string,
 
     ipsTerm?:string,
     customerTerm?: string,

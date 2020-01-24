@@ -95,7 +95,9 @@ export const UPDATE_SUPPLIER = gql
         $customerTerm: String
         $VAT: String
         $warrantyPolicy: String,
-        $ipsPolicy: String
+        $ipsPolicy: String,
+        $noteReceiving: String,
+        $noteShipping: String
         ) {
         updateSupplier(id: $id, 
             name: $name, 
@@ -105,7 +107,11 @@ export const UPDATE_SUPPLIER = gql
             customerTerm: $customerTerm,
             warrantyPolicy: $warrantyPolicy,
             ipsPolicy: $ipsPolicy
-            VAT: $VAT) {
+            VAT: $VAT
+            noteReceiving: $noteReceiving
+            noteShipping: $noteShipping
+            
+            ) {
             id
             name
             contactType
@@ -115,6 +121,8 @@ export const UPDATE_SUPPLIER = gql
             VAT
             ipsPolicy
             warrantyPolicy
+            noteShipping
+            noteReceiving
         }
     }
 `
