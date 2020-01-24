@@ -1,10 +1,8 @@
 import React from "react";
-import { Input, message, Form, Button } from "antd";
-import TextArea from "antd/lib/input/TextArea";
+import {  message, Form } from "antd";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import { UPDATE_REPRESENTATIVE_EMAIL } from "../../../../graphql/mutation";
-import { Email } from "../../../../store/contract/Suppliers";
 import * as yup from 'yup'
 interface EmailEditableProps {
   text: any;
@@ -38,6 +36,7 @@ const EmailEditable: React.FC<EmailEditableProps> = (props: any) => {
   });
 
   const onChange = (val: any) => {
+    console.log(val)
     const id = record.id;
     updateEmail({ variables: { ...val, representativeId: id } });
   };

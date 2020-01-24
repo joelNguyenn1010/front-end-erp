@@ -8,7 +8,8 @@ import { GET_ECOMMERCIALID_QUERY} from "../../../../../graphql/query";
 import LoadingSpin from "../../../../../components/loadingSpin";
 import { EcommercialId} from "../../../../../store/contract/Suppliers";
 import ButtonAddEcommercial from "./button-add-ecommercialId.component";
-import { UPDATE_ECOMMERCIAL_ID} from "../../../../../graphql/mutation";
+import {DELETE_ECOMMERCIAL_ID, UPDATE_ECOMMERCIAL_ID} from "../../../../../graphql/mutation";
+import client from "../../../../../graphql";
 
 const requiredRules =  [{required: true}]
 
@@ -51,7 +52,7 @@ const OverviewEcommercialIdComponent = (props: any) => {
         data.ecommercialId.data.length > 0 ? (
           <Popconfirm
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.key)}
+            onConfirm={() => handleDelete(record.id)}
           >
             <a>Delete</a>
           </Popconfirm>
@@ -83,7 +84,14 @@ const OverviewEcommercialIdComponent = (props: any) => {
   });
 
   const handleDelete = (key: any) => {
-
+      client.mutate({mutation: DELETE_ECOMMERCIAL_ID, variables:{id: parseInt(key)}})
+          .then(res => {
+            message.success("Item was deleted")
+            refetchTheData()
+          })
+          .catch(err => {
+            message.error("Cant delete item, please try again")
+          })
   };
 
   const [updateEcommercial ] = useMutation( UPDATE_ECOMMERCIAL_ID, {

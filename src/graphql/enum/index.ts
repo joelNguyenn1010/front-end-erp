@@ -8,7 +8,7 @@ export const SALUTATION_ENUM = gql`
     }
 
     input EmailInput {
-        name: String
+        email: String
     }
 
     enum SupplierAddressTypeEnum {

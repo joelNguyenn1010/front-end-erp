@@ -35,7 +35,7 @@ const CreateEcommercialId: React.FC<CreateEcommercialIdProps> = (props: any) => 
     const onSubmit = (data: any) => {
         // supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails
         createAddEcommercial({ variables: { ...data, supplierId: id } });
-        // console.log(data)
+        props.setOpen(false);
     };
 
     const onCancel = (e: any) => {

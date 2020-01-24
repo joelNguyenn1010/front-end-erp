@@ -236,3 +236,16 @@ export const GET_ECOMMERCIALID_QUERY = gql`
   }
 }
 `
+
+export const GET_EMAIL_SUPPLIER = gql`
+    query($limit: Int!, $page: Int!, $supplierId: Int!){
+        supplierEmail(limit: $limit, page: $page, supplierId: $supplierId){
+            data{
+                id
+                supplierId
+                email
+                typeemail
+            }
+        }
+    }
+`

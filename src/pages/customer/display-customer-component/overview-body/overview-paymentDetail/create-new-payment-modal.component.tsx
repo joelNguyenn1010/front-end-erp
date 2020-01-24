@@ -51,6 +51,7 @@ const CreateNewPaymentModal: React.FC<CreateNewPaymentProps> = (props: any) => {
     // createCustomer({ variables: {...data, supplierId: id}})
 
     createBankAccount({ variables: {...data, supplierId: id}})
+    props.setOpen(false);
   };
 
 

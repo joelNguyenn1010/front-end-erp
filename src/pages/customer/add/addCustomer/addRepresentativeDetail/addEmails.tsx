@@ -23,7 +23,7 @@ const AddEmails = () => {
                                 help={errors.emails && "Email is required"}
                                 validateStatus={errors.emails ? "error" : ""}
                             >
-                                <input type="email" className="ant-input" name={`emails[${index}].name`} ref={register({ required: true })} />
+                                <input type="email" className="ant-input" name={`emails[${index}].email`} ref={register({ required: true })} />
                             </Form.Item>
 
 

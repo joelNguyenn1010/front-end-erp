@@ -27,7 +27,7 @@ const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: 
         {
             onCompleted: () => {
                 message.success("New representative created")
-                methods.reset({emails: [{name: ""}]})
+                methods.reset({emails: [{email: ""}]})
                 if(props.refetchData) {
                     props.refetchData()
                 }
@@ -43,9 +43,11 @@ const CreateNewRepresentative: React.FC<CreateNewRepresentativeProps> = (props: 
    
 
     // BaseSyntheticEvent<object, any, any>
-    const onSubmit = (data: any) => { 
+    const onSubmit = (data: any) => {
+        console.log(data)
         // supplierId: $supplierId, salutation: $salutation, fullName: $fullName, position: $position, phoneNumber: $phoneNumber, emails: $emails
         createCustomer({ variables: {...data, supplierId: id}})
+        props.setOpen(false);
      }
 
      const onCancel = (e: any) => {

@@ -6,7 +6,7 @@ import {Button} from "antd";
 
 const EcommercialForm = () => {
     return (
-        <table>
+        <table style={{width: '100%'}}>
             <tbody>
                 <tr>
                     <td>

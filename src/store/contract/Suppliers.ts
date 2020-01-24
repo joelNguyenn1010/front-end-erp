@@ -64,3 +64,9 @@ export interface EcommercialId {
     identify: string,
     name: string
 }
+
+export interface EmailSupplier {
+    id: number
+    email: string,
+    typeemail: string
+}
