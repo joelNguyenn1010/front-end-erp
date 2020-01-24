@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import { Table, Result } from 'antd'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
@@ -23,6 +23,8 @@ const Supplier: React.FC<SupplierProps> = props => {
 
 
 
+
+
   const [pagi, setPagi] = React.useState<any>({
     page: 1,
     limit: 10,
@@ -37,10 +39,10 @@ const Supplier: React.FC<SupplierProps> = props => {
       key: 'name',
       dataIndex: "name",
       render: (text: any, record: any) => {
-       const id = record.id
-           
+        const id = record.id
 
-        return <a href="#" onClick={() =>  id ? props.history.push(`/supplier/${id}`) : ''}>{text}</a>
+
+        return <a href="#" onClick={() => id ? props.history.push(`/supplier/${id}`) : ''}>{text}</a>
       }
     },
     {
@@ -66,27 +68,15 @@ const Supplier: React.FC<SupplierProps> = props => {
 
 
 
+  // channel.bind('supplier', (data) => {
+  //   console.log("binding", refetch, pagi)
+  //   // try {
+  //     refetch(pagi)
+  //   // } catch(e) {
+  //   //   console.log("New product")
+  //   // }
 
-  useEffect(() => {
-    Pusher.logToConsole = true;
-
-    const app_id = "11a083decab4e140d659"
-    const pusher = new Pusher(app_id, {
-        cluster: 'ap4',
-        forceTLS: true
-    });
-    
-    
-    const channel = pusher.subscribe('my-channel');
-
-    channel.bind('supplier', () => {
-      if(refetch) {
-        refetch(pagi)
-      } 
-    })
-    
-  }, [])
-
+  // })
 
   const itemRender = (current: any, type: any, originalElement: any) => {
     if (type === "prev") {
@@ -113,6 +103,8 @@ const Supplier: React.FC<SupplierProps> = props => {
     } else if (data && data.supplier && data.supplier.data) {
       const dataTotal = data.supplier.total
 
+      const supplier = data.supplier.data
+ 
 
       return <Table
 
@@ -142,7 +134,7 @@ const Supplier: React.FC<SupplierProps> = props => {
         //         props.history.push(`/supplier/${id}`)
         //     }
         // }}
-        dataSource={data ? data.supplier ? data.supplier.data : [] : []}
+        dataSource={supplier}
       />
     } else {
       return <Result
