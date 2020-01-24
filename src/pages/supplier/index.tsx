@@ -61,11 +61,15 @@ const Supplier: React.FC<SupplierProps> = props => {
 
 
 
-  channel.bind('supplier', () => {
-    if(refetch) {
-      refetch(pagi)
-    } 
-  })
+
+
+  useEffect(() => {
+    channel.bind('supplier', () => {
+      if(refetch) {
+        refetch(pagi)
+      }
+    })
+  }, [])
 
   const itemRender = (current: any, type: any, originalElement: any) => {
     if (type === "prev") {

@@ -23,26 +23,33 @@ export const OverviewWarrantyComponent = () => {
         return (
             <Descriptions layout="vertical" title="" bordered>
 
+                <Row>
+                    <Col>
+                        <Descriptions.Item label="IPS policy" span={6}> <UpdateDescriptionField
+                            name="ipsPolicy"
+                            isTextarea={true}
+                            value={supplier.ipsPolicy}
+                            mutation={UPDATE_SUPPLIER}
+                            id={id}
 
-                <Descriptions.Item label="IPS policy"> <UpdateDescriptionField
-                    name="ipsPolicy"
-                    isTextarea={true}
-                    value={supplier.ipsPolicy}
-                    mutation={UPDATE_SUPPLIER}
-                    id={id}
+                        /></Descriptions.Item>
+                    </Col>
+                    <Col>
+                        <Descriptions.Item label="Warranty policy" span={6}> <UpdateDescriptionField
+                            name="warrantyPolicy"
+                            isTextarea={true}
+                            mutation={UPDATE_SUPPLIER}
 
-                /></Descriptions.Item>
+                            value={supplier.warrantyPolicy}
+                            id={id}
+                            //
+                        /></Descriptions.Item>
+                    </Col>
+                </Row>
 
 
-                <Descriptions.Item label="Warranty policy"> <UpdateDescriptionField
-                    name="warrantyPolicy"
-                    isTextarea={true}
-                    mutation={UPDATE_SUPPLIER}
 
-                    value={supplier.warrantyPolicy}
-                    id={id}
-                // 
-                /></Descriptions.Item>
+
             </Descriptions>
         )
     } else if (loading) {
