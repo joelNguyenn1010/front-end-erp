@@ -21,6 +21,7 @@ const CreateEcommercialId: React.FC<CreateEcommercialIdProps> = (props: any) => 
     const [createAddEcommercial] = useMutation(ADD_ECOMMERCIAL_ID, {
         onCompleted: () => {
             message.success("New ecommercial id created");
+            methods.reset()
             if (props.refetchData) {
                 props.refetchData();
             }

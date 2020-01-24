@@ -73,3 +73,8 @@ export interface EmailSupplier {
     email: string,
     typeemail: string
 }
+
+export interface Couriers {
+    courier: string,
+    shippingAccount: string
+}

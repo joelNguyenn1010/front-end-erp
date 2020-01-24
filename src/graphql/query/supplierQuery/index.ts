@@ -117,3 +117,16 @@ export const GET_EMAIL_SUPPLIER = gql`
         }
     }
 `
+
+export const GET_COURIER = gql`
+    query($limit: Int!, $page: Int!, $supplierId: Int!){
+        couriers(limit: $limit, page: $page, supplierId: $supplierId){
+            data{
+                id
+                supplierId
+                courier
+                shippingAccount
+            }
+        }
+    }
+`

@@ -6,7 +6,7 @@ const AddEmails = () => {
 
     const { control, register, errors } = useFormContext()
 
-    const { fields, append, prepend, remove } = useFieldArray({ control, name: "emails" });
+    const { fields, append, remove } = useFieldArray({ control, name: "emails" });
 
     useEffect(() => {
         append({ name: "emails" })
@@ -25,28 +25,23 @@ const AddEmails = () => {
                             >
                                 <input type="email" className="ant-input" name={`emails[${index}].email`} ref={register({ required: true })} />
                             </Form.Item>
-
-
                         </td>
-                        {/* <button onClick={() => remove(index)}>Delete</button> */}
-                        {fields.length > 1 ? <td><Icon
+                        {fields.length > 1 ? (<td><Icon
                             type="minus-circle-o"
                             onClick={() => remove(index)}
                             style={{ marginLeft: "10px" }}
-                        /></td> : ''}
+                        /></td>) : ''}
                     </tr>
                 ))}
+                    <tr>
+                        <td colSpan={2}>
+                            <Icon
+                                style={{ fontSize: '30px', color: '#08c' }}
+                                type="plus-circle"
+                                onClick={() => append({ name: "emails" })} />
 
-
-                <tr>
-                    <td colSpan={2}>
-                        <Icon
-                            style={{ fontSize: '30px', color: '#08c' }}
-                            type="plus-circle"
-                            onClick={() => append({ name: "emails" })} />
-
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
             </tbody>
         </table>
     )

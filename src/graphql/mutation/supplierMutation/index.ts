@@ -254,3 +254,36 @@ export const UPDATE_ECOMMERCIAL_ID = gql`
         }
     }
 `
+
+export const ADD_COURIER = gql`
+    mutation($supplierId: Int!, $courier: String!, $shippingAccount: String){
+        createCourier(supplierId: $supplierId, courier: $courier, shippingAccount: $shippingAccount){
+            id
+            supplierId
+            courier
+            shippingAccount
+        }
+    }
+`
+
+export const UPDATE_COURIER = gql`
+    mutation($id: Int!, $courier: String!, $shippingAccount: String){
+        updateCourier(id: $id, courier: $courier, shippingAccount: $shippingAccount){
+            id
+            supplierId
+            courier
+            shippingAccount
+        }
+    }
+`
+
+export const DELETE_COURIER = gql`
+    mutation($id: Int!){
+        deleteCourier(id: $id){
+            id
+            supplierId
+            courier
+            shippingAccount
+        }
+    }
+`
