@@ -13,7 +13,7 @@ export const OverviewWarrantyComponent = () => {
     const { data, loading } = useQuery(FIND_WARRENTY_SUPPLIER, { variables: { id } })
 
 
-
+    console.log(id)
 
     if (!loading && data && data.findSupplier) {
 
@@ -24,7 +24,7 @@ export const OverviewWarrantyComponent = () => {
             <Descriptions layout="vertical" title="" bordered>
 
 
-                <Descriptions.Item label="IPS policy"> <EditableField
+                <Descriptions.Item  label="IPS policy"> <EditableField
                     name="ipsPolicy"
                     isTextarea={true}
                     value={supplier.ipsPolicy}
