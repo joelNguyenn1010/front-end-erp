@@ -4,41 +4,50 @@ import { Link } from "react-router-dom";
 
 const HeaderLink: React.FC = () => {
   return (
-    <Dropdown
-      overlay={
-        <Menu>
-          <Menu.Item>
-            <Link to="/model">Model</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/item">Item</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/model/add">Add Model</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/item/add">Add Item</Link>
-          </Menu.Item>
+    <>
+      <Button>
 
-          <Menu.Item>
-            <Link to="/add/item/noserial">Add Item With No SN</Link>
-          </Menu.Item>
+        <Link to="/model">Model</Link>
 
-          <Menu.Item>
-            <Link to="/customer">Add Customer</Link>
-          </Menu.Item>
+      </Button>
 
-          <Menu.Item>
-              <Link to="/display/customer"> Display Customer</Link>
-          </Menu.Item>
-          <Menu.Item>
-              <Link to="/supplier"> Display Supplier</Link>
-          </Menu.Item>
-        </Menu>
-      }
-    >
-      <Button>Product</Button>
-    </Dropdown>
+
+      <Button>
+
+        <Link to="/item">Item</Link>
+
+      </Button>
+
+
+
+
+      <Button>
+
+        <Link to="/model/add">Add Model</Link>
+
+      </Button>
+
+
+      <Button>
+
+        <Link to="/item/add">Add Item</Link>
+
+      </Button>
+
+
+
+      <Button>
+
+        <Link to="/add/item/noserial">Add Item No SN</Link>
+
+      </Button>
+
+      <Button>
+
+        <Link to="/supplier">Supplier</Link>
+
+      </Button>
+    </>
   );
 };
 
