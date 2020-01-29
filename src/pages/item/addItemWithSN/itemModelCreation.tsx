@@ -29,10 +29,13 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     const source = CancelToken.source();
 
     const [open, setOpen] = useState<boolean>(false)
-    const [reload, setReload] = useState<any>({
-        name: "", limit: 5, page: 1 
-    })
 
+    const variables = {
+        name: '',
+        limit: 10,
+        page: 1,
+        hasSerial: true
+    }
     // new version
     const [ciscoModel, setCiscoModel] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(true)
@@ -44,15 +47,14 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     // const ciscoModel = useSelector((state: AppState) => state.createItemReducer.items[props.index].ciscoModel)
     const name = useSelector((state: AppState) => state.createItemReducer.items[props.index].model)
 
-
-
     const dispatch: any = useDispatch();
 
 
 
+    
 
     const { data, refetch } = useQuery(GET_MODEL_QUERY, {
-        variables: { name :reload.name, limit: reload.limit, page: reload.page }
+        variables
     });
 
 
@@ -69,7 +71,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
         setInput(val)
         clearTimeout(timeout);
         timeout = setTimeout(function () {
-            setReload({ name: val, limit: 5, page: 1 });
+            refetch({...variables, name: val})
         }, 220);
     };
 
@@ -146,7 +148,7 @@ const ItemModelCreation: React.FC<ItemModelCreationProps> = props => {
     return loading ? <Spin /> : (
         <Button.Group style={{width: "100%"}}>
             <SearchCreation
-                onDropdownVisibleChange={() => setReload({ name: "", limit: 5, page: 1 })}
+                onDropdownVisibleChange={() => refetch({...variables, name: ''})}
                 input={name}
                 loading={loading}
                 onSearch={onSearch}

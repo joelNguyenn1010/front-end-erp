@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { ADD_ITEM } from './../../../graphql/mutation/productMutation';
+import { ADD_ITEM ,ADD_ITEM_WITH_NO_SN} from './../../../graphql/mutation/productMutation';
 import {ItemNoSNActionTypes} from '../../types/item/item.noSn.types'
 import { AppState } from "../..";
 import client from '../../../graphql';
@@ -43,7 +43,7 @@ export const SubmitItemWithoutSNAction = () => {
 
         }
 
-        client.mutate({mutation: ADD_ITEM, variables: {...newItemWithoutSN}})
+        client.mutate({mutation: ADD_ITEM_WITH_NO_SN, variables: {...newItemWithoutSN}})
         .then(res => {
             message.success("New Item created")
 

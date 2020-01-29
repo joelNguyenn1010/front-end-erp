@@ -7,7 +7,7 @@ import LoadingSpin from '../../../../../components/loadingSpin'
 import { useParams } from 'react-router-dom'
 import { GET_SUPPLIER_NOTE } from '../../../../../graphql/mutation/supplierNote'
 import { SupplierNote } from '../../../../../store/contract/SupplierNote'
-import { channel } from '../../../../../websocket/pusher'
+import { pusher } from '../../../../../websocket/pusher'
 
 const OverviewNoteComponent = () => {
 
@@ -21,6 +21,8 @@ const OverviewNoteComponent = () => {
     } else if (data && data.supplierNote) {
 
         const notes: Array<SupplierNote> = data.supplierNote
+
+
         // console.log(notes)
         return (
             <Timeline style={{paddingRight: '10rem', paddingLeft: '10rem'}}>
@@ -29,6 +31,7 @@ const OverviewNoteComponent = () => {
                     <AddSupplierNote />
 
                 </Timeline.Item>
+
 
                 {notes.map((data: SupplierNote) => (
                     <React.Fragment key={data.id}>

@@ -14,14 +14,16 @@ const SubmitItemButton: React.FC = () => {
   const onClick = () => {
     for (let i = 0; i < name.length; i++) {
       dispatch(submitItemAction(i));
-      console.log("submit");
+
     }
   };
 
   return (
     <tr>
       <td style={{paddingBottom: '1rem', paddingTop: '1rem'}} colSpan={7}>
-        <Button style={{width:'100%'}} type="primary" onClick={onClick}>Submit</Button>
+        <Button
+          disabled={name.length > 0 ? false : true}
+         style={{width:'100%'}} type="primary" onClick={onClick}>Submit</Button>
       </td>
     </tr>
   );

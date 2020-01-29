@@ -18,8 +18,10 @@ const ModelSearch: React.FC = () => {
 
     const dispatch: any = useDispatch();
 
+    const variables =  { name: '', limit: 5, page: 1, hasSerial: false }
+
     const { loading, data, refetch, error } = useQuery(GET_MODEL_QUERY, {
-        variables: { name: '', limit: 5, page: 1 }
+        variables
     })
 
 
@@ -40,7 +42,7 @@ const ModelSearch: React.FC = () => {
         setCiscoModel(val)
         clearTimeout(timeout)
         timeout = setTimeout(function () {
-            refetch({ name: val, limit: 5, page: 1 })
+            refetch({...variables, name: val})
         }, 250)
     }
 

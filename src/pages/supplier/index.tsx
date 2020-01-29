@@ -6,7 +6,7 @@ import { GET_SUPPLIER_QUERY } from '../../graphql/query/supplierQuery'
 import { Link, withRouter } from 'react-router-dom'
 import AddSupplier from './addSupplier'
 import LoadingSpin from '../../components/loadingSpin'
-import { channel } from '../../websocket/pusher'
+import { pusher } from '../../websocket/pusher'
 import TableCellRightClick from '../../graphql/tableCellRightClick'
 import DeleteSupplier from './deleteSupplier'
 

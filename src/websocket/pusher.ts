@@ -4,16 +4,22 @@ import Pusher from 'pusher-js'
 Pusher.logToConsole = true;
 
 const app_id = "11a083decab4e140d659"
-const pusher = new Pusher(app_id, {
+export const pusher = new Pusher(app_id, {
     cluster: 'ap4',
     forceTLS: true
 });
 
 
-export const channel = pusher.subscribe('my-channel');
 
 
 
+// export const updateDataSupplier = (data: Array<any>) => {
+//     const newData = data.concat()
+//     channel.bind('supplier', () => {
+
+//     })
+//     return newData
+// } 
 
 // channel.bind('my-event', callback)
 

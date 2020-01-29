@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EditableDisplayText from "../../../components/sharedStyled/EditableDisplayText";
-import { Input, Form, Popover, message, Tooltip } from "antd";
+import { Input, Form, Popover, message, Tooltip, Avatar, Tag } from "antd";
 import client from "../../../graphql";
 import { EDIT_MODEL_NAME } from "../../../graphql/mutation/modelMutation";
 
@@ -12,6 +12,7 @@ interface EditableNameProps {
 const EditableName: React.FC<EditableNameProps> = props => {
   const { record, text } = props;
 
+  const hasSerial = record.hasSerial;
   const [value, setValue] = useState<string>(text);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +57,8 @@ const EditableName: React.FC<EditableNameProps> = props => {
 
   return (
     <Popover trigger="click" placement="right" content={contentEdit}>
-      <EditableDisplayText>{text}</EditableDisplayText>
+
+  <EditableDisplayText>{text} {!hasSerial ? <Tag color="red">NoSN</Tag> : ''}</EditableDisplayText>
     </Popover>
   );
 };

@@ -16,11 +16,14 @@ interface EditableDescriptionFieldProps {
 
 const UpdateDescriptionField: React.FC<EditableDescriptionFieldProps> = props => {
 
+
+    const [visible, setVisible] = React.useState<boolean>(false)
     
 
     const [updateSupplier] = useMutation(props.mutation, {
         onCompleted: () => {
             message.success("Update success")
+            setVisible(false)
         },
         onError: (error: any) => {
             message.error("Error, please try again")
@@ -67,10 +70,18 @@ const UpdateDescriptionField: React.FC<EditableDescriptionFieldProps> = props =>
         </FormContext>
     )
     return (
-        <Popover trigger="click" content={formEdit}>
-            <Tooltip placement="right" title={"Click to edit"}>
+        <Popover 
+      
+        // mouseLeaveDelay={() => cconsol}
+        onVisibleChange={(visible: any) => setVisible(visible)}
+        visible={visible}
+        
+        trigger="click" content={formEdit}>
+            <Tooltip placement="right" title={"Click here to edit"}>
+                <div onClick={() => setVisible(true)}>
 
                 {props.value ? <p>{props.value}</p> : <Button>Edit</Button>}
+                </div>
             </Tooltip>
             {/* {edit && formEdit} */}
         </Popover>

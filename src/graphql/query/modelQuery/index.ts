@@ -12,8 +12,8 @@ query($name: String!) {
 `
 
 export const GET_MODEL_QUERY = gql`
-  query($limit: Int!, $page: Int!, $name: String!) {
-    model(limit: $limit, page: $page, name: $name) {
+  query($limit: Int!, $page: Int!, $name: String!, $hasSerial: Boolean) {
+    model(limit: $limit, page: $page, name: $name, hasSerial: $hasSerial) {
         data{
           au_condition {
             name

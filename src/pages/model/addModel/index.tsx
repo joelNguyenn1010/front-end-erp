@@ -11,33 +11,44 @@ const AddModel: React.FC = () => {
   return (
     <Form>
       <Row>
-        <Col span={12}>
+        <Col span={24}>
           <AddName />
         </Col>
+      </Row>
+      <Row>
 
-        <Col span={12}>
+
+        <Col span={24}>
           <Form.Item>
             <ManufactorCreation />
           </Form.Item>
         </Col>
+
 
       </Row>
 
 
 
       <Row>
-        <Col span={12}>
+        <Col span={24}>
           <CategorySearch />
         </Col>
+      </Row>
 
-        <Col span={12}>
+      <Row style={{marginTop: '2rem'}}>
+        <Col span={24}>
           <HasSerialModel />
         </Col>
 
       </Row>
 
+      <Row style={{marginTop: '2rem'}}>
+      <Col span={24}>
 
       <SubmitModel />
+      </Col>
+
+      </Row>
 
     </Form>
   );

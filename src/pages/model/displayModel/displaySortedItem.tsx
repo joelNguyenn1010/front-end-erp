@@ -15,8 +15,15 @@ const DisplaySortedItem: React.FC<DisplaySortedItemProps> = props => {
 
     useEffect(() => {
 
+
         
-        const data =  record.find((element: any) => element.name === props.cond)
+        const data =  record.find((element: any) => { 
+          console.log(typeof element.name, element.name)
+          console.log(typeof props.cond, props.cond)
+
+
+         return element.name === props.cond 
+        })
         const qty = data ? data.QTY : 0
 
         setValue(qty)

@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useEffect } from "react";
 import { GET_MODEL_QUERY } from "../../../graphql/query/modelQuery";
 import { Table, Input, Button, Icon } from "antd";
 import EditableName from "./editableName";
 import EditableManufactor from "./editableManufactor";
 import DisplaySortedItem from "./displaySortedItem";
-import { channel } from "../../../websocket/pusher";
+import { pusher } from "../../../websocket/pusher";
 
 
 const DisplayModelContainer: React.FC = () => {
@@ -16,18 +16,45 @@ const DisplayModelContainer: React.FC = () => {
     name: ""
   });
 
+  const HALF_SECOND = 1500
 
   const { data, loading, refetch } = useQuery(
     GET_MODEL_QUERY,
-    { variables: { limit: pagi.limit, page: pagi.page, name: pagi.name } }
+    { 
+      variables: { limit: pagi.limit, page: pagi.page, name: pagi.name },
+  }
   );
 
+  const refetchData = () => {
+    refetch({ limit: pagi.limit, page: pagi.page, name: "" })
+  } 
+
+
+  useEffect(() => {
+    // const MODEL_CHANNEL = 
+    // refetch this again when 
+    refetchData()
+
+    const channel = pusher.subscribe('model');
+    channel.bind('new-model', () => {
+      refetchData()
+    })
+
+
+    return () => {
+      channel.unbind('new_model')
+      console.log('out')
+
+      // cleanup
+      // pusher.unsubscribe('my-channel')
+    };
+
+
+  }, [])
 
 
 
-  // channel.bind('new-model', () => {
-  //   refetch({ limit: pagi.limit, page: pagi.page, name: "" })
-  // })
+
 
   const dataRender = data ? data.model.data : [];
   const dataTotal = data ? data.model.total : [];
@@ -38,7 +65,7 @@ const DisplayModelContainer: React.FC = () => {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      width: '12%',
+      width: '15%',
 
       render: (text: any, record: any) => <EditableName text={text} record={record} />
     },
@@ -109,39 +136,35 @@ const DisplayModelContainer: React.FC = () => {
         {
           title: "NOB",
           key: "nobUS",
-          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NOB" />
 
         },
         {
           title: "USEDA",
           key: "usedaUS",
-          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="USEDA" />
 
         },
         {
           title: "USEDB",
           key: "usedbUS",
-          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="USEDB" />
 
         },
         {
           title: "USEDC",
           key: "usedcUS",
-          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="USEDC" />
 
         },
         {
           title: "PART",
           key: "partUS",
-          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="NIB" />
+          render: (text: string, record: any) => <DisplaySortedItem text={text} record={record.us_condition} cond="PART" />
         }
       ]
     }
   ];
-
-  const onShowSizeChange = (current: number, size: number) => {
-    setPagi({ limit: size, page: current, name: pagi.name });
-  };
 
   const itemRender = (current: any, type: any, originalElement: any) => {
     if (type === "prev") {
@@ -168,10 +191,7 @@ const DisplayModelContainer: React.FC = () => {
         bordered
         pagination={{
           itemRender: itemRender,
-          pageSizeOptions: ["10", "20", "100", "500", "1000"],
-          onShowSizeChange: (current: number, size: number) => {
-            onShowSizeChange(current, size);
-          },
+
           showSizeChanger: true,
           showQuickJumper: true,
           current: pagi.page,

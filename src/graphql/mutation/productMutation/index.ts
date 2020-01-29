@@ -31,7 +31,34 @@ export const ADD_ITEM = gql`
   }
 `
 
+export const ADD_ITEM_WITH_NO_SN = gql`
+mutation($whlocationId: Int!, $supplierId: Int!, $modelId: Int!, $price: Float, $note: String, $quantity: Int!, $conditionId: Int!){
+  createItemWithNoSN(whlocationId: $whlocationId, supplierId: $supplierId, modelId: $modelId,  price: $price, note: $note, quantity: $quantity, conditionId: $conditionId){
+    id
+    conditionId
+    whlocations{
+      id
+      name
+    }
+    suppliers{
+      id
+      name
+    }
+    models{
+      id
+      name
+    }
+    price
+    note
+    quantity
+    conditions{
+      id
+      name
+    }
 
+  }
+}
+`
 export const ADD_WHLOCATION = gql`
   mutation($name: String!){
     createNewWHLocation(name: $name){
