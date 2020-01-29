@@ -20,14 +20,14 @@ const DisplayModelContainer: React.FC = () => {
 
   const { data, loading, refetch } = useQuery(
     GET_MODEL_QUERY,
-    { 
+    {
       variables: { limit: pagi.limit, page: pagi.page, name: pagi.name },
-  }
+    }
   );
 
   const refetchData = () => {
     refetch({ limit: pagi.limit, page: pagi.page, name: "" })
-  } 
+  }
 
 
   useEffect(() => {
@@ -35,21 +35,24 @@ const DisplayModelContainer: React.FC = () => {
     // refetch this again when 
     refetchData()
 
-    const channel = pusher.subscribe('model');
-    channel.bind('new-model', () => {
+    const SUBSCRIBER = 'model'
+    const CHANNEL = 'new-model'
+
+    const channel = pusher.subscribe(SUBSCRIBER);
+    channel.bind(CHANNEL, () => {
+      console.log("New item")
       refetchData()
     })
 
+    console.log("in")
+
 
     return () => {
-      channel.unbind('new_model')
-      console.log('out')
-
+      channel.unbind(CHANNEL)
       // cleanup
-      // pusher.unsubscribe('my-channel')
+      
+      pusher.unsubscribe(SUBSCRIBER)
     };
-
-
   }, [])
 
 
