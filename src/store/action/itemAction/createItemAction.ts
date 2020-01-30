@@ -267,6 +267,7 @@ export const addItem = (sn: string) => {
         // const arr_sn_comma =  sn.split(',');
 
         const removed_duplicated_sn = _.uniq(arr_sn)
+        
         removed_duplicated_sn.map((item: string) => {
             if (item.length > 0) {
                 const serialNumber = item.trim();
@@ -281,9 +282,6 @@ export const addItem = (sn: string) => {
                 }
             }
         })
-
-
-
     }
 
 }

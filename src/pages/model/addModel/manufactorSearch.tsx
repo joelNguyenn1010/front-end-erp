@@ -3,49 +3,23 @@ import SearchCreation from '../../../components/searchCreation';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { MANUFACTURE_QUERY } from '../../../graphql/query/modelQuery';
 import { ADD_MANUFACTURE } from '../../../graphql/mutation/modelMutation';
-import { message } from 'antd';
+import { message, Form } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeValueAction } from '../../../store/action/model/createModelAction';
 import { AppState } from '../../../store';
 import client from '../../../graphql';
 import { gql } from 'apollo-boost';
+import { Controller, useFormContext } from 'react-hook-form';
+import { FormDataModel } from '.';
 
 let timeout: any = null;
 const ManufactorSearch: React.FC = () => {
- 
 
 
-    const name = useSelector((state: AppState) => state.createModelReducer.input.manufactor)
+    const defaultManufactureQuery = "CISCO"
 
-    const dispatch: any = useDispatch()
+    const [name, setName] = useState<string>(defaultManufactureQuery)
 
-// inital State to make a default state as cisco
-    React.useEffect(() => {
-        
-        client.query({
-            query: gql`
-        query{
-            manufactor(limit:1, page:1, name: "cisco") {
-              data {
-                name
-                id
-              }
-            }
-          }
-          
-        `})
-    
-        .then((res: any) => {
-        
-            if(res && res.data && res.data.manufactor && res.data.manufactor.data.length > 0) {
-                dispatch(changeValueAction('manufactor', res.data.manufactor.data[0].name))
-                dispatch(changeValueAction('manufactorId', parseInt(res.data.manufactor.data[0].id)))
-            }
-            // localStorage.setItem('manufactor', )
-        })
-
-
-    }, [])
 
     const { loading, error, data, refetch } = useQuery(MANUFACTURE_QUERY, {
         // bỏ varialbe search vào
@@ -78,12 +52,20 @@ const ManufactorSearch: React.FC = () => {
     }
 
 
-    const onSelected = (val: string, option: any) => {
-        refetch({ name: '' })
-        dispatch(changeValueAction('manufactor', val))
-        dispatch(changeValueAction('manufactorId', parseInt(option.key)))
-    }
+    const {control, setValue } = useFormContext<FormDataModel>()
 
+    const onSelected = (val: string, option: any) => {
+
+        refetch({ name: '' })
+
+        setName(val)
+
+        setValue('manufactorId', parseInt(option.key))
+
+
+        // dispatch(changeValueAction('manufactor', val))
+        // dispatch(changeValueAction('manufactorId', parseInt(option.key)))
+    }
 
 
     const onSearch = (val: string) => {
@@ -94,20 +76,30 @@ const ManufactorSearch: React.FC = () => {
     }
 
 
+
+
     return (
-        <React.Fragment>
-            <label>Manufacture:</label>
-            <SearchCreation
-                placeholder="Manufacture"
-                loading={loading}
-                content={data ? data.manufactor ? data.manufactor.data : [] : []}
-                onClickCreate={onCreate}
-                onSelected={onSelected}
-                onSearch={onSearch}
-                input={name}
-      
+        <Form.Item
+            label="Manufacture"
+        >
+
+            <Controller
+                as={<SearchCreation
+                    placeholder="Manufacture"
+                    loading={loading}
+                    content={data ? data.manufactor ? data.manufactor.data : [] : []}
+                    onClickCreate={onCreate}
+                    onSelected={onSelected}
+                    onSearch={onSearch}
+                    input={name}
+                />}
+
+                control={control}
+                name="manufactorId"
+
             />
-        </React.Fragment>
+
+        </Form.Item>
 
     )
 }

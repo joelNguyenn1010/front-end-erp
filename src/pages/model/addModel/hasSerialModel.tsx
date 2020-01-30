@@ -1,23 +1,31 @@
 import React from 'react'
-import {  Radio } from 'antd';
-import { RadioChangeEvent } from 'antd/lib/radio';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../store';
-import { changeValueAction } from '../../../store/action/model/createModelAction';
+import { Select } from 'antd';
+
+import { FormDataModel } from '.';
+import { useFormContext, Controller } from 'react-hook-form';
+import { watch } from 'fs';
 
 const HasSerialModel: React.FC = () => {
 
-    // const context: any = useContext(CreateModelContext)
-    const dispatch = useDispatch()
-
-    const hasSerial = useSelector((state: AppState) => state.createModelReducer.input.hasSerial)
-
+    const { control, setValue } = useFormContext<FormDataModel>()
 
     return (
-        <Radio.Group value={hasSerial} onChange={(value: RadioChangeEvent) => dispatch(changeValueAction('hasSerial', value.target.value))}>
-            <Radio.Button value={true}>Manage By Serial Number</Radio.Button>
-            <Radio.Button value={false}>Manage By Quantity</Radio.Button>
-        </Radio.Group>
+        <Controller
+            as={<Select onChange={(value: any) => {
+                console.log(value.target.value, "redio")
+                var isTrueSet = (value.target.value == 'true');
+
+                setValue('hasSerial', isTrueSet)
+            }}>
+                <Select.Option value={"true"}>Manage By Serial Number</Select.Option>
+                <Select.Option value={"false"}>Manage By Quantity</Select.Option>
+            </Select>}
+
+            defaultValue={"true"}
+            // defaultValue={}
+            control={control}
+            name="hasSerial"
+        />
     )
 }
 

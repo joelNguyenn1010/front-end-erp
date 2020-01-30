@@ -4,6 +4,21 @@ import { ItemActionTypes } from '../types/item/item.types';
 
 
 
+// const initValue: Item = {
+//     serialNumber: action.payload,
+//     model: '',
+//     condition: 'USEDB',
+//     conditionId: 2,
+//     supplier: '',
+//     supplierId: 0,
+//     note: '',
+//     isFetchingModel: true,
+//     noModelInDB: true,
+//     ciscoModel: '',
+//     quantity: 1,
+//     whlocation: 'sydney',
+//     whlocationId: 1,
+// }
 
 export interface CreateItem {
     items: Array<Item>

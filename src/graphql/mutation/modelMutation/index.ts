@@ -25,13 +25,10 @@ mutation($name: String!) {
 
 
 
-
-
-
 export const ADD_MODEL = gql`
 mutation($name: String!, 
-  $manufactorId: Int!, 
-  $categoryId: Int!, 
+  $manufactorId: Int, 
+  $categoryId: Int, 
   $hasSerial: Boolean!, 
   $shortDescription: String, 
   $longDescription: String)

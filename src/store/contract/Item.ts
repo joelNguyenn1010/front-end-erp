@@ -13,7 +13,7 @@ export interface Item {
     whlocation: string,
     whlocationId: number,
     quantity: number,
-
+    version?: string
 }
 
 // export interface ItemCreate { 
